@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aula Virtual - Alumno - The Queen's Tea</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
+
+  <!-- FontAwesome para iconos -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <style>
+    /* RESET */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f8fafc;
+      color: #0f204f;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* SIDEBAR */
+    aside.sidebar {
+      background-color: #365b6d;
+      width: 280px;
+      display: flex;
+      flex-direction: column;
+      padding-top: 20px;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    aside.sidebar h1 {
+      font-weight: 700;
+      font-size: 1.7rem;
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 0 15px;
+      letter-spacing: 1.1px;
+      user-select: none;
+    }
+
+    aside.sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 0 10px;
+      flex-grow: 1;
+    }
+
+    aside.sidebar nav button {
+      background: none;
+      border: none;
+      color: white;
+      padding: 14px 20px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+
+    aside.sidebar nav button i {
+      min-width: 20px;
+      font-size: 1.2rem;
+    }
+
+    aside.sidebar nav button:hover,
+    aside.sidebar nav button.active {
+      background-color: #41c1ba;
+      color: #0f204f;
+      font-weight: 700;
+    }
+
+    aside.sidebar .logout-btn {
+      padding: 15px 20px;
+      border-top: 1px solid rgba(255,255,255,0.3);
+      background-color: #2e4a57;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+    }
+    aside.sidebar .logout-btn:hover {
+      background-color: #41c1ba;
+      color: #0f204f;
+    }
+
+    /* MAIN CONTENT */
+    main.content {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 30px 40px;
+      background-color: #fff;
+      border-left: 1px solid #ddd;
+    }
+
+    main.content section {
+      display: none;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    main.content section.active {
+      display: block;
+    }
+
+    main.content h2 {
+      color: #365b6d;
+      font-weight: 700;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      border-bottom: 3px solid #41c1ba;
+      padding-bottom: 8px;
+      user-select: none;
+    }
+
+    /* Tablas */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+      margin-top: 15px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px 15px;
+      text-align: left;
+      vertical-align: middle;
+    }
+    th {
+      background-color: #365b6d;
+      color: white;
+      user-select: none;
+    }
+    tbody tr:hover {
+      background-color: #f1f9fa;
+    }
+
+    /* Enlaces */
+    a.enlace-material {
+      color: #41c1ba;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    a.enlace-material:hover {
+      color: #0f204f;
+      text-decoration: underline;
+    }
+
+    /* Inputs y botones dentro de tablas */
+    input[type="file"],
+    input[type="text"],
+    textarea {
+      padding: 7px 10px;
+      font-size: 0.9rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 100%;
+      font-family: 'Poppins', sans-serif;
+      box-sizing: border-box;
+      resize: vertical;
+    }
+
+    button.btn-submit,
+    button.btnEnviarEntrega,
+    button.btnMarcarClase {
+      background-color: #41c1ba;
+      border: none;
+      color: #0f204f;
+      font-weight: 700;
+      padding: 7px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    button.btn-submit:hover,
+    button.btnEnviarEntrega:hover,
+    button.btnMarcarClase:hover {
+      background-color: #365b6d;
+      color: white;
+    }
+
+    /* Estados */
+    .estado-pagada {
+      color: green;
+      font-weight: 700;
+    }
+    .estado-pendiente {
+      color: red;
+      font-weight: 700;
+    }
+    .comprobante-subido {
+      color: green;
+      font-weight: 600;
+      margin-top: 5px;
+      display: inline-block;
+    }
+
+    /* Mensajes en secciones vacías */
+    .coming-soon {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: #666;
+      user-select: none;
+    }
+
+    /* Scrollbar para main */
+    main.content::-webkit-scrollbar {
+      width: 8px;
+    }
+    main.content::-webkit-scrollbar-track {
+      background: #f0f4f7;
+    }
+    main.content::-webkit-scrollbar-thumb {
+      background-color: #41c1ba;
+      border-radius: 4px;
+    }
+
+    /* Checkboxes centrados */
+    td.checkbox-td {
+      text-align: center;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      body {
+        flex-direction: column;
+        height: auto;
+      }
+      aside.sidebar {
+        width: 100%;
+        flex-direction: row;
+        padding: 0;
+        overflow-x: auto;
+      }
+      aside.sidebar h1 {
+        display: none;
+      }
+      aside.sidebar nav {
+        flex-direction: row;
+        gap: 5px;
+        padding: 5px;
+        flex-grow: 1;
+      }
+      aside.sidebar nav button {
+        flex: 1 0 auto;
+        padding: 10px 8px;
+        font-size: 0.9rem;
+        justify-content: center;
+        gap: 6px;
+      }
+      main.content {
+        padding: 20px 15px;
+        height: auto;
+      }
+      table, th, td {
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <aside class="sidebar" role="navigation" aria-label="Menú de navegación principal">
+    <h1>The Queen's Tea</h1>
+    <nav>
+      <button class="active" data-section="facturas" aria-current="page"><i class="fa-solid fa-file-invoice-dollar"></i>Facturas</button>
+      <button data-section="material"><i class="fa-solid fa-book-open"></i>Material</button>
+      <button data-section="tareas"><i class="fa-solid fa-clipboard-list"></i>Tareas</button>
+      <button data-section="calificaciones"><i class="fa-solid fa-graduation-cap"></i>Calificaciones</button>
+      <button data-section="asistencia"><i class="fa-solid fa-calendar-check"></i>Asistencia</button>
+      <button data-section="recursos"><i class="fa-solid fa-toolbox"></i>Recursos útiles</button>
+      <button data-section="trabajo"><i class="fa-solid fa-folder-open"></i>Trabajo de clase</button>
+    </nav>
+    <button class="logout-btn" id="btnLogout" aria-label="Cerrar sesión"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</button>
+  </aside>
+
+  <main class="content" role="main">
+
+<!-- FACTURAS -->
+<section id="facturas" class="active" tabindex="0">
+  <h2>Mis Facturas</h2>
+  <p>Aquí puedes ver tus facturas, el total a pagar y subir comprobantes de pago. Marca cada clase pagada y recibe el link de Google Meet.</p>
+
+  <table id="tablaFacturasAlumno" aria-describedby="facturas-description" style="margin-bottom:20px;">
+    <thead>
+      <tr>
+        <th scope="col">Mes</th>
+        <th scope="col">Clase #</th>
+        <th scope="col">Link Google Meet</th>
+        <th scope="col">Pagada</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Clases mensuales se cargan aquí -->
+    </tbody>
+  </table>
+
+  <div style="margin-top: 25px;">
+    <h3>Subir comprobante de pago</h3>
+
+    <label for="nombreAlumno" style="font-weight: 600;">Tu nombre:</label><br />
+    <input type="text" id="nombreAlumno" required /><br /><br />
+
+    <label for="emailAlumno" style="font-weight: 600;">Tu email:</label><br />
+    <input type="email" id="emailAlumno" required /><br /><br />
+
+    <label for="selectFactura" style="font-weight: 600;">Factura:</label><br />
+    <select id="selectFactura" required>
+      <option value="">Seleccioná una factura</option>
+      <option value="1">Julio 2025</option>
+      <option value="2">Agosto 2025</option>
+      <!-- Agregá dinámicamente según facturas -->
+    </select><br /><br />
+
+    <label for="selectClase" style="font-weight: 600;">Clase:</label><br />
+    <select id="selectClase" required>
+      <option value="">Seleccioná una clase</option>
+      <option value="1">Clase 1</option>
+      <option value="2">Clase 2</option>
+      <!-- Agregá dinámicamente según clases -->
+    </select><br /><br />
+
+    <label for="inputComprobante" style="font-weight: 600;">Subí tu comprobante de pago (PDF o imagen):</label><br />
+    <input type="file" id="inputComprobante" accept="image/*,.pdf" required /><br /><br />
+
+    <button id="btnEnviarComprobante" class="btn-submit">Enviar comprobante</button>
+
+    <p id="mensajeComprobante" style="color:green; font-weight:600; margin-top:10px; display:none;"></p>
+    <p id="errorComprobante" style="color:red; font-weight:600; margin-top:10px; display:none;"></p>
+  </div>
+
+  <hr style="margin: 40px 0; border-color: #ccc;" />
+
+  <h3>Factura oficial ARCA (ex AFIP)</h3>
+  <p>Descarga tu factura oficial aquí:</p>
+  <a href="#" id="linkFacturaArca" class="enlace-material" target="_blank" rel="noopener">No hay factura cargada aún</a>
+  <div style="margin-top: 10px;">
+    <label for="inputFacturaArca" style="font-weight: 600;">Subir factura oficial ARCA (solo admins):</label><br />
+    <input type="file" id="inputFacturaArca" accept=".pdf" />
+    <button id="btnSubirFacturaArca" class="btn-submit" style="margin-top:10px;">Subir factura</button>
+    <p id="mensajeFacturaArca" style="color:green; font-weight:600; margin-top:10px; display:none;">Factura subida correctamente.</p>
+  </div>
+</section>
+
+
+    <!-- MATERIAL -->
+    <section id="material" tabindex="0">
+      <h2>Material de mi Curso</h2>
+      <p>Consulta todo el material que el profesor ha subido para tu curso.</p>
+      <ul id="listaMaterialAlumno" style="list-style-type: disc; padding-left: 20px;">
+        <!-- Material listado aquí -->
+      </ul>
+      <p class="coming-soon">Esta sección estará disponible próximamente.</p>
+    </section>
+
+    <!-- TAREAS -->
+    <section id="tareas" tabindex="0">
+      <h2>Mis Tareas</h2>
+      <p>Envía tus observaciones, preguntas o comentarios para que la docente pueda calificarlas mejor.</p>
+      <table id="tablaTareasAlumno" style="margin-top: 15px;">
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Descripción / Link</th>
+            <th>Fecha límite</th>
+            <th>Estado</th>
+            <th>Comentario para la docente</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Tareas dinámicas -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- CALIFICACIONES -->
+    <section id="calificaciones" tabindex="0">
+      <h2>Mis Calificaciones y Resultados</h2>
+      <p>Consulta las calificaciones que el profesor ha registrado para tus tareas y exámenes.</p>
+      <table id="tablaCalificacionesAlumno" style="margin-top: 15px;">
+        <thead>
+          <tr>
+            <th>Actividad</th>
+            <th>Curso</th>
+            <th>Fecha</th>
+            <th>Calificación</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Calificaciones dinámicas -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ASISTENCIA -->
+    <section id="asistencia" tabindex="0">
+      <h2>Mi Asistencia</h2>
+      <p>Revisa el registro de tu asistencia a las clases.</p>
+      <table id="tablaAsistenciaAlumno" style="margin-top: 15px;">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Asistencia dinámica -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- RECURSOS ÚTILES -->
+    <section id="recursos" tabindex="0">
+      <h2>🔗 Recursos útiles</h2>
+      <ul>
+        <li><a href="https://www.wordreference.com/" target="_blank" rel="noopener">📘 WordReference</a></li>
+        <li><a href="https://dictionary.cambridge.org/" target="_blank" rel="noopener">📗 Cambridge Dictionary</a></li>
+        <li><a href="https://www.linguee.com/" target="_blank" rel="noopener">📙 Linguee</a></li>
+        <li><a href="https://www.deepl.com/translator" target="_blank" rel="noopener">📕 DeepL Translator</a></li>
+      </ul>
+    </section>
+
+    <!-- TRABAJO DE CLASE -->
+    <section id="trabajo" tabindex="0">
+      <h2>Trabajo de clase</h2>
+      <p>Aquí podrás descargar las unidades de trabajo y diapositivas que el docente sube.</p>
+      <ul id="listaTrabajoClase" style="list-style-type: disc; padding-left: 20px;">
+        <!-- Archivos trabajo clase -->
+      </ul>
+      <div style="margin-top: 10px;">
+        <label for="inputTrabajoClase" style="font-weight: 600;">Subir nuevo material de trabajo (solo admins):</label><br />
+        <input type="file" id="inputTrabajoClase" accept=".pdf,.ppt,.pptx" multiple />
+        <button id="btnSubirTrabajoClase" class="btn-submit" style="margin-top:10px;">Subir material</button>
+        <p id="mensajeTrabajoClase" style="color:green; font-weight:600; margin-top:10px; display:none;">Material subido correctamente.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // Simulación usuario demo
+    const usuarioAlumno = JSON.parse(localStorage.getItem('usuario')) || { id: 1, curso: "C1 Advanced", admin: false };
+
+    if (!usuarioAlumno.id) {
+      alert('No estás logueado, por favor inicia sesión.');
+      window.location.href = 'login.html';
+    }
+
+    const esAdmin = usuarioAlumno.admin;
+
+    // Navegación sidebar
+    const navButtons = document.querySelectorAll('aside.sidebar nav button');
+    const sections = document.querySelectorAll('main.content section');
+
+    navButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        navButtons.forEach(b => {
+          b.classList.remove('active');
+          b.removeAttribute('aria-current');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-current', 'page');
+
+        const target = btn.dataset.section;
+        sections.forEach(sec => {
+          sec.classList.toggle('active', sec.id === target);
+        });
+
+        // Cargar contenido dinámico por sección
+        switch (target) {
+          case 'facturas': cargarFacturas(); break;
+          case 'material': cargarMaterial(); break;
+          case 'tareas': cargarTareas(); break;
+          case 'calificaciones': cargarCalificaciones(); break;
+          case 'asistencia': cargarAsistencia(); break;
+          case 'recursos': break; // Recursos fijos
+          case 'trabajo': cargarTrabajoClase(); break;
+        }
+      });
+    });
+
+    // Cerrar sesión
+    document.getElementById('btnLogout').addEventListener('click', () => {
+      localStorage.removeItem('usuario');
+      alert('Sesión cerrada.');
+      window.location.href = 'login.html';
+    });
+
+    /********* DATOS DE DEMO ************/
+    let facturasAlumno = [
+      {
+        mes: 'Julio 2025',
+        clases: [
+          { numero: 1, linkMeet: 'https://meet.google.com/aaa-bbbb-ccc', pagada: false, comprobanteUrl: null },
+          { numero: 2, linkMeet: 'https://meet.google.com/ddd-eeee-fff', pagada: false, comprobanteUrl: null },
+          { numero: 3, linkMeet: 'https://meet.google.com/ggg-hhhh-iii', pagada: true, comprobanteUrl: 'comprobante3.pdf' },
+        ]
+      }
+    ];
+
+    let materialCurso = [
+      { nombre: "Unidad 1 - Presentaciones", url: "https://drive.google.com/yourlinkunidad1" },
+      { nombre: "Unidad 2 - Verbos irregulares", url: "https://drive.google.com/yourlinkunidad2" },
+      { nombre: "Glosario de vocabulario", url: "https://drive.google.com/yourlinkglosario" }
+    ];
+
+    let tareasAlumno = [
+      { titulo: "Tarea 1: Describir tu rutina", descripcion: "Envía un audio con tu rutina diaria.", fechaLimite: "2025-08-15", estado: "Pendiente", comentario: "" },
+      { titulo: "Tarea 2: Redacción", descripcion: "Escribe un párrafo sobre tu película favorita.", fechaLimite: "2025-08-22", estado: "Entregada", comentario: "La redacté con ejemplos." }
+    ];
+
+    let calificacionesAlumno = [
+      { actividad: "Tarea 1", curso: "C1 Advanced", fecha: "2025-08-16", calificacion: 8.5 },
+      { actividad: "Tarea 2", curso: "C1 Advanced", fecha: "2025-08-23", calificacion: 9.0 }
+    ];
+
+    let asistenciaAlumno = [
+      { fecha: "2025-07-01", estado: "Presente" },
+      { fecha: "2025-07-08", estado: "Ausente" },
+      { fecha: "2025-07-15", estado: "Presente" },
+    ];
+
+    // Link factura ARCA demo
+    let facturaArcaUrl = null;
+
+    // Carga de secciones
+    function cargarFacturas() {
+      const tbody = document.querySelector('#tablaFacturasAlumno tbody');
+      tbody.innerHTML = '';
+
+      facturasAlumno.forEach(mesObj => {
+        mesObj.clases.forEach(clase => {
+          const tr = document.createElement('tr');
+
+          // Mes
+          const tdMes = document.createElement('td');
+          tdMes.textContent = mesObj.mes;
+          tr.appendChild(tdMes);
+
+          // Clase #
+          const tdNum = document.createElement('td');
+          tdNum.textContent = clase.numero;
+          tr.appendChild(tdNum);
+
+          // Link Google Meet
+          const tdLink = document.createElement('td');
+          const aLink = document.createElement('a');
+          aLink.href = clase.linkMeet;
+          aLink.textContent = "Unirse";
+          aLink.target = "_blank";
+          aLink.rel = "noopener";
+          aLink.classList.add('enlace-material');
+          tdLink.appendChild(aLink);
+          tr.appendChild(tdLink);
+
+          // Pagada checkbox
+          const tdPagada = document.createElement('td');
+          tdPagada.classList.add('checkbox-td');
+          const checkbox = document.createElement('input');
+          checkbox.type = 'checkbox';
+          checkbox.checked = clase.pagada;
+          checkbox.title = `Marcar clase ${clase.numero} como pagada`;
+          checkbox.disabled = !esAdmin; // Solo admin puede cambiar pago
+          checkbox.addEventListener('change', e => {
+            clase.pagada = e.target.checked;
+            // Aquí actualizar backend si tienes API
+            alert(`Clase ${clase.numero} marcada como ${clase.pagada ? 'pagada' : 'no pagada'}`);
+          });
+          tdPagada.appendChild(checkbox);
+          tr.appendChild(tdPagada);
+
+          tbody.appendChild(tr);
+        });
+      });
+    }
+
+    function cargarMaterial() {
+      const ul = document.getElementById('listaMaterialAlumno');
+      ul.innerHTML = '';
+      if (materialCurso.length === 0) {
+        ul.innerHTML = '<li>No hay material disponible por ahora.</li>';
+        return;
+      }
+      materialCurso.forEach(mat => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = mat.url;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.textContent = mat.nombre;
+        a.className = 'enlace-material';
+        li.appendChild(a);
+        ul.appendChild(li);
+      });
+    }
+
+    function cargarTareas() {
+      const tbody = document.querySelector('#tablaTareasAlumno tbody');
+      tbody.innerHTML = '';
+      tareasAlumno.forEach((tarea, idx) => {
+        const tr = document.createElement('tr');
+
+        const tdTitulo = document.createElement('td');
+        tdTitulo.textContent = tarea.titulo;
+        tr.appendChild(tdTitulo);
+
+        const tdDescripcion = document.createElement('td');
+        tdDescripcion.textContent = tarea.descripcion;
+        tr.appendChild(tdDescripcion);
+
+        const tdFecha = document.createElement('td');
+        tdFecha.textContent = tarea.fechaLimite;
+        tr.appendChild(tdFecha);
+
+        const tdEstado = document.createElement('td');
+        tdEstado.textContent = tarea.estado;
+        tdEstado.style.fontWeight = '700';
+        tdEstado.style.color = tarea.estado.toLowerCase() === 'pendiente' ? 'red' : 'green';
+        tr.appendChild(tdEstado);
+
+        const tdComentario = document.createElement('td');
+        const textarea = document.createElement('textarea');
+        textarea.value = tarea.comentario || "";
+        textarea.placeholder = "Escribe un comentario para la docente...";
+        textarea.rows = 2;
+        textarea.addEventListener('input', e => {
+          tareasAlumno[idx].comentario = e.target.value;
+          // Aquí puedes mandar el comentario a backend
+        });
+        tdComentario.appendChild(textarea);
+        tr.appendChild(tdComentario);
+
+        tbody.appendChild(tr);
+      });
+    }
+
+    function cargarCalificaciones() {
+      const tbody = document.querySelector('#tablaCalificacionesAlumno tbody');
+      tbody.innerHTML = '';
+      calificacionesAlumno.forEach(calif => {
+        const tr = document.createElement('tr');
+
+        ['actividad', 'curso', 'fecha', 'calificacion'].forEach(prop => {
+          const td = document.createElement('td');
+          td.textContent = calif[prop];
+          tr.appendChild(td);
+        });
+
+        tbody.appendChild(tr);
+      });
+    }
+
+    function cargarAsistencia() {
+      const tbody = document.querySelector('#tablaAsistenciaAlumno tbody');
+      tbody.innerHTML = '';
+      asistenciaAlumno.forEach(registro => {
+        const tr = document.createElement('tr');
+
+        const tdFecha = document.createElement('td');
+        tdFecha.textContent = registro.fecha;
+        tr.appendChild(tdFecha);
+
+        const tdEstado = document.createElement('td');
+        tdEstado.textContent = registro.estado;
+        tdEstado.style.color = registro.estado.toLowerCase() === 'presente' ? 'green' : 'red';
+        tdEstado.style.fontWeight = '700';
+        tr.appendChild(tdEstado);
+
+        tbody.appendChild(tr);
+      });
+    }
+
+    function cargarTrabajoClase() {
+      const ul = document.getElementById('listaTrabajoClase');
+      ul.innerHTML = '';
+      // Demo: archivo
+      const archivos = [
+        { nombre: "Unidad 1 - Presentación.pdf", url: "https://drive.google.com/file/d/ejemplo" },
+        { nombre: "Unidad 2 - Ejercicios.pptx", url: "https://drive.google.com/file/d/ejemplo2" }
+      ];
+      archivos.forEach(file => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = file.url;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.textContent = file.nombre;
+        a.className = 'enlace-material';
+        li.appendChild(a);
+        ul.appendChild(li);
+      });
+
+      // Mostrar o esconder uploader según admin
+      const uploaderDiv = document.getElementById('inputTrabajoClase').parentElement;
+      uploaderDiv.style.display = esAdmin ? 'block' : 'none';
+    }
+
+    // Evento subir factura ARCA (solo admin)
+    document.getElementById('btnSubirFacturaArca').addEventListener('click', () => {
+      if (!esAdmin) {
+        alert('Solo los administradores pueden subir facturas.');
+        return;
+      }
+      const inputFile = document.getElementById('inputFacturaArca');
+      if (inputFile.files.length === 0) {
+        alert('Por favor, selecciona un archivo para subir.');
+        return;
+      }
+      const file = inputFile.files[0];
+
+      // Aquí deberías hacer la subida real al backend.
+      // Demo:
+      facturaArcaUrl = URL.createObjectURL(file);
+      document.getElementById('linkFacturaArca').href = facturaArcaUrl;
+      document.getElementById('linkFacturaArca').textContent = file.name;
+
+      const mensaje = document.getElementById('mensajeFacturaArca');
+      mensaje.style.display = 'block';
+      setTimeout(() => {
+        mensaje.style.display = 'none';
+      }, 4000);
+
+      inputFile.value = '';
+    });
+
+    // Evento subir material de trabajo clase (solo admin)
+    document.getElementById('btnSubirTrabajoClase').addEventListener('click', () => {
+      if (!esAdmin) {
+        alert('Solo los administradores pueden subir material.');
+        return;
+      }
+      const inputFiles = document.getElementById('inputTrabajoClase');
+      if (inputFiles.files.length === 0) {
+        alert('Selecciona al menos un archivo para subir.');
+        return;
+      }
+      // Demo: simplemente avisar
+      alert(`${inputFiles.files.length} archivo(s) subido(s).`);
+
+      const mensaje = document.getElementById('mensajeTrabajoClase');
+      mensaje.style.display = 'block';
+      setTimeout(() => {
+        mensaje.style.display = 'none';
+      }, 4000);
+
+      inputFiles.value = '';
+    });
+
+    // Carga inicial
+    cargarFacturas();
+
+  </script>
+ <div id="robot-chat" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
+  <button id="toggleChat" style="background:#36d1dc; border:none; color:white; font-weight:bold; border-radius:50%; width:60px; height:60px; font-size:1.4rem; box-shadow:0 2px 10px rgba(0,0,0,0.3); cursor:pointer;">💬</button>
+  <div id="chatBox" style="display:none; width:300px; height:380px; background:white; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.2); padding:10px; position:absolute; bottom:70px; right:0;">
+    <h4 style="margin:0 0 10px; font-weight:bold; color:#333;">👋 Soy QueenBot</h4>
+    <div id="chatMessages" style="height:260px; overflow-y:auto; border:1px solid #eee; padding:5px 10px; font-size:0.9rem;"></div>
+    <input id="chatInput" placeholder="Escribí tu duda..." style="width:100%; padding:8px; margin-top:5px; border-radius:6px; border:1px solid #ccc;" />
+  </div>
+</div><script>
+  const respuestas = {
+    "tarea": "Podés ver tus tareas en la sección 'Tareas' dentro del aula virtual.",
+    "comprobante": "Subí tu comprobante desde la opción 'Comprobantes' en tu panel.",
+    "profesor": "Tu profesor te puede responder desde la mensajería interna.",
+    "pago": "Las facturas están disponibles en tu panel de alumno.",
+    "hola": "¡Hola! ¿Cómo puedo ayudarte?",
+    "error": "No entendí tu pregunta. Probá con palabras clave como: tarea, comprobante, profesor, pago."
+  };
+
+  const chatBtn = document.getElementById("toggleChat");
+  const chatBox = document.getElementById("chatBox");
+  const chatMessages = document.getElementById("chatMessages");
+  const chatInput = document.getElementById("chatInput");
+
+  chatBtn.addEventListener("click", () => {
+    chatBox.style.display = chatBox.style.display === "none" ? "block" : "none";
+  });
+
+  chatInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      const pregunta = chatInput.value.trim().toLowerCase();
+      if (!pregunta) return;
+      agregarMensaje("Tú", pregunta);
+
+      let respuesta = "error";
+      for (let clave in respuestas) {
+        if (pregunta.includes(clave)) {
+          respuesta = clave;
+          break;
+        }
+      }
+
+      setTimeout(() => {
+        agregarMensaje("QueenBot", respuestas[respuesta]);
+        chatInput.value = "";
+      }, 500);
+    }
+  });
+
+  function agregarMensaje(remitente, texto) {
+    chatMessages.innerHTML += `<p><strong>${remitente}:</strong> ${texto}</p>`;
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+</script>
+</div>
+
+<script>
+document.getElementById('btnEnviarComprobante').addEventListener('click', async () => {
+  const inputFile = document.getElementById('inputComprobante');
+  const nombreAlumno = document.getElementById('nombreAlumno').value.trim();
+  const emailAlumno = document.getElementById('emailAlumno').value.trim();
+  const claseId = document.getElementById('selectClase')?.value || '1';
+  const facturaId = document.getElementById('selectFactura')?.value || '1';
+
+  const mensajeComprobante = document.getElementById('mensajeComprobante');
+  const errorComprobante = document.getElementById('errorComprobante');
+
+  if (!inputFile.files.length || !nombreAlumno || !emailAlumno || !claseId || !facturaId) {
+    errorComprobante.textContent = 'Por favor, completa todos los campos.';
+    errorComprobante.style.display = 'block';
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append('comprobante', inputFile.files[0]);
+  formData.append('nombreAlumno', nombreAlumno);
+  formData.append('emailAlumno', emailAlumno);
+  formData.append('claseId', claseId);
+  formData.append('facturaId', facturaId);
+
+  try {
+    const res = await fetch('http://localhost:3000/api/subir-comprobante', {
+      method: 'POST',
+      body: formData
+    });
+    const data = await res.json();
+
+    if (res.ok) {
+      mensajeComprobante.textContent = data.mensaje || 'Comprobante enviado correctamente.';
+      mensajeComprobante.style.display = 'block';
+      errorComprobante.style.display = 'none';
+      inputFile.value = '';
+    } else {
+      throw new Error(data.mensaje || 'Error en el servidor');
+    }
+  } catch (err) {
+    errorComprobante.textContent = 'Hubo un error al enviar el comprobante.';
+    errorComprobante.style.display = 'block';
+  }
+});
+</script>
+
+</body>
+</html>

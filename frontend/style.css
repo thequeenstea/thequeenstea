@@ -1,0 +1,905 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f5f7fa;
+  color: #333;
+  line-height: 1.6;
+}
+
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Header */
+header {
+  background: #222;
+  color: white;
+  padding: 20px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  font-weight: 600;
+  font-size: 1.8rem;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 25px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #ff7f50;
+}
+
+.btn-login {
+  border: 2px solid #ff7f50;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+/* Hero */
+.hero {
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  color: white;
+  padding: 100px 0;
+  text-align: center;
+}
+
+.hero h2 {
+  font-size: 2.8rem;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+.btn-primary, .btn-secondary {
+  display: inline-block;
+  background: #ff7f50;
+  color: white;
+  padding: 12px 30px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.btn-primary:hover, .btn-secondary:hover {
+  background: #e06940;
+}
+
+/* Info sections */
+.info-section {
+  padding: 50px 0;
+  background: white;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px rgb(0 0 0 / 0.1);
+}
+
+.info-section h3 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.info-section ul {
+  list-style: inside disc;
+  margin-top: 15px;
+}
+
+.info-section p {
+  font-size: 1.1rem;
+}
+
+/* Login section */
+.login-section {
+  background: #f0f0f0;
+  padding: 40px 0;
+  text-align: center;
+  border-radius: 10px;
+}
+
+/* Nuevos estilos para el contenedor y formulario de login */
+.login-container {
+  max-width: 400px;
+  margin: 0 auto;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px rgb(0 0 0 / 0.1);
+  text-align: left;
+}
+
+.login-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-container label {
+  margin: 15px 0 5px 0;
+  font-weight: 600;
+}
+
+.login-container input {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.3s ease;
+}
+
+.login-container input:focus {
+  border-color: #ff7f50;
+  outline: none;
+}
+
+.mensaje-error {
+  margin-top: 15px;
+  color: #d9534f;
+  font-weight: 600;
+}
+
+footer {
+  text-align: center;
+  padding: 20px 0;
+  background: #222;
+  color: white;
+  margin-top: 50px;
+}
+
+/* Testimonios */
+#testimonios {
+  background: #f5f7fa; /* mismo color que el body para armonizar */
+  padding: 50px 0;
+}
+
+#testimonios .testimonial {
+  background: white;
+  border-radius: 10px;
+  padding: 25px 30px;
+  margin-bottom: 25px;
+  box-shadow: 0 5px 10px rgb(0 0 0 / 0.1); /* mismo estilo de sombra que .info-section */
+  font-style: italic;
+  color: #444;
+  transition: transform 0.3s ease;
+}
+
+#testimonios .testimonial:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgb(0 0 0 / 0.15);
+}
+
+#testimonios .testimonial-author {
+  text-align: right;
+  font-weight: 600;
+  margin-top: 15px;
+  color: #222; /* mismo que header/footer */
+}
+
+/* Slider testimonios */
+#testimonios .slider {
+  position: relative;
+  overflow: hidden;
+  margin-top: 30px;
+}
+
+#testimonios .slider-wrapper {
+  overflow: hidden;
+}
+
+#testimonios .testimonios-lista {
+  display: flex;
+  transition: transform 0.4s ease-in-out;
+  gap: 20px;
+  width: max-content;
+}
+
+#testimonios .testimonial {
+  background: white;
+  border-radius: 10px;
+  padding: 25px 30px;
+  box-shadow: 0 5px 10px rgb(0 0 0 / 0.1);
+  font-style: italic;
+  color: #444;
+  flex: 0 0 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 0;
+}
+
+#testimonios .testimonial-author {
+  margin-top: 15px;
+  font-weight: 600;
+  text-align: right;
+  color: #222;
+}
+
+#testimonios .slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #ff7f50;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  padding: 10px 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.3s ease;
+  user-select: none;
+}
+
+#testimonios .slider-btn:hover {
+  background: #e06940;
+}
+
+#testimonios .prev-btn {
+  left: 10px;
+}
+
+#testimonios .next-btn {
+  right: 10px;
+}
+
+@media (max-width: 900px) {
+  #testimonios .testimonios-lista {
+    gap: 15px;
+  }
+
+  #testimonios .testimonial {
+    flex: 0 0 250px;
+  }
+}
+
+@media (max-width: 600px) {
+  #testimonios .testimonial {
+    flex: 0 0 90vw;
+  }
+}
+.slider-wrapper {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.testimonios-lista {
+  display: flex;
+  transition: transform 0.5s ease;
+  will-change: transform;
+}
+
+.testimonial {
+  min-width: 320px;
+  margin: 1rem;
+  padding: 1rem;
+  background-color: #f8f8f8;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  flex-shrink: 0;
+}
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 25px;
+}
+
+.course-card {
+  background: white;
+  border-radius: 12px;
+  padding: 25px 20px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 220px;
+}
+
+.course-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.course-card h4 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  color: #ff7f50;
+  font-weight: 700;
+}
+
+/* Distintos colores para niveles */
+.level-a1 { border-top: 5px solid #6a11cb; }
+.level-a2 { border-top: 5px solid #2575fc; }
+.level-a2plus { border-top: 5px solid #6acaf7; }
+.level-b1 { border-top: 5px solid #28a745; }
+.level-b1plus { border-top: 5px solid #20c997; }
+.level-b2 { border-top: 5px solid #fd7e14; }
+.level-b2first { border-top: 5px solid #ffc107; }
+.level-c1c2 { border-top: 5px solid #6610f2; }
+.level-ielts { border-top: 5px solid #dc3545; }
+.level-toefl { border-top: 5px solid #0d6efd; }
+
+.course-card p {
+  flex-grow: 1;
+  font-size: 1rem;
+  color: #555;
+  margin-top: 0;
+  line-height: 1.3;
+}
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 25px;
+}
+
+.course-card {
+  background: white;
+  padding: 20px 25px;
+  border-radius: 12px;
+  box-shadow: 0 5px 12px rgb(0 0 0 / 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.course-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 20px rgb(0 0 0 / 0.15);
+}
+
+.course-card h4 {
+  margin-bottom: 12px;
+  font-weight: 700;
+  color: #2575fc;
+}
+
+.course-card p {
+  flex-grow: 1;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: #444;
+}
+
+/* Botón inscribirse */
+.btn-inscribirse {
+  margin-top: 15px;
+  padding: 10px 18px;
+  background: #ff7f50;
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 25px;
+  text-align: center;
+  transition: background 0.3s ease;
+  display: inline-block;
+  width: fit-content;
+}
+
+.btn-inscribirse:hover {
+  background: #e06940;
+}
+
+/* Formulario inscripción */
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 450px;
+  margin-top: 20px;
+}
+
+form label {
+  font-weight: 600;
+  margin: 12px 0 5px 0;
+}
+
+form input,
+form select {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.3s ease;
+}
+
+form input:focus,
+form select:focus {
+  border-color: #ff7f50;
+  outline: none;
+}
+
+form button {
+  margin-top: 20px;
+  width: 150px;
+  align-self: flex-start;
+}
+form small {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 4px;
+  margin-bottom: 12px;
+  display: block;
+}
+.card-valor {
+  width: 180px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-valor:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+.card-valor h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #222;
+}
+.card-valor p {
+  font-size: 16px;
+  font-weight: bold;
+  color: #5a0085;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px auto;
+  font-size: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+thead {
+  background-color: #3f51b5;
+  color: white;
+}
+
+th, td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+input[type="file"] {
+  border: none;
+}
+/* Contenedor de notificaciones */
+.notifications {
+  background-color: #fff9f8;
+  border-left: 5px solid #ff7f50;
+  padding: 15px 20px;
+  margin: 20px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  font-size: 1rem;
+  color: #333;
+  position: relative;
+}
+
+/* Título de la sección */
+.notifications h4 {
+  margin-bottom: 10px;
+  color: #ff7f50;
+  font-weight: 700;
+}
+
+/* Cada notificación individual */
+.notification-item {
+  background-color: #fff;
+  border: 1px solid #ff7f50;
+  padding: 12px 15px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.notification-item:hover {
+  background-color: #ffe9e4;
+}
+
+/* Texto de la notificación */
+.notification-text {
+  flex-grow: 1;
+}
+
+/* Botón para marcar como leído */
+.mark-read-btn {
+  background: none;
+  border: none;
+  color: #ff7f50;
+  font-weight: 700;
+  cursor: pointer;
+  padding-left: 15px;
+  font-size: 0.9rem;
+}
+
+/* Icono (puedes usar un emoji o iconos SVG/fontawesome si quieres) */
+.notification-icon {
+  margin-right: 10px;
+  font-size: 1.3rem;
+}
+/* Contenedor de notificaciones */
+.notifications {
+  background-color: #fff9f8;
+  border-left: 5px solid #ff7f50;
+  padding: 15px 20px;
+  margin: 20px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  font-size: 1rem;
+  color: #333;
+  position: relative;
+}
+
+/* Título de la sección */
+.notifications h4 {
+  margin-bottom: 10px;
+  color: #ff7f50;
+  font-weight: 700;
+}
+
+/* Cada notificación individual */
+.notification-item {
+  background-color: #fff;
+  border: 1px solid #ff7f50;
+  padding: 12px 15px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.notification-item:hover {
+  background-color: #ffe9e4;
+}
+
+/* Texto de la notificación */
+.notification-text {
+  flex-grow: 1;
+}
+
+/* Botón para marcar como leído */
+.mark-read-btn {
+  background: none;
+  border: none;
+  color: #ff7f50;
+  font-weight: 700;
+  cursor: pointer;
+  padding-left: 15px;
+  font-size: 0.9rem;
+}
+
+/* Icono */
+.notification-icon {
+  margin-right: 10px;
+  font-size: 1.3rem;
+}
+
+@media (max-width: 600px) {
+  .notification-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .mark-read-btn {
+    margin-top: 8px;
+    padding-left: 0;
+  }
+}
+/* Contenedor de notificaciones */
+.notifications {
+  background-color: #fff9f8;
+  border-left: 5px solid #ff7f50;
+  padding: 15px 20px;
+  margin: 20px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  font-size: 1rem;
+  color: #333;
+  position: relative;
+}
+
+/* Título de la sección */
+.notifications h4 {
+  margin-bottom: 10px;
+  color: #ff7f50;
+  font-weight: 700;
+}
+
+/* Cada notificación individual */
+.notification-item {
+  background-color: #fff;
+  border: 1px solid #ff7f50;
+  padding: 12px 15px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.notification-item:hover {
+  background-color: #ffe9e4;
+}
+
+/* Texto de la notificación */
+.notification-text {
+  flex-grow: 1;
+}
+
+/* Botón para marcar como leído */
+.mark-read-btn {
+  background: none;
+  border: none;
+  color: #ff7f50;
+  font-weight: 700;
+  cursor: pointer;
+  padding-left: 15px;
+  font-size: 0.9rem;
+}
+
+/* Icono */
+.notification-icon {
+  margin-right: 10px;
+  font-size: 1.3rem;
+}
+
+@media (max-width: 600px) {
+  .notification-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .mark-read-btn {
+    margin-top: 8px;
+    padding-left: 0;
+  }
+}
+/* Contenedor de notificaciones */
+.notifications {
+  background-color: #fff9f8;
+  border-left: 5px solid #ff7f50;
+  padding: 15px 20px;
+  margin: 20px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  font-size: 1rem;
+  color: #333;
+  position: relative;
+}
+
+/* Título de la sección */
+.notifications h4 {
+  margin-bottom: 10px;
+  color: #ff7f50;
+  font-weight: 700;
+}
+
+/* Cada notificación individual */
+.notification-item {
+  background-color: #fff;
+  border: 1px solid #ff7f50;
+  padding: 12px 15px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.notification-item:hover {
+  background-color: #ffe9e4;
+}
+
+/* Texto de la notificación */
+.notification-text {
+  flex-grow: 1;
+}
+
+/* Botón para marcar como leído */
+.mark-read-btn {
+  background: none;
+  border: none;
+  color: #ff7f50;
+  font-weight: 700;
+  cursor: pointer;
+  padding-left: 15px;
+  font-size: 0.9rem;
+}
+
+/* Icono */
+.notification-icon {
+  margin-right: 10px;
+  font-size: 1.3rem;
+}
+
+@media (max-width: 600px) {
+  .notification-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .mark-read-btn {
+    margin-top: 8px;
+    padding-left: 0;
+  }
+}
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f4f6f9;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #2c3e50;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 5px;
+}
+
+section.seccion {
+  background: #fff;
+  margin: 20px auto;
+  padding: 20px;
+  width: 90%;
+  max-width: 800px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li {
+  margin: 10px 0;
+}
+
+ul li a {
+  display: inline-block;
+  text-decoration: none;
+  color: #2980b9;
+  background-color: #ecf0f1;
+  padding: 10px 15px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+ul li a:hover {
+  background-color: #3498db;
+  color: #fff;
+}
+/* ---- Estilos existentes arriba ---- */
+
+/* ---- NUEVOS ESTILOS PARA LA TIENDA ---- */
+
+.producto {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+  transition: transform 0.3s ease;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.producto:hover {
+  transform: scale(1.02);
+}
+
+.producto img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.producto h3 {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+}
+
+.producto p {
+  margin: 0.3rem 0;
+  color: #444;
+}
+
+.boton-agregar {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  margin-top: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.boton-agregar:hover {
+  background-color: #0056b3;
+}
+
+.carrito {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: white;
+  border: 2px solid #007bff;
+  border-radius: 8px;
+  padding: 1rem;
+  width: 300px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  z-index: 999;
+}
+
+.carrito h2 {
+  margin-top: 0;
+}
+
+.carrito-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.boton-comprar {
+  margin-top: 1rem;
+  background-color: #28a745;
+  color: white;
+  padding: 10px;
+  border: none;
+  width: 100%;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.boton-comprar:hover {
+  background-color: #1e7e34;
+}

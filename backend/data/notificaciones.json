@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "alumnoId": 101,
+    "icon": "⚠️",
+    "text": "Recuerda que el pago vence el 25 de agosto",
+    "read": false
+  },
+  {
+    "id": 2,
+    "alumnoId": 101,
+    "icon": "📅",
+    "text": "Tu próxima clase es el martes a las 18hs",
+    "read": false
+  }
+]

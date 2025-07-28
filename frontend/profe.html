@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aula Virtual - Portal de Profesor - The Queen's Tea</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0; padding: 0;
+      background: #fff;
+      color: #0f204f;
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #365b6d;
+      color: white;
+      padding: 15px 0;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-weight: 600;
+      font-size: 1.8rem;
+    }
+    nav {
+      background-color: #41c1ba;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      padding: 12px 0;
+    }
+    nav button {
+      background: #365b6d;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 8px 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    nav button:hover,
+    nav button.active {
+      background-color: #0f204f;
+    }
+    main {
+      flex-grow: 1;
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 0 20px 50px;
+    }
+    section {
+      display: none;
+    }
+    section.active {
+      display: block;
+    }
+    h2 {
+      color: #365b6d;
+      font-weight: 700;
+      margin-bottom: 15px;
+      font-size: 1.8rem;
+      border-bottom: 3px solid #41c1ba;
+      padding-bottom: 8px;
+      margin-top: 0;
+    }
+    label {
+      display: block;
+      margin: 12px 0 6px 0;
+      font-weight: 600;
+      color: #0f204f;
+    }
+    select, input[type="text"], input[type="date"], input[type="number"], textarea {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      font-size: 0.9rem;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background-color: #365b6d;
+      color: white;
+    }
+    button.btn-submit {
+      margin-top: 15px;
+      background-color: #365b6d;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+    }
+    button.btn-submit:hover {
+      background-color: #0f204f;
+    }
+    .message-area {
+      margin-top: 15px;
+      display: flex;
+      flex-direction: column;
+      height: 300px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #f9f9f9;
+    }
+    .messages {
+      flex-grow: 1;
+      padding: 10px;
+      overflow-y: auto;
+      font-size: 0.95rem;
+      background: white;
+    }
+    .messages p {
+      margin: 6px 0;
+      padding: 6px 12px;
+      border-radius: 15px;
+      max-width: 70%;
+    }
+    .messages p.teacher {
+      background-color: #41c1ba;
+      color: white;
+      align-self: flex-end;
+    }
+    .messages p.student {
+      background-color: #365b6d;
+      color: white;
+      align-self: flex-start;
+    }
+    .message-input {
+      display: flex;
+      padding: 10px;
+      border-top: 1px solid #ccc;
+      background-color: #e6f2f2;
+    }
+    .message-input textarea {
+      flex-grow: 1;
+      height: 50px;
+      resize: none;
+      padding: 8px 12px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+    }
+    .message-input button {
+      margin-left: 10px;
+      background-color: #365b6d;
+      border: none;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 20px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .message-input button:hover {
+      background-color: #0f204f;
+    }
+    /* Scrollbar styling for messages */
+    .messages::-webkit-scrollbar {
+      width: 8px;
+    }
+    .messages::-webkit-scrollbar-thumb {
+      background-color: #41c1ba;
+      border-radius: 4px;
+    }
+    .messages::-webkit-scrollbar-track {
+      background: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>The Queen's Tea - Portal de Profesor</h1>
+</header>
+
+<nav>
+  <button class="active" data-section="facturas">Facturas</button>
+  <button data-section="tareas">Tareas</button>
+  <button data-section="material">Material</button>
+  <button data-section="examenes">Exámenes</button>
+  <button data-section="asistencia">Asistencia</button>
+  <button data-section="mensajes">Mensajes</button>
+</nav>
+
+<main>
+
+  <!-- FACTURAS -->
+  <section id="facturas" class="active">
+    <h2>Gestión de Facturas</h2>
+    <p>Aquí podrás ver y gestionar las facturas de tus alumnos por curso.</p>
+
+    <label for="cursoFacturas">Seleccionar curso:</label>
+    <select id="cursoFacturas">
+      <option value="">-- Elegir curso --</option>
+      <option value="C1 Advanced">C1 Advanced</option>
+      <option value="B2 Upper-Intermediate">B2 Upper-Intermediate</option>
+      <option value="B1 Intermediate">B1 Intermediate</option>
+      <!-- Agrega más cursos según corresponda -->
+    </select>
+
+    <table id="tablaFacturas" style="margin-top: 20px;">
+      <thead>
+        <tr>
+          <th>Alumno</th>
+          <th>Clases del mes</th>
+          <th>Valor por clase</th>
+          <th>Descuento</th>
+          <th>Motivo descuento</th>
+          <th>Total a pagar</th>
+          <th>Marcar pagada</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Facturas dinámicas aquí -->
+      </tbody>
+    </table>
+
+  </section>
+
+  <!-- TAREAS -->
+  <section id="tareas">
+    <h2>Gestión de Tareas</h2>
+    <p>Selecciona el curso, asigna tareas con fecha límite y califica automáticamente según entrega.</p>
+
+    <label for="cursoTareas">Seleccionar curso:</label>
+    <select id="cursoTareas">
+      <option value="">-- Elegir curso --</option>
+      <option value="C1 Advanced">C1 Advanced</option>
+      <option value="B2 Upper-Intermediate">B2 Upper-Intermediate</option>
+      <option value="B1 Intermediate">B1 Intermediate</option>
+    </select>
+
+    <label for="tareaTitulo">Título de la tarea:</label>
+    <input type="text" id="tareaTitulo" placeholder="Ej: Redacción sobre el último libro" />
+
+    <label for="tareaDescripcion">Descripción / enlace (Google Forms, doc, etc.):</label>
+    <textarea id="tareaDescripcion" placeholder="Ej: Link a formulario de Google Forms"></textarea>
+
+    <label for="fechaEntrega">Fecha máxima de entrega:</label>
+    <input type="date" id="fechaEntrega" />
+
+    <button class="btn-submit" id="btnAgregarTarea">Agregar tarea al curso</button>
+
+    <h3 style="margin-top: 30px;">Tareas asignadas</h3>
+    <table id="tablaTareas" style="margin-top: 10px;">
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Curso</th>
+          <th>Fecha límite</th>
+          <th>Calificar y gestionar entregas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Tareas listadas aquí -->
+      </tbody>
+    </table>
+  </section>
+
+  <!-- MATERIAL -->
+  <section id="material">
+    <h2>Material del Curso</h2>
+    <p>Aquí puedes subir material para cada curso, visible para todos los alumnos matriculados.</p>
+
+    <label for="cursoMaterial">Seleccionar curso:</label>
+    <select id="cursoMaterial">
+      <option value="">-- Elegir curso --</option>
+      <option value="C1 Advanced">C1 Advanced</option>
+      <option value="B2 Upper-Intermediate">B2 Upper-Intermediate</option>
+      <option value="B1 Intermediate">B1 Intermediate</option>
+    </select>
+
+    <label for="materialTitulo">Título del material:</label>
+    <input type="text" id="materialTitulo" placeholder="Ej: Lectura semana 1" />
+
+    <label for="materialLink">Link al material (Google Drive, YouTube, etc.):</label>
+    <input type="text" id="materialLink" placeholder="https://..." />
+
+    <button class="btn-submit" id="btnAgregarMaterial">Subir material</button>
+
+    <h3 style="margin-top: 30px;">Material cargado</h3>
+    <ul id="listaMaterial" style="list-style-type: disc; padding-left: 20px;">
+      <!-- Material cargado -->
+    </ul>
+  </section>
+
+  <!-- EXÁMENES -->
+  <section id="examenes">
+    <h2>Resultados de Exámenes</h2>
+    <p>Visualiza y gestiona los resultados de los exámenes de tus alumnos.</p>
+
+    <label for="cursoExamenes">Seleccionar curso:</label>
+    <select id="cursoExamenes">
+      <option value="">-- Elegir curso --</option>
+      <option value="C1 Advanced">C1 Advanced</option>
+      <option value="B2 Upper-Intermediate">B2 Upper-Intermediate</option>
+      <option value="B1 Intermediate">B1 Intermediate</option>
+    </select>
+
+    <table id="tablaExamenes" style="margin-top: 20px;">
+      <thead>
+        <tr>
+          <th>Alumno</th>
+          <th>Fecha</th>
+          <th>Resultado</th>
+          <th>Comentarios</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Resultados dinámicos -->
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ASISTENCIA -->
+  <section id="asistencia">
+    <h2>Registro de Asistencia</h2>
+    <p>Selecciona el curso y marca la asistencia diaria de tus alumnos rápidamente.</p>
+
+    <label for="cursoAsistencia">Seleccionar curso:</label>
+    <select id="cursoAsistencia">
+      <option value="">-- Elegir curso --</option>
+      <option value="C1 Advanced">C1 Advanced</option>
+      <option value="B2 Upper-Intermediate">B2 Upper-Intermediate</option>
+      <option value="B1 Intermediate">B1 Intermediate</option>
+    </select>
+
+    <label for="fechaAsistencia">Fecha:</label>
+    <input type="date" id="fechaAsistencia" value="" />
+
+    <table id="tablaAsistencia" style="margin-top: 15px;">
+      <thead>
+        <tr>
+          <th>Alumno</th>
+          <th>Presente</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Lista alumnos asistencia -->
+      </tbody>
+    </table>
+
+    <button class="btn-submit" id="btnGuardarAsistencia">Guardar asistencia</button>
+  </section>
+
+  <!-- MENSAJES -->
+  <section id="mensajes">
+    <h2>Comunicación con Alumnos</h2>
+    <p>Selecciona el alumno para enviar mensajes en tiempo real.</p>
+
+    <label for="selectAlumnoMensaje">Seleccionar alumno:</label>
+    <select id="selectAlumnoMensaje">
+      <option value="">-- Elegir alumno --</option>
+      <!-- Opciones dinámicas -->
+    </select>
+
+    <div class="message-area" aria-label="Área de mensajes">
+      <div class="messages" id="chatMessages"></div>
+
+      <div class="message-input">
+        <textarea id="inputMensaje" placeholder="Escribe tu mensaje aquí..."></textarea>
+        <button id="btnEnviarMensaje">Enviar</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // Datos demo para cursos y alumnos
+  const cursos = {
+    "C1 Advanced": [
+      { id: 1, nombre: "Ana Pérez" },
+      { id: 2, nombre: "Carlos Díaz" },
+      { id: 3, nombre: "María Gómez" },
+    ],
+    "B2 Upper-Intermediate": [
+      { id: 4, nombre: "Juan López" },
+      { id: 5, nombre: "Lucía Fernández" },
+    ],
+    "B1 Intermediate": [
+      { id: 6, nombre: "Sofía Martínez" },
+      { id: 7, nombre: "Pedro Sánchez" },
+    ],
+  };
+
+  // Facturas demo
+  let facturas = [
+    { id: 1, alumnoId: 1, alumno: "Ana Pérez", curso: "C1 Advanced", clasesMes: 4, valorClase: 11000, descuento: 1000, motivo: "Feriado", pagada: false },
+    { id: 2, alumnoId: 2, alumno: "Carlos Díaz", curso: "C1 Advanced", clasesMes: 4, valorClase: 11000, descuento: 0, motivo: "", pagada: true },
+    { id: 3, alumnoId: 4, alumno: "Juan López", curso: "B2 Upper-Intermediate", clasesMes: 4, valorClase: 10600, descuento: 500, motivo: "Feriado", pagada: false },
+  ];
+
+  // Tareas demo
+  let tareas = [];
+
+  // Material demo
+  let materiales = [];
+
+  // Exámenes demo
+  let examenes = [];
+
+  // Asistencia demo (por alumno, fecha, presente: true/false)
+  let asistencias = [];
+
+  // Mensajes demo: almacenamos mensajes entre profe y alumno { alumnoId, mensajes: [{de: 'teacher'|'student', texto, fecha}] }
+  let mensajesChat = [];
+
+  // --- NAV y secciones ---
+  const navButtons = document.querySelectorAll('nav button');
+  const sections = document.querySelectorAll('main section');
+
+  navButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Cambiar botón activo
+      navButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      // Mostrar sección correspondiente
+      const sec = btn.dataset.section;
+      sections.forEach(s => {
+        s.classList.toggle('active', s.id === sec);
+      });
+      // Al cargar sección, actualizar datos
+      if(sec === 'facturas') cargarFacturas();
+      if(sec === 'tareas') cargarTareas();
+      if(sec === 'material') cargarMaterial();
+      if(sec === 'examenes') cargarExamenes();
+      if(sec === 'asistencia') cargarAsistencia();
+      if(sec === 'mensajes') cargarAlumnosMensaje();
+    });
+  });
+
+  // ----------- FACTURAS -----------
+  const cursoFacturasSelect = document.getElementById('cursoFacturas');
+  const tablaFacturasBody = document.querySelector('#tablaFacturas tbody');
+
+  cursoFacturasSelect.addEventListener('change', cargarFacturas);
+
+  function cargarFacturas() {
+    const curso = cursoFacturasSelect.value;
+    tablaFacturasBody.innerHTML = '';
+
+    if (!curso) return;
+
+    const facturasFiltradas = facturas.filter(f => f.curso === curso);
+
+    facturasFiltradas.forEach(f => {
+      const tr = document.createElement('tr');
+
+      tr.innerHTML = `
+        <td>${f.alumno}</td>
+        <td>${f.clasesMes}</td>
+        <td>$${f.valorClase.toLocaleString()}</td>
+        <td>${f.descuento > 0 ? '$' + f.descuento.toLocaleString() : '-'}</td>
+        <td>${f.motivo || '-'}</td>
+        <td><strong>$${((f.valorClase * f.clasesMes) - f.descuento).toLocaleString()}</strong></td>
+        <td><input type="checkbox" ${f.pagada ? 'checked disabled' : ''} data-id="${f.id}" /></td>
+      `;
+
+      tablaFacturasBody.appendChild(tr);
+    });
+
+    // Evento marcar pagada
+    document.querySelectorAll('#tablaFacturas tbody input[type="checkbox"]').forEach(chk => {
+      chk.addEventListener('change', e => {
+        const id = Number(e.target.dataset.id);
+        const factura = facturas.find(f => f.id === id);
+        if (factura) {
+          factura.pagada = e.target.checked;
+          e.target.disabled = factura.pagada;
+          alert(`Factura de ${factura.alumno} marcada como pagada.`);
+        }
+      });
+    });
+  }
+
+  // ----------- TAREAS -----------
+  const cursoTareasSelect = document.getElementById('cursoTareas');
+  const tareaTituloInput = document.getElementById('tareaTitulo');
+  const tareaDescripcionInput = document.getElementById('tareaDescripcion');
+  const fechaEntregaInput = document.getElementById('fechaEntrega');
+  const btnAgregarTarea = document.getElementById('btnAgregarTarea');
+  const tablaTareasBody = document.querySelector('#tablaTareas tbody');
+
+  btnAgregarTarea.addEventListener('click', () => {
+    const curso = cursoTareasSelect.value;
+    const titulo = tareaTituloInput.value.trim();
+    const descripcion = tareaDescripcionInput.value.trim();
+    const fechaEntrega = fechaEntregaInput.value;
+
+    if (!curso || !titulo || !descripcion || !fechaEntrega) {
+      alert('Por favor completa todos los campos de la tarea.');
+      return;
+    }
+
+    tareas.push({
+      id: Date.now(),
+      curso,
+      titulo,
+      descripcion,
+      fechaEntrega,
+      entregas: [], // { alumnoId, entregado: boolean, fechaEntregaAlumno, calificacion }
+    });
+
+    tareaTituloInput.value = '';
+    tareaDescripcionInput.value = '';
+    fechaEntregaInput.value = '';
+
+    alert('Tarea agregada al curso ' + curso);
+    cargarTareas();
+  });
+
+  function cargarTareas() {
+    tablaTareasBody.innerHTML = '';
+
+    tareas.forEach(tarea => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${tarea.titulo}</td>
+        <td>${tarea.curso}</td>
+        <td>${tarea.fechaEntrega}</td>
+        <td><button data-id="${tarea.id}" class="btn-calificar">Calificar / Ver entregas</button></td>
+      `;
+      tablaTareasBody.appendChild(tr);
+    });
+
+    document.querySelectorAll('.btn-calificar').forEach(btn => {
+      btn.addEventListener('click', e => {
+        const tareaId = Number(e.target.dataset.id);
+        abrirModalCalificacion(tareaId);
+      });
+    });
+  }
+
+  // Modal simple para calificar entregas (creado dinámicamente)
+  function abrirModalCalificacion(tareaId) {
+    const tarea = tareas.find(t => t.id === tareaId);
+    if (!tarea) return alert('Tarea no encontrada.');
+
+    // Crear modal
+    const modal = document.createElement('div');
+    modal.style.position = 'fixed';
+    modal.style.top = '0';
+    modal.style.left = '0';
+    modal.style.width = '100vw';
+    modal.style.height = '100vh';
+    modal.style.backgroundColor = 'rgba(0,0,0,0.5)';
+    modal.style.display = 'flex';
+    modal.style.justifyContent = 'center';
+    modal.style.alignItems = 'center';
+    modal.style.zIndex = '9999';
+
+    const modalContent = document.createElement('div');
+    modalContent.style.background = 'white';
+    modalContent.style.padding = '20px';
+    modalContent.style.borderRadius = '8px';
+    modalContent.style.width = '90%';
+    modalContent.style.maxWidth = '700px';
+    modalContent.style.maxHeight = '80vh';
+    modalContent.style.overflowY = 'auto';
+
+    modalContent.innerHTML = `
+      <h3>Calificar entregas: ${tarea.titulo}</h3>
+      <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+          <tr style="background-color: #365b6d; color: white;">
+            <th>Alumno</th>
+            <th>Entregado</th>
+            <th>Fecha entrega</th>
+            <th>Calificación (0-10)</th>
+          </tr>
+        </thead>
+        <tbody id="tbodyEntregas"></tbody>
+      </table>
+      <button id="cerrarModal" style="margin-top: 15px; background-color: #365b6d; color: white; padding: 8px 15px; border: none; border-radius: 5px; cursor: pointer;">Cerrar</button>
+    `;
+
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+
+    const tbodyEntregas = modalContent.querySelector('#tbodyEntregas');
+
+    // Traer alumnos del curso
+    const alumnosCurso = cursos[tarea.curso] || [];
+
+    // Mostrar lista alumnos y entregas
+    alumnosCurso.forEach(alumno => {
+      // Buscar si entregó
+      let entrega = tarea.entregas.find(e => e.alumnoId === alumno.id);
+      let entregado = entrega ? (entrega.entregado ? "Sí" : "No") : "No";
+      let fechaEntregado = entrega ? (entrega.fechaEntregaAlumno || '-') : '-';
+      let calif = entrega ? (entrega.calificacion ?? '') : '';
+
+      // Si la fecha límite pasó y no entregó, poner calificación 0 automáticamente
+      const hoyStr = new Date().toISOString().split('T')[0];
+      if (!entrega && hoyStr > tarea.fechaEntrega) {
+        entregado = "No";
+        calif = 0;
+        tarea.entregas.push({ alumnoId: alumno.id, entregado: false, fechaEntregaAlumno: null, calificacion: 0 });
+      }
+
+      const tr = document.createElement('tr');
+
+      tr.innerHTML = `
+        <td>${alumno.nombre}</td>
+        <td>${entregado}</td>
+        <td>${fechaEntregado}</td>
+        <td><input type="number" min="0" max="10" value="${calif}" data-alumnoid="${alumno.id}" style="width: 60px;" /></td>
+      `;
+
+      tbodyEntregas.appendChild(tr);
+    });
+
+    // Guardar calificaciones al cerrar
+    modalContent.querySelector('#cerrarModal').addEventListener('click', () => {
+      // Leer inputs calificaciones
+      tbodyEntregas.querySelectorAll('input[type="number"]').forEach(input => {
+        const alumnoId = Number(input.dataset.alumnoid);
+        const calif = Number(input.value);
+        let entrega = tarea.entregas.find(e => e.alumnoId === alumnoId);
+        if (entrega) {
+          entrega.calificacion = calif;
+        } else {
+          tarea.entregas.push({ alumnoId, entregado: false, fechaEntregaAlumno: null, calificacion: calif });
+        }
+      });
+
+      alert('Calificaciones guardadas.');
+      modal.remove();
+    });
+  }
+
+  // ----------- MATERIAL -----------
+  const cursoMaterialSelect = document.getElementById('cursoMaterial');
+  const materialTituloInput = document.getElementById('materialTitulo');
+  const materialLinkInput = document.getElementById('materialLink');
+  const btnAgregarMaterial = document.getElementById('btnAgregarMaterial');
+  const listaMaterialUl = document.getElementById('listaMaterial');
+
+  btnAgregarMaterial.addEventListener('click', () => {
+    const curso = cursoMaterialSelect.value;
+    const titulo = materialTituloInput.value.trim();
+    const link = materialLinkInput.value.trim();
+
+    if (!curso || !titulo || !link) {
+      alert('Por favor completa todos los campos del material.');
+      return;
+    }
+
+    materiales.push({ id: Date.now(), curso, titulo, link });
+
+    materialTituloInput.value = '';
+    materialLinkInput.value = '';
+
+    alert('Material subido al curso ' + curso);
+    cargarMaterial();
+  });
+
+  function cargarMaterial() {
+    listaMaterialUl.innerHTML = '';
+    materiales.forEach(m => {
+      listaMaterialUl.innerHTML += `<li><strong>${m.curso}:</strong> <a href="${m.link}" target="_blank">${m.titulo}</a></li>`;
+    });
+  }
+
+  // ----------- EXÁMENES -----------
+  const cursoExamenesSelect = document.getElementById('cursoExamenes');
+  const tablaExamenesBody = document.querySelector('#tablaExamenes tbody');
+
+  cursoExamenesSelect.addEventListener('change', cargarExamenes);
+
+  function cargarExamenes() {
+    const curso = cursoExamenesSelect.value;
+    tablaExamenesBody.innerHTML = '';
+
+    if (!curso) return;
+
+    const examenesFiltrados = examenes.filter(e => e.curso === curso);
+
+    examenesFiltrados.forEach(ex => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${ex.alumno}</td>
+        <td>${ex.fecha}</td>
+        <td>${ex.resultado}</td>
+        <td>${ex.comentarios || '-'}</td>
+      `;
+      tablaExamenesBody.appendChild(tr);
+    });
+  }
+
+  // ----------- ASISTENCIA -----------
+  const cursoAsistenciaSelect = document.getElementById('cursoAsistencia');
+  const fechaAsistenciaInput = document.getElementById('fechaAsistencia');
+  const tablaAsistenciaBody = document.querySelector('#tablaAsistencia tbody');
+  const btnGuardarAsistencia = document.getElementById('btnGuardarAsistencia');
+
+  cursoAsistenciaSelect.addEventListener('change', cargarAsistencia);
+  fechaAsistenciaInput.addEventListener('change', cargarAsistencia);
+
+  // Inicializa fecha con hoy
+  fechaAsistenciaInput.value = new Date().toISOString().split('T')[0];
+
+  function cargarAsistencia() {
+    const curso = cursoAsistenciaSelect.value;
+    const fecha = fechaAsistenciaInput.value;
+    tablaAsistenciaBody.innerHTML = '';
+
+    if (!curso || !fecha) return;
+
+    const alumnosCurso = cursos[curso] || [];
+
+    alumnosCurso.forEach(alumno => {
+      // Buscar si hay registro asistencia para este alumno y fecha
+      const registro = asistencias.find(a => a.alumnoId === alumno.id && a.fecha === fecha);
+      const presente = registro ? registro.presente : false;
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${alumno.nombre}</td>
+        <td><input type="checkbox" data-alumnoid="${alumno.id}" ${presente ? 'checked' : ''} /></td>
+      `;
+      tablaAsistenciaBody.appendChild(tr);
+    });
+  }
+
+  btnGuardarAsistencia.addEventListener('click', () => {
+    const curso = cursoAsistenciaSelect.value;
+    const fecha = fechaAsistenciaInput.value;
+    if (!curso || !fecha) return alert('Selecciona curso y fecha.');
+
+    const checkboxes = tablaAsistenciaBody.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(chk => {
+      const alumnoId = Number(chk.dataset.alumnoid);
+      const presente = chk.checked;
+      // Buscar registro asistencia
+      let registro = asistencias.find(a => a.alumnoId === alumnoId && a.fecha === fecha);
+      if (registro) {
+        registro.presente = presente;
+      } else {
+        asistencias.push({ alumnoId, fecha, presente });
+      }
+    });
+
+    alert(`Asistencia guardada para ${curso} el día ${fecha}.`);
+  });
+
+  // ----------- MENSAJES -----------
+  const selectAlumnoMensaje = document.getElementById('selectAlumnoMensaje');
+  const chatMessagesDiv = document.getElementById('chatMessages');
+  const inputMensaje = document.getElementById('inputMensaje');
+  const btnEnviarMensaje = document.getElementById('btnEnviarMensaje');
+
+  function cargarAlumnosMensaje() {
+    selectAlumnoMensaje.innerHTML = '<option value="">-- Elegir alumno --</option>';
+    // Todos los alumnos en todos los cursos (sin duplicados)
+    const todosAlumnos = Object.values(cursos).flat();
+    const alumnosUnicos = {};
+    todosAlumnos.forEach(alumno => {
+      alumnosUnicos[alumno.id] = alumno.nombre;
+    });
+    for (const id in alumnosUnicos) {
+      const option = document.createElement('option');
+      option.value = id;
+      option.textContent = alumnosUnicos[id];
+      selectAlumnoMensaje.appendChild(option);
+    }
+    chatMessagesDiv.innerHTML = '';
+  }
+
+  let alumnoActualId = null;
+
+  selectAlumnoMensaje.addEventListener('change', () => {
+    alumnoActualId = Number(selectAlumnoMensaje.value);
+    mostrarMensajes();
+  });
+
+  btnEnviarMensaje.addEventListener('click', () => {
+    if (!alumnoActualId) return alert('Selecciona un alumno primero.');
+    const texto = inputMensaje.value.trim();
+    if (!texto) return;
+
+    // Guardar mensaje profe
+    let chat = mensajesChat.find(c => c.alumnoId === alumnoActualId);
+    if (!chat) {
+      chat = { alumnoId: alumnoActualId, mensajes: [] };
+      mensajesChat.push(chat);
+    }
+    chat.mensajes.push({ de: 'teacher', texto, fecha: new Date().toISOString() });
+
+    inputMensaje.value = '';
+    mostrarMensajes();
+  });
+
+  function mostrarMensajes() {
+    chatMessagesDiv.innerHTML = '';
+    if (!alumnoActualId) return;
+
+    let chat = mensajesChat.find(c => c.alumnoId === alumnoActualId);
+    if (!chat) {
+      chatMessagesDiv.innerHTML = '<p style="text-align:center; margin-top: 100px; color: #999;">No hay mensajes aún.</p>';
+      return;
+    }
+
+    chat.mensajes.forEach(m => {
+      const p = document.createElement('p');
+      p.textContent = m.texto;
+      p.classList.add(m.de === 'teacher' ? 'teacher' : 'student');
+      chatMessagesDiv.appendChild(p);
+    });
+
+    // Scroll al final
+    chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
+  }
+
+  // Inicialización: cargar facturas al inicio
+  cargarFacturas();
+
+</script>
+
+</body>
+</html>

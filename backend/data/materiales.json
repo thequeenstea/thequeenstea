@@ -1,0 +1,20 @@
+[
+  {
+    "titulo": "Unidad 1 - Vocabulario",
+    "tipo": "Google Slides",
+    "url": "https://docs.google.com/presentation/d/xxx",
+    "nivel": "A2"
+  },
+  {
+    "titulo": "Unidad 1 - Formulario de repaso",
+    "tipo": "Google Form",
+    "url": "https://docs.google.com/forms/d/yyy",
+    "nivel": "A2"
+  },
+  {
+    "titulo": "Guía de lectura (PDF)",
+    "tipo": "PDF",
+    "url": "https://drive.google.com/file/d/zzz",
+    "nivel": "A2"
+  }
+]

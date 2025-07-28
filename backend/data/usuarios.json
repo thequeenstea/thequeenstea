@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "nombre": "Cynthia",
+    "email": "admin@tea.com",
+    "password": "1234",
+    "rol": "admin"
+  },
+  {
+    "id": 2,
+    "nombre": "Marcela",
+    "email": "prof@tea.com",
+    "password": "5678",
+    "rol": "docente"
+  },
+  {
+    "id": 3,
+    "nombre": "Lucía",
+    "email": "lucia@gmail.com",
+    "password": "abcd",
+    "rol": "alumno",
+    "nivel": "B1"
+  }
+]

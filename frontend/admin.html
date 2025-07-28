@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Panel Admin - The Queen's Tea</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Panel de Administración - The Queen's Tea</h1>
+      <nav>
+        <a href="index.html">Inicio</a>
+        <a href="#" id="logoutBtn">Cerrar sesión</a>
+      </nav>
+    </div>
+  </header>
+
+<main class="container">
+  <h2>Bienvenido, administrador</h2>
+  <p>Desde aquí podrás gestionar usuarios, facturas, cursos y más.</p>
+
+  <!-- Aquí podés agregar más secciones para manejar la administración -->
+  <section>
+    <h3>Gestión de usuarios</h3>
+    <p>Próximamente...</p>
+  </section>
+
+  <section>
+    <h3>Gestión de facturas</h3>
+    <p>Próximamente...</p>
+  </section>
+
+  <section>
+    <h3>Gestión de cursos</h3>
+    <p>Próximamente...</p>
+  </section>
+
+  <!-- NUEVA SECCIÓN: Clases y Pagos -->
+  <section>
+    <h3>Clases y Pagos</h3>
+    <p>Marca las clases como pagadas para que el alumno reciba el link de Google Meet.</p>
+
+    <table id="tablaClasesPagos" style="width:100%; border-collapse: collapse; margin-top: 10px;">
+      <thead>
+        <tr style="background-color:#f0f0f0;">
+          <th style="padding: 8px; border: 1px solid #ddd;">Mes</th>
+          <th style="padding: 8px; border: 1px solid #ddd;">Clase #</th>
+          <th style="padding: 8px; border: 1px solid #ddd;">Link Google Meet</th>
+          <th style="padding: 8px; border: 1px solid #ddd;">Pagada</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Aquí se cargan las clases y checkboxes -->
+      </tbody>
+    </table>
+  </section>
+
+  <script>
+    // Ejemplo de datos; idealmente cargalos desde tu backend
+    const clases = [
+      { id: 1, mes: 'Julio 2025', numero: 1, linkMeet: 'https://meet.google.com/abc-123', pagada: false, alumnoEmail: 'alumno1@example.com' },
+      { id: 2, mes: 'Julio 2025', numero: 2, linkMeet: 'https://meet.google.com/def-456', pagada: false, alumnoEmail: 'alumno1@example.com' },
+      { id: 3, mes: 'Julio 2025', numero: 3, linkMeet: 'https://meet.google.com/ghi-789', pagada: false, alumnoEmail: 'alumno2@example.com' },
+    ];
+
+    const tbody = document.querySelector('#tablaClasesPagos tbody');
+
+    function renderClases() {
+      tbody.innerHTML = '';
+      clases.forEach(clase => {
+        const tr = document.createElement('tr');
+
+        tr.innerHTML = `
+          <td style="padding: 8px; border: 1px solid #ddd;">${clase.mes}</td>
+          <td style="padding: 8px; border: 1px solid #ddd;">${clase.numero}</td>
+          <td style="padding: 8px; border: 1px solid #ddd;">
+            <a href="${clase.linkMeet}" target="_blank" rel="noopener">Unirse</a>
+          </td>
+          <td style="padding: 8px; border: 1px solid #ddd; text-align:center;">
+            <input type="checkbox" ${clase.pagada ? 'checked' : ''} />
+          </td>
+        `;
+
+        // Detectar cambio en checkbox para marcar pagada y enviar mail
+        const checkbox = tr.querySelector('input[type="checkbox"]');
+        checkbox.addEventListener('change', async (e) => {
+          clase.pagada = e.target.checked;
+
+          try {
+            const res = await fetch('http://localhost:3000/api/actualizar-pago-clase', {
+              method: 'POST',
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify({
+                claseId: clase.id,
+                alumnoEmail: clase.alumnoEmail,
+                pagada: clase.pagada,
+                linkMeet: clase.linkMeet
+              })
+            });
+
+            const data = await res.json();
+            if (res.ok) {
+              alert(data.mensaje);
+            } else {
+              alert('Error: ' + data.mensaje);
+              checkbox.checked = !clase.pagada; // revertir cambio si falla
+            }
+          } catch(err) {
+            alert('Error de conexión con el servidor.');
+            checkbox.checked = !clase.pagada; // revertir cambio si falla
+          }
+        });
+
+        tbody.appendChild(tr);
+      });
+    }
+
+    renderClases();
+  </script>
+</main>

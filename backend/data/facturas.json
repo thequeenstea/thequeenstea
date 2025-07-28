@@ -1,0 +1,78 @@
+[
+  {
+    "id": 1,
+    "alumnoId": 1,
+    "mes": "Julio 2025",
+    "clases": [
+      {
+        "nro": 1,
+        "fecha": "2025-07-01",
+        "valor": 10000,
+        "abonada": false,
+        "comprobante": "",
+        "linkMeet": "",
+        "linkVisible": false
+      },
+      {
+        "nro": 2,
+        "fecha": "2025-07-08",
+        "valor": 10000,
+        "abonada": true,
+        "comprobante": "comprobante_julio_2.jpg",
+        "linkMeet": "https://meet.google.com/abc-julio2",
+        "linkVisible": true
+      },
+      {
+        "nro": 3,
+        "fecha": "2025-07-15",
+        "valor": 10000,
+        "abonada": false,
+        "comprobante": "",
+        "linkMeet": "",
+        "linkVisible": false
+      },
+      {
+        "nro": 4,
+        "fecha": "2025-07-22",
+        "valor": 10000,
+        "abonada": false,
+        "comprobante": "",
+        "linkMeet": "",
+        "linkVisible": false
+      }
+    ],
+    "descuentoTotal": 2000,
+    "motivoDescuento": "Feriado nacional",
+    "cuentaBancaria": "CBU 1234567890123456789012",
+    "facturaArca": "factura_1.pdf"
+  },
+  {
+    "id": 2,
+    "alumnoId": 2,
+    "mes": "Julio 2025",
+    "clases": [
+      {
+        "nro": 1,
+        "fecha": "2025-07-02",
+        "valor": 9500,
+        "abonada": true,
+        "comprobante": "comp_2_1.png",
+        "linkMeet": "https://meet.google.com/xyz-clase1",
+        "linkVisible": true
+      },
+      {
+        "nro": 2,
+        "fecha": "2025-07-09",
+        "valor": 9500,
+        "abonada": false,
+        "comprobante": "",
+        "linkMeet": "",
+        "linkVisible": false
+      }
+    ],
+    "descuentoTotal": 0,
+    "motivoDescuento": "",
+    "cuentaBancaria": "CBU 9876543210987654321098",
+    "facturaArca": ""
+  }
+]

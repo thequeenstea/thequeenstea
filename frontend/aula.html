@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aula Virtual - The Queen's Tea</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>The Queen's Tea - Aula Virtual</h1>
+      <nav>
+        <a href="index.html">Inicio</a>
+        <a href="login.html" id="logoutBtn">Cerrar sesión</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="info-section container">
+    <h2>Bienvenido al Aula Virtual</h2>
+    <p id="bienvenida"></p>
+    <p>Aquí podrás ver tu material, tareas y mensajes con tus compañeros y profesores.</p>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 The Queen's Tea. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Mostrar el nombre del usuario guardado en localStorage
+    const bienvenida = document.getElementById('bienvenida');
+    const usuario = JSON.parse(localStorage.getItem('usuario'));
+
+    if (!usuario) {
+      // Si no hay usuario, redirigir al login
+      window.location.href = 'login.html';
+    } else {
+      bienvenida.textContent = `Hola, ${usuario.nombre}!`;
+    }
+
+    // Botón para cerrar sesión
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      localStorage.removeItem('usuario');
+    });
+  </script>
+</body>
+</html>

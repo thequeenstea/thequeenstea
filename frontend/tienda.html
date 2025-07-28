@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Queen's Tea - Tienda Completa</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  /* RESET & BASE */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: #e3f0ff;
+    color: #222;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  body.dark-mode {
+    background-color: #121212;
+    color: #eee;
+  }
+  a {
+    text-decoration: none;
+    color: #0077cc;
+  }
+  a:hover {
+    color: #005fa3;
+  }
+  button {
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    background: #0077cc;
+    color: white;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s;
+  }
+  button:hover {
+    background: #005fa3;
+  }
+  input, select, textarea {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 100%;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+  }
+  input:focus, select:focus, textarea:focus {
+    border-color: #0077cc;
+    outline: none;
+  }
+  h1, h2, h3, h4 {
+    margin-bottom: 1rem;
+  }
+
+  /* HEADER */
+  header {
+    background-color: #0077cc;
+    color: white;
+    padding: 1.5rem 1rem;
+    box-shadow: 0 4px 8px rgb(0 0 0 / 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  header h1 {
+    font-weight: 700;
+    font-size: 1.8rem;
+    user-select: none;
+  }
+  #btnModoOscuro {
+    background: #005fa3;
+    padding: 0.4rem 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    user-select: none;
+  }
+  #btnModoOscuro:hover {
+    background: #004375;
+  }
+
+  /* CONTENEDOR PRINCIPAL */
+  main {
+    flex-grow: 1;
+    max-width: 1024px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+
+  /* SECCIONES DE PASOS */
+  section#pasos {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgb(0 0 0 / 0.1);
+    padding: 2rem;
+    margin-bottom: 3rem;
+    transition: background-color 0.3s;
+  }
+  body.dark-mode section#pasos {
+    background: #222;
+  }
+  .paso {
+    display: none;
+    animation: fadeIn 0.5s ease forwards;
+  }
+  .paso.activo {
+    display: block;
+  }
+  @keyframes fadeIn {
+    from {opacity: 0; transform: translateY(10px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+  .botones {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  .botones button {
+    min-width: 120px;
+  }
+
+  /* PRODUCTOS: GRID */
+  #listaProductos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    gap: 1.6rem;
+  }
+  .producto-card {
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background: #f7fbff;
+    padding: 1rem;
+    box-shadow: 0 6px 15px rgb(0 0 0 / 0.05);
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s, box-shadow 0.3s;
+  }
+  body.dark-mode .producto-card {
+    background: #333;
+    border-color: #555;
+    box-shadow: 0 6px 15px rgb(255 255 255 / 0.1);
+  }
+  .producto-card:hover {
+    box-shadow: 0 12px 25px rgb(0 0 0 / 0.15);
+  }
+  .producto-card img {
+    width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+    max-height: 180px;
+    margin-bottom: 1rem;
+  }
+  .producto-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #004080;
+  }
+  body.dark-mode .producto-card h3 {
+    color: #aad8ff;
+  }
+  .producto-card p {
+    flex-grow: 1;
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+  }
+  .producto-card strong {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+    color: #0077cc;
+  }
+  body.dark-mode .producto-card strong {
+    color: #aad8ff;
+  }
+  .producto-card button {
+    align-self: flex-start;
+  }
+
+  /* CATEGORÍAS */
+  #categorias {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+  #categorias button {
+    background: #0077cc;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 30px;
+    font-weight: 600;
+    border: 2px solid transparent;
+    transition: background-color 0.3s, border-color 0.3s;
+    user-select: none;
+  }
+  #categorias button:hover {
+    background: #005fa3;
+  }
+  #categorias button.activo {
+    background: white;
+    color: #0077cc;
+    border-color: #0077cc;
+  }
+  body.dark-mode #categorias button.activo {
+    background: #005fa3;
+    color: white;
+    border-color: transparent;
+  }
+
+  /* RESUMEN DE PEDIDO */
+  #resumen {
+    margin-top: 1.5rem;
+    background: #d9f0ff;
+    border-radius: 12px;
+    padding: 1rem;
+    font-size: 1rem;
+    color: #004080;
+    user-select: none;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  body.dark-mode #resumen {
+    background: #003354;
+    color: #aad8ff;
+  }
+  #resumen ul {
+    margin-left: 1rem;
+    margin-bottom: 0.8rem;
+  }
+  #resumen p {
+    font-weight: 600;
+  }
+  #resumen .descuento {
+    color: #2d7a2d;
+  }
+  #resumen .descuento.invalido {
+    color: #a33;
+  }
+
+  /* FORMULARIO DATOS */
+  #datosComprador input, #datosComprador textarea {
+    margin-bottom: 1rem;
+  }
+
+  /* COMPROBANTE */
+  #comprobante {
+    margin-top: 1rem;
+  }
+
+  /* CONFIRMACIÓN */
+  #confirmacion {
+    margin-top: 1rem;
+    font-weight: 600;
+    color: #2d7a2d;
+  }
+  body.dark-mode #confirmacion {
+    color: #8fce8f;
+  }
+
+  /* PANEL ADMIN */
+  #adminPanel {
+    max-width: 700px;
+    margin: 3rem auto;
+    background: #f5faff;
+    border-radius: 12px;
+    box-shadow: 0 6px 25px rgb(0 0 0 / 0.1);
+    padding: 2rem;
+    display: none;
+    transition: background-color 0.3s;
+  }
+  body.dark-mode #adminPanel {
+    background: #222;
+  }
+  #adminPanel h2 {
+    margin-bottom: 1rem;
+    color: #0077cc;
+  }
+  #adminPanel label {
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    display: block;
+  }
+  #adminPanel input, #adminPanel textarea {
+    margin-bottom: 1rem;
+  }
+  #listaProductosAdmin {
+    margin-top: 1rem;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  #listaProductosAdmin table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  #listaProductosAdmin th, #listaProductosAdmin td {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    font-size: 0.9rem;
+  }
+  #listaProductosAdmin th {
+    background-color: #0077cc;
+    color: white;
+    position: sticky;
+    top: 0;
+  }
+  body.dark-mode #listaProductosAdmin th {
+    background-color: #005fa3;
+  }
+  #listaProductosAdmin tr:nth-child(even) {
+    background: #e9f4ff;
+  }
+  body.dark-mode #listaProductosAdmin tr:nth-child(even) {
+    background: #333;
+  }
+  #listaProductosAdmin button {
+    background: #cc3300;
+    padding: 0.3rem 0.7rem;
+    font-size: 0.85rem;
+  }
+  #listaProductosAdmin button:hover {
+    background: #a02500;
+  }
+
+  /* INPUT CUPÓN */
+  #inputCupon {
+    width: auto;
+    max-width: 300px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* VOLVER AL INICIO */
+  #btnVolverInicio {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #0077cc;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    color: white;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.3);
+    user-select: none;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1100;
+  }
+  #btnVolverInicio:hover {
+    background: #005fa3;
+  }
+
+  /* SCROLLBAR */
+  #resumen::-webkit-scrollbar, #listaProductosAdmin::-webkit-scrollbar {
+    width: 7px;
+  }
+  #resumen::-webkit-scrollbar-thumb, #listaProductosAdmin::-webkit-scrollbar-thumb {
+    background: #0077cc;
+    border-radius: 10px;
+  }
+  body.dark-mode #resumen::-webkit-scrollbar-thumb, body.dark-mode #listaProductosAdmin::-webkit-scrollbar-thumb {
+    background: #aad8ff;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    #categorias {
+      justify-content: center;
+      gap: 0.8rem;
+    }
+    .botones {
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .botones button {
+      min-width: 100%;
+    }
+  }
+
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🫖 The Queen's Tea</h1>
+  <button id="btnModoOscuro" aria-label="Alternar modo oscuro">🌙 Modo Oscuro</button>
+</header>
+
+<main>
+
+<!-- CATEGORIAS -->
+<nav id="categorias" aria-label="Categorías de productos">
+  <button data-categoria="todos" class="activo" aria-pressed="true">Todos</button>
+  <button data-categoria="recursos" aria-pressed="false">Recursos Docentes</button>
+  <button data-categoria="fiestas" aria-pressed="false">Fiestas Patrias</button>
+  <button data-categoria="esi" aria-pressed="false">ESI</button>
+  <button data-categoria="cursos" aria-pressed="false">Cursos por Nivel</button>
+  <button data-categoria="otros" aria-pressed="false">Otros</button>
+</nav>
+
+<section id="pasos" aria-live="polite" aria-atomic="true">
+
+  <!-- PASO 1 - SELECCIÓN -->
+  <article id="paso1" class="paso activo" aria-label="Paso 1: Selección de productos" tabindex="0">
+    <h2>🛍️ Paso 1: Selección de productos</h2>
+    <p>Elegí los productos que deseas comprar, haciendo click en "Agregar".</p>
+    <div id="listaProductos" role="list"></div>
+    <div class="botones">
+      <button id="btnSiguiente1" aria-label="Ir al siguiente paso">Siguiente ➡️</button>
+    </div>
+  </article>
+
+  <!-- PASO 2 - DATOS -->
+  <article id="paso2" class="paso" aria-label="Paso 2: Datos del comprador" tabindex="0">
+    <h2>📝 Paso 2: Datos del comprador</h2>
+    <form id="formDatos" novalidate>
+      <label for="nombre">Nombre completo *</label>
+      <input id="nombre" type="text" placeholder="Tu nombre completo" required autocomplete="name" />
+      <label for="email">Correo electrónico *</label>
+      <input id="email" type="email" placeholder="ejemplo@correo.com" required autocomplete="email" />
+      <label for="comentarios">Comentarios (opcional)</label>
+      <textarea id="comentarios" rows="3" placeholder="¿Querés decirnos algo?"></textarea>
+      <label for="inputCupon">Código de cupón (opcional)</label>
+      <input id="inputCupon" type="text" placeholder="Ej: TEA10" maxlength="10" autocomplete="off" />
+    </form>
+    <div id="resumen" aria-live="polite" aria-atomic="true"></div>
+    <div class="botones">
+      <button id="btnVolver2" aria-label="Volver al paso anterior">⬅️ Volver</button>
+      <button id="btnSiguiente2" aria-label="Ir al siguiente paso">Siguiente ➡️</button>
+    </div>
+  </article>
+
+  <!-- PASO 3 - COMPROBANTE -->
+  <article id="paso3" class="paso" aria-label="Paso 3: Enviar comprobante" tabindex="0">
+    <h2>📎 Paso 3: Enviar comprobante</h2>
+    <label for="comprobante">Adjuntá tu comprobante de pago *</label>
+    <input id="comprobante" type="file" accept="image/*,application/pdf" required />
+    <div class="botones">
+      <button id="btnVolver3" aria-label="Volver al paso anterior">⬅️ Volver</button>
+      <button id="btnConfirmar" aria-label="Confirmar pedido">✅ Confirmar pedido</button>
+    </div>
+    <p id="confirmacion" role="alert"></p>
+  </article>
+
+</section>
+
+<!-- PANEL ADMIN -->
+<section id="adminPanel" aria-label="Panel de administración">
+  <h2>🛠️ Panel de Administración</h2>
+  <form id="formAdmin" novalidate>
+    <label for="nuevoNombre">Nombre del producto *</label>
+    <input id="nuevoNombre" type="text" required placeholder="Nombre producto" />
+    <label for="nuevaCategoria">Categoría *</label>
+    <select id="nuevaCategoria" required>
+      <option value="">Seleccioná categoría</option>
+      <option value="recursos">Recursos Docentes</option>
+      <option value="fiestas">Fiestas Patrias</option>
+      <option value="esi">ESI</option>
+      <option value="cursos">Cursos por Nivel</option>
+      <option value="otros">Otros</option>
+    </select>
+    <label for="nuevoPrecio">Precio *</label>
+    <input id="nuevoPrecio" type="number" min="1" step="0.01" required placeholder="Precio en $AR" />
+    <label for="nuevaDescripcion">Descripción *</label>
+    <textarea id="nuevaDescripcion" rows="3" required placeholder="Descripción detallada"></textarea>
+    <label for="nuevaImagen">URL de la imagen *</label>
+    <input id="nuevaImagen" type="url" required placeholder="https://ejemplo.com/imagen.jpg" />
+    <button type="submit">Agregar Producto</button>
+  </form>
+  <h3>Productos existentes</h3>
+  <div id="listaProductosAdmin" role="table" aria-label="Listado de productos">
+    <!-- Tabla productos admin -->
+  </div>
+</section>
+
+</main>
+
+<button id="btnVolverInicio" aria-label="Volver al inicio de la página" title="Volver al inicio">⬆️</button>
+
+<footer>
+  <p style="text-align:center; padding:1rem 0; font-size:0.9rem; user-select:none;">
+    © 2025 The Queen’s Tea. Desarrollado con ☕ y ❤️ por ChatGPT.
+  </p>
+</footer>
+
+<script>
+(() => {
+  'use strict';
+
+  // Variables globales
+  const modoOscuroBtn = document.getElementById('btnModoOscuro');
+  const btnVolverInicio = document.getElementById('btnVolverInicio');
+  const categoriasNav = document.getElementById('categorias');
+  const listaProductosEl = document.getElementById('listaProductos');
+  const resumenEl = document.getElementById('resumen');
+  const pasosSection = document.getElementById('pasos');
+  const pasosArticulos = pasosSection.querySelectorAll('.paso');
+  const formDatos = document.getElementById('formDatos');
+  const inputCupon = document.getElementById('inputCupon');
+  const confirmacionEl = document.getElementById('confirmacion');
+
+  // Botones pasos
+  const btnSiguiente1 = document.getElementById('btnSiguiente1');
+  const btnSiguiente2 = document.getElementById('btnSiguiente2');
+  const btnVolver2 = document.getElementById('btnVolver2');
+  const btnVolver3 = document.getElementById('btnVolver3');
+  const btnConfirmar = document.getElementById('btnConfirmar');
+
+  // Panel admin
+  const adminPanel = document.getElementById('adminPanel');
+  const formAdmin = document.getElementById('formAdmin');
+  const listaProductosAdmin = document.getElementById('listaProductosAdmin');
+  const nuevoNombre = document.getElementById('nuevoNombre');
+  const nuevaCategoria = document.getElementById('nuevaCategoria');
+  const nuevoPrecio = document.getElementById('nuevoPrecio');
+  const nuevaDescripcion = document.getElementById('nuevaDescripcion');
+  const nuevaImagen = document.getElementById('nuevaImagen');
+
+  // Estado
+  let modoOscuro = false;
+  let pasoActual = 1;
+  let categoriaActiva = 'todos';
+  const carrito = [];
+
+  // Productos iniciales con categorías
+  let productos = [
+    { id: 1, nombre: "Cuaderno Tea", precio: 3500, descripcion: "Hermoso cuaderno con diseño británico, ideal para tomar notas.", imagen: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80", categoria: "recursos" },
+    { id: 2, nombre: "Curso Inglés Básico", precio: 8500, descripcion: "Curso práctico de inglés para viajeros, nivel básico.", imagen: "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=400&q=80", categoria: "cursos" },
+    { id: 3, nombre: "Set Stickers Educativos", precio: 1200, descripcion: "Stickers para decorar y motivar el aprendizaje.", imagen: "https://images.unsplash.com/photo-1525909002-8c69c76d32d3?auto=format&fit=crop&w=400&q=80", categoria: "otros" },
+    { id: 4, nombre: "Guía Fiestas Patrias", precio: 4200, descripcion: "Material didáctico para celebrar fiestas patrias con los alumnos.", imagen: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=400&q=80", categoria: "fiestas" },
+    { id: 5, nombre: "Manual ESI", precio: 3800, descripcion: "Manual para abordar la educación sexual integral en las aulas.", imagen: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=400&q=80", categoria: "esi" },
+    { id: 6, nombre: "Curso Inglés Intermedio", precio: 12500, descripcion: "Avanzá en el inglés con nuestro curso intermedio.", imagen: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=400&q=80", categoria: "cursos" },
+    { id: 7, nombre: "Kit Recursos Docentes", precio: 7800, descripcion: "Pack con materiales para docentes activos y creativos.", imagen: "https://images.unsplash.com/photo-1497493292307-31c376b6e479?auto=format&fit=crop&w=400&q=80", categoria: "recursos" },
+    { id: 8, nombre: "Decoración Fiestas Patrias", precio: 2100, descripcion: "Decoraciones temáticas para las fiestas patrias.", imagen: "https://images.unsplash.com/photo-1466637574441-749b8f19452f?auto=format&fit=crop&w=400&q=80", categoria: "fiestas" },
+  ];
+
+  // Cupones
+  const cupones = [
+    { codigo: "TEA10", descuento: 10 },
+    { codigo: "REBAJA20", descuento: 20 },
+    { codigo: "VIP30", descuento: 30 }
+  ];
+
+  // ADMIN PASSWORD
+  const ADMIN_PASS = "thequeenstea";
+
+  // FUNCIONES
+
+  // Modo oscuro
+  function toggleModoOscuro() {
+    modoOscuro = !modoOscuro;
+    document.body.classList.toggle('dark-mode', modoOscuro);
+    modoOscuroBtn.textContent = modoOscuro ? '☀️ Modo Claro' : '🌙 Modo Oscuro';
+  }
+
+  // Mostrar paso
+  function mostrarPaso(n) {
+    if (n < 1 || n > 3) return;
+    pasoActual = n;
+    pasosArticulos.forEach(p => p.classList.remove('activo'));
+    document.getElementById(`paso${n}`).classList.add('activo');
+    document.getElementById(`paso${n}`).focus();
+
+    // Mostrar resumen en paso 2
+    if (n === 2) {
+      actualizarResumen();
+    }
+  }
+
+  // Filtrar productos por categoría
+  function filtrarProductos(categoria) {
+    categoriaActiva = categoria;
+    document.querySelectorAll('#categorias button').forEach(btn => {
+      btn.classList.toggle('activo', btn.dataset.categoria === categoria);
+      btn.setAttribute('aria-pressed', btn.dataset.categoria === categoria);
+    });
+    cargarProductos();
+  }
+
+  // Cargar productos en lista
+  function cargarProductos() {
+    listaProductosEl.innerHTML = '';
+    let productosFiltrados = categoriaActiva === 'todos' ? productos : productos.filter(p => p.categoria === categoriaActiva);
+    if (productosFiltrados.length === 0) {
+      listaProductosEl.innerHTML = `<p>No hay productos en esta categoría.</p>`;
+      return;
+    }
+    productosFiltrados.forEach(prod => {
+      const card = document.createElement('article');
+      card.className = 'producto-card';
+      card.setAttribute('role', 'listitem');
+      card.setAttribute('tabindex', '0');
+      card.innerHTML = `
+        <img src="${prod.imagen}" alt="Imagen de ${prod.nombre}" loading="lazy" />
+        <h3>${prod.nombre}</h3>
+        <p>${prod.descripcion}</p>
+        <strong>$${prod.precio.toLocaleString('es-AR')}</strong>
+        <button aria-label="Agregar ${prod.nombre} al carrito" data-id="${prod.id}">Agregar 🛒</button>
+      `;
+      listaProductosEl.appendChild(card);
+    });
+  }
+
+  // Agregar al carrito
+  function agregarAlCarrito(id) {
+    const prod = productos.find(p => p.id === id);
+    if (!prod) return alert("Producto no encontrado.");
+    const item = carrito.find(i => i.id === id);
+    if (item) {
+      item.cantidad++;
+    } else {
+      carrito.push({...prod, cantidad: 1});
+    }
+    alert(`Agregaste "${prod.nombre}" al carrito.`);
+    actualizarResumen();
+  }
+
+  // Actualizar resumen de compra
+  function actualizarResumen() {
+    if (carrito.length === 0) {
+      resumenEl.innerHTML = '<p>No hay productos en el carrito.</p>';
+      return;
+    }
+    let html = '<ul>';
+    let total = 0;
+    carrito.forEach(item => {
+      html += `<li>${item.nombre} x${item.cantidad} - $${(item.precio * item.cantidad).toLocaleString('es-AR')}</li>`;
+      total += item.precio * item.cantidad;
+    });
+    html += '</ul>';
+
+    // Validar cupón
+    let codigo = inputCupon.value.trim().toUpperCase();
+    let descuento = 0;
+    let cuponValido = false;
+    if (codigo.length > 0) {
+      let cupon = cupones.find(c => c.codigo === codigo);
+      if (cupon) {
+        descuento = (total * cupon.descuento) / 100;
+        cuponValido = true;
+        html += `<p class="descuento">Descuento (${codigo}): -$${descuento.toFixed(2)}</p>`;
+      } else {
+        html += `<p class="descuento invalido">Cupón "${codigo}" inválido.</p>`;
+      }
+    }
+    const totalFinal = total - descuento;
+    html += `<p><strong>Total final: $${totalFinal.toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</strong></p>`;
+    resumenEl.innerHTML = html;
+  }
+
+  // Validar formulario datos comprador
+  function validarDatos() {
+    if (!formDatos.nombre.value.trim()) {
+      alert("Por favor ingresa tu nombre.");
+      formDatos.nombre.focus();
+      return false;
+    }
+    if (!formDatos.email.value.trim()) {
+      alert("Por favor ingresa tu correo electrónico.");
+      formDatos.email.focus();
+      return false;
+    }
+    // Email básico
+    if (!formDatos.email.value.includes('@')) {
+      alert("Por favor ingresa un correo válido.");
+      formDatos.email.focus();
+      return false;
+    }
+    if (carrito.length === 0) {
+      alert("El carrito está vacío. Agregá productos para continuar.");
+      mostrarPaso(1);
+      return false;
+    }
+    return true;
+  }
+
+  // Validar comprobante
+  function validarComprobante() {
+    const fileInput = document.getElementById('comprobante');
+    if (!fileInput.files || fileInput.files.length === 0) {
+      alert("Por favor adjuntá el comprobante de pago.");
+      fileInput.focus();
+      return false;
+    }
+    const archivo = fileInput.files[0];
+    const tiposValidos = ['image/jpeg', 'image/png', 'application/pdf'];
+    if (!tiposValidos.includes(archivo.type)) {
+      alert("El comprobante debe ser imagen JPEG, PNG o PDF.");
+      fileInput.focus();
+      return false;
+    }
+    return true;
+  }
+
+  // Enviar pedido (simulado)
+  function enviarPedido() {
+    if (!validarDatos() || !validarComprobante()) return;
+    // Simulación de envío (podrías integrar EmailJS o backend)
+    confirmacionEl.textContent = `Gracias ${formDatos.nombre.value.trim()}! Recibimos tu pedido y te enviaremos el material pronto 📩`;
+    // Resetear formulario y carrito
+    carrito.length = 0;
+    formDatos.reset();
+    document.getElementById('comprobante').value = "";
+    inputCupon.value = "";
+    actualizarResumen();
+    mostrarPaso(1);
+  }
+
+  // Panel administrador
+
+  // Mostrar productos en admin
+  function cargarProductosAdmin() {
+    if (productos.length === 0) {
+      listaProductosAdmin.innerHTML = '<p>No hay productos agregados.</p>';
+      return;
+    }
+    let html = '<table><thead><tr><th>Nombre</th><th>Categoría</th><th>Precio</th><th>Acción</th></tr></thead><tbody>';
+    productos.forEach(prod => {
+      html += `<tr>
+        <td>${prod.nombre}</td>
+        <td>${categoriaNombre(prod.categoria)}</td>
+        <td>$${prod.precio.toLocaleString('es-AR')}</td>
+        <td><button aria-label="Eliminar ${prod.nombre}" data-id="${prod.id}">Eliminar</button></td>
+      </tr>`;
+    });
+    html += '</tbody></table>';
+    listaProductosAdmin.innerHTML = html;
+
+    // Agregar evento a botones eliminar
+    listaProductosAdmin.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', e => {
+        const id = parseInt(e.target.dataset.id);
+        eliminarProducto(id);
+      });
+    });
+  }
+
+  // Nombre legible para categoría
+  function categoriaNombre(cat) {
+    switch(cat) {
+      case 'recursos': return 'Recursos Docentes';
+      case 'fiestas': return 'Fiestas Patrias';
+      case 'esi': return 'ESI';
+      case 'cursos': return 'Cursos por Nivel';
+      case 'otros': return 'Otros';
+      default: return 'Sin categoría';
+    }
+  }
+
+  // Agregar producto admin
+  function agregarProductoAdmin(event) {
+    event.preventDefault();
+    const nombre = nuevoNombre.value.trim();
+    const categoria = nuevaCategoria.value;
+    const precio = parseFloat(nuevoPrecio.value);
+    const descripcion = nuevaDescripcion.value.trim();
+    const imagen = nuevaImagen.value.trim();
+
+    if (!nombre || !categoria || isNaN(precio) || !descripcion || !imagen) {
+      alert("Completá todos los campos correctamente.");
+      return;
+    }
+    if (precio <= 0) {
+      alert("El precio debe ser mayor a 0.");
+      return;
+    }
+    const idNuevo = productos.length ? productos[productos.length -1].id + 1 : 1;
+    productos.push({id: idNuevo, nombre, categoria, precio, descripcion, imagen});
+    cargarProductos();
+    cargarProductosAdmin();
+    alert("Producto agregado correctamente.");
+    formAdmin.reset();
+    filtrarProductos(categoriaActiva);
+  }
+
+  // Eliminar producto admin
+  function eliminarProducto(id) {
+    const idx = productos.findIndex(p => p.id === id);
+    if (idx === -1) return;
+    if (confirm(`¿Querés eliminar el producto "${productos[idx].nombre}"?`)) {
+      productos.splice(idx, 1);
+      cargarProductos();
+      cargarProductosAdmin();
+      actualizarResumen();
+      alert("Producto eliminado.");
+    }
+  }
+
+  // Eventos
+
+  // Modo oscuro toggle
+  modoOscuroBtn.addEventListener('click', toggleModoOscuro);
+
+  // Categorías click
+  categoriasNav.addEventListener('click', e => {
+    if (e.target.tagName !== 'BUTTON') return;
+    filtrarProductos(e.target.dataset.categoria);
+  });
+
+  // Delegación agregar producto click
+  listaProductosEl.addEventListener('click', e => {
+    if (e.target.tagName === 'BUTTON') {
+      const id = parseInt(e.target.dataset.id);
+      agregarAlCarrito(id);
+    }
+  });
+
+  // Cupon input actualiza resumen
+  inputCupon.addEventListener('input', actualizarResumen);
+
+  // Botones pasos
+  btnSiguiente1.addEventListener('click', () => {
+    if (carrito.length === 0) {
+      alert("Por favor agregá al menos un producto al carrito.");
+      return;
+    }
+    mostrarPaso(2);
+  });
+  btnVolver2.addEventListener('click', () => mostrarPaso(1));
+  btnSiguiente2.addEventListener('click', () => {
+    if (!validarDatos()) return;
+    mostrarPaso(3);
+  });
+  btnVolver3.addEventListener('click', () => mostrarPaso(2));
+  btnConfirmar.addEventListener('click', enviarPedido);
+
+  // Form admin submit
+  formAdmin.addEventListener('submit', agregarProductoAdmin);
+
+  // Volver al inicio botón
+  btnVolverInicio.addEventListener('click', () => window.scrollTo({top:0, behavior: 'smooth'}));
+  window.addEventListener('scroll', () => {
+    if(window.scrollY > 400) btnVolverInicio.style.display = 'flex';
+    else btnVolverInicio.style.display = 'none';
+  });
+
+  // LOGIN ADMIN
+  function pedirPasswordAdmin() {
+    let intentos = 3;
+    function preguntar() {
+      const pass = prompt("Ingrese contraseña de administrador para panel (3 intentos):");
+      if(pass === null) return; // Canceló
+      if(pass === ADMIN_PASS) {
+        adminPanel.style.display = 'block';
+        alert("Acceso concedido al panel de administración.");
+      } else {
+        intentos--;
+        if(intentos > 0) {
+          alert(`Contraseña incorrecta. Te quedan ${intentos} intentos.`);
+          preguntar();
+        } else {
+          alert("Acceso denegado al panel de administración.");
+        }
+      }
+    }
+    preguntar();
+  }
+
+  // Inicio
+  function init() {
+    cargarProductos();
+    cargarProductosAdmin();
+    actualizarResumen();
+    toggleModoOscuro(); // modo claro inicial
+  }
+
+  init();
+
+// Ocultar panel admin al inicio sin pedir contraseña
+document.addEventListener('keydown', (e) => {
+  if (e.ctrlKey && e.altKey && e.key.toLowerCase() === 'a') {
+    pedirPasswordAdmin(); // solo si hace Ctrl + Alt + A
+  }
+});
+
+})();
+</script>
+
+</body>
+</html>

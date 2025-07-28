@@ -1,0 +1,17 @@
+[
+  {
+    "nivel": "A1",
+    "titulo": "Escribir una presentación personal",
+    "fechaEntrega": "2025-07-30"
+  },
+  {
+    "nivel": "B1",
+    "titulo": "Completar ejercicios de gramática",
+    "fechaEntrega": "2025-07-25"
+  },
+  {
+    "nivel": "B2",
+    "titulo": "Escuchar y resumir una conversación",
+    "fechaEntrega": "2025-07-28"
+  }
+]

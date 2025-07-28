@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Iniciar sesión - The Queen's Tea</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <style>
+    /* Reset básico */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #5b86e5, #36d1dc);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: rgba(255,255,255,0.15);
+      padding: 20px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    header .container {
+      width: 90%;
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+    header h1 {
+      font-weight: 600;
+      font-size: 1.6rem;
+    }
+    header nav a {
+      color: #e0e0e0;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    header nav a:hover {
+      color: white;
+      text-decoration: underline;
+    }
+
+    main {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+    }
+    .login-container {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      max-width: 400px;
+      width: 100%;
+      padding: 30px 40px;
+    }
+    .login-container h2 {
+      margin-bottom: 10px;
+      color: #333;
+      font-weight: 600;
+      text-align: center;
+      font-size: 1.8rem;
+    }
+    .login-container p.intro-text {
+      text-align: center;
+      color: #777;
+      font-size: 0.95rem;
+      margin-top: -15px;
+      margin-bottom: 25px;
+    }
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #555;
+      font-size: 0.9rem;
+    }
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px 14px;
+      margin-bottom: 20px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+      border-color: #36d1dc;
+      outline: none;
+    }
+    button.btn-primary {
+      width: 100%;
+      padding: 14px;
+      background: #36d1dc;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      animation: pulse 2s infinite;
+    }
+    button.btn-primary:hover {
+      background: #2bb0c9;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(54, 209, 220, 0.5); }
+      70% { box-shadow: 0 0 0 10px rgba(54, 209, 220, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(54, 209, 220, 0); }
+    }
+    .mensaje-error {
+      color: #cc3333;
+      font-weight: 600;
+      font-size: 0.95rem;
+      min-height: 1.4em;
+      text-align: center;
+      margin-top: 10px;
+    }
+    .login-container p.cta-text {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #666;
+      margin-top: 20px;
+    }
+    .login-container p.cta-text a {
+      color: #36d1dc;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .login-container p.cta-text a:hover {
+      text-decoration: underline;
+    }
+    .login-container p.support-text {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #999;
+      margin-top: 8px;
+    }
+    .login-container p.support-text a {
+      color: #36d1dc;
+      text-decoration: none;
+    }
+    .login-container p.support-text a:hover {
+      text-decoration: underline;
+    }
+    footer {
+      background-color: rgba(255,255,255,0.15);
+      text-align: center;
+      padding: 15px 0;
+      font-size: 0.9rem;
+      color: #eee;
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>The Queen's Tea</h1>
+      <nav>
+        <a href="index.html">Inicio</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="login-container">
+      <h2>Welcome back!</h2>
+      <p class="intro-text">Accedé a tu aula, revisá tus clases y disfrutá de tu progreso</p>
+      <form id="loginForm" novalidate>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="tuemail@ejemplo.com" required />
+
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" placeholder="********" required />
+
+        <button type="submit" class="btn-primary">¡Entrá a tu espacio!</button>
+      </form>
+      <div id="mensaje" class="mensaje-error"></div>
+      <p class="cta-text">
+        ¿Todavía no tenés cuenta? <a href="registro.html">Registrate acá</a>
+      </p>
+      <p class="support-text">
+        ¿Necesitás ayuda? Escribinos por WhatsApp: <a href="https://wa.me/5492212229980" target="_blank" rel="noopener noreferrer">+54 9 221 222 9980</a>
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 The Queen's Tea. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const mensajeDiv = document.getElementById('mensaje');
+
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const email = loginForm.email.value.trim();
+      const password = loginForm.password.value.trim();
+
+      mensajeDiv.textContent = '';
+
+      if (!email || !password) {
+        mensajeDiv.textContent = 'Por favor, completá todos los campos.';
+        return;
+      }
+
+      try {
+        const response = await fetch('http://localhost:3000/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password }),
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          mensajeDiv.textContent = errorData.mensaje || 'Error en el login.';
+          return;
+        }
+
+        const data = await response.json();
+        const usuario = data.usuario;
+        localStorage.setItem('usuario', JSON.stringify(usuario));
+
+        if (usuario.rol === 'admin') {
+          window.location.href = 'admin.html';
+        } else if (usuario.rol === 'profesor') {
+          window.location.href = 'panel-profe.html';
+        } else if (usuario.rol === 'alumno') {
+          window.location.href = 'alumno.html';
+        } else {
+          mensajeDiv.textContent = 'Rol no reconocido.';
+        }
+      } catch (error) {
+        mensajeDiv.textContent = 'Error de conexión, intentá nuevamente.';
+      }
+    });
+  </script>
+</body>
+</html>
