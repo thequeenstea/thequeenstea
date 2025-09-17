@@ -1,0 +1,27 @@
+{
+  "cursos": {
+    "C1 Advanced": [
+      { "id": 1, "nombre": "Ana Pérez", "email": "ana.perez@example.com" },
+      { "id": 2, "nombre": "Carlos Díaz", "email": "carlos.diaz@example.com" },
+      { "id": 3, "nombre": "María Gómez", "email": "maria.gomez@example.com" }
+    ],
+    "B2 Upper-Intermediate": [
+      { "id": 4, "nombre": "Juan López", "email": "juan.lopez@example.com" },
+      { "id": 5, "nombre": "Lucía Fernández", "email": "lucia.f@example.com" }
+    ],
+    "B1 Intermediate": [
+      { "id": 6, "nombre": "Sofía Martínez", "email": "sofia.m@example.com" },
+      { "id": 7, "nombre": "Pedro Sánchez", "email": "pedro.s@example.com" }
+    ]
+  },
+  "facturas": [
+    { "id": 1, "alumnoId": 1, "alumno": "Ana Pérez", "curso": "C1 Advanced", "clasesMes": 4, "valorClase": 11000, "descuento": 1000, "motivo": "Feriado", "pagada": false, "facturaArca": null },
+    { "id": 2, "alumnoId": 2, "alumno": "Carlos Díaz", "curso": "C1 Advanced", "clasesMes": 4, "valorClase": 11000, "descuento": 0, "motivo": "", "pagada": true, "facturaArca": null },
+    { "id": 3, "alumnoId": 4, "alumno": "Juan López", "curso": "B2 Upper-Intermediate", "clasesMes": 4, "valorClase": 10600, "descuento": 500, "motivo": "Feriado", "pagada": false, "facturaArca": null }
+  ],
+  "tareas": [],
+  "materiales": [],
+  "examenes": [],
+  "asistencias": [],
+  "mensajesChat": []
+}
