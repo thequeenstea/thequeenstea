@@ -1,743 +1,1835 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>The Queen's Tea - Academia de Inglés</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
-  <style>
-
-    /* ESTILOS GENERALES */
-    body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0; padding: 0;
-      background: #fff;
-      color: #0f204f;
-      line-height: 1.5;
-    }
-    .container {
-      width: 90%;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    header {
-      background: #0f204f;
-      color: white;
-      padding: 20px 0;
-    }
-    header h1 {
-      margin: 0;
-      font-weight: 600;
-      font-size: 2rem;
-      text-align: center;
-    }
-    nav {
-      margin-top: 10px;
-      text-align: center;
-    }
-    nav a {
-      color: white;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.3s;
-    }
-    nav a:hover {
-      color: #68a0f9;
-    }
-    .btn-primary, .btn-secondary, .btn-inscribirse, .btn-login {
-      background-color: #0f204f;
-      color: white;
-      padding: 10px 22px;
-      border: none;
-      border-radius: 5px;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-      transition: background-color 0.3s;
-    }
-    .btn-primary:hover, .btn-secondary:hover, .btn-inscribirse:hover, .btn-login:hover {
-      background-color: #68a0f9;
-      color: #fff;
-    }
-    section {
-      padding: 40px 0;
-    }
-    h2, h3, h4 {
-      font-weight: 600;
-      color: #0f204f;
-      margin-bottom: 20px;
-    }
-    p {
-      font-weight: 400;
-      margin-bottom: 15px;
-      font-size: 1.1rem;
-    }
-
-    /* HERO */
-    .hero {
-      background: linear-gradient(135deg, #68a0f9 0%, #0f204f 100%);
-      color: white;
-      text-align: center;
-      padding: 80px 20px;
-    }
-    .hero h2 {
-      font-size: 2.8rem;
-      margin-bottom: 10px;
-    }
-    .hero p {
-      font-size: 1.4rem;
-      margin-bottom: 25px;
-    }
-
-    /* CURSOS */
-    .courses-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
-    }
-    .course-card {
-      background: #f5f8ff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 3px 10px rgb(0 0 0 / 0.1);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      text-align: center;
-      transition: transform 0.3s;
-    }
-    .course-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgb(0 0 0 / 0.15);
-    }
-    .course-card h4 {
-      margin-bottom: 12px;
-      font-size: 1.3rem;
-    }
-    .course-card p {
-      flex-grow: 1;
-      font-size: 1rem;
-      color: #1a2a5b;
-      margin-bottom: 20px;
-    }
-    .btn-inscribirse {
-      background-color: #0f204f;
-      padding: 10px;
-      border-radius: 5px;
-      font-weight: 600;
-      color: white;
-      text-decoration: none;
-      transition: background-color 0.3s;
-    }
-    .btn-inscribirse:hover {
-      background-color: #68a0f9;
-      color: #fff;
-    }
-
-    /* METODOLOGÍA */
-    #metodologia {
-      background: #f5f8ff;
-      text-align: center;
-    }
-    .metodologia-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-      margin-top: 20px;
-    }
-    .metodo-item {
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.1);
-      flex: 1 1 280px;
-      max-width: 300px;
-      padding: 25px;
-      color: #0f204f;
-      transition: transform 0.3s;
-      cursor: default;
-    }
-    .metodo-item:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    }
-    .metodo-item h4 {
-      margin-bottom: 15px;
-      font-size: 1.25rem;
-      color: #0f204f;
-    }
-    .metodo-item p {
-      font-size: 1rem;
-      color: #1a2a5b;
-      line-height: 1.4;
-    }
-
-    /* FORMULARIO DE INSCRIPCIÓN */
-    #inscripcion form {
-      max-width: 500px;
-      margin: 0 auto;
-      background: #f5f8ff;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.1);
-    }
-    #inscripcion label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-      color: #0f204f;
-      margin-top: 15px;
-    }
-    #inscripcion input,
-    #inscripcion select {
-      width: 100%;
-      padding: 10px 12px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-      box-sizing: border-box;
-      transition: border-color 0.3s;
-    }
-    #inscripcion input:focus,
-    #inscripcion select:focus {
-      border-color: #68a0f9;
-      outline: none;
-    }
-    #inscripcion small {
-      color: #555;
-      font-size: 0.85rem;
-    }
-    #inscripcion p.note {
-      font-size: 0.9rem;
-      color: #555;
-      margin-top: 12px;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-    #inscripcion button.btn-primary {
-      margin-top: 20px;
-      width: 100%;
-      font-size: 1.1rem;
-      font-weight: 700;
-      padding: 12px;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    /* SLIDER TESTIMONIOS */
-    #testimonios .slider {
-      position: relative;
-      overflow: hidden;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .slider-wrapper {
-      overflow: hidden;
-    }
-    .testimonios-lista {
-      display: flex;
-      transition: transform 0.5s ease;
-      will-change: transform;
-    }
-    .testimonial {
-      background: #f5f8ff;
-      padding: 25px 30px;
-      border-radius: 15px;
-      margin: 0 10px;
-      min-width: 360px;
-      box-sizing: border-box;
-      color: #0f204f;
-      font-style: italic;
-      position: relative;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-    }
-    .testimonial-author {
-      margin-top: 15px;
-      font-weight: 700;
-      font-style: normal;
-      text-align: right;
-      color: #1a2a5b;
-    }
-    .slider-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: #0f204f;
-      color: white;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 20px;
-      opacity: 0.7;
-      transition: opacity 0.3s;
-      user-select: none;
-    }
-    .slider-btn:hover {
-      opacity: 1;
-    }
-    .prev-btn {
-      left: 0;
-    }
-    .next-btn {
-      right: 0;
-    }
-
-    /* Responsive */
-    @media (max-width: 600px) {
-      .metodologia-grid {
-        flex-direction: column;
-        align-items: center;
-      }
-      .testimonial {
-        min-width: 90vw;
-        margin: 0 5vw;
-      }
-      .courses-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <div class="container">
-      <h1>The Queen's Tea</h1>
-      <nav>
-  <a href="#cursos">Cursos</a>
-  <a href="#valores">Valores</a>
-  <a href="#examen">Examen de nivel</a>
-  <a href="login.html" class="btn-login">Iniciar sesión</a>
-  <a href="registro.html" class="btn-secondary" style="margin-left: 10px;">Crear cuenta</a>
-</nav>
-
-    </div>
-  </header>
-
-  <section class="hero">
-    <div class="container">
-       <img src="img/logo.png" alt="Logo de mi sitio" width="150">
-      <h2>THE QUEEN'S TEA</h2>
-      <p>Inglés a un click de distancia</p>
-      <a href="#examen" class="btn-primary">Hacé el examen de nivel</a>
-    </div>
-  </section>
-
-  <section id="cursos" class="info-section">
-    <div class="container">
-      <h3>Cursos disponibles</h3>
-      <div class="courses-grid">
-
-        <div class="course-card level-a1">
-          <h4>A1 - Básico</h4>
-          <p>Inicio del aprendizaje. Comprendé y usá expresiones cotidianas y frases simples para necesidades básicas.</p>
-          <a href="#inscripcion" class="btn-inscribirse">Inscribirse</a>
-        </div>
-
-        <div class="course-card level-a2">
-          <h4>A2</h4>
-          <p>Comprendé frases y expresiones frecuentes relacionadas con la vida diaria y comunicación simple.</p>
-          <a href="#inscripcion" class="btn-inscribirse">Inscribirse</a>
-        </div>
-
-        <div class="course-card level-a2plus">
-          <h4>A2+</h4>
-          <p>Refuerzo de lo básico con más fluidez y vocabulario ampliado para interacciones cotidianas.</p>
-          <a href="#inscripcion" class="btn-inscribirse">Inscribirse</a>
-        </div>
-
-        <div class="course-card level-b1">
-          <h4>B1 | MIÉRCOLES 20 A 21 HS</h4>
-          <p>Capacidad para comprender los puntos principales de textos claros y sobre temas conocidos.</p>
-          <a href="#inscripcion" class="btn-inscribirse">Inscribirse</a>
-        </div>
-
-        <div class="course-card level-b1plus">
-          <h4>B1+</h4>
-          <p>Interacciones más complejas y confianza para comunicarte en distintas situaciones.</p>
-          <a href="#inscripcion" class="btn-inscribirse">Inscribirse</a>
-        </div>
-
-        <div class="course-card level-b2">
-          <h4>B2 - Intermedio alto</h4>
-          <p>Comprensión clara de textos complejos y capacidad para discutir temas técnicos y generales.</p>
-          <a href="#inscripcion" class="btn-inscribirse">Inscribirse</a>
-        </div>
-
-        <div class="course-card level-b2first">
-          <h4>B2 First | MARTES 20 A 21 HS</h4>
-          <p>Preparación para el examen Cambridge First Certificate, nivel intermedio avanzado.</p>
-          <a href="#inscripcion" class="btn-inscribirse">Inscribirse</a>
-        </div>
-
-        <div class="course-card level-c1c2">
-          <h4>C1-C2 | MARTES 19 A 20 HS</h4>
-          <p>Dominio fluido y preciso del idioma, tanto oral como escrito, con habilidades profesionales.</p>
-          <a href="#inscripcion" class="btn-inscribirse">Inscribirse</a>
-        </div>
-
-        <div class="course-card level-ielts">
-          <h4>IELTS | MARTES 17 A 18 HS</h4>
-          <p>Preparación para el examen IELTS, apto para estudios y trabajo internacional.</p>
-          <a href="#inscripcion" class="btn-inscribirse">Inscribirse</a>
-        </div>
-
-        <div class="course-card level-toefl">
-          <h4>TOEFL (desde B1)</h4>
-          <p>Preparación para el examen TOEFL, reconocido para estudios universitarios y laborales.</p>
-          <a href="#inscripcion" class="btn-inscribirse">Inscribirse</a>
-        </div>
-
-        <div class="course-card level-ielts">
-          <h4>Conversación A2/B1 | MIÉRCOLES 19 A 20 HS</h4>
-          <p>Perdés el miedo a hablar y empezá a expresarte con soltura. Practicá estructuras útiles y vocabulario de la vida real en clases dinámicas y guiadas.</p>
-          <a href="#inscripcion" class="btn-inscribirse">Inscribirse</a>
-        </div>
-
-        <div class="course-card level-ielts">
-          <h4>Conversación B2/C1 | JUEVES 19 A 20 HS</h4>
-          <p>Pulí tu fluidez, naturalidad y confianza para hablar inglés real. Clases 100% prácticas con enfoque en temas actuales, pronunciación y estilo personal.</p>
-          <a href="#inscripcion" class="btn-inscribirse">Inscribirse</a>
-        </div>
-
-        <div class="course-card level-ielts">
-          <h4>Preparación ingreso 2026 (traductorado/profesorado) | JUEVES 18 A 19 HS</h4>
-          <p>Preparate estratégicamente para rendir con seguridad. Trabajamos comprensión, redacción, gramática y oralidad con enfoque académico.</p>
-          <a href="#inscripcion" class="btn-inscribirse">Inscribirse</a>
-        </div>
-
-        <div class="course-card level-ielts">
-          <h4>Preparación Lengua Inglesa 1 | MIÉRCOLES 18 A 19 HS</h4>
-          <p>Revisá y afianzá contenidos clave de la materia: gramática avanzada, writing académico y análisis de texto. Clases orientadas a aprobar con bases sólidas.</p>
-          <a href="#inscripcion" class="btn-inscribirse">Inscribirse</a>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Nueva sección dinámica metodología -->
-  <section id="metodologia" class="info-section">
-    <div class="container">
-      <h3>Nuestra metodología</h3>
-      <div class="metodologia-grid">
-        <div class="metodo-item">
-          <h4>Grupos reducidos</h4>
-          <p>Creemos que una de las maneras más eficientes de aprender un idioma es escuchando activamente y nutriéndose del aporte y la experiencia de otros. Por eso, todas nuestras clases se realizan en grupos reducidos, creando un ambiente cercano y de confianza donde cada alumno tiene un lugar para despejar dudas y aportar comentarios valiosos que pueden ayudar también a sus compañeros.</p>
-        </div>
-        <div class="metodo-item">
-          <h4>Conversación como eje</h4>
-          <p>En todas nuestras clases, la conversación es el eje principal. Trabajamos con diálogo real y dinámico para que puedas practicar y ganar fluidez desde el primer día.</p>
-        </div>
-        <div class="metodo-item">
-          <h4>Materiales motivadores</h4>
-          <p>Analizamos películas que motivan y enriquecen el vocabulario, textos literarios cuidadosamente seleccionados que amplían tu comprensión y cultura, y muchos otros recursos interactivos que hacen que aprender inglés sea una experiencia completa, divertida y eficaz.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-<section id="valores" style="padding: 60px 20px; background-color: #f9f9f9;">
-  <div style="max-width: 1100px; margin: 0 auto; text-align: center;">
-    <h2 style="font-size: 32px; margin-bottom: 20px;">Valores y formas de pago</h2>
-
-    <p style="font-size: 18px; margin-bottom: 30px; color: #444;">
-      Cada curso consiste en un <strong>encuentro grupal semanal de una hora de duración en vivo</strong>. <br><br>
-      Las clases se pueden abonar de forma mensual o semanal, siempre y cuando la clase a tomar se encuentre paga con al menos <strong>24 horas de antelación</strong>.<br><br>
-      Se establece un valor por hora no en razón de cuántas clases quiera tomar el alumno, sino en cuanto a las clases que efectivamente se dictan. <br>
-      De esta manera, al no cobrarse los días feriados o en caso de ausencia del docente, la cuota mensual se verá ajustada. <br>
-      <strong>Los días en que el alumno esté ausente, la clase se abona de todas maneras.</strong>
-    </p>
-
-    <h3 style="font-size: 24px; margin-top: 40px;">💳 Monto mensual aproximado</h3>
-    <table style="width: 100%; max-width: 700px; margin: 20px auto; border-collapse: collapse; font-size: 16px;">
-      <thead>
-        <tr style="background-color: #333; color: white;">
-          <th style="padding: 12px;">Semanas del mes</th>
-          <th style="padding: 12px;">Cantidad de clases</th>
-          <th style="padding: 12px;">Monto a abonar (según nivel)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr style="background-color: #fff;">
-          <td style="padding: 12px;">3 semanas</td>
-          <td style="padding: 12px;">3 clases</td>
-          <td style="padding: 12px;">Valor clase × 3</td>
-        </tr>
-        <tr style="background-color: #f0f0f0;">
-          <td style="padding: 12px;">4 semanas</td>
-          <td style="padding: 12px;">4 clases</td>
-          <td style="padding: 12px;">Valor clase × 4</td>
-        </tr>
-        <tr style="background-color: #fff;">
-          <td style="padding: 12px;">5 semanas</td>
-          <td style="padding: 12px;">5 clases</td>
-          <td style="padding: 12px;">Valor clase × 5</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h3 style="font-size: 24px; margin-top: 40px;">Valores por clase según nivel</h3>
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 20px;">
-      <div class="card-valor"><h4>A1 Pre-Elementary</h4><p>$14.000</p></div>
-      <div class="card-valor"><h4>A2 Elementary</h4><p>$14.000</p></div>
-      <div class="card-valor"><h4>A2+ Pre-Intermediate</h4><p>$14.000</p></div>
-      <div class="card-valor"><h4>B1 Intermediate</h4><p>$14.500</p></div>
-      <div class="card-valor"><h4>B1+ Pre-First</h4><p>$14.500</p></div>
-      <div class="card-valor"><h4>B2 Upper-Intermediate</h4><p>$15.000</p></div>
-      <div class="card-valor"><h4>B2+ Pre-Advanced</h4><p>$15.000</p></div>
-      <div class="card-valor"><h4>C1 Advanced</h4><p>$16.000</p></div>
-      <div class="card-valor"><h4>IELTS</h4><p>$16.000</p></div>
-      <div class="card-valor"><h4>TOEFL</h4><p>$16.000</p></div>
-      <div class="card-valor"><h4>Conversación B2/C1</h4><p>$16.000</p></div>
-      <div class="card-valor"><h4>Conversación A2/B1</h4><p>$15.000</p></div>
-      <div class="card-valor"><h4>Preparación Ingreso 2026</h4><p>$18.000</p></div>
-      <div class="card-valor"><h4>Preparación Lengua Inglesa 1</h4><p>$18.000</p></div>
-    </div>
-  </div>
-</section>
-
-<section id="examen" style="padding: 60px 20px; background-color: #fff8fc;">
-  <div style="max-width: 900px; margin: 0 auto; text-align: center;">
-    <h2 style="font-size: 32px; margin-bottom: 20px; color: #5a0085;">¿Querés saber tu nivel de inglés?</h2>
-    <p style="font-size: 18px; margin-bottom: 40px; color: #444;">
-      Completá nuestro test gratuito y descubrí qué curso se adapta mejor a vos. <br>
-      No tiene límite de tiempo y podés hacerlo desde cualquier dispositivo.
-    </p>
-
-    <div style="background-color: #fff; border-radius: 12px; padding: 30px 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); max-width: 600px; margin: 0 auto;">
-      <h3 style="font-size: 22px; margin-bottom: 15px; color: #222;">Accedé al examen de nivel</h3>
-      <p style="font-size: 16px; margin-bottom: 25px; color: #555;">
-        Una vez que lo completes, nos pondremos en contacto con vos para contarte tu resultado y sugerirte el mejor grupo.
-      </p>
-      <a href="https://forms.gle/d4ZmXNRCWqwbiCyQA" target="_blank"
-         style="display: inline-block; padding: 14px 28px; font-size: 16px; background-color: #5a0085; color: white; border-radius: 8px; text-decoration: none; transition: background-color 0.3s;">
-        Hacer el test
-      </a>
-    </div>
-  </div>
-</section>
-
-  <section id="login" class="login-section info-section" style="background: #f5f8ff;">
-  <div class="container">
-    <h3>Área de alumnos</h3>
-    <p>Accedé a tu aula virtual y materiales exclusivos.</p>
-    <a href="login.html" class="btn-primary" style="margin-right: 10px;">Iniciar sesión</a>
-    <a href="registro.html" class="btn-secondary">Crear cuenta</a>
-  </div>
-</section>
-
-
-  <!-- Testimonios -->
-  <section id="testimonios" class="info-section">
-    <div class="container">
-      <h3>Lo que dicen nuestros alumnos</h3>
-      <div class="slider" aria-label="Slider de testimonios">
-        <button class="slider-btn prev-btn" aria-label="Testimonio anterior">&#10094;</button>
-        <div class="slider-wrapper">
-          <div class="testimonios-lista">
-            <div class="testimonial">
-              <p>Las clases son tan amenas que se nos pasa la hora volando! Por primera vez después de estudiar inglés toda mi vida me siento cómodo, tranquilo y con la certeza de que voy aprendiendo, gracias Cynthia!!!!</p>
-              <div class="testimonial-author">— Gabriela Laplace</div>
-            </div>
-
-            <div class="testimonial">
-              <p>Realmente la experiencia en las clases son muy enriquecedoras. Clases dinámicas, con mucha empatía hacia el aprendizaje y sus tiempos. Muy feliz de ser alumno en The Queen's Tea.</p>
-              <div class="testimonial-author">— Liliana Cignetti</div>
-            </div>
-
-            <div class="testimonial">
-              <p>No tengo más que palabras de agradecimiento. Me ayudaron muchísimo adaptando todo para lo que necesitaba. Aprobé la materia gracias a su ayuda. Los súper recomiendo.</p>
-              <div class="testimonial-author">— Sofía Quero</div>
-            </div>
-
-            <div class="testimonial">
-              <p>Cynthia es una profesora muy comprensiva y dedicada, cada clase es única y divertida. ¡Vamos por más clases 2025!</p>
-              <div class="testimonial-author">— Joaco Montero</div>
-            </div>
-
-            <div class="testimonial">
-              <p>Cyn es increíble! Prepara todas las clases, con enfoque dinámico y apasionado. Altamente recomendado para aprender inglés y disfrutar el proceso.</p>
-              <div class="testimonial-author">— Gianina Soloa</div>
-            </div>
-
-            <div class="testimonial">
-              <p>Estudio con Cyn hace dos años. Empecé con cero conocimientos y hoy ya estoy a punto de empezar el nivel intermedio.
-Debo admitir que no fue fácil, pero Cyn hace hablar hasta a las paredes 🤭. No creo que exista persona que haya estudiado con ella y no haya aprendido. La cantidad de actividades tanto en la clase como posteriores a ella son excelentes, apostando a que el cerebro trabaje y el conocimeinto continúe. Siempre dispuesta a dar lo mejor de sí y de buen humor incluso a las 8 a.m. La alegría con la que te recibe, su predisposición a responder cada duda y la PACIENCIA 🙏🏻 Hizo que me gustara leer en inglés gracias a sus talleres de lectura y consejos.
-Recomiendo al 1000%</p>
-              <div class="testimonial-author">— Rocío Benitez</div>
-            </div>
-
-            <div class="testimonial">
-              <p>Clases didácticas, actualizadas y con temas de actualidad. Excelente entrega y dedicación del profesor. 😊</p>
-              <div class="testimonial-author">— Laura Bastias</div>
-            </div>
-          </div>
-        </div>
-        <button class="slider-btn next-btn" aria-label="Testimonio siguiente">&#10095;</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Sección de inscripción -->
-  <section id="inscripcion" class="info-section" style="background: #f5f8ff;">
-    <div class="container">
-      <h3>Formulario de Inscripción</h3>
-      <p>Completá tus datos y el curso al que querés inscribirte. Nos contactaremos pronto.</p>
-      <form id="formInscripcion">
-        <label for="nombre">Nombre completo:</label>
-        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required />
-
-        <label for="documento">Número de documento o CUIL:</label>
-        <input type="text" id="documento" name="documento" placeholder="Ej: 20.123.456 o 20-12345678-9" required />
-        <small>Este dato es necesario para generar facturas de ARCA.</small>
-
-        <label for="whatsapp">Número de WhatsApp:</label>
-        <input type="tel" id="whatsapp" name="whatsapp" placeholder="+54 9 11 1234 5678" required />
-
-        <label for="Mail">Correo electrónico:</label>
-        <input type="tel" id="Mail" name="Mail" placeholder="thequeenstea.ingles@gmail.com" required />
-
-        <label for="curso">Curso seleccionado:</label>
-        <select id="curso" name="curso" required>
-          <option value="">-- Seleccioná un curso --</option>
-          <option value="A1 - Básico">A1 - Básico</option>
-          <option value="A2 - Básico alto">A2 - Básico alto</option>
-          <option value="A2+">A2+</option>
-          <option value="B1 - Intermedio">B1 - Intermedio</option>
-          <option value="B1+">B1+</option>
-          <option value="B2 - Intermedio alto">B2 - Intermedio alto</option>
-          <option value="B2 First (FCE)">B2 First (FCE)</option>
-          <option value="C1-C2 - Avanzado">C1-C2 - Avanzado</option>
-          <option value="IELTS">IELTS</option>
-          <option value="TOEFL">TOEFL</option>
-          <option value="TOEFL">Preparación Ingreso 2026</option>
-          <option value="TOEFL">Preparación Lengua Inglesa 1</option>
-          <option value="TOEFL">Conversación A2/B1</option>
-          <option value="TOEFL">Conversación B2/C1</option>
-        </select>
-
-        <p class="note">
-          Al hacer clic en <strong>"Enviar inscripción"</strong> se abrirá WhatsApp para enviar tu inscripción rápidamente.
-        </p>
-
-        <button type="submit" class="btn-primary">Enviar inscripción</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- JavaScript -->
-  <script>
-    // Testimonios slider
-    const lista = document.querySelector('.testimonios-lista');
-    const btnPrev = document.querySelector('.prev-btn');
-    const btnNext = document.querySelector('.next-btn');
-
-    const anchoItem = 380; // ancho de cada testimonio
-    let desplazamiento = 0;
-    const maxDesplazamiento = (lista.children.length - 1) * anchoItem;
-
-    btnNext.addEventListener('click', () => {
-      desplazamiento += anchoItem;
-      if (desplazamiento > maxDesplazamiento) desplazamiento = 0;
-      lista.style.transform = `translateX(-${desplazamiento}px)`;
-    });
-
-    btnPrev.addEventListener('click', () => {
-      desplazamiento -= anchoItem;
-      if (desplazamiento < 0) desplazamiento = maxDesplazamiento;
-      lista.style.transform = `translateX(-${desplazamiento}px)`;
-    });
-
-    setInterval(() => {
-      desplazamiento += anchoItem;
-      if (desplazamiento > maxDesplazamiento) desplazamiento = 0;
-      lista.style.transform = `translateX(-${desplazamiento}px)`;
-    }, 4000);
-
-    // Formulario de inscripción y apertura de WhatsApp
-    const form = document.getElementById('formInscripcion');
-    form.addEventListener('submit', function(event) {
-      event.preventDefault();
-
-      const nombre = form.nombre.value.trim();
-      const documento = form.documento.value.trim();
-      const whatsapp = form.whatsapp.value.trim();
-      const curso = form.curso.value;
-
-      if (!nombre || !documento || !whatsapp || !curso) {
-        alert('Por favor, completá todos los campos.');
-        return;
-      }
-
-      const mensaje = `Hola, quiero inscribirme al curso ${curso}. Mi nombre es ${nombre}, DNI/CUIL: ${documento}, WhatsApp: ${whatsapp}.`;
-
-      const miNumero = '5492212229980'; // tu número sin signos ni espacios
-
-      const url = `https://wa.me/${miNumero}?text=${encodeURIComponent(mensaje)}`;
-
-      if (confirm('Se abrirá WhatsApp para enviar tu inscripción. ¿Querés continuar?')) {
-        window.open(url, '_blank');
-      }
-    });
-  </script>
-<div id="robot-chat" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
-  <button id="toggleChat" style="background:#36d1dc; border:none; color:white; font-weight:bold; border-radius:50%; width:60px; height:60px; font-size:1.4rem; box-shadow:0 2px 10px rgba(0,0,0,0.3); cursor:pointer;">💬</button>
-  <div id="chatBox" style="display:none; width:300px; height:380px; background:white; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.2); padding:10px; position:absolute; bottom:70px; right:0;">
-    <h4 style="margin:0 0 10px; font-weight:bold; color:#333;">👋 Soy QueenBot</h4>
-    <div id="chatMessages" style="height:260px; overflow-y:auto; border:1px solid #eee; padding:5px 10px; font-size:0.9rem;"></div>
-    <input id="chatInput" placeholder="Escribí tu duda..." style="width:100%; padding:8px; margin-top:5px; border-radius:6px; border:1px solid #ccc;" />
-  </div>
-</div>
-<script>
-  const respuestas = {
-    "tarea": "Podés ver tus tareas en la sección 'Tareas' dentro del aula virtual.",
-    "comprobante": "Subí tu comprobante desde la opción 'Comprobantes' en tu panel.",
-    "profesor": "Tu profesor te puede responder desde la mensajería interna.",
-    "pago": "Las facturas están disponibles en tu panel de alumno.",
-    "hola": "¡Hola! ¿Cómo puedo ayudarte?",
-    "error": "No entendí tu pregunta. Probá con palabras clave como: tarea, comprobante, profesor, pago."
-  };
-
-  const chatBtn = document.getElementById("toggleChat");
-  const chatBox = document.getElementById("chatBox");
-  const chatMessages = document.getElementById("chatMessages");
-  const chatInput = document.getElementById("chatInput");
-
-  chatBtn.addEventListener("click", () => {
-    chatBox.style.display = chatBox.style.display === "none" ? "block" : "none";
-  });
-
-  chatInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      const pregunta = chatInput.value.trim().toLowerCase();
-      if (!pregunta) return;
-      agregarMensaje("Tú", pregunta);
-
-      let respuesta = "error";
-      for (let clave in respuestas) {
-        if (pregunta.includes(clave)) {
-          respuesta = clave;
-          break;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Queen's Tea | Cursos de Inglés Conversacional y para Exámenes</title>
+    <meta name="description" content="Aprende inglés con grupos súper reducidos, material incluido y enfoque 100% conversacional. Clases de Niveles, Exámenes (IELTS/TOEFL) y más.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'> 👑 </text></svg>">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'original-blue': '#224097', // Azul Primario
+                        'accent-primary': '#4a75e6', // Azul más claro para acentos
+                        'accent-gold': '#FFD700', // Dorado/Amarillo
+                        'accent-light': '#f8f9fa', // Fondo claro
+                        'accent-dark-bg': '#1e293b', // Fondo Oscuro (slate-800)
+                        'text-dark': '#0f172a', // Texto oscuro (slate-900)
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    },
+                    keyframes: {
+                        'fade-in-up': {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    },
+                    animation: {
+                        'fade-in-up': 'fade-in-up 0.5s ease-out forwards',
+                    },
+                }
+            }
         }
-      }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* [Tu CSS personalizado - Mantenido] */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+        }
+        .accordion-item.active .accordion-content {
+            max-height: 500px; 
+        }
+        .scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+            backdrop-filter: blur(5px);
+        }
+        .filter-btn-js {
+            transition: all 0.2s ease;
+        }
+        .check-icon {
+            color: #4a75e6; /* accent-primary */
+        }
 
-      setTimeout(() => {
-        agregarMensaje("QueenBot", respuestas[respuesta]);
-        chatInput.value = "";
-      }, 500);
+        /* [Estilos de Quiz - Mejorados para Feedback] */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            display: none; 
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            backdrop-filter: blur(5px);
+            overflow-y: auto; 
+        }
+
+        .modal-content {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            padding: 2rem;
+            max-width: 550px; 
+            width: 100%;
+            position: relative;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .opcion-respuesta {
+            display: block;
+            text-align: left;
+            width: 100%;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 2px solid #D1D5DB;
+            font-size: 1.1rem;
+            transition: all 0.2s ease-in-out;
+            color: #1F2937;
+            cursor: pointer;
+            background-color: #F9FAFB;
+            font-weight: 500;
+            box-sizing: border-box;
+        }
+
+        .opcion-respuesta:not([disabled]):hover {
+            background-color: #E5E7EB;
+            border-color: #4a75e6; 
+        }
+
+        /* Clases de feedback añadidas: */
+        .opcion-respuesta.correct {
+            background-color: #DCFCE7 !important; 
+            border-color: #10B981 !important;     
+            color: #065F46 !important;
+            font-weight: bold;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5); 
+        }
+
+        .opcion-respuesta.incorrect {
+            background-color: #FEE2E2 !important; 
+            border-color: #EF4444 !important;     
+            color: #991B1B !important;
+        }
+
+        .modal-overlay.flex {
+            display: flex;
+        }
+
+        .resultado-input {
+            width: 100%; 
+            padding: 0.75rem; 
+            border: 1px solid #D1D5DB; 
+            border-radius: 0.5rem;
+            box-sizing: border-box;
+            margin-top: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .pregunta-texto {
+            font-size: 1.4rem; 
+            font-weight: 800; 
+            color: #1F2937; 
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body class="font-sans text-text-dark bg-white overflow-x-hidden">
+
+    <div id="scrollWatcher" class="absolute top-0 h-1 w-full pointer-events-none"></div>
+
+    <header id="header" class="fixed top-0 left-0 w-full z-50 transition duration-300 bg-transparent">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+            <div class="flex justify-between items-center py-4 lg:py-5">
+                
+                <a href="#inicio" class="flex flex-col items-start font-heading text-xl font-extrabold tracking-wider text-original-blue transition duration-300 leading-none">
+                    <span class="text-2xl font-black">THE QUEEN'S TEA</span>
+                    <span class="text-xs font-medium text-slate-600 uppercase tracking-widest mt-1">EDUCACIÓN A DISTANCIA</span>
+                </a>
+
+                <nav class="hidden lg:block">
+                    <ul class="flex space-x-8">
+                        <li><a href="#inicio" class="text-original-blue hover:text-accent-primary font-medium transition duration-200">Inicio</a></li>
+                        <li><a href="#cursos" class="text-original-blue hover:text-accent-primary font-medium transition duration-200">Cursos</a></li>
+                        <li><a href="#valores" class="text-original-blue hover:text-accent-primary font-medium transition duration-200">Valores</a></li>
+                        <li><a href="#testimonios" class="text-original-blue hover:text-accent-primary font-medium transition duration-200">Opiniones</a></li>
+                        <li><a href="#faq" class="text-original-blue hover:text-accent-primary font-medium transition duration-200">FAQ</a></li>
+                    </ul>
+                </nav>
+
+                <div class="flex items-center space-x-4">
+                    <a href="#contacto" class="hidden lg:inline-flex px-4 py-2 border border-original-blue text-sm font-semibold rounded-lg text-white bg-original-blue hover:bg-accent-primary transition duration-300">
+                        Inscripción
+                    </a>
+                    <button id="mobile-menu-btn" class="lg:hidden p-2 text-original-blue focus:outline-none focus:ring-2 focus:ring-accent-primary rounded-md" aria-expanded="false" aria-controls="mobile-menu">
+                        ☰
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="hidden lg:hidden bg-white/95 backdrop-blur-sm shadow-xl absolute top-full w-full py-4 transition-all duration-300" role="menu">
+            <ul class="flex flex-col space-y-3 px-4">
+                <li><a href="#inicio" class="mobile-nav-link block px-3 py-2 text-original-blue hover:bg-accent-light rounded-md font-semibold" role="menuitem">Inicio</a></li>
+                <li><a href="#cursos" class="mobile-nav-link block px-3 py-2 text-original-blue hover:bg-accent-light rounded-md font-semibold" role="menuitem">Cursos</a></li>
+                <li><a href="#valores" class="mobile-nav-link block px-3 py-2 text-original-blue hover:bg-accent-light rounded-md font-semibold" role="menuitem">Valores</a></li>
+                <li><a href="#testimonios" class="mobile-nav-link block px-3 py-2 text-original-blue hover:bg-accent-light rounded-md font-semibold" role="menuitem">Opiniones</a></li>
+                <li><a href="#faq" class="mobile-nav-link block px-3 py-2 text-original-blue hover:bg-accent-light rounded-md font-semibold" role="menuitem">FAQ</a></li>
+                <li><a href="#contacto" class="mobile-nav-link block text-center mt-3 px-3 py-2 bg-accent-primary text-white font-bold rounded-lg hover:bg-original-blue transition duration-300" role="menuitem">Pre-Inscribite</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section id="inicio" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-accent-light overflow-hidden" role="region" aria-labelledby="hero-title">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl text-center">
+                <div class="max-w-5xl mx-auto">
+                    <p class="font-heading text-lg font-extrabold uppercase text-accent-primary tracking-widest mb-4 reveal-on-scroll">
+                        TU FUTURO A UN CLICK DE DISTANCIA
+                    </p>
+                    <h1 id="hero-title" class="font-heading text-6xl md:text-8xl lg:text-9xl font-black text-text-dark leading-none reveal-on-scroll" data-delay="100">
+                        Aprendizaje <span class="text-original-blue">garantizado.</span>
+                    </h1>
+                    <p class="mt-8 text-xl text-slate-700 max-w-3xl mx-auto reveal-on-scroll" data-delay="200">
+                        Hace diez años soñábamos con derribar las barreras del idioma y acompañar a cada estudiante. Hoy, cientos de voces argentinas confirman que ese sueño se hizo realidad.
+                    </p>
+
+                    <div class="mt-12 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center reveal-on-scroll" data-delay="300">
+                        <a href="#cursos" class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-lg font-bold rounded-lg shadow-xl text-white bg-accent-primary hover:bg-original-blue transition duration-300 ease-in-out transform hover:scale-105">
+                            Ver Cursos y Horarios
+                        </a>
+                        
+                        <button id="abrir-modal-prueba" class="inline-flex items-center justify-center px-8 py-3 border border-accent-primary text-lg font-bold rounded-lg shadow-xl text-accent-primary bg-white hover:bg-accent-light transition duration-300 ease-in-out transform hover:scale-105">
+                            ¡Test de Nivel GRATIS!
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        </main>
+
+    <div id="modal-prueba-nivel" class="modal-overlay hidden">
+        <div class="modal-content">
+            
+            <button id="cerrar-modal-prueba" style="position: absolute; top: 1rem; right: 1rem; font-size: 2rem; color: #9CA3AF; background: none; border: none; cursor: pointer;">
+                &times;
+            </button>
+            
+            <div id="quiz-container">
+                <h3 style="font-size: 1.5rem; font-weight: bold; color: #4a75e6; border-bottom: 2px solid #E5E7EB; padding-bottom: 0.75rem; margin-bottom: 1.5rem;">
+                    Test de Nivel de Inglés 👑
+                </h3>
+                
+                <div style="margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid #F3F4F6;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 1rem; font-weight: 600; color: #4B5563;">
+                        <span style="font-size: 1.1rem; font-weight: 700;">Aciertos: <span id="current-score" style="color: #10B981; font-size: 1.5rem;">0</span></span>
+                        <span>Pregunta: <span id="contador-preguntas">1 / 120</span></span>
+                    </div>
+                    
+                    <div style="width: 100%; background-color: #E5E7EB; border-radius: 9999px; height: 0.75rem; position: relative; margin-top: 0.5rem;">
+                        <div id="level-progress" style="height: 100%; border-radius: 9999px; transition: width 0.5s ease-in-out; background-color: #4a75e6; width: 0%;"></div>
+                    </div>
+                </div>
+
+                <div id="pregunta-actual-container" style="min-height: 200px;">
+                    </div>
+                
+            </div>
+
+            <div id="resultado-container" class="hidden" style="text-align: center; padding: 1rem;">
+                <h3 id="resultado-titulo" style="font-size: 2rem; font-weight: 800; color: #4a75e6; margin-bottom: 1.5rem;"></h3>
+                <div style="padding: 1.5rem; background-color: #F3F4F6; border-radius: 0.75rem; margin-bottom: 1.5rem;">
+                    <p style="font-size: 1.25rem; font-weight: bold; color: #4B5563; margin-bottom: 0.5rem;">Puntuación Final:</p>
+                    <p id="resultado-aciertos" style="font-size: 3rem; font-weight: 900; color: #1F2937;">0</p>
+                    <p style="font-size: 1.25rem; font-weight: bold; color: #10B981; margin-top: 1rem;">Nivel Estimado:</p>
+                    <p id="nivel-recomendado" style="font-size: 3.5rem; font-weight: 900; color: #10B981;"></p>
+                </div>
+                
+                <p id="resultado-mensaje" style="font-size: 1rem; color: #4B5563; margin-bottom: 1.5rem;"></p>
+                
+                <p style="font-size: 0.875rem; color: #6B7280; margin-bottom: 0.5rem;">Completa tu nombre para obtener tu análisis personalizado:</p>
+                <input type="text" id="nombre-completo" placeholder="Tu Nombre Completo" class="resultado-input" required>
+                
+                <a href="#" id="btn-whatsapp-info" style="display: none; margin-top: 1rem; width: 100%; align-items: center; justify-content: center; padding: 0.75rem 1rem; background-color: #25D366; color: white; font-weight: bold; border-radius: 0.5rem; transition: background-color 0.3s; text-decoration: none;">
+                    <span style="font-size: 1.25rem; margin-right: 0.75rem;">&#x2705;</span> Enviar Resultados por WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+// ===============================================
+// A. PREGUNTAS DEL EXAMEN (120 Preguntas con Respuestas Validadas)
+// ===============================================
+const preguntas = [
+    // A1 (Starter/Elementary)
+    { id: 1, pregunta: "Where ____ from? I'm from Russia.", opciones: ["A you are", "B you", "C are you"], correcta: "C are you" },
+    { id: 2, pregunta: "We have ____ house in Moscow.", opciones: ["A any", "B a", "C can"], correcta: "B a" },
+    { id: 3, pregunta: "I have two ____, a boy and a girl.", opciones: ["A sons", "B daughters", "C children"], correcta: "C children" },
+    { id: 4, pregunta: "I work in a ____. I'm a doctor.", opciones: ["A hospital", "B hotel", "C supermarket"], correcta: "A hospital" },
+    { id: 5, pregunta: "This is my brother. ____ name's Paul.", opciones: ["A Her", "B His", "C He's"], correcta: "B His" },
+    { id: 6, pregunta: "____ five people in my family.", opciones: ["A They are", "B There is", "C There are"], correcta: "C There are" },
+    { id: 7, pregunta: "I get up ____ 7 o'clock in the morning.", opciones: ["A for", "B at", "C in"], correcta: "B at" },
+    { id: 8, pregunta: "I like apples, but I ____ bananas.", opciones: ["A don't like", "B like", "C do like"], correcta: "A don't like" },
+    { id: 9, pregunta: "Excuse me, ____ speak French?", opciones: ["A do you", "B you do", "C you"], correcta: "A do you" },
+    { id: 10, pregunta: "How much are ____ shoes?", opciones: ["A this", "B these", "C that"], correcta: "B these" },
+    { id: 11, pregunta: "Where are my glasses? They're ____ the table.", opciones: ["A at", "B on", "C in"], correcta: "B on" },
+    { id: 12, pregunta: "My sister ____ tennis very well.", opciones: ["A plays", "B play", "C playing"], correcta: "A plays" },
+    { id: 13, pregunta: "I usually go to work ____ train.", opciones: ["A on", "B with", "C by"], correcta: "C by" },
+    { id: 14, pregunta: "I don't see my parents very often ____ they live in South Africa.", opciones: ["A so", "B but", "C because"], correcta: "C because" },
+    { id: 15, pregunta: "Rosie stayed ____ home yesterday afternoon.", opciones: ["A in", "B at", "C to"], correcta: "B at" },
+    { id: 16, pregunta: "Last night I ____ to the cinema.", opciones: ["A went", "B did go", "C was"], correcta: "A went" },
+    { id: 17, pregunta: "The ____ is quite expensive but the food there is excellent.", opciones: ["A film", "B restaurant", "C book"], correcta: "B restaurant" },
+    { id: 18, pregunta: "Do you want to listen to music or ____ TV?", opciones: ["A see", "B look", "C watch"], correcta: "C watch" },
+    { id: 19, pregunta: "____ were you at the weekend? I was in Scotland.", opciones: ["A When", "B Where", "C What"], correcta: "B Where" },
+    { id: 20, pregunta: "____ you have a good time at the party? Yes, it was fun.", opciones: ["A Did", "B Were", "C Had"], correcta: "A Did" },
+    // A2 (Elementary/Pre-Int)
+    { id: 21, pregunta: "Are you ____ English teacher?", opciones: ["A Maria", "B Marias'", "C Maria's"], correcta: "C Maria's" },
+    { id: 22, pregunta: "Bob will meet ____ at the airport.", opciones: ["A us", "B we", "C our"], correcta: "A us" },
+    { id: 23, pregunta: "____ you like to come? I'm going to a concert tonight.", opciones: ["A Do", "B Are", "C Would"], correcta: "C Would" },
+    { id: 24, pregunta: "____ use your dictionary? Sure. Here you are.", opciones: ["A Could I", "B Could you", "C Do I"], correcta: "A Could I" },
+    { id: 25, pregunta: "I like this apartment but the ____ is too expensive for me.", opciones: ["A money", "B rent", "C cost"], correcta: "B rent" },
+    { id: 26, pregunta: "Excuse me, how do I ____ to the bus station?", opciones: ["A come", "B get", "C arrive"], correcta: "B get" },
+    { id: 27, pregunta: "Do you sell stamps? Yes, we do. How ____ do you want?", opciones: ["A any", "B many", "C much"], correcta: "B many" },
+    { id: 28, pregunta: "Sorry I'm so late. That's ____.", opciones: ["A OK", "B great", "C right"], correcta: "A OK" },
+    { id: 29, pregunta: "I'd like ____ milk in my coffee, please.", opciones: ["A some", "B any", "C a"], correcta: "A some" },
+    { id: 30, pregunta: "____ a bus stop near my flat.", opciones: ["A It's", "B Here's", "C There's"], correcta: "C There's" },
+    { id: 31, pregunta: "Is this a good time to talk? Sorry, no. I ____ dinner.", opciones: ["A cook", "B am cooking", "C cooking"], correcta: "B am cooking" },
+    { id: 32, pregunta: "I think cycling is more dangerous ____ driving.", opciones: ["A as", "B like", "C than"], correcta: "C than" },
+    { id: 33, pregunta: "We ____ going to the theatre next Saturday.", opciones: ["A will", "B do", "C are"], correcta: "C are" },
+    { id: 34, pregunta: "____ meet for coffee some time soon.", opciones: ["A Let's", "B Do you", "C Shall they"], correcta: "A Let's" },
+    { id: 35, pregunta: "Kamal has got a holiday home near ____ sea.", opciones: ["A a", "B the", "C some"], correcta: "B the" },
+    { id: 36, pregunta: "If you've got a headache, you ____ go home.", opciones: ["A should", "B did", "C had"], correcta: "A should" },
+    { id: 37, pregunta: "____ ever been to New York?", opciones: ["A Have you", "B Are you", "C Did you"], correcta: "A Have you" },
+    { id: 38, pregunta: "I only get about five hours' sleep a night. That's not ____.", opciones: ["A enough", "B a lot", "C too much"], correcta: "A enough" },
+    { id: 39, pregunta: "Did Amina finish the report? No. She ____ it tomorrow.", opciones: ["A finishes", "B is going to finish", "C finished"], correcta: "B is going to finish" },
+    { id: 40, pregunta: "Paula ____ loves working with children.", opciones: ["A very", "B really", "C much"], correcta: "B really" },
+    // B1 (Pre-Int/Intermediate)
+    { id: 41, pregunta: "Is Ottawa the capital of Canada? I think ____.", opciones: ["A is", "B yes", "C so", "D right"], correcta: "C so" },
+    { id: 42, pregunta: "We never ____ a television when I was a child.", opciones: ["A have had", "B hadn't", "C had", "D didn't have"], correcta: "C had" },
+    { id: 43, pregunta: "We paid the restaurant bill ____ credit card.", opciones: ["A to", "B with", "C on", "D by"], correcta: "D by" },
+    { id: 44, pregunta: "The last time I ____ Joanna was in Paris.", opciones: ["A have seen", "B saw", "C see", "D was seeing"], correcta: "B saw" },
+    { id: 45, pregunta: "If you ____ money from a friend, you should always pay it back promptly.", opciones: ["A borrow", "B earn", "C spend", "D lend"], correcta: "A borrow" },
+    { id: 46, pregunta: "Can I make myself a cup of coffee? Of course. You ____ to ask.", opciones: ["A haven't", "B mustn't", "C needn't", "D don't have"], correcta: "D don't have" },
+    { id: 47, pregunta: "I ____ a lot of sport in my free time.", opciones: ["A do", "B practise", "C make", "D exercise"], correcta: "A do" },
+    { id: 48, pregunta: "____ anywhere interesting recently?", opciones: ["A Do you go", "B Have you been", "C Are you going", "D Will you go"], correcta: "B Have you been" },
+    { id: 49, pregunta: "It's Walter's birthday on Friday. He ____ be 30, I think.", opciones: ["A should", "B can", "C will", "D shall"], correcta: "C will" },
+    { id: 50, pregunta: "Learning the piano isn't as difficult ____ learning the violin.", opciones: ["A like", "B so", "C than", "D as"], correcta: "D as" },
+    { id: 51, pregunta: "If the weather ____ bad tomorrow, we can go to a museum.", opciones: ["A will be", "B had been", "C is", "D would be"], correcta: "C is" },
+    { id: 52, pregunta: "About a billion cans of Coca-Cola ____ drunk around the world every day.", opciones: ["A is", "B are", "C was", "D were"], correcta: "B are" },
+    { id: 53, pregunta: "My mum's not very well. Oh, ____.", opciones: ["A it doesn't matter", "B I do apologise", "C sorry to hear that", "D not bad, thanks."], correcta: "C sorry to hear that" },
+    { id: 54, pregunta: "Hans isn't here. He ____ to see his grandmother. He'll be back tomorrow.", opciones: ["A has gone", "B was", "C has been", "D had gone"], correcta: "A has gone" },
+    { id: 55, pregunta: "Would you mind changing my appointment? ____ time on Friday is fine.", opciones: ["A Next", "B All the", "C Every", "D Any"], correcta: "D Any" },
+    { id: 56, pregunta: "When I was a child, I ____ climb the wall and jump into our neighbours' garden.", opciones: ["A would", "B did", "C have", "D used"], correcta: "A would" },
+    { id: 57, pregunta: "Have you finished ____ the wall yet?", opciones: ["A paint", "B to paint", "C painting", "D painted"], correcta: "C painting" },
+    { id: 58, pregunta: "Can you help me? I've tried ____ hotel in the city and can't find a room.", opciones: ["A many", "B any", "C every", "D all"], correcta: "C every" },
+    { id: 59, pregunta: "Lena used to find work boring ____ she became a nurse.", opciones: ["A unless", "B until", "C if", "D since"], correcta: "B until" },
+    { id: 60, pregunta: "If I ____ closer to my office, I could walk to work.", opciones: ["A lived", "B would live", "C had lived", "D live"], correcta: "A lived" },
+    // B2 (Intermediate/Upper Int)
+    { id: 61, pregunta: "I ____ outside the cinema when suddenly a police car arrived.", opciones: ["A stood", "B was standing", "C have stood", "D am standing"], correcta: "B was standing" },
+    { id: 62, pregunta: "It ____ be fully booked. They're sometimes busy on a Monday.", opciones: ["A will", "B may", "C can", "D must"], correcta: "B may" },
+    { id: 63, pregunta: "We've ____ come back from a trip to India. It was amazing.", opciones: ["A already", "B yet", "C just", "D only"], correcta: "C just" },
+    { id: 64, pregunta: "Don't worry, I ____ you a lift if you want.", opciones: ["A give", "B am giving", "C 'll give", "D 'm going to give"], correcta: "C 'll give" },
+    { id: 65, pregunta: "My doctor advised me ____ more exercise.", opciones: ["A take", "B taking", "C having taken", "D to take"], correcta: "D to take" },
+    { id: 66, pregunta: "I couldn't ____ up with the noise in the city, so we moved to the countryside.", opciones: ["A put", "B live", "C set", "D take"], correcta: "A put" },
+    { id: 67, pregunta: "There's no name on this dictionary. It ____ be mine then.", opciones: ["A might not", "B mustn't", "C won't", "D can't"], correcta: "D can't" },
+    { id: 68, pregunta: "Julia ____ married since she was 20.", opciones: ["A is", "B was", "C has been", "D is being"], correcta: "C has been" },
+    { id: 69, pregunta: "Don't worry if I ____ late tonight. I'm going to the gym after work.", opciones: ["A am", "B will be", "C would be", "D was"], correcta: "A am" },
+    { id: 70, pregunta: "Have you tried ____ some aspirin?", opciones: ["A to take", "B take", "C took", "D taking"], correcta: "D taking" },
+    { id: 71, pregunta: "Boxing is a sport ____ requires a lot of speed and fitness.", opciones: ["A it", "B that", "C what", "D where"], correcta: "B that" },
+    { id: 72, pregunta: "Jon ____ working on this project for a couple of months so he hasn't made much progress yet.", opciones: ["A is only", "B has only been", "C was only", "D had only been"], correcta: "B has only been" },
+    { id: 73, pregunta: "I was wondering ____ I could ask you some questions.", opciones: ["A what", "B if", "C that", "D how"], correcta: "B if" },
+    { id: 74, pregunta: "What clothes should I pack? Well, it depends ____ the time of year that you go.", opciones: ["A on", "B with", "C up", "D to"], correcta: "A on" },
+    { id: 75, pregunta: "I've finished this salad and I'm still hungry. I ____ ordered something more filling.", opciones: ["A must have", "B would have", "C should have", "D may have"], correcta: "C should have" },
+    { id: 76, pregunta: "Do you ever ask your neighbours to do favours ____ you?", opciones: ["A for", "B to", "C with", "D about"], correcta: "A for" },
+    { id: 77, pregunta: "Some married couples seem to get more ____ over time.", opciones: ["A alike", "B same", "C like", "D equal"], correcta: "A alike" },
+    { id: 78, pregunta: "The price label's ____ off.", opciones: ["A gone", "B taken", "C done", "D come"], correcta: "D come" },
+    { id: 79, pregunta: "Ben got the job because he ____ a very good impression at his interview.", opciones: ["A made", "B did", "C put", "D took"], correcta: "A made" },
+    { id: 80, pregunta: "Salsa music always ____ me of my trip to Cuba.", opciones: ["A remembers", "B realises", "C recognises", "D reminds"], correcta: "D reminds" },
+    // C1 (Upper Int/Advanced)
+    { id: 81, pregunta: "I ____ to be picking Tom up at the station but I've lost my keys.", opciones: ["A am supposed", "B am requested", "C am intended", "D am obliged"], correcta: "A am supposed" },
+    { id: 82, pregunta: "How about going to Colours nightclub? There's no ____ I'm going there. It's awful!", opciones: ["A hope", "B way", "C time", "D opportunity"], correcta: "B way" },
+    { id: 83, pregunta: "By the age of 18, I ____ not to go to university.", opciones: ["A had decided", "B decided", "C have decided", "D was deciding"], correcta: "A had decided" },
+    { id: 84, pregunta: "I'm afraid your car ____ repaired before next week.", opciones: ["A hasn't been", "B wasn't", "C wouldn't be", "D can't be"], correcta: "D can't be" },
+    { id: 85, pregunta: "The amount of organically grown food on sale has ____ enormously in recent years.", opciones: ["A raised", "B lifted", "C increased", "D built"], correcta: "C increased" },
+    { id: 86, pregunta: "A woman has been ____ for hacking into the computer of her online virtual husband.", opciones: ["A accused", "B suspended", "C arrested", "D suspected"], correcta: "C arrested" },
+    { id: 87, pregunta: "You may borrow my laptop ____ you promise to look after it.", opciones: ["A unless", "B in case", "C as long as", "D although"], correcta: "C as long as" },
+    { id: 88, pregunta: "It's a huge painting. It ____ taken ages to complete.", opciones: ["A must have", "B can't have", "C should have", "D won't have"], correcta: "A must have" },
+    { id: 89, pregunta: "Pierre tends to put ____ dealing with problems, rather than dealing with them immediately.", opciones: ["A down", "B off", "C over", "D away"], correcta: "B off" },
+    { id: 90, pregunta: "If the taxi hadn't stopped for us, we ____ standing in the rain.", opciones: ["A were still", "B would still be", "C are still", "D will still be"], correcta: "B would still be" },
+    { id: 91, pregunta: "My mother's Italian, so ____ the language has been quite easy for me.", opciones: ["A to learn", "B learn", "C having learned", "D learning"], correcta: "D learning" },
+    { id: 92, pregunta: "____ I had the talent, I still wouldn't want to be a movie star.", opciones: ["A In case", "B Even if", "C Provided that", "D However much"], correcta: "B Even if" },
+    { id: 93, pregunta: "The factory workers threatened ____ on strike if they didn't get a pay rise.", opciones: ["A going", "B to go", "C that they go", "D to have gone"], correcta: "B to go" },
+    { id: 94, pregunta: "I was about to go to sleep when it ____ to me where the missing keys might be.", opciones: ["A remembered", "B happened", "C appeared", "D occurred"], correcta: "D occurred" },
+    { id: 95, pregunta: "They've asked me to ____ it up. (new department)", opciones: ["A take", "B set", "C put", "D bring"], correcta: "B set" },
+    { id: 96, pregunta: "If the film is a ____ success, the director will get most of the credit.", opciones: ["A big", "B high", "C large", "D good"], correcta: "A big" },
+    { id: 97, pregunta: "I will ____ to each of you individually. (By the end of today's seminar)", opciones: ["A speak", "B have spoken", "C be speaking", "D have been speaking"], correcta: "B have spoken" },
+    { id: 98, pregunta: "This is a photo of my little sister ____ ice cream on the beach.", opciones: ["A eat", "B eating", "C was eating", "D having eaten"], correcta: "B eating" },
+    { id: 99, pregunta: "Our students take their responsibilities very ____.", opciones: ["A considerably", "B thoroughly", "C seriously", "D strongly"], correcta: "C seriously" },
+    { id: 100, pregunta: "Pia was ____ delighted with the birthday present.", opciones: ["A very", "B completely", "C fairly", "D absolutely"], correcta: "D absolutely" },
+    // C2 (Advanced)
+    { id: 101, pregunta: "The burglary took place in ____ daylight.", opciones: ["A wide", "B broad", "C large", "D open"], correcta: "B broad" },
+    { id: 102, pregunta: "She invested a lot of time ____ researching the course.", opciones: ["A to", "B for", "C with", "D in"], correcta: "D in" },
+    { id: 103, pregunta: "The police claimed that they acted in self-____.", opciones: ["A interest", "B confidence", "C defence", "D discipline"], correcta: "C defence" },
+    { id: 104, pregunta: "I ____ remember putting my briefcase down on that shelf.", opciones: ["A deeply", "B entirely", "C clearly", "D strongly"], correcta: "C clearly" },
+    { id: 105, pregunta: "He turned ____ to be considerably older than I had imagined.", opciones: ["A over", "B up", "C out", "D round"], correcta: "C out" },
+    { id: 106, pregunta: "The windows in this house are in urgent ____ of replacement.", opciones: ["A need", "B help", "C want", "D demand"], correcta: "A need" },
+    { id: 107, pregunta: "Speed cameras ____ shown to reduce accidents.", opciones: ["A have", "B were being", "C have been", "D are being"], correcta: "C have been" },
+    { id: 108, pregunta: "Life is a ____ deal easier for immigrants who can speak the local language.", opciones: ["A far", "B huge", "C big", "D great"], correcta: "D great" },
+    { id: 109, pregunta: "The experiment ____ testing people's responses.", opciones: ["A contained", "B incorporated", "C involved", "D consisted"], correcta: "C involved" },
+    { id: 110, pregunta: "We may be a bit late. We're ____ in a traffic jam.", opciones: ["A buried", "B stuck", "C blocked", "D surrounded"], correcta: "B stuck" },
+    { id: 111, pregunta: "Having ____ his driving test several times, Paul finally passed.", opciones: ["A taken", "B made", "C had", "D attended"], correcta: "A taken" },
+    { id: 112, pregunta: "Gospel music has been a major influence ____ other musical styles.", opciones: ["A with", "B to", "C about", "D on"], correcta: "D on" },
+    { id: 113, pregunta: "Maintaining an accurate balance sheet is essential, ____ business you're in.", opciones: ["A however", "B wherever", "C whatever", "D whenever"], correcta: "C whatever" },
+    { id: 114, pregunta: "It's ____ likely that this novel will win a literary prize.", opciones: ["A totally", "B deeply", "C strongly", "D highly"], correcta: "D highly" },
+    { id: 115, pregunta: "It's no ____ for me to get Brad's phone number.", opciones: ["A point", "B wonder", "C secret", "D problem"], correcta: "D problem" },
+    { id: 116, pregunta: "I was used to ____ on the left side of the road.", opciones: ["A driving", "B drive", "C having driven", "D drove"], correcta: "A driving" },
+    { id: 117, pregunta: "I don't think the colours in Julia's outfit ____ together.", opciones: ["A fit", "B suit", "C match", "D go"], correcta: "D go" },
+    { id: 118, pregunta: "Very rarely ____ here in July.", opciones: ["A it rains", "B does it rain", "C is it raining", "D it is raining"], correcta: "B does it rain" },
+    { id: 119, pregunta: "I prefer to buy CDs ____ download music from my computer.", opciones: ["A in contrast to", "B as opposed to", "C rather than", "D in comparison to"], correcta: "C rather than" },
+    { id: 120, pregunta: "The number of turtles ____ by 70% over the last decade.", opciones: ["A has declined", "B has been declining", "C has been declined", "D is declining"], correcta: "A has declined" }
+];
+
+// --- RANGOS DE RESULTADO (CEFR DETALLADO) ---
+const rangosNivel = [
+    { 
+        min: 0, 
+        max: 15, 
+        nivel: "A1", 
+        titulo: "¡Buen Comienzo! (A1)", 
+        recomendacion: "Te recomendamos comenzar por nuestros cursos de Nivel Básico (A1). ¡Construí una base sólida desde cero y ganá confianza desde el primer día!" 
+    },
+    { 
+        min: 16, 
+        max: 30, 
+        nivel: "A2", 
+        titulo: "Elementary (A2)", 
+        recomendacion: "Tenés un inicio prometedor. El curso de Nivel A2 es ideal para consolidar estructuras y vocabulario cotidiano." 
+    },
+    { 
+        min: 31, 
+        max: 40, 
+        nivel: "A2+", 
+        titulo: "Pre-Intermediate (A2+)", 
+        recomendacion: "Ya dominás lo esencial. Nuestro curso A2+ (Puente a B1) te ayudará a ganar soltura, fluidez y comprensión auditiva." 
+    },
+    { 
+        min: 41, 
+        max: 55, 
+        nivel: "B1", 
+        titulo: "¡Excelente! (B1)", 
+        recomendacion: "Tenés conocimientos intermedios. Te sugerimos el curso de Nivel Intermedio (B1) para mejorar tu expresión y fluidez en conversaciones reales." 
+    },
+    { 
+        min: 56, 
+        max: 65, 
+        nivel: "B1+", 
+        titulo: "Pre-First (B1+)", 
+        recomendacion: "Tu inglés es funcional y claro. El curso B1+ (Puente a B2) te llevará a expresarte con mayor naturalidad y precisión." 
+    },
+    { 
+        min: 66, 
+        max: 80, 
+        nivel: "B2", 
+        titulo: "Intermedio alto (B2)", 
+        recomendacion: "Muy buen dominio del idioma. Podés avanzar a nuestros cursos de Upper-Intermediate (B2) y trabajar estructuras avanzadas y vocabulario específico." 
+    },
+    { 
+        min: 81, 
+        max: 95, 
+        nivel: "B2+", 
+        titulo: "Pre-Advanced (B2+)", 
+        recomendacion: "Tu inglés ya te permite desenvolverte en contextos académicos o laborales. Recomendamos B2+ Pre-Advanced, con foco en naturalidad y precisión." 
+    },
+    { 
+        min: 96, 
+        max: 120, 
+        nivel: "C1–C2", 
+        titulo: "Advanced (C1/C2)", 
+        recomendacion: "Demostrás un dominio avanzado del inglés. Explorá nuestros cursos C1/C2 para perfeccionar el inglés académico, profesional y de negocios." 
     }
-  });
+];
 
-  function agregarMensaje(remitente, texto) {
-    chatMessages.innerHTML += `<p><strong>${remitente}:</strong> ${texto}</p>`;
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-  }
+
+
+            // ===============================================
+            // B. LÓGICA DEL QUIZ (Manejo de flujo y eventos)
+            // ===============================================
+            let respuestasUsuario = new Array(preguntas.length).fill(null);
+            let indicePreguntaActual = 0;
+            const totalPreguntas = preguntas.length;
+            let aciertosFinales = null;
+            let resultadoNivelFinal = null;
+
+            // Elementos del DOM
+            const modalOverlay = document.getElementById('modal-prueba-nivel');
+            const btnCerrar = document.getElementById('cerrar-modal-prueba');
+            const quizContainer = document.getElementById('quiz-container');
+            const resultadoContainer = document.getElementById('resultado-container');
+            const preguntaContainer = document.getElementById('pregunta-actual-container');
+            const contadorSpan = document.getElementById('contador-preguntas');
+            const progressBar = document.getElementById('level-progress');
+            const currentScoreSpan = document.getElementById('current-score');
+            const inputNombre = document.getElementById('nombre-completo');
+            const btnWhatsApp = document.getElementById('btn-whatsapp-info');
+            
+            // Botones de apertura del modal
+            const btnAbrirPrincipal = document.getElementById('abrir-modal-prueba');
+            const btnAbrirSecundario = document.getElementById('abrir-modal-prueba-secundario');
+            const botonesAbrir = [btnAbrirPrincipal, btnAbrirSecundario].filter(btn => btn !== null);
+
+
+            // --- MANEJO DE MODAL ---
+            botonesAbrir.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    // Reiniciar quiz
+                    indicePreguntaActual = 0;
+                    respuestasUsuario = new Array(preguntas.length).fill(null);
+                    aciertosFinales = null;
+                    inputNombre.value = ''; 
+                    btnWhatsApp.style.display = 'none';
+
+                    quizContainer.style.display = 'block';
+                    resultadoContainer.style.display = 'none';
+                    btnCerrar.style.display = 'block';
+                    modalOverlay.classList.remove('hidden');
+                    modalOverlay.classList.add('flex');
+                    document.body.style.overflow = 'hidden'; 
+                    
+                    renderizarPregunta(indicePreguntaActual);
+                    currentScoreSpan.textContent = '0';
+                });
+            });
+            
+            if(btnCerrar) {
+                btnCerrar.addEventListener('click', () => {
+                    modalOverlay.classList.remove('flex');
+                    modalOverlay.classList.add('hidden');
+                    document.body.style.overflow = ''; 
+                });
+            }
+
+            // --- FUNCIÓN PARA CALCULAR ACIERTOS ACTUALES ---
+            function calcularAciertosActuales() {
+                let aciertos = 0;
+                for (let i = 0; i < preguntas.length; i++) { 
+                    // Si hay respuesta Y esa respuesta es la correcta
+                    if (respuestasUsuario[i] !== null && respuestasUsuario[i] === preguntas[i].correcta) {
+                        aciertos++;
+                    }
+                }
+                return aciertos;
+            }
+
+            // --- FUNCIÓN PRINCIPAL DE INTERACCIÓN ---
+            function seleccionarRespuesta(index, opcion) {
+                // Evita procesar si ya se respondió
+                if (respuestasUsuario[index] !== null) return;
+
+                const preguntaData = preguntas[index];
+                // Marcamos la opción 'I don\'t know' como una respuesta, pero que no suma.
+                const esSkip = opcion === 'I don\'t know'; 
+                const esCorrecta = opcion === preguntaData.correcta;
+                respuestasUsuario[index] = opcion;
+
+                // 1. Deshabilitar y dar feedback visual
+                const todasLasOpciones = document.querySelectorAll('#pregunta-actual-container button'); 
+                todasLasOpciones.forEach(button => {
+                    button.disabled = true;
+                    button.classList.add('opacity-70');
+                    button.style.pointerEvents = 'none'; 
+                });
+                
+                // Aplica feedback visual a la opción seleccionada (si no fue "No sé")
+                if (!esSkip) { 
+                    const selectedElement = preguntaContainer.querySelector(`[data-opcion="${opcion}"]`);
+                    
+                    if (selectedElement) {
+                        selectedElement.classList.remove('opacity-70'); 
+                        if (esCorrecta) {
+                            selectedElement.classList.add('correct');
+                        } else {
+                            selectedElement.classList.add('incorrect');
+
+                            // Resaltar la respuesta correcta
+                            const correctElement = preguntaContainer.querySelector(`[data-opcion="${preguntaData.correcta}"]`);
+                            if (correctElement) {
+                                correctElement.classList.remove('opacity-70');
+                                correctElement.classList.add('correct');
+                            }
+                        }
+                    }
+                } else {
+                    // Si es "No sé", solo se resalta la correcta
+                    const correctElement = preguntaContainer.querySelector(`[data-opcion="${preguntaData.correcta}"]`);
+                    if (correctElement) {
+                        correctElement.classList.remove('opacity-70');
+                        correctElement.classList.add('correct');
+                    }
+                    // Marca el botón "No sé" como seleccionado (un poco más tenue)
+                    const skipButton = document.getElementById('btn-skip');
+                    if (skipButton) {
+                        skipButton.classList.remove('opacity-70');
+                        skipButton.classList.add('opacity-40');
+                        skipButton.style.borderStyle = 'dashed'; // Feedback visual de "omitido"
+                    }
+                }
+                
+                // 2. Actualizar score en vivo
+                currentScoreSpan.textContent = calcularAciertosActuales();
+
+                // 3. Auto-avance después de 1.5 segundos
+                setTimeout(() => {
+                    if (indicePreguntaActual < totalPreguntas - 1) {
+                        indicePreguntaActual++;
+                        renderizarPregunta(indicePreguntaActual);
+                    } else {
+                        // Finalizar el quiz
+                        calcularResultado();
+                    }
+                }, 1500); 
+            }
+
+            // --- RENDEREIZACIÓN DE PREGUNTA (ESTO INCLUYE EL BOTÓN "NO SÉ") ---
+            function renderizarPregunta(index) {
+                const preguntaData = preguntas[index];
+                
+                let opcionesHTML = preguntaData.opciones.map(opcion => {
+                    const match = opcion.match(/([A-D])\s+(.+)/);
+                    const [clave, texto] = match ? [match[1], match[2]] : ['', opcion]; 
+                    
+                    return `
+                        <button class="opcion-respuesta" data-opcion="${opcion}">
+                            <span style="font-weight: 700;">${clave})</span> ${texto}
+                        </button>
+                    `;
+                }).join('');
+
+                // 🌟 ESTE ES EL CÓDIGO DEL BOTÓN "NO SÉ" 🌟
+                const skipButtonHTML = `
+                    <button id="btn-skip" class="opcion-respuesta" style="
+                        background-color: #9CA3AF !important; 
+                        color: white !important; 
+                        border-color: #6B7280 !important; 
+                        margin-top: 1rem; 
+                        display: block;
+                        font-weight: 600;
+                    ">
+                        No sé / I don't know
+                    </button>
+                `;
+
+                preguntaContainer.innerHTML = `
+                    <p class="pregunta-texto">${preguntaData.id}. ${preguntaData.pregunta}</p>
+                    <div id="opciones-container" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                        ${opcionesHTML}
+                    </div>
+                    ${skipButtonHTML}
+                `;
+                
+                actualizarProgreso();
+
+                // ⚠️ Listeners para las opciones
+                document.querySelectorAll('#opciones-container .opcion-respuesta').forEach(button => {
+                    button.addEventListener('click', function() {
+                        seleccionarRespuesta(index, this.dataset.opcion);
+                    });
+                });
+
+                // ⚠️ Listener para el botón "No sé"
+                document.getElementById('btn-skip').addEventListener('click', function() {
+                    seleccionarRespuesta(index, 'I don\'t know');
+                });
+            }
+
+            // --- FUNCIÓN PARA ACTUALIZAR BARRA DE PROGRESO Y CONTADORES (FIXED) ---
+            function actualizarProgreso() {
+                // Muestra la pregunta actual + 1 (para que empiece en 1/120)
+                contadorSpan.textContent = `${indicePreguntaActual + 1} / ${totalPreguntas}`; 
+
+                // El progreso se calcula en base a la pregunta actual.
+                const progreso = ((indicePreguntaActual + 1) / totalPreguntas) * 100; // Usamos +1 para que la barra crezca desde 0.83%
+                progressBar.style.width = `${progreso}%`;
+            }
+            
+            // --- FUNCIÓN PARA CALCULAR Y MOSTRAR RESULTADO FINAL ---
+            function calcularResultado() {
+                aciertosFinales = calcularAciertosActuales(); 
+
+                const resultadoFinal = rangosNivel.find(rango => aciertosFinales >= rango.min && aciertosFinales <= rango.max) || rangosNivel[0];
+                resultadoNivelFinal = resultadoFinal;
+
+                // Actualizar la vista de Resultado
+                document.getElementById('resultado-aciertos').innerHTML = `<span style="font-size: 3rem; font-weight: 900; color: #1F2937;">${aciertosFinales}</span> correctas de ${totalPreguntas}`;
+                document.getElementById('resultado-titulo').textContent = resultadoFinal.titulo;
+                document.getElementById('nivel-recomendado').textContent = resultadoFinal.nivel;
+                document.getElementById('resultado-mensaje').innerHTML = resultadoFinal.recomendacion;
+
+                // Asegurar que la barra llegue al 100% al finalizar
+                progressBar.style.width = '100%';
+                contadorSpan.textContent = `${totalPreguntas} / ${totalPreguntas}`; // Fija el contador al final
+
+                // Transición de vistas
+                if (quizContainer) quizContainer.style.display = 'none';
+                if (resultadoContainer) resultadoContainer.style.display = 'block';
+                if (btnCerrar) btnCerrar.style.display = 'none'; 
+            }
+
+            // --- FUNCIÓN PARA GENERAR EL ENLACE DE WHATSAPP ---
+            function generarWhatsAppLink(nombre, aciertos, nivel) {
+                // ⚠️ RECUERDA: MODIFICAR CON TU NÚMERO REAL
+                const numeroWhatsApp = '5492212229980'; 
+                
+                const mensajeBase = `Hola, mi nombre es ${nombre}. Acabo de completar el test de nivel de The Queen's Tea.
+
+*Resultado:* *${aciertos}/${totalPreguntas} aciertos*
+*Nivel Estimado:* *${nivel}*
+
+Me gustaría recibir el análisis y la información sobre el curso que me recomiendan. ¡Gracias!`;
+                
+                const encodedMensaje = encodeURIComponent(mensajeBase);
+                return `https://wa.me/${numeroWhatsApp}?text=${encodedMensaje}`;
+            }
+
+            // --- EVENT LISTENER PARA EL INPUT DE NOMBRE ---
+            if (inputNombre) {
+                inputNombre.addEventListener('input', function() {
+                    const nombre = this.value.trim();
+                    const nivelFinal = resultadoNivelFinal ? resultadoNivelFinal.nivel : 'No Determinado';
+                    
+                    if (nombre.length > 0 && aciertosFinales !== null) { 
+                        const url = generarWhatsAppLink(nombre, aciertosFinales, nivelFinal);
+                        btnWhatsApp.setAttribute('href', url);
+                        btnWhatsApp.style.display = 'flex'; 
+                    } else {
+                        btnWhatsApp.style.display = 'none';
+                    }
+                });
+            }
+            
+            // --- Otros scripts que tenías (mantener) ---
+            const header = document.getElementById('header');
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            // Scroll animations
+            const revealElements = document.querySelectorAll('.reveal-on-scroll');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1 
+            };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const delay = entry.target.getAttribute('data-delay') || 0;
+                        setTimeout(() => {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }, delay);
+                    }
+                });
+            }, observerOptions);
+
+            revealElements.forEach(element => {
+                observer.observe(element);
+            });
+
+            // Header shrink on scroll
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Mobile menu toggle
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true' || false;
+                    mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+
+            // Close mobile menu on link click
+            document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                });
+            });
+            
+        });
+    </script>
+
+        </section>
+
+        <section id="nosotros" class="py-20 bg-white" role="region" aria-labelledby="us-title">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <h2 id="us-title" class="font-heading text-sm font-bold uppercase text-accent-primary tracking-widest reveal-on-scroll">Nuestra Metodología</h2>
+                    <h3 class="font-heading text-3xl md:text-4xl font-extrabold text-text-dark mt-3 reveal-on-scroll" data-delay="100">
+                        ¿Por qué <span class="text-accent-gold">elegirnos</span>?
+                    </h3>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center p-6 bg-accent-light rounded-xl shadow-lg reveal-on-scroll" data-delay="200">
+                        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-original-blue text-white mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                        </div>
+                        <h4 class="font-heading text-xl font-bold text-original-blue mb-2">Máximo 8 Alumnos</h4>
+                        <p class="text-slate-700">Garantizamos atención personalizada y el 100% de tu tiempo de práctica oral en cada sesión.</p>
+                    </div>
+                    
+                    <div class="text-center p-6 bg-accent-light rounded-xl shadow-lg reveal-on-scroll" data-delay="300">
+                        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-original-blue text-white mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                        </div>
+                        <h4 class="font-heading text-xl font-bold text-original-blue mb-2">Foco Conversacional</h4>
+                        <p class="text-slate-700">Te enseñamos a pensar y hablar, no solo a memorizar. El inglés se aprende usándolo.</p>
+                    </div>
+                    
+                    <div class="text-center p-6 bg-accent-light rounded-xl shadow-lg reveal-on-scroll" data-delay="400">
+                        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-original-blue text-white mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.203 5 7.5 5A4.5 4.5 0 003 9.5c0 1.25.148 2.456.417 3.554M12 6.253C13.168 5.477 14.797 5 16.5 5A4.5 4.5 0 0121 9.5c0 1.25-.148 2.456-.417 3.554M12 6.253v13m0-13C12.42 5.992 12.82 5.8 13.25 5.75c1.474-.2 2.894.467 3.65 1.5M12 19.75c.42 0 .82-.192 1.25-.242 1.474-.2 2.894.467 3.65 1.5M12 19.75v-13"/></svg>
+                        </div>
+                        <h4 class="font-heading text-xl font-bold text-original-blue mb-2">Material Incluido</h4>
+                        <p class="text-slate-700">Libros de texto, recursos digitales y práctica extra sin costos adicionales.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cursos" class="py-20 lg:py-24 bg-accent-dark-bg" role="region" aria-labelledby="courses-title">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <h2 id="courses-title" class="font-heading text-sm font-bold uppercase text-accent-gold tracking-widest reveal-on-scroll">Nuestra Oferta</h2>
+                    <h3 class="font-heading text-3xl md:text-4xl font-extrabold text-white mt-3 reveal-on-scroll" data-delay="100">
+                        Cursos por <span class="text-accent-primary">Nivel, examen y conversación</span>
+                    </h3>
+                </div>
+
+                <div class="flex flex-wrap justify-center space-x-2 sm:space-x-4 mb-10 reveal-on-scroll" data-delay="200" role="tablist">
+                    <button class="filter-btn-js px-4 py-2 text-sm font-semibold rounded-full shadow-md transition duration-300 bg-original-blue text-white" data-filter="todos" role="tab" aria-selected="true">
+                        Todos
+                    </button>
+                    <button class="filter-btn-js px-4 py-2 text-sm font-semibold rounded-full shadow-md transition duration-300 bg-accent-dark-bg text-original-blue hover:bg-accent-primary/50 hover:text-white" data-filter="niveles" role="tab" aria-selected="false">
+                        Niveles (A1-C2)
+                    </button>
+                    <button class="filter-btn-js px-4 py-2 text-sm font-semibold rounded-full shadow-md transition duration-300 bg-accent-dark-bg text-original-blue hover:bg-accent-primary/50 hover:text-white" data-filter="examenes" role="tab" aria-selected="false">
+                        Exámenes & Académico
+                    </button>
+                    <button class="filter-btn-js px-4 py-2 text-sm font-semibold rounded-full shadow-md transition duration-300 bg-accent-dark-bg text-original-blue hover:bg-accent-primary/50 hover:text-white" data-filter="conversacion" role="tab" aria-selected="false">
+                        Conversación
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                    
+                    <div class="course-card-js bg-white rounded-xl shadow-xl overflow-hidden block reveal-on-scroll" data-category="niveles">
+                        <div class="p-6">
+                            <span class="inline-block text-xs font-bold uppercase tracking-wider text-white bg-original-blue px-3 py-1 rounded-full mb-3">Inicio del Aprendizaje</span>
+                            <h4 class="font-heading text-xl font-bold text-text-dark mb-2">A1 - Inicial | Nuevos horarios pronto</h4>
+                            <p class="text-slate-700 mb-4 text-sm">Comprendé y usá expresiones cotidianas y frases simples para necesidades básicas.</p>
+                            <ul class="space-y-2 text-sm">
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Construcción de vocabulario esencial.</li>
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Presente simple y continuo.</li>
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Interacciones de supervivencia.</li>
+                            </ul>
+                            <a href="#contacto" class="mt-4 inline-block text-original-blue font-semibold hover:text-accent-primary transition duration-200 border-b border-original-blue/30 text-sm">Inscribirse</a>
+                        </div>
+                    </div>
+                    
+                    <div class="course-card-js bg-white rounded-xl shadow-xl overflow-hidden block reveal-on-scroll" data-category="niveles">
+                        <div class="p-6">
+                            <span class="inline-block text-xs font-bold uppercase tracking-wider text-white bg-original-blue px-3 py-1 rounded-full mb-3">Comunicación Diaria</span>
+                            <h4 class="font-heading text-xl font-bold text-text-dark mb-2">A2 - Elementary | Nuevos horarios pronto</h4>
+                            <p class="text-slate-700 mb-4 text-sm">Comprendé frases y expresiones frecuentes relacionadas con la vida diaria y comunicación simple.</p>
+                            <ul class="space-y-2 text-sm">
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Narración en pasado (simple y continuo).</li>
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Vocabulario sobre viajes y compras.</li>
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Capacidad de describir el entorno.</li>
+                            </ul>
+                            <a href="#contacto" class="mt-4 inline-block text-original-blue font-semibold hover:text-accent-primary transition duration-200 border-b border-original-blue/30 text-sm">Inscribirse</a>
+                        </div>
+                    </div>
+                    
+                    <div class="course-card-js bg-white rounded-xl shadow-xl overflow-hidden block reveal-on-scroll" data-category="niveles">
+                        <div class="p-6">
+                            <span class="inline-block text-xs font-bold uppercase tracking-wider text-white bg-original-blue px-3 py-1 rounded-full mb-3">Refuerzo y Fluidez Básica</span>
+                            <h4 class="font-heading text-xl font-bold text-text-dark mb-2">A2+ - Pre-Intermediate | Nuevos horarios pronto</h4>
+                            <p class="text-slate-700 mb-4 text-sm">Refuerzo de lo básico con más fluidez y vocabulario ampliado para interacciones cotidianas.</p>
+                            <ul class="space-y-2 text-sm">
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Uso de Presente Perfecto.</li>
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Mejora de la precisión gramatical.</li>
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Interacciones más detalladas.</li>
+                            </ul>
+                            <a href="#contacto" class="mt-4 inline-block text-original-blue font-semibold hover:text-accent-primary transition duration-200 border-b border-original-blue/30 text-sm">Inscribirse</a>
+                        </div>
+                    </div>
+                    
+                    <div class="course-card-js bg-white rounded-xl shadow-xl overflow-hidden block reveal-on-scroll" data-category="niveles">
+                        <div class="p-6">
+                            <span class="inline-block text-xs font-bold uppercase tracking-wider text-white bg-original-blue px-3 py-1 rounded-full mb-3">Puntos Principales</span>
+                            <h4 class="font-heading text-xl font-bold text-text-dark mb-2">B1 - Intermediate | Miércoles 20 a 21 hs</h4>
+                            <p class="text-slate-700 mb-4 text-sm">Capacidad para comprender los puntos principales de textos claros y sobre temas conocidos.</p>
+                            <ul class="space-y-2 text-sm">
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Dominio de voz pasiva y reportada.</li>
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Debate sobre temas de interés personal.</li>
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Producción de textos simples coherentes.</li>
+                            </ul>
+                            <a href="#contacto" class="mt-4 inline-block text-original-blue font-semibold hover:text-accent-primary transition duration-200 border-b border-original-blue/30 text-sm">Inscribirse</a>
+                        </div>
+                    </div>
+                    
+                    <div class="course-card-js bg-white rounded-xl shadow-xl overflow-hidden block reveal-on-scroll" data-category="niveles">
+                        <div class="p-6">
+                            <span class="inline-block text-xs font-bold uppercase tracking-wider text-white bg-original-blue px-3 py-1 rounded-full mb-3">Interacciones Complejas</span>
+                            <h4 class="font-heading text-xl font-bold text-text-dark mb-2">B1+ - Pre-First | Nuevos horarios pronto</h4>
+                            <p class="text-slate-700 mb-4 text-sm">Interacciones más complejas y confianza para comunicarte en distintas situaciones.</p>
+                            <ul class="space-y-2 text-sm">
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Introducción a modismos comunes.</li>
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Simulación de escenarios reales (viajes/trabajo).</li>
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Mayor precisión en la pronunciación.</li>
+                            </ul>
+                            <a href="#contacto" class="mt-4 inline-block text-original-blue font-semibold hover:text-accent-primary transition duration-200 border-b border-original-blue/30 text-sm">Inscribirse</a>
+                        </div>
+                    </div>
+                    
+                    <div class="course-card-js bg-white rounded-xl shadow-xl overflow-hidden block reveal-on-scroll" data-category="niveles">
+                        <div class="p-6">
+                            <span class="inline-block text-xs font-bold uppercase tracking-wider text-white bg-original-blue px-3 py-1 rounded-full mb-3">Comprensión Clara y Debate</span>
+                            <h4 class="font-heading text-xl font-bold text-text-dark mb-2">B2 - Upper-Intermediate | Martes 20 a 21 hs</h4>
+                            <p class="text-slate-700 mb-4 text-sm">Comprensión clara de textos complejos y capacidad para discutir temas técnicos y generales.</p>
+                            <ul class="space-y-2 text-sm">
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Uso fluido de frases verbales (phrasal verbs).</li>
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Argumentación detallada de opiniones.</li>
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Análisis de textos complejos.</li>
+                            </ul>
+                            <a href="#contacto" class="mt-4 inline-block text-original-blue font-semibold hover:text-accent-primary transition duration-200 border-b border-original-blue/30 text-sm">Inscribirse</a>
+                        </div>
+                    </div>
+                    
+                    <div class="course-card-js bg-white rounded-xl shadow-xl overflow-hidden block reveal-on-scroll" data-category="niveles examenes">
+                        <div class="p-6">
+                            <span class="inline-block text-xs font-bold uppercase tracking-wider text-white bg-accent-primary px-3 py-1 rounded-full mb-3">Dominio Fluido</span>
+                            <h4 class="font-heading text-xl font-bold text-text-dark mb-2">C1-C2 | Martes 19 a 20 hs</h4>
+                            <p class="text-slate-700 mb-4 text-sm">Dominio fluido y preciso del idioma, tanto oral como escrito, con habilidades profesionales.</p>
+                            <ul class="space-y-2 text-sm">
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Uso natural y coloquial del idioma.</li>
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Redacción avanzada y académica.</li>
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Discusión de filosofía y arte.</li>
+                            </ul>
+                            <a href="#contacto" class="mt-4 inline-block text-original-blue font-semibold hover:text-accent-primary transition duration-200 border-b border-original-blue/30 text-sm">Inscribirse</a>
+                        </div>
+                    </div>
+                    
+                    <div class="course-card-js bg-white rounded-xl shadow-xl overflow-hidden block reveal-on-scroll" data-category="examenes">
+                        <div class="p-6">
+                            <span class="inline-block text-xs font-bold uppercase tracking-wider text-white bg-accent-primary px-3 py-1 rounded-full mb-3">Exámenes</span>
+                            <h4 class="font-heading text-xl font-bold text-text-dark mb-2">B2 First | Martes 19 a 20 hs</h4>
+                            <p class="text-slate-700 mb-4 text-sm">Preparación para el examen Cambridge First Certificate, nivel intermedio avanzado.</p>
+                            <ul class="space-y-2 text-sm">
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Simulacros de examen (todas las partes).</li>
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Estrategias específicas para Speaking y Writing.</li>
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Gramática compleja enfocada en el examen.</li>
+                            </ul>
+                            <a href="#contacto" class="mt-4 inline-block text-original-blue font-semibold hover:text-accent-primary transition duration-200 border-b border-original-blue/30 text-sm">Inscribirse</a>
+                        </div>
+                    </div>
+                    
+                    <div class="course-card-js bg-white rounded-xl shadow-xl overflow-hidden block reveal-on-scroll" data-category="examenes">
+                        <div class="p-6">
+                            <span class="inline-block text-xs font-bold uppercase tracking-wider text-white bg-accent-primary px-3 py-1 rounded-full mb-3">Exámenes</span>
+                            <h4 class="font-heading text-xl font-bold text-text-dark mb-2">IELTS (B1-C1) | Martes 17 a 18 hs</h4>
+                            <p class="text-slate-700 mb-4 text-sm">Preparación para el examen IELTS (Académico o General), apto para estudios y trabajo internacional.</p>
+                            <ul class="space-y-2 text-sm">
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Enfoque en Writing Task 1 (Academic & General).</li>
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Manejo de acentos y Listening con velocidad real.</li>
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Clases 100% enfocadas en formato de examen.</li>
+                            </ul>
+                            <a href="#contacto" class="mt-4 inline-block text-original-blue font-semibold hover:text-accent-primary transition duration-200 border-b border-original-blue/30 text-sm">Inscribirse</a>
+                        </div>
+                    </div>
+                    
+                    <div class="course-card-js bg-white rounded-xl shadow-xl overflow-hidden block reveal-on-scroll" data-category="examenes">
+                        <div class="p-6">
+                            <span class="inline-block text-xs font-bold uppercase tracking-wider text-white bg-accent-primary px-3 py-1 rounded-full mb-3">Exámenes</span>
+                            <h4 class="font-heading text-xl font-bold text-text-dark mb-2">TOEFL | Nuevos horarios pronto</h4>
+                            <p class="text-slate-700 mb-4 text-sm">Preparación para el examen TOEFL iBT, reconocido para estudios universitarios y laborales.</p>
+                            <ul class="space-y-2 text-sm">
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Dominio de la toma de notas (Note-Taking).</li>
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Práctica intensiva de Speaking y Writing integrados.</li>
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Simulación de lecturas y conferencias universitarias.</li>
+                            </ul>
+                            <a href="#contacto" class="mt-4 inline-block text-original-blue font-semibold hover:text-accent-primary transition duration-200 border-b border-original-blue/30 text-sm">Inscribirse</a>
+                        </div>
+                    </div>
+
+                    <div class="course-card-js bg-white rounded-xl shadow-xl overflow-hidden block reveal-on-scroll" data-category="conversacion">
+                        <div class="p-6">
+                            <span class="inline-block text-xs font-bold uppercase tracking-wider text-white bg-accent-gold px-3 py-1 rounded-full mb-3">Conversación</span>
+                            <h4 class="font-heading text-xl font-bold text-text-dark mb-2">A2/B1 | Miércoles 19 a 20 hs</h4>
+                            <p class="text-slate-700 mb-4 text-sm">Perdé el miedo a hablar y empezá a expresarte con soltura. Practicá estructuras útiles y vocabulario de la vida real.</p>
+                            <ul class="space-y-2 text-sm">
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Foco en estructuras para argumentar simple.</li>
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Temas de actualidad de interés general.</li>
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Corrección de errores al instante.</li>
+                            </ul>
+                            <a href="#contacto" class="mt-4 inline-block text-original-blue font-semibold hover:text-accent-primary transition duration-200 border-b border-original-blue/30 text-sm">Inscribirse</a>
+                        </div>
+                    </div>
+                    
+                    <div class="course-card-js bg-white rounded-xl shadow-xl overflow-hidden block reveal-on-scroll" data-category="conversacion">
+                        <div class="p-6">
+                            <span class="inline-block text-xs font-bold uppercase tracking-wider text-white bg-accent-gold px-3 py-1 rounded-full mb-3">Conversación</span>
+                            <h4 class="font-heading text-xl font-bold text-text-dark mb-2">B2/C1 | Jueves 19 a 20 hs</h4>
+                            <p class="text-slate-700 mb-4 text-sm">Pulí tu fluidez, naturalidad y confianza para hablar inglés real. Clases 100% prácticas con enfoque en temas actuales.</p>
+                            <ul class="space-y-2 text-sm">
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Mejora de la naturalidad y el acento.</li>
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Debates avanzados y argumentación compleja.</li>
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Uso de lenguaje idiomático y jerga.</li>
+                            </ul>
+                            <a href="#contacto" class="mt-4 inline-block text-original-blue font-semibold hover:text-accent-primary transition duration-200 border-b border-original-blue/30 text-sm">Inscribirse</a>
+                        </div>
+                    </div>
+                    
+                    <div class="course-card-js bg-white rounded-xl shadow-xl overflow-hidden block reveal-on-scroll" data-category="examenes">
+                        <div class="p-6">
+                            <span class="inline-block text-xs font-bold uppercase tracking-wider text-white bg-accent-primary px-3 py-1 rounded-full mb-3">Académico</span>
+                            <h4 class="font-heading text-xl font-bold text-text-dark mb-2">Preparación Ingreso 2026 | Jueves 18 a 19 hs</h4>
+                            <p class="text-slate-700 mb-4 text-sm">Preparate estratégicamente para rendir con seguridad para traductorado/profesorado.</p>
+                            <ul class="space-y-2 text-sm">
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Enfoque en comprensión de textos académicos.</li>
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Gramática y oralidad con formato de examen.</li>
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Práctica de redacción formal (Writing).</li>
+                            </ul>
+                            <a href="#contacto" class="mt-4 inline-block text-original-blue font-semibold hover:text-accent-primary transition duration-200 border-b border-original-blue/30 text-sm">Inscribirse</a>
+                        </div>
+                    </div>
+                    
+                    <div class="course-card-js bg-white rounded-xl shadow-xl overflow-hidden block reveal-on-scroll" data-category="examenes">
+                        <div class="p-6">
+                            <span class="inline-block text-xs font-bold uppercase tracking-wider text-white bg-accent-primary px-3 py-1 rounded-full mb-3">Académico</span>
+                            <h4 class="font-heading text-xl font-bold text-text-dark mb-2">Prep. Lengua Inglesa 1 | Miércoles 18 a 19 hs</h4>
+                            <p class="text-slate-700 mb-4 text-sm">Revisá y afianzá contenidos clave de la materia: gramática avanzada, writing académico y análisis de texto.</p>
+                            <ul class="space-y-2 text-sm">
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Revisión profunda de gramática avanzada.</li>
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Desarrollo de writing académico y formal.</li>
+                                <li class="flex items-start"><svg class="check-icon w-4 h-4 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 13.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Análisis de textos con enfoque crítico.</li>
+                            </ul>
+                            <a href="#contacto" class="mt-4 inline-block text-original-blue font-semibold hover:text-accent-primary transition duration-200 border-b border-original-blue/30 text-sm">Inscribirse</a>
+                        </div>
+                    </div>
+        </section>
+
+<section id="valores" class="py-24 bg-gradient-to-b from-accent-light to-white" role="region" aria-labelledby="prices-title">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+    
+    <!-- Título -->
+    <div class="text-center mb-16">
+      <h2 id="prices-title" class="font-heading text-sm font-bold uppercase text-accent-primary tracking-widest mb-3 reveal-on-scroll">
+        Tu Inversión
+      </h2>
+      <h3 class="font-heading text-4xl md:text-5xl font-extrabold text-text-dark reveal-on-scroll" data-delay="100">
+        Calculá tu <span class="text-accent-gold">Cuota Mensual</span>
+      </h3>
+      <p class="mt-4 text-slate-500 text-base">Descubrí cuánto cuesta tu curso según la cantidad de clases en el mes.</p>
+    </div>
+
+    <!-- Card principal -->
+    <div class="bg-white p-10 rounded-2xl shadow-2xl border border-slate-100 transition-all hover:shadow-[0_0_35px_-10px_rgba(0,0,0,0.2)] reveal-on-scroll" data-delay="300">
+      
+      <!-- Tabla de info -->
+      <div class="mb-8 border border-slate-200 rounded-xl overflow-hidden">
+        <div class="p-4 bg-original-blue text-white font-bold text-lg flex items-center gap-2">
+          <i class="fa-solid fa-coins"></i> Metodología de Pago
+        </div>
+        <div class="p-5 text-sm text-slate-700 bg-slate-50 leading-relaxed">
+          <p class="mb-3 font-semibold">Cada curso incluye 1 encuentro grupal semanal de 1 hora.</p>
+          <table class="w-full text-left text-xs sm:text-sm">
+            <thead>
+              <tr class="border-b border-slate-300">
+                <th class="py-2 font-bold text-slate-600">Concepto</th>
+                <th class="py-2 font-bold text-slate-600">Detalle</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2 text-original-blue font-semibold">Modalidad de Pago</td>
+                <td class="py-2">Mensual o semanal (pago 24hs antes de la clase).</td>
+              </tr>
+              <tr>
+                <td class="py-2 text-original-blue font-semibold">Cálculo de Cuota</td>
+                <td class="py-2">Se cobra <strong>solo por las clases dictadas</strong>. Si hay feriados, se ajusta.</td>
+              </tr>
+              <tr class="bg-red-50">
+                <td class="py-2 font-bold text-red-600">Ausencias del Alumno</td>
+                <td class="py-2 font-bold text-red-600">La clase se abona igualmente (cupo reservado).</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Selector de curso -->
+      <div class="mb-10">
+        <label for="course-level-select" class="block text-lg font-bold text-original-blue mb-3">
+          <i class="fa-solid fa-graduation-cap"></i> 1. Seleccioná el Curso/Nivel
+        </label>
+        <select id="course-level-select" class="w-full px-4 py-3 border border-slate-300 bg-white rounded-lg shadow-sm text-lg focus:ring-accent-primary focus:border-accent-primary transition duration-300 hover:shadow-md">
+          <option value="">-- Seleccioná para calcular --</option>
+          <option value="a1" data-cost="14000">A1 - Básico ($14.000)</option>
+          <option value="a2" data-cost="14000">A2 - Elementary ($14.000)</option>
+          <option value="a2plus" data-cost="14000">A2+ - Pre-Intermediate ($14.000)</option>
+          <option value="b1" data-cost="14500">B1 - Intermediate ($14.500)</option>
+          <option value="b1plus" data-cost="14500">B1+ - Pre-First ($14.500)</option>
+          <option value="b2" data-cost="15000">B2 - Upper-Intermediate ($15.000)</option>
+          <option value="b2plus" data-cost="15000">B2+ - Pre-Advanced ($15.000)</option>
+          <option value="c1c2" data-cost="16000">C1-C2 - Advanced ($16.000)</option>
+          <option value="ielts" data-cost="16000">IELTS ($16.000)</option>
+          <option value="toefl" data-cost="16000">TOEFL ($16.000)</option>
+          <option value="conv_a2b1" data-cost="15000">Conversación A2/B1 ($15.000)</option>
+          <option value="conv_b2c1" data-cost="16000">Conversación B2/C1 ($16.000)</option>
+          <option value="ingreso_2026" data-cost="18000">Preparación Ingreso 2026 ($18.000)</option>
+          <option value="lengua_inglesa_1" data-cost="18000">Preparación Lengua Inglesa 1 ($18.000)</option>
+        </select>
+      </div>
+
+      <!-- Resultados -->
+      <div id="cost-result-panel" class="hidden mt-10 border-t-4 border-accent-primary/40 pt-8 bg-gradient-to-b from-white to-accent-light rounded-2xl shadow-xl p-8 transition-all duration-700 ease-in-out">
+        <h4 class="font-heading text-2xl font-bold text-accent-primary mb-5">
+          Inversión Estimada para: <span id="selected-level-display" class="text-original-blue"></span>
+        </h4>
+        
+        <div class="space-y-4">
+          <div class="flex justify-between items-center p-4 bg-slate-50 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300">
+            <span class="text-slate-600 font-semibold">Mínimo (3 Clases/mes)</span>
+            <span id="clases-x3" class="text-xl font-bold text-text-dark">$ -</span>
+          </div>
+          <div class="flex justify-between items-center p-5 bg-accent-primary/10 rounded-xl border-2 border-accent-primary shadow-md hover:shadow-lg transition-all duration-300">
+            <span class="text-original-blue font-bold">Promedio (4 Clases/mes)</span>
+            <span id="clases-x4" class="text-2xl font-black text-original-blue">$ -</span>
+          </div>
+          <div class="flex justify-between items-center p-4 bg-slate-50 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300">
+            <span class="text-slate-600 font-semibold">Máximo (5 Clases/mes)</span>
+            <span id="clases-x5" class="text-xl font-bold text-text-dark">$ -</span>
+          </div>
+          <p class="text-xs text-slate-500 mt-4 pt-4 border-t border-slate-100 italic">
+            *La cuota final depende de la cantidad de clases reales del mes (entre 3 y 5).
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+        
+        <section id="testimonios" class="py-20 lg:py-24 bg-white" role="region" aria-labelledby="testimonials-title">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <h2 id="testimonials-title" class="font-heading text-sm font-bold uppercase text-accent-gold tracking-widest reveal-on-scroll">La Voz de Nuestros Alumnos</h2>
+                    <h3 class="font-heading text-3xl md:text-4xl font-extrabold text-text-dark mt-3 reveal-on-scroll" data-delay="100">
+                        Opiniones sobre <span class="text-original-blue">The Queen's Tea</span>
+                    </h3>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-accent-light p-6 rounded-xl shadow-lg border-t-4 border-accent-primary reveal-on-scroll" data-delay="200">
+                        <div class="flex text-accent-gold mb-3">⭐⭐⭐⭐⭐</div>
+                        <p class="text-slate-700 italic mb-4">"Retome las clases y por lejos el mejor instituto al que fui, las clases son súper organizadas y dinamicas; la profe esta siempre a disposición y con la mejor de las ondas!"</p>
+                        <p class="font-bold text-original-blue">- Paula S. (B2 Upper-Intermediate)</p>
+                    </div>
+                    
+                    <div class="bg-accent-light p-6 rounded-xl shadow-lg border-t-4 border-accent-primary reveal-on-scroll" data-delay="300">
+                        <div class="flex text-accent-gold mb-3">⭐⭐⭐⭐⭐</div>
+                        <p class="text-slate-700 italic mb-4">"La preparación para el IELTS fue súper completa. Los simulacros de examen me dieron la confianza que necesitaba para el día de la prueba."</p>
+                        <p class="font-bold text-original-blue">- Camila R. (IELTS Prep)</p>
+                    </div>
+
+                    <div class="bg-accent-light p-6 rounded-xl shadow-lg border-t-4 border-accent-primary reveal-on-scroll" data-delay="400">
+                        <div class="flex text-accent-gold mb-3">⭐⭐⭐⭐⭐</div>
+                        <p class="text-slate-700 italic mb-4">"Clases super dinámicas y llevaderas.
+La profe siempre está atenta a nuestros requerimientos y dificultades individuales. Recomiendo 100% tomar clases con esta academia."</p>
+                        <p class="font-bold text-original-blue">- Julieta M. (Nivel A2)</p>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-10 reveal-on-scroll" data-delay="500">
+                    <a href="#contacto" class="inline-flex items-center text-accent-primary font-semibold hover:text-original-blue transition duration-200 border-b border-accent-primary">
+                        ¡Sé el próximo en lograrlo!
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="py-20 bg-accent-light" role="region" aria-labelledby="faq-title">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <h2 id="faq-title" class="font-heading text-sm font-bold uppercase text-accent-primary tracking-widest reveal-on-scroll">Resolvé tus Dudas</h2>
+                    <h3 class="font-heading text-3xl md:text-4xl font-extrabold text-text-dark mt-3 reveal-on-scroll" data-delay="100">
+                        Preguntas <span class="text-accent-gold">Frecuentes</span>
+                    </h3>
+                </div>
+
+                <div class="space-y-4 reveal-on-scroll" data-delay="200">
+                    <div class="accordion-item bg-white rounded-xl shadow-md" role="presentation">
+                        <h4 class="accordion-header" role="heading" aria-level="4">
+                            <button class="w-full text-left font-heading text-lg font-semibold text-original-blue py-4 px-6 flex justify-between items-center" aria-expanded="false" aria-controls="content-1" id="btn-1">
+                                ¿Cuál es el tamaño máximo de los grupos?
+                                <span class="ml-6 transform transition-transform duration-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+                                </span>
+                            </button>
+                        </h4>
+                        <div id="content-1" class="accordion-content px-6" role="region" aria-labelledby="btn-1">
+                            <p class="py-4 text-slate-700 border-t border-slate-200">Nuestros grupos son <strong>reducidos</strong>, con un máximo de 8 alumnos por clase. Esto es fundamental para garantizar que cada alumno tenga el tiempo de práctica oral y la atención personalizada que necesita para alcanzar la fluidez rápidamente.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item bg-white rounded-xl shadow-md" role="presentation">
+                        <h4 class="accordion-header" role="heading" aria-level="4">
+                            <button class="w-full text-left font-heading text-lg font-semibold text-original-blue py-4 px-6 flex justify-between items-center" aria-expanded="false" aria-controls="content-2" id="btn-2">
+                                ¿El material de estudio está incluido?
+                                <span class="ml-6 transform transition-transform duration-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+                                </span>
+                            </button>
+                        </h4>
+                        <div id="content-2" class="accordion-content px-6" role="region" aria-labelledby="btn-2">
+                            <p class="py-4 text-slate-700 border-t border-slate-200">Sí, todos los materiales están incluidos. <strong>No tendrás costos extra durante tu curso.</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item bg-white rounded-xl shadow-md" role="presentation">
+                        <h4 class="accordion-header" role="heading" aria-level="4">
+                            <button class="w-full text-left font-heading text-lg font-semibold text-original-blue py-4 px-6 flex justify-between items-center" aria-expanded="false" aria-controls="content-3" id="btn-3">
+                                ¿Qué pasa si falto a una clase? ¿Hay reposición?
+                                <span class="ml-6 transform transition-transform duration-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+                                </span>
+                            </button>
+                        </h4>
+                        <div id="content-3" class="accordion-content px-6" role="region" aria-labelledby="btn-3">
+                            <p class="py-4 text-slate-700 border-t border-slate-200">Debido a la naturaleza de los grupos reducidos, <strong>no ofrecemos clases de reposición individual</strong>. Recordá: <strong>Si el alumno falta, la clase se abona de todas maneras</strong>, ya que el cupo se reserva para vos. Te facilitamos el material para que no pierdas el hilo. De igual manera, <strong> si la docente falta, el valor de la clase se reintegra y se envía material.</strong></p>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item bg-white rounded-xl shadow-md" role="presentation">
+                        <h4 class="accordion-header" role="heading" aria-level="4">
+                            <button class="w-full text-left font-heading text-lg font-semibold text-original-blue py-4 px-6 flex justify-between items-center" aria-expanded="false" aria-controls="content-4" id="btn-4">
+                                ¿Cómo se calcula la cuota si hay feriados?
+                                <span class="ml-6 transform transition-transform duration-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+                                </span>
+                            </button>
+                        </h4>
+                        <div id="content-4" class="accordion-content px-6" role="region" aria-labelledby="btn-4">
+                            <p class="py-4 text-slate-700 border-t border-slate-200">La cuota mensual se calcula por el <strong> número de clases que efectivamente se dictan a nivel calendario</strong> en el mes. Al no cobrarse los días feriados o en caso de ausencia del docente, la cuota mensual se verá ajustada a la baja, <strong>garantizando que solo pagues por el servicio recibido.</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="fixed bottom-4 right-4 z-50">
+            <div id="chat-window" class="hidden bg-white rounded-xl shadow-2xl w-80 md:w-96 mb-20 overflow-hidden ring-2 ring-accent-primary transform scale-100 transition duration-300 ease-out">
+                <div class="p-4 bg-original-blue text-white flex justify-between items-center">
+                    <h4 class="font-heading font-bold text-lg">The Queen's Bot 💬</h4>
+                </div>
+                <div class="p-4 h-80 overflow-y-auto space-y-4">
+                    <div class="flex justify-start">
+                        <div class="bg-accent-light p-3 rounded-lg max-w-xs shadow">
+                            <p class="text-slate-800">¡Hola! Soy tu asistente. ¿Cómo puedo ayudarte a comenzar tu camino al inglés?</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <h5 class="text-sm font-semibold text-original-blue pt-2">Preguntas Frecuentes:</h5>
+                        <button class="chat-option-btn w-full text-left px-3 py-2 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition duration-200 text-sm" data-question="cursos">
+                            Quiero saber sobre los tipos de cursos
+                        </button>
+                        <button class="chat-option-btn w-full text-left px-3 py-2 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition duration-200 text-sm" data-question="nivel">
+                            ¿Qué nivel de inglés tengo?
+                        </button>
+                        <button class="chat-option-btn w-full text-left px-3 py-2 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition duration-200 text-sm" data-question="valores">
+                            ¿Cuál es el valor por clase?
+                        </button>
+                        <button class="chat-option-btn w-full text-left px-3 py-2 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition duration-200 text-sm" data-question="inscripcion-chat">
+                            ¿Cómo me inscribo?
+                        </button>
+                    </div>
+
+                    <div id="chat-response" class="hidden mt-4 p-4 bg-accent-light rounded-lg shadow-inner">
+                        </div>
+                </div>
+            </div>
+            
+            <button id="toggleChat" class="fixed bottom-4 right-4 w-14 h-14 rounded-full bg-accent-primary text-white text-2xl font-bold shadow-lg hover:bg-original-blue transition duration-300 flex items-center justify-center focus:outline-none focus:ring-4 focus:ring-accent-primary/50" aria-label="Abrir chat">
+                💬
+            </button>
+        </div>
+
+        <section id="contacto" class="py-20 lg:py-24 bg-accent-dark-bg reveal-on-scroll" role="region" aria-labelledby="contact-title">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+                    <div class="lg:sticky lg:top-8 lg:self-start">
+                        <h2 id="contact-title" class="font-heading text-sm font-bold uppercase text-accent-gold tracking-widest reveal-on-scroll">Tu Próximo Nivel</h2>
+                        <h3 class="font-heading text-3xl md:text-4xl font-extrabold text-white mt-3 reveal-on-scroll" data-delay="100">
+                            Pre-Inscribite Ahora <span class="text-accent-primary">y Reservá tu Cupo</span>
+                        </h3>
+                        <p class="mt-6 text-slate-300 text-lg reveal-on-scroll" data-delay="200">
+                            Completá este formulario para que un asesor se ponga en contacto con vos por <strong>WhatsApp</strong> y confirme tu nivel, horarios y reserva de vacante. ¡Empezá hoy mismo!
+                        </p>
+
+                        <div class="mt-6 p-4 bg-accent-primary/20 border-l-4 border-accent-gold rounded-lg reveal-on-scroll" data-delay="300">
+                            <p class="font-semibold text-white mb-2">¿Dudas sobre tu nivel?</p>
+                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeBJwQwR8YK_pHp-7mNoNP_yYFuJlb6maJ_rRPqZlSDrDvxpQ/viewform?usp=send_form" target="_blank" class="inline-flex items-center text-accent-gold font-bold hover:text-white transition duration-200">
+                                🔗 Hacé nuestra Evaluación de Nivel ¡Sin Costo!
+                            </a>
+
+                        </div>
+                        
+                        <ul class="mt-8 space-y-4 text-white reveal-on-scroll" data-delay="400">
+                            <li class="flex items-start">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-accent-gold mr-3 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                                Grupos reducidos.
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-accent-gold mr-3 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                                Material de estudio incluido.
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-accent-gold mr-3 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                                Clases 100% conversacionales.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-8 md:p-10 rounded-xl shadow-2xl reveal-on-scroll" data-delay="500">
+                        <h4 class="font-heading text-xl font-bold text-text-dark mb-6">Formulario de Pre-Inscripción</h4>
+                        
+                        <form id="inscription-form" class="space-y-4">
+                            <div>
+                                <label for="full_name" class="block text-sm font-medium text-slate-700">Nombre Completo <span class="text-red-500">*</span></label>
+                                <input type="text" id="full_name" name="full_name" required class="mt-1 block w-full px-4 py-2 border border-slate-300 rounded-md shadow-sm focus:ring-accent-primary focus:border-accent-primary transition duration-150">
+                            </div>
+
+                            <div>
+                                <label for="dni" class="block text-sm font-medium text-slate-700">DNI/CUIL <span class="text-red-500">*</span></label>
+                                <input type="text" id="dni" name="dni" required class="mt-1 block w-full px-4 py-2 border border-slate-300 rounded-md shadow-sm focus:ring-accent-primary focus:border-accent-primary transition duration-150">
+                            </div>
+
+                            <div>
+                                <label for="phone_number" class="block text-sm font-medium text-slate-700">Teléfono (WhatsApp) <span class="text-red-500">*</span></label>
+                                <input type="tel" id="phone_number" name="phone_number" required placeholder="Ej: 2212229980" class="mt-1 block w-full px-4 py-2 border border-slate-300 rounded-md shadow-sm focus:ring-accent-primary focus:border-accent-primary transition duration-150">
+                                <p class="mt-1 text-xs text-slate-500">Te contactaremos por este número para confirmar tu cupo.</p>
+                            </div>
+
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-slate-700">Email <span class="text-red-500">*</span></label>
+                                <input type="email" id="email" name="email" required class="mt-1 block w-full px-4 py-2 border border-slate-300 rounded-md shadow-sm focus:ring-accent-primary focus:border-accent-primary transition duration-150">
+                            </div>
+                            
+                            <div>
+                                <label for="desired_course_contact" class="block text-sm font-medium text-slate-700">Curso/Nivel Deseado <span class="text-red-500">*</span></label>
+                                <select id="desired_course_contact" name="desired_course" required class="mt-1 block w-full px-4 py-2 border border-slate-300 bg-white rounded-md shadow-sm focus:ring-accent-primary focus:border-accent-primary transition duration-150">
+                                    <option value="">-- Seleccioná una opción --</option>
+                                    <optgroup label="Niveles">
+                                        <option value="a1">A1 - Básico</option>
+                                        <option value="a2">A2 - Elementary</option>
+                                        <option value="a2plus">A2+ - Pre-Intermediate</option>
+                                        <option value="b1">B1 - Intermediate (Miér 20-21)</option>
+                                        <option value="b1plus">B1+ - Pre-First</option>
+                                        <option value="b2">B2 - Upper-Intermediate</option>
+                                        <option value="c1c2">C1-C2 - Advanced (Mar 19-20)</option>
+                                    </optgroup>
+                                    <optgroup label="Exámenes y Académico">
+                                        <option value="b2first">B2 First Prep (Mar 20-21)</option>
+                                        <option value="ielts">IELTS Prep (Mar 17-18)</option>
+                                        <option value="toefl">TOEFL Prep</option>
+                                        <option value="ingreso_2026">Prep. Ingreso 2026 (Jue 18-19)</option>
+                                        <option value="lengua_inglesa_1">Prep. Lengua Inglesa 1 (Miér 18-19)</option>
+                                    </optgroup>
+                                    <optgroup label="Conversación">
+                                        <option value="conv_a2b1">Conversación A2/B1 (Miér 19-20)</option>
+                                        <option value="conv_b2c1">Conversación B2/C1 (Jue 19-20)</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="w-full mt-6 flex items-center justify-center px-6 py-3 border border-transparent text-base font-bold rounded-md shadow-sm text-white bg-accent-primary hover:bg-original-blue transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-primary">
+                                Enviar Pre-Inscripción por WhatsApp
+                                <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="bg-original-blue py-8 reveal-on-scroll" data-delay="100" role="contentinfo">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+            <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left space-y-4 md:space-y-0">
+                <div class="text-white font-heading text-xl font-extrabold tracking-wider flex flex-col items-center md:items-start leading-none">
+                     <span class="text-xl font-black">THE QUEEN'S TEA</span>
+                    <span class="text-xs font-medium text-slate-300 uppercase tracking-widest mt-1">EDUCACIÓN A DISTANCIA</span>
+                </div>
+
+                <nav class="space-x-4">
+                    <a href="#inicio" class="text-slate-300 hover:text-accent-gold transition duration-200 text-sm">Inicio</a>
+                    <a href="#cursos" class="text-slate-300 hover:text-accent-gold transition duration-200 text-sm">Cursos</a>
+                    <a href="#valores" class="text-slate-300 hover:text-accent-gold transition duration-200 text-sm">Valores</a>
+                    <a href="#faq" class="text-slate-300 hover:text-accent-gold transition duration-200 text-sm">FAQ</a>
+                </nav>
+
+                <p class="text-slate-300 text-sm">
+                    &copy; <span id="current-year-footer"></span> The Queen's Tea. Todos los derechos reservados.
+                </p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    // Precios de Referencia ACTUALIZADOS para la Calculadora
+    const COURSE_PRICES = {
+        a1: { name: 'A1 - Básico', cost: 14000 },
+        a2: { name: 'A2 - Elementary', cost: 14000 },
+        a2plus: { name: 'A2+ - Pre-Intermediate', cost: 14000 },
+        b1: { name: 'B1 - Intermediate', cost: 14500 },
+        b1plus: { name: 'B1+ - Pre-First', cost: 14500 },
+        b2: { name: 'B2 - Upper-Intermediate', cost: 15000 },
+        b2plus: { name: 'B2+ - Pre-Advanced', cost: 15000 },
+        b2first: { name: 'B2 First Prep', cost: 15000 },
+        c1c2: { name: 'C1-C2 - Advanced', cost: 16000 },
+        ielts: { name: 'IELTS Prep', cost: 16000 },
+        toefl: { name: 'TOEFL Prep', cost: 16000 },
+        conv_a2b1: { name: 'Conversación A2/B1', cost: 15000 },
+        conv_b2c1: { name: 'Conversación B2/C1', cost: 16000 },
+        ingreso_2026: { name: 'Preparación Ingreso 2026', cost: 18000 },
+        lengua_inglesa_1: { name: 'Preparación Lengua Inglesa 1', cost: 18000 },
+    };
+
+    // Elementos del DOM
+    const courseSelect = document.getElementById('course-level-select');
+    const resultPanel = document.getElementById('cost-result-panel');
+    const selectedLevelDisplay = document.getElementById('selected-level-display');
+    const classCostCalc = document.getElementById('class-cost-calc');
+    const monthlyBody = document.getElementById('monthly-calculation-body');
+    const clase3 = document.getElementById('clases-x3');
+    const clase4 = document.getElementById('clases-x4');
+    const clase5 = document.getElementById('clases-x5');
+
+    // Función principal de cálculo
+    function updateCalculation(courseKey) {
+        if (!COURSE_PRICES[courseKey]) {
+            resultPanel.classList.add('hidden');
+            return;
+        }
+
+        const course = COURSE_PRICES[courseKey];
+        const cost = course.cost;
+        selectedLevelDisplay.textContent = course.name;
+        classCostCalc.textContent = cost.toLocaleString('es-AR');
+
+        // Calcular cuotas estimadas
+        const prices = {
+            3: cost * 3,
+            4: cost * 4,
+            5: cost * 5
+        };
+
+        clase3.textContent = `$${prices[3].toLocaleString('es-AR')}`;
+        clase4.textContent = `$${prices[4].toLocaleString('es-AR')}`;
+        clase5.textContent = `$${prices[5].toLocaleString('es-AR')}`;
+
+        // Actualizar tabla detallada
+        monthlyBody.innerHTML = `
+            <tr>
+                <td class="py-3 px-6 text-left">1 Mes</td>
+                <td class="py-3 px-6 text-center">3-5 Clases</td>
+                <td class="py-3 px-6 text-right font-bold">$${prices[4].toLocaleString('es-AR')}</td>
+            </tr>
+            <tr>
+                <td class="py-3 px-6 text-left">3 Meses</td>
+                <td class="py-3 px-6 text-center">12-15 Clases</td>
+                <td class="py-3 px-6 text-right font-bold">$${(prices[4] * 3).toLocaleString('es-AR')}</td>
+            </tr>
+            <tr>
+                <td class="py-3 px-6 text-left">6 Meses</td>
+                <td class="py-3 px-6 text-center">24-30 Clases</td>
+                <td class="py-3 px-6 text-right font-bold">$${(prices[4] * 6).toLocaleString('es-AR')}</td>
+            </tr>
+        `;
+
+        resultPanel.classList.remove('hidden');
+    }
+
+    // Escuchador del cambio en el select
+    courseSelect.addEventListener('change', (e) => {
+        const selectedValue = e.target.value;
+        updateCalculation(selectedValue);
+    });
+
+    // Si hay un valor preseleccionado, calcular automáticamente
+    if (courseSelect.value !== "") {
+        updateCalculation(courseSelect.value);
+    }
+
+});
+
+
+// ... (Si tienes más código JavaScript después, este continuaría aquí)
+            // WhatsApp Info ACTUALIZADA
+            const whatsappNumber = "2212229980"; // Número sin 549
+            const countryCode = "549"; // Código de país/área para Argentina móvil
+
+            // Elementos del DOM (Definidos aquí por si se usaron antes)
+            const header = document.getElementById('header');
+            const scrollWatcher = document.getElementById('scrollWatcher');
+            
+            // 1. SCROLL OBSERVER (Efecto de Header Fijo/Transparente)
+            const navObserver = new IntersectionObserver((entries) => {
+                // Si el scrollWatcher NO está visible (es decir, hicimos scroll hacia abajo), agregamos la clase 'scrolled'
+                header.classList.toggle('scrolled', !entries[0].isIntersecting);
+            }, { 
+                // rootMargin: '-1px 0px 0px 0px' -> El observador se activa 1px antes de que el scrollWatcher salga del viewport
+                rootMargin: '-1px 0px 0px 0px' 
+            });
+
+            navObserver.observe(scrollWatcher);
+            
+            // Actualizar Año en el Footer
+            document.getElementById('current-year-footer').textContent = new Date().getFullYear();
+
+            // 2. MOBILE MENU TOGGLE & SMOOTH SCROLL
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true' || false;
+                mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
+                mobileMenu.classList.toggle('hidden');
+                mobileMenuBtn.textContent = isExpanded ? '☰' : '✕';
+            });
+            
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    // Cerrar el menú después de hacer click en un enlace
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    mobileMenuBtn.textContent = '☰';
+                });
+            });
+
+            // 3. REVEAL ON SCROLL ANIMATION
+            const revealElements = document.querySelectorAll('.reveal-on-scroll');
+            const observerOptions = {
+                root: null, 
+                rootMargin: '0px',
+                threshold: 0.1 
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const delay = parseInt(entry.target.getAttribute('data-delay') || '0');
+                        setTimeout(() => {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target); // Dejar de observar una vez visible
+                        }, delay);
+                    }
+                });
+            }, observerOptions);
+
+            revealElements.forEach(el => observer.observe(el));
+            
+            // 4. COURSE FILTERING
+            const filterButtons = document.querySelectorAll('.filter-btn-js');
+            const courseCards = document.querySelectorAll('.course-card-js');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const filter = button.getAttribute('data-filter');
+
+                    // Cambiar el estilo del botón seleccionado
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('bg-original-blue', 'text-white');
+                        btn.classList.add('bg-accent-dark-bg', 'text-original-blue', 'hover:bg-accent-primary/50', 'hover:text-white');
+                        btn.setAttribute('aria-selected', 'false');
+                    });
+
+                    button.classList.remove('bg-accent-dark-bg', 'text-original-blue', 'hover:bg-accent-primary/50', 'hover:text-white');
+                    button.classList.add('bg-original-blue', 'text-white');
+                    button.setAttribute('aria-selected', 'true');
+
+                    // Filtrar las tarjetas
+                    courseCards.forEach(card => {
+                        const categories = card.getAttribute('data-category').split(' '); // Permitir múltiples categorías
+                        
+                        if (filter === 'todos' || categories.includes(filter)) {
+                            card.classList.remove('hidden');
+                            card.classList.add('block'); 
+                        } else {
+                            card.classList.add('hidden');
+                            card.classList.remove('block');
+                        }
+                    });
+                });
+            });
+            
+            // 5. CHATBOT SIMPLE
+            const toggleChatBtn = document.getElementById('toggleChat');
+            const chatWindow = document.getElementById('chat-window');
+            const chatOptions = document.querySelectorAll('.chat-option-btn');
+            const chatResponseDiv = document.getElementById('chat-response');
+            
+            const responses = {
+                'cursos': "Nuestra oferta incluye Niveles (A1-C2), Exámenes (IELTS, TOEFL), Conversación y Preparaciones Académicas (Ingreso/Materias). Podés ver los detalles en la sección de Cursos.",
+                'nivel': "Te recomendamos hacer nuestro Test de Nivelación gratuito. Es un examen corto que te dará una idea clara de tu nivel según el MCER. El link está en el formulario de inscripción.",
+                'valores': "El valor es por *clase dictada* ($14.000 a $18.000). La cuota mensual varía según el número de clases del mes (3, 4 o 5). Consultá la Calculadora de Inversión para un estimado.",
+                'inscripcion-chat': "¡Inscribirse es muy fácil! Completá el formulario de pre-inscripción abajo y te pondremos en contacto con un asesor por WhatsApp para confirmar tu cupo."
+            };
+
+            toggleChatBtn.addEventListener('click', () => {
+                const isHidden = chatWindow.classList.toggle('hidden');
+                // Alternar el estado 'active' para cambiar el ícono del botón
+                toggleChatBtn.classList.toggle('active', !isHidden);
+                toggleChatBtn.textContent = isHidden ? '💬' : '✕';
+                if (!isHidden) {
+                    // Mover el scroll al fondo al abrir el chat
+                    const chatBody = chatWindow.querySelector('.overflow-y-auto');
+                    chatBody.scrollTop = chatBody.scrollHeight;
+                } else {
+                    // Limpiar y ocultar la respuesta al cerrar
+                    chatResponseDiv.classList.add('hidden');
+                    chatResponseDiv.innerHTML = '';
+                }
+            });
+
+            chatOptions.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const question = btn.getAttribute('data-question');
+                    
+                    // Inyectar pregunta y respuesta
+                    chatResponseDiv.innerHTML = `<div class="font-bold text-original-blue mb-1">Tu Pregunta:</div><p class="mb-2 text-slate-700">"${btn.textContent}"</p><div class="font-bold text-accent-primary mb-1">Nuestra Respuesta:</div><p class="text-slate-800">${responses[question]}</p>`;
+                    chatResponseDiv.classList.remove('hidden');
+                    
+                    // Mover el scroll al fondo después de la respuesta
+                    const chatBody = chatWindow.querySelector('.overflow-y-auto');
+                    setTimeout(() => {
+                        chatBody.scrollTop = chatBody.scrollHeight;
+                    }, 100);
+                });
+            });
+            
+            // 6. CALCULADORA DE INVERSIÓN
+            const courseLevelSelect = document.getElementById('course-level-select');
+            const costResultPanel = document.getElementById('cost-result-panel');
+            const selectedLevelDisplay = document.getElementById('selected-level-display');
+            const classCostCalcSpan = document.getElementById('class-cost-calc');
+            const monthlyCalculationBody = document.getElementById('monthly-calculation-body');
+
+            // Formateador de números a pesos AR
+            const formatter = new Intl.NumberFormat('es-AR', { useGrouping: true, maximumFractionDigits: 0 });
+
+            function updateInvestmentCalculator() {
+                const selectedCourseId = courseLevelSelect.value;
+
+                if (!selectedCourseId || !COURSE_PRICES[selectedCourseId]) {
+                    costResultPanel.classList.add('hidden');
+                    return;
+                }
+
+                const course = COURSE_PRICES[selectedCourseId];
+                
+                selectedLevelDisplay.textContent = course.name;
+                classCostCalcSpan.textContent = formatter.format(course.cost);
+                
+                // Generar tabla de cálculo mensual
+                monthlyCalculationBody.innerHTML = '';
+                const weeks = [3, 4, 5];
+                
+                weeks.forEach(numWeeks => {
+                    const totalCost = numWeeks * course.cost;
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td class="py-3 px-6">${numWeeks} semanas</td>
+                        <td class="py-3 px-6 text-center">${numWeeks} clases</td>
+                        <td class="py-3 px-6 text-right font-extrabold text-original-blue">$${formatter.format(totalCost)}</td>
+                    `;
+                    monthlyCalculationBody.appendChild(row);
+                });
+
+                costResultPanel.classList.remove('hidden');
+            }
+
+            courseLevelSelect.addEventListener('change', updateInvestmentCalculator);
+            
+            // 7. FAQ ACORDEÓN
+            const accordionItems = document.querySelectorAll('.accordion-item');
+
+            accordionItems.forEach(item => {
+                const button = item.querySelector('.accordion-header button');
+                const icon = button.querySelector('span');
+
+                button.addEventListener('click', () => {
+                    const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+                    // Cerrar todos los demás ítems
+                    accordionItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                            otherItem.querySelector('.accordion-header button').setAttribute('aria-expanded', 'false');
+                            otherItem.querySelector('.accordion-header span').style.transform = 'rotate(0deg)';
+                        }
+                    });
+
+                    // Abrir/Cerrar el ítem actual
+                    item.classList.toggle('active');
+                    button.setAttribute('aria-expanded', !isExpanded);
+                    icon.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
+                });
+            });
+            
+            // 8. MANEJO DE FORMULARIO A WHATSAPP
+            const form = document.getElementById('inscription-form');
+            const desiredCourseContact = document.getElementById('desired_course_contact');
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const formData = new FormData(form);
+                const data = {};
+                formData.forEach((value, key) => { data[key] = value.trim(); });
+
+                // Validación simple de campos obligatorios
+                if (!data.full_name || !data.dni || !data.phone_number || !data.email || !data.desired_course) {
+                    alert('Por favor, completá todos los campos obligatorios antes de enviar.');
+                    return;
+                }
+
+                const selectedCourseText = desiredCourseContact.options[desiredCourseContact.selectedIndex].text;
+
+                // Construcción del mensaje de WhatsApp
+                const message = `¡Hola, The Queen's Tea! Quiero pre-inscribirme en un curso. Mis datos son:\n` +
+                                `\n*Nombre:* ${data.full_name}` +
+                                `\n*DNI:* ${data.dni}` +
+                                `\n*Teléfono:* ${data.phone_number}` +
+                                `\n*Email:* ${data.email}` +
+                                `\n*Curso/Nivel Deseado:* ${selectedCourseText}` +
+                                `\n\nPor favor, enviame los horarios disponibles para este curso. ¡Gracias!`;
+
+                const encodedMessage = encodeURIComponent(message);
+                
+                // Construcción del enlace
+                const whatsappLink = `https://wa.me/${countryCode}${whatsappNumber}?text=${encodedMessage}`;
+                
+                // Redirigir
+                window.open(whatsappLink, '_blank');
+            });
 </script>
 
-</body>
-</html>
 
+      <!-- Panel de resultados -->
+      <div id="cost-result-panel" class="hidden mt-8 border-t-4 border-accent-primary/40 pt-6 bg-gradient-to-b from-white to-accent-light rounded-xl shadow-lg p-6 transition-all duration-500">
+        <h4 class="font-heading text-xl font-bold text-accent-primary mb-4">
+          Inversión Estimada para: <span id="selected-level-display" class="text-original-blue"></span>
+        </h4>
+        <div class="space-y-4">
+          <div class="flex justify-between items-center p-4 bg-slate-50 rounded-xl border border-slate-200 shadow-sm">
+            <span class="text-slate-600 font-semibold">Costo por clase:</span>
+            <span id="class-cost-calc" class="text-xl font-extrabold text-original-blue">ARS 0</span>
+          </div>
+          <div class="flex justify-between items-center p-4 bg-accent-primary/10 rounded-xl border-2 border-accent-primary shadow-md">
+            <span class="text-original-blue font-bold">Mínimo (3 clases/mes):</span>
+            <span id="clases-x3" class="text-xl font-black text-original-blue">ARS 0</span>
+          </div>
+          <div class="flex justify-between items-center p-4 bg-slate-50 rounded-xl border border-slate-200 shadow-sm">
+            <span class="text-slate-600 font-semibold">Promedio (4 clases/mes):</span>
+            <span id="clases-x4" class="text-xl font-bold text-original-blue">ARS 0</span>
+          </div>
+          <div class="flex justify-between items-center p-4 bg-accent-primary/10 rounded-xl border-2 border-accent-primary shadow-md">
+            <span class="text-original-blue font-bold">Máximo (5 clases/mes):</span>
+            <span id="clases-x5" class="text-xl font-black text-original-blue">ARS 0</span>
+          </div>
+        </div>
+        <p class="mt-4 text-xs text-slate-500 italic border-t border-slate-100 pt-4">
+          *La cuota final se ajusta según la cantidad real de clases en el mes.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const select = document.getElementById("course-level-select");
+  const panel = document.getElementById("cost-result-panel");
+  const classCost = document.getElementById("class-cost-calc");
+  const selectedLevelDisplay = document.getElementById("selected-level-display");
+  const clases3 = document.getElementById("clases-x3");
+  const clases4 = document.getElementById("clases-x4");
+  const clases5 = document.getElementById("clases-x5");
+
+  const formatARS = (value) => {
+    return new Intl.NumberFormat("es-AR", { style: "currency", currency: "ARS", minimumFractionDigits: 0 }).format(value);
+  };
+
+  select.addEventListener("change", () => {
+    const selectedOption = select.options[select.selectedIndex];
+    const cost = parseInt(selectedOption.getAttribute("data-cost"));
+
+    if (!cost) {
+      panel.classList.add("hidden");
+      return;
+    }
+
+    panel.classList.remove("hidden");
+    selectedLevelDisplay.textContent = selectedOption.text;
+    classCost.textContent = formatARS(cost);
+    clases3.textContent = formatARS(cost * 3);
+    clases4.textContent = formatARS(cost * 4);
+    clases5.textContent = formatARS(cost * 5);
+  });
+});
+</script>
+</body>
+<html>
