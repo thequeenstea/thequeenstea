@@ -1103,29 +1103,113 @@ Me gustaría recibir el análisis y la información sobre el curso que me recomi
         </div>
       </div>
 
-      <!-- Selector de curso -->
-      <div class="mb-10">
-        <label for="course-level-select" class="block text-lg font-bold text-original-blue mb-3">
-          <i class="fa-solid fa-graduation-cap"></i> 1. Seleccioná el Curso/Nivel
-        </label>
-        <select id="course-level-select" class="w-full px-4 py-3 border border-slate-300 bg-white rounded-lg shadow-sm text-lg focus:ring-accent-primary focus:border-accent-primary transition duration-300 hover:shadow-md">
-          <option value="">-- Seleccioná para calcular --</option>
-          <option value="a1" data-cost="20000">A1 - Básico ($20.000)</option>
-          <option value="a2" data-cost="20000">A2 - Elementary ($20.000)</option>
-          <option value="a2plus" data-cost="20000">A2+ - Pre-Intermediate ($20.000)</option>
-          <option value="b1" data-cost="20200">B1 - Intermediate ($20.200)</option>
-          <option value="b1plus" data-cost="20200">B1+ - Pre-First ($20.200)</option>
-          <option value="b2" data-cost="20400">B2 - Upper-Intermediate ($20.400)</option>
-          <option value="b2plus" data-cost="20400">B2+ - Pre-Advanced ($20.400)</option>
-          <option value="c1c2" data-cost="20600">C1-C2 - Advanced ($20.600)</option>
-          <option value="ielts" data-cost="21000">IELTS ($21.000)</option>
-          <option value="toefl" data-cost="22000">TOEFL ($22.000)</option>
-          <option value="conv_a2b1" data-cost="20000">Conversación A2/B1 ($20.000)</option>
-          <option value="conv_b2c1" data-cost="20000">Conversación B2/C1 ($20.000)</option>
-          <option value="ingreso_2026" data-cost="22000">Preparación Ingreso 2026 ($22.000)</option>
-          <option value="lengua_inglesa_1" data-cost="23000">Preparación Lengua Inglesa 1 ($23.000)</option>
-        </select>
+<div class="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-2xl border border-slate-100">
+  
+  <div class="mb-8 text-center">
+    <h2 class="text-2xl font-extrabold text-slate-800 tracking-tight">Calculadora de Cuota</h2>
+    <p class="text-sm text-slate-500">¡Ahorrá más del 13% abonando el mes completo!</p>
+  </div>
+
+  <div class="mb-6">
+    <label for="course-level-select" class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wider">
+      <i class="fa-solid fa-graduation-cap text-blue-600 mr-2"></i> 1. Seleccioná tu Nivel
+    </label>
+    <select id="course-level-select" onchange="calculatePrice()" class="w-full px-4 py-3 border-2 border-slate-100 bg-slate-50 rounded-xl shadow-sm text-lg focus:ring-blue-500 focus:border-blue-500 transition duration-300">
+      <option value="0">-- Elegir curso --</option>
+      <option value="20000">A1 - Básico</option>
+      <option value="20000">A2 - Elementary</option>
+      <option value="20000">A2+ - Pre-Intermediate</option>
+      <option value="20200">B1 - Intermediate</option>
+      <option value="20200">B1+ - Pre-First</option>
+      <option value="20400">B2 - Upper-Intermediate</option>
+      <option value="20400">B2+ - Pre-Advanced</option>
+      <option value="20600">C1-C2 - Advanced</option>
+      <option value="21000">IELTS</option>
+      <option value="22000">TOEFL</option>
+      <option value="20000">Conversación A2/B1</option>
+      <option value="20000">Conversación B2/C1</option>
+      <option value="22000">Preparación Ingreso 2026</option>
+      <option value="23000">Preparación Lengua Inglesa 1</option>
+    </select>
+  </div>
+
+  <div class="mb-6">
+    <label class="block text-sm font-bold text-slate-700 mb-3 uppercase tracking-wider">
+      <i class="fa-solid fa-calendar-check text-blue-600 mr-2"></i> 2. Modalidad de Pago
+    </label>
+    <div class="grid grid-cols-2 gap-4">
+      <button onclick="setMode('single')" id="btn-single" class="mode-btn flex flex-col items-center p-4 border-2 rounded-xl border-slate-100 hover:bg-slate-50 transition">
+        <span class="text-xs font-bold uppercase">Por Clase</span>
+        <span class="text-lg font-bold text-slate-400">Estándar</span>
+      </button>
+      <button onclick="setMode('month')" id="btn-month" class="mode-btn flex flex-col items-center p-4 border-2 rounded-xl border-blue-500 bg-blue-50 transition">
+        <span class="text-xs font-bold text-blue-600 uppercase">Mes Completo</span>
+        <span class="text-lg font-bold text-blue-700">Ahorro ✅</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="bg-slate-900 rounded-2xl p-6 text-white shadow-inner">
+    <div class="flex justify-between items-center mb-4">
+      <span class="text-slate-400">Precio por clase:</span>
+      <span id="price-per-class" class="text-xl font-bold">$0</span>
+    </div>
+    
+    <hr class="border-slate-700 mb-4">
+
+    <div class="text-center">
+      <p class="text-xs text-blue-400 font-bold uppercase mb-1">Total a abonar</p>
+      <div id="total-price" class="text-5xl font-black mb-2 text-white">$0</div>
+      
+      <div id="benefit-tag" class="inline-block bg-green-500/20 text-green-400 text-xs px-3 py-1 rounded-full font-bold">
+        ¡Aboná 24hs antes y asegurá tu cupo!
       </div>
+    </div>
+  </div>
+
+  <p class="mt-4 text-[11px] text-slate-400 text-center leading-relaxed">
+    * Para acceder al beneficio del mes completo, el pago debe acreditarse <b>24hs antes de la primera clase</b> (sin excepción). Pagos realizados el mismo día de clase abonan tarifa individual.
+  </p>
+</div>
+
+<script>
+  let mode = 'month';
+  let basePrice = 0;
+
+  function setMode(selectedMode) {
+    mode = selectedMode;
+    // Estética de botones
+    document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('border-blue-500', 'bg-blue-50'));
+    document.getElementById(`btn-${selectedMode}`).classList.add('border-blue-500', 'bg-blue-50');
+    calculatePrice();
+  }
+
+  function calculatePrice() {
+    const select = document.getElementById('course-level-select');
+    basePrice = parseFloat(select.value);
+    
+    if(basePrice === 0) return;
+
+    let finalPerClass = 0;
+    let total = 0;
+    const tag = document.getElementById('benefit-tag');
+
+    if (mode === 'single') {
+      finalPerClass = basePrice + 3000;
+      total = finalPerClass;
+      tag.innerHTML = "💡 ¡Ahorrá $3.000 por clase pagando el mes!";
+      tag.className = "inline-block bg-amber-500/20 text-amber-400 text-xs px-3 py-1 rounded-full font-bold";
+    } else {
+      finalPerClass = basePrice;
+      total = basePrice * 4; // Ejemplo basado en 4 clases al mes
+      tag.innerHTML = "✨ Descuento por pago anticipado aplicado";
+      tag.className = "inline-block bg-green-500/20 text-green-400 text-xs px-3 py-1 rounded-full font-bold";
+    }
+
+    document.getElementById('price-per-class').innerText = `$${finalPerClass.toLocaleString()}`;
+    document.getElementById('total-price').innerText = `$${total.toLocaleString()}`;
+  }
+</script>
 
       <!-- Resultados -->
       <div id="cost-result-panel" class="hidden mt-10 border-t-4 border-accent-primary/40 pt-8 bg-gradient-to-b from-white to-accent-light rounded-2xl shadow-xl p-8 transition-all duration-700 ease-in-out">
