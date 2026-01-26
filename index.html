@@ -1295,48 +1295,29 @@ Me gustaría recibir el análisis y la información sobre el curso que me recomi
     </style>
 </body>
 <script>
-    // 1. OBJETO INICIAL ÚNICO
     let course = { 
-        name: '', 
-        subLevel: '', 
-        price: 0, 
-        sched: '', 
-        code: '', 
-        classes: 4, 
-        payType: 'pack', 
-        currency: 'ars' 
+        name: '', subLevel: '', price: 0, sched: '', code: '', classes: 4, payType: 'pack', currency: 'ars' 
     };
 
-    // 2. SELECCIONAR CURSO
     function selectCourse(name, price, sched, code) {
         course = { name, subLevel: '', price, sched, code, classes: 4, payType: 'pack', currency: 'ars' };
         if(['a2', 'b1', 'b2'].includes(code)) course.subLevel = code.toUpperCase();
-
         const target = document.getElementById('scroll-target');
         target.style.display = 'block';
-        setTimeout(() => {
-            target.classList.add('visible');
-            renderApp();
-        }, 10);
-
-        window.scrollTo({ top: target.offsetTop - 50, behavior: 'smooth' });
-
-        document.querySelectorAll('.bar-wrap').forEach(b => {
-            b.classList.remove('active');
-            if(b.querySelector('.bar-tag').innerText.toLowerCase() === code.toLowerCase()) b.classList.add('active');
-        });
+        renderApp();
+        setTimeout(() => { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
     }
 
-    // 3. ACTUALIZACIONES
     function updatePayType(type) { course.payType = type; renderApp(); }
     function updateClasses(num) { course.classes = num; renderApp(); }
     function updateCurrency(curr) { course.currency = curr; renderApp(); }
-    function updateSubLevel(lvl) { course.subLevel = lvl; renderApp(); }
 
-    // 4. RENDERIZADO ESTÉTICO
     function renderApp() {
-        const extraPercent = 0.15;
-        const priceSingleARS = course.price + (course.price * extraPercent);
+        const isPack = course.payType === 'pack';
+        const isUSD = course.currency === 'usd';
+
+        // Lógica de Precios
+        const priceSingleARS = course.price * 1.15;
         const totalSingleARS = priceSingleARS * course.classes;
         const totalPackARS = course.price * course.classes;
         const savingsARS = totalSingleARS - totalPackARS;
@@ -1348,145 +1329,181 @@ Me gustaría recibir el análisis y la información sobre el curso que me recomi
         const totalPackUSD = baseUSD * course.classes;
         const savingsUSD = totalSingleUSD - totalPackUSD;
 
-        const isPack = course.payType === 'pack';
-        const isUSD = course.currency === 'usd';
-
-        const finalDisplayPrice = isUSD ? (isPack ? totalPackUSD : totalSingleUSD) : (isPack ? totalPackARS : totalSingleARS);
+        const finalPrice = isUSD ? (isPack ? totalPackUSD : totalSingleUSD) : (isPack ? totalPackARS : totalSingleARS);
         const unitValue = isUSD ? (isPack ? baseUSD : priceSingleUSD) : (isPack ? course.price : priceSingleARS);
         const savingsAmount = isUSD ? savingsUSD : savingsARS;
         const currencySign = isUSD ? 'USD' : '$';
 
         document.getElementById('panel-content').innerHTML = `
-            <div style="text-align: center; margin-bottom: 50px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 40px;">
-                <span style="color: var(--accent); font-weight: 800; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 4px; display: block; margin-bottom: 10px;">Formulario de Inscripción 2026</span>
-                <h2 style="margin: 0; font-size: 3.5rem; font-weight: 900; color: #ffffff; line-height: 1.1;">${course.name} ${course.subLevel ? '(' + course.subLevel + ')' : ''}</h2>
-                <div style="display: inline-block; background: var(--accent); color: #223e4b; padding: 12px 40px; border-radius: 50px; font-weight: 900; font-size: 1.5rem; margin-top: 20px; box-shadow: 0 10px 25px rgba(65, 193, 186, 0.4);">
-                    🗓️ ${course.sched}
-                </div>
-            </div>
-
-            <div class="calc-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 40px; align-items: start;">
-                
-                <div style="background: rgba(255,255,255,0.02); padding: 35px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.05);">
-                    <h4 style="text-transform: uppercase; font-size: 0.9rem; color: var(--accent); margin-bottom: 30px; letter-spacing: 1px; border-left: 4px solid var(--accent); padding-left: 15px;">1. Datos Personales</h4>
-                    <div style="display: flex; flex-direction: column; gap: 18px;">
-                        <div class="form-group"><label>Nombre Completo</label><input type="text" id="f_name" placeholder="Ej: Maria Perez"></div>
-                        <div class="form-group"><label>DNI / Passport</label><input type="text" id="f_dni" placeholder="Identificación"></div>
-                        <div class="form-group"><label>Ciudad y País</label><input type="text" id="f_location" placeholder="¿De dónde sos?"></div>
-                        <div class="form-group"><label>WhatsApp</label><input type="tel" id="f_phone" placeholder="Cod. área + número"></div>
-                    </div>
-
-                    <div style="margin-top: 40px; background: rgba(0,0,0,0.25); padding: 25px; border-radius: 20px;">
-                        <p style="font-size: 0.75rem; color: var(--accent); font-weight: 800; text-transform: uppercase; margin-bottom: 20px; text-align: center;">Términos de Compromiso</p>
-                        <div style="display: flex; flex-direction: column; gap: 15px; font-size: 0.85rem; color: #ccc;">
-                            <div style="display: flex; gap: 12px;"><input type="checkbox" id="term_var"><label for="term_var" style="cursor:pointer; line-height: 1.3;">Acepto que la inversión varía según las clases del mes.</label></div>
-                            <div style="display: flex; gap: 12px;"><input type="checkbox" id="term_abs"><label for="term_abs" style="cursor:pointer; line-height: 1.3;">Las ausencias se abonan. Pago 24hs previo a la clase.</label></div>
-                            <div style="display: flex; gap: 12px;"><input type="checkbox" id="term_links"><label for="term_links" style="cursor:pointer; line-height: 1.3;">Acceso a enlaces únicamente con pago confirmado.</label></div>
-                            <div style="display: flex; gap: 12px;"><input type="checkbox" id="term_wait"><label for="term_wait" style="cursor:pointer; line-height: 1.3;">Tolerancia máxima de espera: 15 minutos.</label></div>
-                            <div style="display: flex; gap: 12px;"><input type="checkbox" id="term_hw"><label for="term_hw" style="cursor:pointer; line-height: 1.3;">Me comprometo a entregar tareas semanales.</label></div>
-                        </div>
-                    </div>
+            <div class="registration-card">
+                <div class="panel-header">
+                    <span class="badge-2026">CONFIRMACIÓN DE CUPO 2026</span>
+                    <h2 class="course-main-title">${course.name}</h2>
+                    <p class="sched-tag-large">🗓️ ${course.sched}</p>
                 </div>
 
-                <div style="background: rgba(255,255,255,0.04); padding: 35px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 15px 35px rgba(0,0,0,0.4);">
-                    <h4 style="text-transform: uppercase; font-size: 0.9rem; color: var(--accent); margin-bottom: 30px; letter-spacing: 1px; border-left: 4px solid var(--accent); padding-left: 15px;">2. Plan de Pago</h4>
-
-                    <label class="selector-label">¿Dónde residís?</label>
-                    <div class="payment-selector" style="margin-bottom: 20px;">
-                        <button class="pay-btn ${course.currency === 'ars' ? 'active' : ''}" onclick="updateCurrency('ars')" style="flex:1">Argentina</button>
-                        <button class="pay-btn ${course.currency === 'usd' ? 'active' : ''}" onclick="updateCurrency('usd')" style="flex:1">Exterior</button>
-                    </div>
-
-                    <label class="selector-label">Modalidad elegida</label>
-                    <div class="payment-selector" style="margin-bottom: 20px;">
-                        <button class="pay-btn ${course.payType === 'week' ? 'active' : ''}" onclick="updatePayType('week')" style="flex:1">Por clase</button>
-                        <button class="pay-btn ${course.payType === 'pack' ? 'active' : ''}" onclick="updatePayType('pack')" style="flex:1">Pack Mensual</button>
-                    </div>
-
-                    <label class="selector-label">Cantidad de clases este mes</label>
-                    <div class="class-selector" style="margin-bottom: 30px;">
-                        <button class="class-btn ${course.classes === 3 ? 'active' : ''}" onclick="updateClasses(3)">3</button>
-                        <button class="class-btn ${course.classes === 4 ? 'active' : ''}" onclick="updateClasses(4)">4</button>
-                        <button class="class-btn ${course.classes === 5 ? 'active' : ''}" onclick="updateClasses(5)">5</button>
-                    </div>
-
-                    <div style="background: #16242c; padding: 25px; border-radius: 20px; border: 1px solid rgba(65, 193, 186, 0.2);">
-                        <div class="breakdown-item" style="color: #888; font-size: 0.85rem; margin-bottom: 12px;">
-                            <span>Subtotal mensual base</span>
-                            <span>${currencySign} ${(isUSD ? totalSingleUSD : totalSingleARS).toLocaleString()}</span>
+                <div class="registration-grid">
+                    <div class="registration-col info-col">
+                        <h4 class="section-title">1. Información del Alumno</h4>
+                        <div class="input-grid">
+                            <input type="text" id="f_name" placeholder="Nombre completo">
+                            <input type="text" id="f_dni" placeholder="DNI / ID Identificación">
+                            <input type="email" id="f_mail" placeholder="Correo electrónico">
+                            <input type="text" id="f_loc" placeholder="Ciudad y País">
+                            <input type="tel" id="f_phone" placeholder="WhatsApp (Ej: +54...)">
                         </div>
+
+                        <div class="commitment-zone">
+                            <h5>Términos y Compromiso</h5>
+                            <div class="check-list">
+                                <label><input type="checkbox" id="c1"> Inversión según clases del mes.</label>
+                                <label><input type="checkbox" id="c2"> Pago 24hs antes de la clase.</label>
+                                <label><input type="checkbox" id="c3"> Ausencias se abonan sin excepción.</label>
+                                <label><input type="checkbox" id="c4"> Tolerancia de espera: 15 minutos.</label>
+                                <label><input type="checkbox" id="c5"> Compromiso con tareas semanales.</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="registration-col payment-col">
+                        <h4 class="section-title">2. Configuración de Pago</h4>
                         
-                        ${isPack ? `
-                        <div class="breakdown-item" style="color: #41c1ba; font-weight: 800; font-size: 0.85rem; background: rgba(65, 193, 186, 0.1); padding: 8px 12px; border-radius: 8px; margin-bottom: 20px;">
-                            <span>✨ Ahorro Pack Mensual</span>
-                            <span>- ${currencySign} ${savingsAmount.toLocaleString()}</span>
-                        </div>
-                        ` : ''}
-
-                        <div style="text-align: center; margin-bottom: 15px; padding: 12px; border-radius: 12px; background: ${isPack ? 'rgba(65, 193, 186, 0.05)' : 'transparent'}; border: ${isPack ? '1px dashed var(--accent)' : 'none'};">
-                            <span style="font-size: 0.75rem; color: #bbb; display: block; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">Cada clase te queda a:</span>
-                            <span style="font-size: 1.6rem; font-weight: 900; color: #fff;">${currencySign} ${unitValue.toLocaleString()}</span>
+                        <div class="selector-box">
+                            <span class="selector-label">¿DÓNDE RESIDÍS?</span>
+                            <div class="full-toggle">
+                                <button onclick="updateCurrency('ars')" class="${!isUSD ? 'active' : ''}">Argentina</button>
+                                <button onclick="updateCurrency('usd')" class="${isUSD ? 'active' : ''}">Exterior</button>
+                            </div>
                         </div>
 
-                        <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; display: flex; justify-content: space-between; align-items: center;">
-                            <span style="font-weight: 800; color: #fff; font-size: 0.95rem; letter-spacing: 0.5px;">TOTAL A INVERTIR</span>
-                            <span style="font-size: 1.9rem; font-weight: 900; color: var(--accent); letter-spacing: -0.5px;">${currencySign} ${finalDisplayPrice.toLocaleString()}</span>
+                        <div class="selector-box">
+                            <span class="selector-label">MODALIDAD</span>
+                            <div class="full-toggle">
+                                <button onclick="updatePayType('pack')" class="${isPack ? 'active' : ''}">Pack Mensual</button>
+                                <button onclick="updatePayType('week')" class="${!isPack ? 'active' : ''}">Por clase</button>
+                            </div>
                         </div>
-                    </div>
 
-                    <div style="margin-top: 20px;">
-                        ${isPack ? `
-                            <p style="font-size: 0.65rem; color: #41c1ba; line-height: 1.5; font-style: italic; background: rgba(65, 193, 186, 0.1); padding: 12px; border-radius: 10px;">
-                                * El beneficio de Pack se pierde si se abona el mismo día de la clase. Válido abonando el mes completo por anticipado.
-                            </p>
-                        ` : `
-                            <p style="font-size: 0.65rem; color: #fbbf24; line-height: 1.5; font-weight: 600; text-align: center;">
-                                💡 ¡Pasate a la modalidad de <strong>Pack Mensual</strong> para ahorrar dinero!
-                            </p>
-                        `}
-                    </div>
+                        <div class="selector-box">
+                            <span class="selector-label">CLASES ESTE MES</span>
+                            <div class="full-toggle">
+                                <button onclick="updateClasses(3)" class="${course.classes===3 ? 'active' : ''}">3</button>
+                                <button onclick="updateClasses(4)" class="${course.classes===4 ? 'active' : ''}">4</button>
+                                <button onclick="updateClasses(5)" class="${course.classes===5 ? 'active' : ''}">5</button>
+                            </div>
+                        </div>
 
-                    <p style="font-size: 0.6rem; color: var(--text-dim); text-align: center; margin-top: 15px; opacity: 0.8;">
-                        Medios de pago: <strong>${isUSD ? 'Western Union / Global66' : 'Transferencia Bancaria / Mercado Pago'}</strong>
-                    </p>
+                        <div class="price-breakdown">
+                            <div class="price-line">
+                                <span>Inversión por clase:</span>
+                                <strong>${currencySign} ${unitValue.toLocaleString()}</strong>
+                            </div>
+                            
+                            <div class="modal-info-text">
+                                ${isPack ? 
+                                    `⚠️ <strong>Nota:</strong> El beneficio de Pack no aplica si abonas el mismo día de la clase. Debe cancelarse con 24hs de antelación.` : 
+                                    `💡 <strong>Tip:</strong> ¡Seleccioná "Pack Mensual" para ahorrar dinero en tu inversión total!`
+                                }
+                            </div>
 
-                    <div style="margin-top: 25px;">
-                        <a href="https://thequeenstea.empretienda.com.ar/matricula-2026/matricula-2026" target="_blank" class="btn-matricula-cromo" style="width:100%; display:block; margin-bottom:15px; text-align:center; padding: 18px;">ABONAR MATRÍCULA 2026</a>
-                        <button onclick="sendInscription()" class="btn-submit" style="width:100%; padding: 18px; font-weight: 800;">CONFIRMAR POR WHATSAPP</button>
+                            ${isPack ? `
+                            <div class="price-line savings">
+                                <span>Ahorro Pack Mensual:</span>
+                                <strong>- ${currencySign} ${savingsAmount.toLocaleString()}</strong>
+                            </div>` : ''}
+                            
+                            <div class="total-line">
+                                <span>TOTAL MES:</span>
+                                <span class="total-val">${currencySign} ${finalPrice.toLocaleString()}</span>
+                            </div>
+                        </div>
+
+                        <div class="dual-buttons">
+                            <a href="https://thequeenstea.empretienda.com.ar/matricula-2026/matricula-2026" target="_blank" class="btn-matricula">
+                                ABONAR MATRÍCULA
+                            </a>
+                            <button onclick="sendInscription()" class="btn-confirm">
+                                CONFIRMAR WHATSAPP
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         `;
     }
 
-    // 5. FUNCIÓN DE WHATSAPP
     function sendInscription() {
         const name = document.getElementById('f_name')?.value;
-        const dni = document.getElementById('f_dni')?.value;
-        const location = document.getElementById('f_location')?.value;
-        const phone = document.getElementById('f_phone')?.value;
-        const terms = [
-            document.getElementById('term_var')?.checked,
-            document.getElementById('term_abs')?.checked,
-            document.getElementById('term_links')?.checked,
-            document.getElementById('term_wait')?.checked,
-            document.getElementById('term_hw')?.checked
+        const mail = document.getElementById('f_mail')?.value;
+        const checks = [
+            document.getElementById('c1')?.checked, 
+            document.getElementById('c2')?.checked, 
+            document.getElementById('c3')?.checked, 
+            document.getElementById('c4')?.checked, 
+            document.getElementById('c5')?.checked
         ];
+        
+        if(!name || !mail) return alert("Por favor, completa tu nombre y mail.");
+        if(checks.includes(false)) return alert("Debes aceptar todos los compromisos para inscribirte.");
 
-        if(!name || !dni || !location || !phone) { alert("Completá todos tus datos personales."); return; }
-        if(terms.includes(false) || terms.includes(undefined)) { alert("Aceptá todas las cláusulas de compromiso."); return; }
-
-        const isUSD = course.currency === 'usd';
-        const isPack = course.payType === 'pack';
-        const usdPricing = { 'a1': 35, 'a2': 35, 'b1': 35, 'b2': 40, 'c1': 40, 'c2': 45, 'medical': 50, 'tcp': 50, 'legal': 55, 'ielts': 40 };
-        const baseUSD = usdPricing[course.code] || 35;
-        const finalVal = isUSD ? (isPack ? baseUSD * course.classes : (baseUSD+5) * course.classes) : (isPack ? course.price * course.classes : (course.price * 1.15) * course.classes);
-
-        const message = `¡Hola The Queen's Tea! 👋%0A%0AInscripción 2026:%0A%0A*DATOS*%0A*Nombre:* ${name}%0A*Ubicación:* ${location} (${isUSD ? 'Exterior' : 'Argentina'})%0A%0A*DETALLE*%0A*Curso:* ${course.name}%0A*Horario:* ${course.sched}%0A*Modalidad:* ${isPack ? 'PACK MENSUAL 👑' : 'POR CLASE SEMANAL'}%0A*Inversión:* ${isUSD ? 'USD' : '$'} ${finalVal.toLocaleString()}%0A%0AHe aceptado los términos y procedo a abonar la matrícula.`;
-
-        window.open(`https://wa.me/5492212229980?text=${message}`, '_blank');
+        const msg = `¡Hola Queen's Tea! 👋%0AInscripción 2026:%0A*${course.name}*%0A*Nombre:* ${name}%0A*Mail:* ${mail}%0A*Modalidad:* ${course.payType.toUpperCase()}%0A*Total:* ${course.currency.toUpperCase()} ${course.price}%0AHe aceptado todos los compromisos.`;
+        window.open(`https://wa.me/5492212229980?text=${msg}`, '_blank');
     }
 </script>
+
+<style>
+    .registration-card { background: #223e4b; border-radius: 40px; padding: 50px 40px; border: 1px solid rgba(255,255,255,0.05); }
+    .panel-header { text-align: center; margin-bottom: 50px; }
+    .badge-2026 { color: #41C1BA; font-weight: 800; font-size: 0.8rem; letter-spacing: 5px; display: block; margin-bottom: 15px; opacity: 0.8; }
+    
+    /* TÍTULOS GIGANTES */
+    .course-main-title { font-size: 4.5rem; font-weight: 900; margin: 0; color: #ffffff; line-height: 1; letter-spacing: -2px; }
+    .sched-tag-large { display: inline-block; background: #41C1BA; color: #0b1622; padding: 12px 35px; border-radius: 50px; margin-top: 25px; font-weight: 800; font-size: 1.8rem; box-shadow: 0 10px 25px rgba(65, 193, 186, 0.3); }
+
+    .registration-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; }
+    
+    /* COLUMNAS CON COLOR RESALTADO */
+    .registration-col { padding: 40px; border-radius: 35px; display: flex; flex-direction: column; transition: 0.3s; }
+    .info-col { background: #121f2e; border: 1px solid rgba(255,255,255,0.03); }
+    .payment-col { background: #0b1622; border: 1px solid rgba(65, 193, 186, 0.1); }
+    
+    .section-title { color: #fff; text-transform: uppercase; font-size: 0.9rem; font-weight: 800; letter-spacing: 2px; margin-bottom: 30px; border-left: 4px solid #41C1BA; padding-left: 15px; }
+
+    /* INPUTS */
+    .input-grid { display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 35px; }
+    .input-grid input { width: 100%; padding: 18px; background: #1a2a3a; border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; color: #fff; box-sizing: border-box; font-family: inherit; font-size: 1rem; }
+
+    /* COMPROMISO */
+    .commitment-zone { background: rgba(0,0,0,0.3); padding: 25px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.05); }
+    .commitment-zone h5 { margin: 0 0 20px 0; font-size: 0.8rem; color: #41C1BA; text-transform: uppercase; text-align: center; letter-spacing: 1px; }
+    .check-list { display: flex; flex-direction: column; gap: 12px; font-size: 0.85rem; color: #bbb; }
+    .check-list label { cursor: pointer; display: flex; gap: 12px; align-items: flex-start; line-height: 1.4; }
+
+    /* SELECTORES ALARGADOS */
+    .selector-box { margin-bottom: 30px; }
+    .selector-label { font-size: 0.7rem; color: #666; font-weight: 800; display: block; margin-bottom: 12px; text-align: center; letter-spacing: 1px; }
+    .full-toggle { background: #16242c; padding: 6px; border-radius: 18px; display: flex; gap: 6px; border: 1px solid rgba(255,255,255,0.05); }
+    .full-toggle button { flex: 1; padding: 16px; border: none; border-radius: 14px; background: transparent; color: #888; font-weight: 800; cursor: pointer; transition: 0.3s; font-size: 0.9rem; }
+    .full-toggle button.active { background: #41C1BA; color: #0b1622; font-weight: 900; }
+
+    /* INFO DINÁMICA DE MODALIDAD */
+    .modal-info-text { font-size: 0.75rem; line-height: 1.5; padding: 15px; border-radius: 12px; background: rgba(255,255,255,0.03); margin: 15px 0; color: #999; }
+    .modal-info-text strong { color: #fff; }
+
+    /* DESGLOSE PRECIOS */
+    .price-breakdown { background: #1a2a3a; padding: 30px; border-radius: 30px; border: 1px dashed rgba(65, 193, 186, 0.3); margin-top: auto; }
+    .price-line { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 1rem; }
+    .price-line.savings { color: #2D7FF9; font-weight: 800; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 10px; margin-top: 10px; }
+    .total-line { border-top: 1px solid #41C1BA; padding-top: 20px; margin-top: 15px; display: flex; justify-content: space-between; align-items: center; }
+    .total-val { font-size: 2.8rem; font-weight: 900; color: #41C1BA; letter-spacing: -1px; }
+
+    /* BOTONES DUALES */
+    .dual-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 35px; }
+    .btn-matricula { background: #8b5cf6; color: #fff; padding: 22px 10px; border-radius: 20px; font-weight: 900; text-decoration: none; text-align: center; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; transition: 0.3s; box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3); letter-spacing: 1px; }
+    .btn-confirm { background: #25D366; color: #fff; border: none; padding: 22px 10px; border-radius: 20px; font-weight: 900; font-size: 0.9rem; cursor: pointer; transition: 0.3s; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3); letter-spacing: 1px; }
+    
+    .btn-matricula:hover, .btn-confirm:hover { transform: translateY(-4px); filter: brightness(1.1); box-shadow: 0 15px 30px rgba(0,0,0,0.4); }
+</style>
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; margin: 0; }
 
