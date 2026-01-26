@@ -1239,246 +1239,200 @@ Me gustaría recibir el análisis y la información sobre el curso que me recomi
             opacity: 0.8;
         }
     </style>
-</head>
-</body>
-
-    <div class="bg-mesh"></div>
-
-    <header class="hero-header">
-        <div class="enrollment-container">
-            <div class="enrollment-card">
-                <span class="web-exclusive">The Queen's Tea • 2026</span>
-                <span class="save-tag">MATRÍCULA 62,5% OFF</span>
-                <div style="margin: 25px 0;">
-                    <span class="old-price">$80.000</span>
-                    <span class="new-price">$30.000</span>
-                </div>
-                <button onclick="scrollToCalculator()" class="btn-reserve-top">ELEGIR MI NIVEL</button>
-            </div>
-        </div>
-    </header>
-
-    <section class="levels-section">
-        <h2 style="text-align: center; margin-bottom: 5px; font-weight: 800;">Cursos y Niveles <span style="color: var(--accent);">Disponibles</span></h2>
-        <span class="click-hint" style="text-align: center; margin-bottom: 30px;">Hacé clic en tu nivel para ver info e inscribirte</span>
-        <div class="chart-grid">
-            <div class="bar-wrap" onclick="selectCourse('A1 - Básico', 23000, 'Jueves 17 a 18 hs', 'a1')"><div class="bar-body" style="height: 25%;"></div><div class="bar-tag">A1</div></div>
-            <div class="bar-wrap" onclick="selectCourse('A2 - Pre-Intermediate', 23000, 'Miércoles 19 a 20 hs', 'a2')"><div class="bar-body" style="height: 35%;"></div><div class="bar-tag">A2</div></div>
-            <div class="bar-wrap" onclick="selectCourse('B1 - Intermediate', 23200, 'Miércoles 20 a 21 hs', 'b1')"><div class="bar-body" style="height: 50%;"></div><div class="bar-tag">B1</div></div>
-            <div class="bar-wrap" onclick="selectCourse('B2 - First', 23400, 'Jueves 20 a 21 hs', 'b2')"><div class="bar-body" style="height: 70%;"></div><div class="bar-tag">B2</div></div>
-            <div class="bar-wrap" onclick="selectCourse('C1 - Advanced', 23600, 'Martes 20 a 21 hs', 'c1')"><div class="bar-body" style="height: 85%;"></div><div class="bar-tag">C1</div></div>
-            <div class="bar-wrap" onclick="selectCourse('C2 - Proficiency', 25000, 'Jueves 19 a 20 hs', 'c2')"><div class="bar-body" style="height: 100%;"></div><div class="bar-tag">C2</div></div>
-        </div>
-    </section>
-
-    <section class="specialized-section">
-        <div class="carousel-wrapper">
-            <div class="specs-container">
-                <div class="spec-item spec-legal" onclick="selectCourse('TOLES - Legal English', 28000, 'Jueves 18 a 19 hs', 'legal')"><h3>⚖️ Legal English</h3></div>
-                <div class="spec-item spec-exams" onclick="selectCourse('IELTS', 25000, 'Martes 19 a 20 hs', 'ielts')"><h3>🎓 Exámenes</h3></div>
-                <div class="spec-item spec-med" onclick="selectCourse('Medical English', 28000, 'Miércoles 17 a 18 hs', 'medical')"><h3>🩺 Inglés Médico</h3></div>
-                <div class="spec-item spec-tcp" onclick="selectCourse('Aviation English', 28000, 'Miércoles 18 a 19 hs', 'tcp')"><h3>✈️ TCP</h3></div>
-                <div class="spec-item spec-legal" onclick="selectCourse('TOLES - Legal English', 28000, 'Jueves 18 a 19 hs', 'legal')"><h3>⚖️ Legal English</h3></div>
-                <div class="spec-item spec-exams" onclick="selectCourse('IELTS', 25000, 'Martes 19 a 20 hs', 'ielts')"><h3>🎓 Exámenes</h3></div>
-            </div>
-        </div>
-    </section>
-
-    <div id="scroll-target">
-        <div id="panel-content"></div>
-    </div>
-
+</style>
     <script>
-        let course = { name: '', subLevel: '', price: 0, sched: '', code: '', classes: 4, payType: 'pack' };
+    // 1. OBJETO INICIAL ÚNICO
+    let course = { 
+        name: '', 
+        subLevel: '', 
+        price: 0, 
+        sched: '', 
+        code: '', 
+        classes: 4, 
+        payType: 'pack', 
+        currency: 'ars' 
+    };
 
-        function scrollToCalculator() {
-            document.querySelector('.levels-section').scrollIntoView({ behavior: 'smooth' });
-        }
+    // 2. SELECCIONAR CURSO
+    function selectCourse(name, price, sched, code) {
+        course = { name, subLevel: '', price, sched, code, classes: 4, payType: 'pack', currency: 'ars' };
+        if(['a2', 'b1', 'b2'].includes(code)) course.subLevel = code.toUpperCase();
 
-        function selectCourse(name, price, sched, code) {
-            // Reiniciar subnivel por defecto al cambiar de curso
-            course = { name, subLevel: '', price, sched, code, classes: 4, payType: 'pack' };
-            
-            // Si tiene subniveles, poner el primero por defecto
-            if(['a2', 'b1', 'b2'].includes(code)) {
-                course.subLevel = code.toUpperCase();
-            }
-
-            const target = document.getElementById('scroll-target');
-            
-            target.style.display = 'block';
-            setTimeout(() => {
-                target.classList.add('visible');
-            }, 10);
-
+        const target = document.getElementById('scroll-target');
+        target.style.display = 'block';
+        setTimeout(() => {
+            target.classList.add('visible');
             renderApp();
-            
-            window.scrollTo({
-                top: target.offsetTop - 50,
-                behavior: 'smooth'
-            });
+        }, 10);
 
-            document.querySelectorAll('.bar-wrap').forEach(b => {
-                b.classList.remove('active');
-                if(b.querySelector('.bar-tag').innerText.toLowerCase() === code.toLowerCase()) b.classList.add('active');
-            });
-        }
+        window.scrollTo({ top: target.offsetTop - 50, behavior: 'smooth' });
 
-        function updateClasses(n) {
-            course.classes = n;
-            renderApp();
-        }
+        document.querySelectorAll('.bar-wrap').forEach(b => {
+            b.classList.remove('active');
+            if(b.querySelector('.bar-tag').innerText.toLowerCase() === code.toLowerCase()) b.classList.add('active');
+        });
+    }
 
-        function updatePayType(type) {
-            course.payType = type;
-            renderApp();
-        }
+    // 3. ACTUALIZACIONES
+    function updatePayType(type) { course.payType = type; renderApp(); }
+    function updateClasses(num) { course.classes = num; renderApp(); }
+    function updateCurrency(curr) { course.currency = curr; renderApp(); }
+    function updateSubLevel(lvl) { course.subLevel = lvl; renderApp(); }
 
-        function updateSubLevel(sub) {
-            course.subLevel = sub;
-            renderApp();
-        }
-
+    // 4. RENDERIZADO ESTÉTICO
     function renderApp() {
-    const extraPercent = 0.15; // 15%
-    const extraPerSingle = course.price * extraPercent;
-    const priceSingle = course.price + extraPerSingle;
-    
-    const totalSingleMode = priceSingle * course.classes;
-    const totalPackMode = course.price * course.classes;
-    
-    const savingsAmount = totalSingleMode - totalPackMode;
-    const savingsPercent = Math.round((savingsAmount / totalSingleMode) * 100);
+        const extraPercent = 0.15;
+        const priceSingleARS = course.price + (course.price * extraPercent);
+        const totalSingleARS = priceSingleARS * course.classes;
+        const totalPackARS = course.price * course.classes;
+        const savingsARS = totalSingleARS - totalPackARS;
 
-    const isPack = course.payType === 'pack';
-    const finalDisplayPrice = isPack ? totalPackMode : totalSingleMode;
-    
+        const usdPricing = { 'a1': 35, 'a2': 35, 'b1': 35, 'b2': 40, 'c1': 40, 'c2': 45, 'medical': 50, 'tcp': 50, 'legal': 55, 'ielts': 40 };
+        const baseUSD = usdPricing[course.code] || 35;
+        const priceSingleUSD = baseUSD + 5;
+        const totalSingleUSD = priceSingleUSD * course.classes;
+        const totalPackUSD = baseUSD * course.classes;
+        const savingsUSD = totalSingleUSD - totalPackUSD;
 
-            // Lógica para mostrar selector de subniveles
-            const hasSublevels = ['a2', 'b1', 'b2'].includes(course.code);
-            const sublevelOptions = hasSublevels ? [course.code.toUpperCase(), course.code.toUpperCase() + '+'] : [];
+        const isPack = course.payType === 'pack';
+        const isUSD = course.currency === 'usd';
 
-            document.getElementById('panel-content').innerHTML = `
-                <div style="text-align: left; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 25px;">
-                    <span style="color: var(--accent); font-weight: 800; font-size: 0.7rem; text-transform: uppercase;">Inscripción THE QUEEN'S TEA 2026</span>
-                    <h2 class="selected-title" style="margin: 8px 0; font-size: 2.2rem;">${course.name} ${course.subLevel ? '(' + course.subLevel + ')' : ''}</h2>
-                    <div class="sched-badge">🗓️ ${course.sched}</div>
+        const finalDisplayPrice = isUSD ? (isPack ? totalPackUSD : totalSingleUSD) : (isPack ? totalPackARS : totalSingleARS);
+        const unitValue = isUSD ? (isPack ? baseUSD : priceSingleUSD) : (isPack ? course.price : priceSingleARS);
+        const savingsAmount = isUSD ? savingsUSD : savingsARS;
+        const currencySign = isUSD ? 'USD' : '$';
+
+        document.getElementById('panel-content').innerHTML = `
+            <div style="text-align: center; margin-bottom: 50px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 40px;">
+                <span style="color: var(--accent); font-weight: 800; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 4px; display: block; margin-bottom: 10px;">Formulario de Inscripción 2026</span>
+                <h2 style="margin: 0; font-size: 3.5rem; font-weight: 900; color: #ffffff; line-height: 1.1;">${course.name} ${course.subLevel ? '(' + course.subLevel + ')' : ''}</h2>
+                <div style="display: inline-block; background: var(--accent); color: #223e4b; padding: 12px 40px; border-radius: 50px; font-weight: 900; font-size: 1.5rem; margin-top: 20px; box-shadow: 0 10px 25px rgba(65, 193, 186, 0.4);">
+                    🗓️ ${course.sched}
                 </div>
+            </div>
 
-                <div class="calc-grid">
-                    <div class="form-container">
-                        <h4 style="margin-top: 0; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 25px; color: #fff;">1. Datos del Alumno</h4>
+            <div class="calc-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 40px; align-items: start;">
+                
+                <div style="background: rgba(255,255,255,0.02); padding: 35px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.05);">
+                    <h4 style="text-transform: uppercase; font-size: 0.9rem; color: var(--accent); margin-bottom: 30px; letter-spacing: 1px; border-left: 4px solid var(--accent); padding-left: 15px;">1. Datos Personales</h4>
+                    <div style="display: flex; flex-direction: column; gap: 18px;">
                         <div class="form-group"><label>Nombre Completo</label><input type="text" id="f_name" placeholder="Ej: Maria Perez"></div>
-                        <div class="form-group"><label>DNI / CUIL</label><input type="text" id="f_dni" placeholder="Sin puntos"></div>
-                        <div class="form-group"><label>WhatsApp</label><input type="tel" id="f_phone" placeholder="221 ..."></div>
-                        <div class="form-group"><label>Email</label><input type="email" id="f_email" placeholder="email@ejemplo.com"></div>
-
-                        <div class="terms-container">
-                            <div class="term-item"><input type="checkbox" id="term_var"><label for="term_var">Entiendo que la inversión mensual puede variar dependiendo de si el mes tiene 3, 4 o 5 clases.</label></div>
-                            <div class="term-item"><input type="checkbox" id="term_abs"><label for="term_abs">Confirmo que he entendido que las clases a las que me encuentre ausente con o sin aviso deben de ser abonadas de todas maneras y que siempre, sin importar el pago por clase o por pack, debo abonar con 24 hs de antelación.</label></div>
-                            <div class="term-item"><input type="checkbox" id="term_links"><label for="term_links">Comprendo que solo se proporcionará acceso a clases a quienes hayan cumplido con el pago anticipado. Una vez confirmado, recibiré los enlaces automáticamente.</label></div>
-                            <div class="term-item"><input type="checkbox" id="term_wait"><label for="term_wait">Acepto el plazo máximo de espera de 15 min; pasado este tiempo y sin alumnos presentes, la docente dará por terminada la clase.</label></div>
-                            <div class="term-item"><input type="checkbox" id="term_hw"><label for="term_hw">Me comprometo a entregar las tareas semanales antes de la fecha límite para reforzar mi aprendizaje.</label></div>
-                        </div>
+                        <div class="form-group"><label>DNI / Passport</label><input type="text" id="f_dni" placeholder="Identificación"></div>
+                        <div class="form-group"><label>Ciudad y País</label><input type="text" id="f_location" placeholder="¿De dónde sos?"></div>
+                        <div class="form-group"><label>WhatsApp</label><input type="tel" id="f_phone" placeholder="Cod. área + número"></div>
                     </div>
 
-                    <div class="price-card">
-                        <div class="savings-badge ${!isPack ? 'hidden' : ''}">🔥 ESTÁS AHORRANDO UN ${savingsPercent}% ($${savingsAmount.toLocaleString()})</div>
+                    <div style="margin-top: 40px; background: rgba(0,0,0,0.25); padding: 25px; border-radius: 20px;">
+                        <p style="font-size: 0.75rem; color: var(--accent); font-weight: 800; text-transform: uppercase; margin-bottom: 20px; text-align: center;">Términos de Compromiso</p>
+                        <div style="display: flex; flex-direction: column; gap: 15px; font-size: 0.85rem; color: #ccc;">
+                            <div style="display: flex; gap: 12px;"><input type="checkbox" id="term_var"><label for="term_var" style="cursor:pointer; line-height: 1.3;">Acepto que la inversión varía según las clases del mes.</label></div>
+                            <div style="display: flex; gap: 12px;"><input type="checkbox" id="term_abs"><label for="term_abs" style="cursor:pointer; line-height: 1.3;">Las ausencias se abonan. Pago 24hs previo a la clase.</label></div>
+                            <div style="display: flex; gap: 12px;"><input type="checkbox" id="term_links"><label for="term_links" style="cursor:pointer; line-height: 1.3;">Acceso a enlaces únicamente con pago confirmado.</label></div>
+                            <div style="display: flex; gap: 12px;"><input type="checkbox" id="term_wait"><label for="term_wait" style="cursor:pointer; line-height: 1.3;">Tolerancia máxima de espera: 15 minutos.</label></div>
+                            <div style="display: flex; gap: 12px;"><input type="checkbox" id="term_hw"><label for="term_hw" style="cursor:pointer; line-height: 1.3;">Me comprometo a entregar tareas semanales.</label></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: rgba(255,255,255,0.04); padding: 35px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 15px 35px rgba(0,0,0,0.4);">
+                    <h4 style="text-transform: uppercase; font-size: 0.9rem; color: var(--accent); margin-bottom: 30px; letter-spacing: 1px; border-left: 4px solid var(--accent); padding-left: 15px;">2. Plan de Pago</h4>
+
+                    <label class="selector-label">¿Dónde residís?</label>
+                    <div class="payment-selector" style="margin-bottom: 20px;">
+                        <button class="pay-btn ${course.currency === 'ars' ? 'active' : ''}" onclick="updateCurrency('ars')" style="flex:1">Argentina</button>
+                        <button class="pay-btn ${course.currency === 'usd' ? 'active' : ''}" onclick="updateCurrency('usd')" style="flex:1">Exterior</button>
+                    </div>
+
+                    <label class="selector-label">Modalidad elegida</label>
+                    <div class="payment-selector" style="margin-bottom: 20px;">
+                        <button class="pay-btn ${course.payType === 'week' ? 'active' : ''}" onclick="updatePayType('week')" style="flex:1">Por clase</button>
+                        <button class="pay-btn ${course.payType === 'pack' ? 'active' : ''}" onclick="updatePayType('pack')" style="flex:1">Pack Mensual</button>
+                    </div>
+
+                    <label class="selector-label">Cantidad de clases este mes</label>
+                    <div class="class-selector" style="margin-bottom: 30px;">
+                        <button class="class-btn ${course.classes === 3 ? 'active' : ''}" onclick="updateClasses(3)">3</button>
+                        <button class="class-btn ${course.classes === 4 ? 'active' : ''}" onclick="updateClasses(4)">4</button>
+                        <button class="class-btn ${course.classes === 5 ? 'active' : ''}" onclick="updateClasses(5)">5</button>
+                    </div>
+
+                    <div style="background: #16242c; padding: 25px; border-radius: 20px; border: 1px solid rgba(65, 193, 186, 0.2);">
+                        <div class="breakdown-item" style="color: #888; font-size: 0.85rem; margin-bottom: 12px;">
+                            <span>Subtotal mensual base</span>
+                            <span>${currencySign} ${(isUSD ? totalSingleUSD : totalSingleARS).toLocaleString()}</span>
+                        </div>
                         
-                        ${hasSublevels ? `
-                            <label class="selector-label">Nivel Específico</label>
-                            <div class="sublevel-selector">
-                                ${sublevelOptions.map(opt => `
-                                    <button class="sub-btn ${course.subLevel === opt ? 'active' : ''}" onclick="updateSubLevel('${opt}')">${opt}</button>
-                                `).join('')}
-                            </div>
+                        ${isPack ? `
+                        <div class="breakdown-item" style="color: #41c1ba; font-weight: 800; font-size: 0.85rem; background: rgba(65, 193, 186, 0.1); padding: 8px 12px; border-radius: 8px; margin-bottom: 20px;">
+                            <span>✨ Ahorro Pack Mensual</span>
+                            <span>- ${currencySign} ${savingsAmount.toLocaleString()}</span>
+                        </div>
                         ` : ''}
 
-                        <label class="selector-label">¿Cómo vas a abonar?</label>
-                        <div class="payment-selector">
-                            <button class="pay-btn ${course.payType === 'week' ? 'active' : ''}" onclick="updatePayType('week')">Por semana (Individual)</button>
-                            <button class="pay-btn ${course.payType === 'pack' ? 'active' : ''}" onclick="updatePayType('pack')">Pack Mensual (Ahorro)</button>
+                        <div style="text-align: center; margin-bottom: 15px; padding: 12px; border-radius: 12px; background: ${isPack ? 'rgba(65, 193, 186, 0.05)' : 'transparent'}; border: ${isPack ? '1px dashed var(--accent)' : 'none'};">
+                            <span style="font-size: 0.75rem; color: #bbb; display: block; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">Cada clase te queda a:</span>
+                            <span style="font-size: 1.6rem; font-weight: 900; color: #fff;">${currencySign} ${unitValue.toLocaleString()}</span>
                         </div>
 
-                        <label class="selector-label">Duración del mes (Calendario)</label>
-                        <div class="class-selector">
-                            <button class="class-btn ${course.classes === 3 ? 'active' : ''}" onclick="updateClasses(3)">3 Clases</button>
-                            <button class="class-btn ${course.classes === 4 ? 'active' : ''}" onclick="updateClasses(4)">4 Clases</button>
-                            <button class="class-btn ${course.classes === 5 ? 'active' : ''}" onclick="updateClasses(5)">5 Clases</button>
+                        <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-weight: 800; color: #fff; font-size: 0.95rem; letter-spacing: 0.5px;">TOTAL A INVERTIR</span>
+                            <span style="font-size: 1.9rem; font-weight: 900; color: var(--accent); letter-spacing: -0.5px;">${currencySign} ${finalDisplayPrice.toLocaleString()}</span>
                         </div>
+                    </div>
 
-                        <div class="breakdown-item"><span>Precio base por clase</span><span>$${priceSingle.toLocaleString()}</span></div>
-                        <div class="breakdown-item"><span>Subtotal ${course.classes} clases</span><span>$${totalSingleMode.toLocaleString()}</span></div>
-                        ${isPack ? `<div class="breakdown-item" style="color: #2dd4bf;"><span>Bonificación Pack Mensual</span><span>- $${savingsAmount.toLocaleString()}</span></div>` : ''}
-                        
-                        <div class="breakdown-item highlight"><span>TOTAL A INVERTIR</span><span>$${finalDisplayPrice.toLocaleString()}</span></div>
+                    <div style="margin-top: 20px;">
+                        ${isPack ? `
+                            <p style="font-size: 0.65rem; color: #41c1ba; line-height: 1.5; font-style: italic; background: rgba(65, 193, 186, 0.1); padding: 12px; border-radius: 10px;">
+                                * El beneficio de Pack se pierde si se abona el mismo día de la clase. Válido abonando el mes completo por anticipado.
+                            </p>
+                        ` : `
+                            <p style="font-size: 0.65rem; color: #fbbf24; line-height: 1.5; font-weight: 600; text-align: center;">
+                                💡 ¡Pasate a la modalidad de <strong>Pack Mensual</strong> para ahorrar dinero!
+                            </p>
+                        `}
+                    </div>
 
-                        <p style="font-size: 0.7rem; color: var(--text-dim); margin: 20px 0; line-height: 1.4;">
-                            ⚠️ El último paso y <strong>único que confirma tu lugar</strong> es el pago de la matrícula anual.
-                        </p>
+                    <p style="font-size: 0.6rem; color: var(--text-dim); text-align: center; margin-top: 15px; opacity: 0.8;">
+                        Medios de pago: <strong>${isUSD ? 'Western Union / Global66' : 'Transferencia Bancaria / Mercado Pago'}</strong>
+                    </p>
 
-                        <a href="https://thequeenstea.empretienda.com.ar/matricula-2026/matricula-2026" target="_blank" class="btn-matricula-cromo">
-                            ABONAR MATRÍCULA 2026
-                        </a>
-                        
-                        <button onclick="sendInscription()" class="btn-submit">Confirmar e Informar por WhatsApp</button>
+                    <div style="margin-top: 25px;">
+                        <a href="https://thequeenstea.empretienda.com.ar/matricula-2026/matricula-2026" target="_blank" class="btn-matricula-cromo" style="width:100%; display:block; margin-bottom:15px; text-align:center; padding: 18px;">ABONAR MATRÍCULA 2026</a>
+                        <button onclick="sendInscription()" class="btn-submit" style="width:100%; padding: 18px; font-weight: 800;">CONFIRMAR POR WHATSAPP</button>
                     </div>
                 </div>
-            `;
-        }
+            </div>
+        `;
+    }
 
-        function sendInscription() {
-            const name = document.getElementById('f_name').value;
-            const dni = document.getElementById('f_dni').value;
-            const phone = document.getElementById('f_phone').value;
-            const email = document.getElementById('f_email').value;
+    // 5. FUNCIÓN DE WHATSAPP
+    function sendInscription() {
+        const name = document.getElementById('f_name')?.value;
+        const dni = document.getElementById('f_dni')?.value;
+        const location = document.getElementById('f_location')?.value;
+        const phone = document.getElementById('f_phone')?.value;
+        const terms = [
+            document.getElementById('term_var')?.checked,
+            document.getElementById('term_abs')?.checked,
+            document.getElementById('term_links')?.checked,
+            document.getElementById('term_wait')?.checked,
+            document.getElementById('term_hw')?.checked
+        ];
 
-            const t1 = document.getElementById('term_var').checked;
-            const t2 = document.getElementById('term_abs').checked;
-            const t3 = document.getElementById('term_links').checked;
-            const t4 = document.getElementById('term_wait').checked;
-            const t5 = document.getElementById('term_hw').checked;
+        if(!name || !dni || !location || !phone) { alert("Completá todos tus datos personales."); return; }
+        if(terms.includes(false) || terms.includes(undefined)) { alert("Aceptá todas las cláusulas de compromiso."); return; }
 
-            if(!name || !dni || !phone || !email) {
-                alert("Por favor completa tus datos personales.");
-                return;
-            }
+        const isUSD = course.currency === 'usd';
+        const isPack = course.payType === 'pack';
+        const usdPricing = { 'a1': 35, 'a2': 35, 'b1': 35, 'b2': 40, 'c1': 40, 'c2': 45, 'medical': 50, 'tcp': 50, 'legal': 55, 'ielts': 40 };
+        const baseUSD = usdPricing[course.code] || 35;
+        const finalVal = isUSD ? (isPack ? baseUSD * course.classes : (baseUSD+5) * course.classes) : (isPack ? course.price * course.classes : (course.price * 1.15) * course.classes);
 
-            if(!t1 || !t2 || !t3 || !t4 || !t5) {
-                alert("Por favor acepta todas las cláusulas de compromiso para continuar.");
-                return;
-            }
+        const message = `¡Hola The Queen's Tea! 👋%0A%0AInscripción 2026:%0A%0A*DATOS*%0A*Nombre:* ${name}%0A*Ubicación:* ${location} (${isUSD ? 'Exterior' : 'Argentina'})%0A%0A*DETALLE*%0A*Curso:* ${course.name}%0A*Horario:* ${course.sched}%0A*Modalidad:* ${isPack ? 'PACK MENSUAL 👑' : 'POR CLASE SEMANAL'}%0A*Inversión:* ${isUSD ? 'USD' : '$'} ${finalVal.toLocaleString()}%0A%0AHe aceptado los términos y procedo a abonar la matrícula.`;
 
-            const extraPerSingle = 3500;
-            const isPack = course.payType === 'pack';
-            const finalPrice = isPack ? (course.price * course.classes) : ((course.price + extraPerSingle) * course.classes);
-            const modalStr = isPack ? "PACK MENSUAL (CON AHORRO)" : "POR CLASE SEMANAL (PRECIO REGULAR)";
-            const levelDisplay = course.subLevel ? `${course.name} (${course.subLevel})` : course.name;
-
-            const message = `¡Hola The Queen's Tea! 👋%0A%0AHe completado mi inscripción para el ciclo 2026:%0A%0A*DATOS DEL ALUMNO*%0A*Nombre:* ${name}%0A*DNI:* ${dni}%0A*Curso:* ${levelDisplay}%0A*Horario:* ${course.sched}%0A*Modalidad de Pago:* ${modalStr}%0A*Mes:* ${course.classes} clases%0A*Inversión:* $${finalPrice.toLocaleString()}%0A%0AHe leído y aceptado todas las cláusulas sobre pagos anticipados, asistencia, compromiso de tareas y tolerancia de espera. Procedo a realizar el pago de la matrícula para confirmar mi lugar. 👑`;
-
-            window.open(`https://wa.me/5492212229980?text=${message}`, '_blank');
-        }
-    </script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'accent-primary': '#3b82f6',
-                        'accent-gold': '#fbbf24',
-                        'accent-light': '#f0f9ff',
-                        'text-dark': '#0f172a',
-                        'original-blue': '#1e40af',
-                    },
-                    fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                        heading: ['Plus Jakarta Sans', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
+        window.open(`https://wa.me/5492212229980?text=${message}`, '_blank');
+    }
+</script>
 
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; margin: 0; }
