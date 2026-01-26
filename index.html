@@ -1064,183 +1064,237 @@ Me gustaría recibir el análisis y la información sobre el curso que me recomi
         .cat-btn { width: 100%; }
     }
 </style>
+<html lang="es">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Queen's Tea - Inglés online</title>
+    <title>The Queen's Tea - Inscripciones 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Montserrat:wght@800&display=swap');
-
+        /* PALETA DE COLORES SEGÚN IMAGEN */
         :root {
-            --bg: #010409;
-            --card-bg: rgba(13, 17, 23, 0.98);
-            --accent: #38bdf8;
-            --accent-glow: rgba(56, 189, 248, 0.4);
-            --price-new: #2dd4bf;
-            --text-main: #f0f6fc;
-            --text-dim: #8b949e;
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --chromatic-gradient: linear-gradient(90deg, #38bdf8, #a78bfa, #38bdf8, #2dd4bf, #38bdf8);
+            --bg-deep: #0B1622;      /* Azul Noche Profundo (Fondo total) */
+            --bg-petrol: #223E4B;    /* Azul Petróleo (Contenedores) */
+            --accent: #41C1BA;       /* Celeste Marca */
+            --electric: #2D7FF9;     /* Azul Eléctrico (Acción) */
+            --text-main: #FFFFFF;    /* Blanco */
+            --text-dim: #888888;     /* Gris Tenue */
         }
 
-        body {
-            background: var(--bg);
-            color: var(--text-main);
-            font-family: 'Plus Jakarta Sans', sans-serif;
+        /* FONDO TOTAL DE LA WEB */
+        html, body {
+            background-color: var(--bg-deep) !important;
             margin: 0;
-            padding-bottom: 100px;
-            overflow-x: hidden;
-            line-height: 1.6;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text-main);
+            min-height: 100vh;
         }
 
-        .bg-mesh {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: 
-                radial-gradient(circle at 10% 10%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 90% 90%, rgba(139, 92, 246, 0.08) 0%, transparent 40%);
-            pointer-events: none; z-index: -1;
+        /* --- HERO: MATRÍCULA --- */
+        header { padding: 60px 20px; text-align: center; }
+        .enrollment-card {
+            background: var(--bg-petrol);
+            border: 1px solid rgba(65, 193, 186, 0.3);
+            padding: 40px;
+            border-radius: 40px;
+            max-width: 480px;
+            margin: 0 auto;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
+
+        .save-tag { background: #fbbf24; color: #000; display: inline-block; padding: 5px 15px; border-radius: 8px; font-weight: 900; font-size: 0.8rem; margin-bottom: 20px; }
+        .price-big { font-size: 4.5rem; font-weight: 900; line-height: 1; margin: 10px 0; letter-spacing: -2px; }
+
+        /* --- BURBUJA DE NIVELES --- */
+        .selection-bubble {
+            background: var(--bg-petrol);
+            border-radius: 50px;
+            padding: 50px 20px;
+            margin: 20px auto;
+            max-width: 1000px;
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
         }
 
-        /* --- HERO & MATRÍCULA --- */
-        .hero-header { padding: 40px 20px; display: flex; flex-direction: column; align-items: center; text-align: center; }
-        .enrollment-container { max-width: 400px; width: 100%; border-radius: 28px; position: relative; background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(167, 139, 250, 0.1)); padding: 2px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7); }
-        .enrollment-card { background: #0d1117; border-radius: 26px; padding: 30px; backdrop-filter: blur(20px); position: relative; overflow: hidden; }
-        .web-exclusive { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent); display: block; margin-bottom: 10px; }
-        .save-tag { background: #2dd4bf; color: #00332e; padding: 2px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 900; }
-        .old-price { font-size: 1.3rem; color: var(--text-dim); text-decoration: line-through; font-weight: 500; }
-        .new-price { font-size: 3.5rem; font-weight: 800; color: var(--price-new); line-height: 1; margin: 10px 0; display: block; text-shadow: 0 0 30px rgba(45, 212, 191, 0.4); }
-        
-        .btn-reserve-top { display: block; border:none; width: 100%; cursor: pointer; background: var(--chromatic-gradient); background-size: 200% auto; color: #000; padding: 18px; border-radius: 16px; font-weight: 800; text-decoration: none; animation: shift-cromo 4s linear infinite; }
-        @keyframes shift-cromo { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-
-        /* --- CAROUSEL MOVIMIENTO --- */
-        .specialized-section { width: 100%; margin: 60px 0; overflow: hidden; position: relative; }
-        .carousel-wrapper { display: flex; width: 100%; mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent); }
-        .specs-container { 
-            display: flex; gap: 20px; animation: scroll-x 30s linear infinite; width: max-content; padding: 20px 0;
-        }
-        @keyframes scroll-x { 
-            0% { transform: translateX(0); } 
-            100% { transform: translateX(calc(-240px * 4)); } 
+        .chart-grid {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 15px;
+            height: 220px;
+            margin-bottom: 60px;
         }
 
-        .spec-item { 
-            flex: 0 0 220px; padding: 35px 15px; border-radius: 24px; cursor: pointer; transition: 0.3s; border: 1px solid var(--glass-border); text-align: center;
+        .bar-wrap { flex: 1; max-width: 80px; cursor: pointer; text-align: center; }
+        .bar-body { 
+            background: var(--accent); 
+            border-radius: 12px 12px 4px 4px; 
+            opacity: 0.6; 
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
         }
-        .spec-item:hover { transform: translateY(-5px); border-color: var(--accent); }
-        .spec-item h3 { margin: 0; font-size: 0.9rem; font-weight: 800; color: #fff; }
-        .spec-legal { background: linear-gradient(145deg, #1e1b4b, #312e81); }
-        .spec-exams { background: linear-gradient(145deg, #0f172a, #1e293b); }
-        .spec-med { background: linear-gradient(145deg, #134e4a, #0f766e); }
-        .spec-tcp { background: linear-gradient(145deg, #1e3a8a, #1d4ed8); }
-
-        /* --- NIVELES --- */
-        .levels-section { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
-        .chart-grid { display: flex; align-items: flex-end; justify-content: space-between; height: 160px; gap: 10px; padding: 25px; background: rgba(255,255,255,0.02); border-radius: 28px; border: 1px solid var(--glass-border); }
-        .bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; cursor: pointer; height: 100%; justify-content: flex-end; }
-        .bar-body { width: 100%; background: var(--accent); border-radius: 8px; transition: 0.4s; opacity: 0.15; }
-        
-        .bar-wrap:nth-child(1) .bar-body { background: #6594a9; }
-        .bar-wrap:nth-child(2) .bar-body { background: #8582d4; }
-        .bar-wrap:nth-child(3) .bar-body { background: #634ea3; }
-        .bar-wrap:nth-child(4) .bar-body { background: #4153a5; }
-        .bar-wrap:nth-child(5) .bar-body { background: #312fa0; }
-        .bar-wrap:nth-child(6) .bar-body { background: #141e74; }
-
-        .bar-wrap.active .bar-body { 
+        .bar-wrap:hover .bar-body, .bar-wrap.active .bar-body { 
             opacity: 1; 
-            box-shadow: 0 0 25px currentColor;
-            filter: brightness(1.2);
+            background: var(--electric); 
+            transform: translateY(-10px);
+            box-shadow: 0 0 25px var(--electric);
         }
-        .bar-tag { margin-top: 12px; font-weight: 800; color: var(--text-dim); font-size: 0.7rem; transition: 0.3s; }
-        .bar-wrap.active .bar-tag { color: #fff; }
 
-        /* --- PANEL DE CÁLCULO --- */
-        #scroll-target {
-            max-width: 1000px; margin: 40px auto; background: var(--card-bg); 
-            border: 1px solid var(--glass-border); border-radius: 32px; padding: 40px; 
-            box-shadow: 0 30px 100px rgba(0,0,0,0.7); backdrop-filter: blur(20px);
-            display: none;
-            opacity: 0; transform: translateY(20px); transition: 0.5s ease;
-        }
-        #scroll-target.visible { display: block; opacity: 1; transform: translateY(0); }
-
-        .calc-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; margin-top: 30px; }
-        @media (max-width: 850px) { .calc-grid { grid-template-columns: 1fr; } }
-
-        /* FORM STYLES */
-        .form-container { background: rgba(255,255,255,0.02); border-radius: 24px; padding: 25px; border: 1px solid var(--glass-border); }
-        .form-group { margin-bottom: 18px; text-align: left; }
-        .form-group label { display: block; font-size: 0.7rem; font-weight: 800; color: var(--text-dim); margin-bottom: 8px; text-transform: uppercase; }
-        .form-group input { 
-            width: 100%; padding: 14px; background: rgba(0,0,0,0.4); border: 1px solid var(--glass-border); 
-            border-radius: 14px; color: #fff; font-family: inherit; font-size: 0.95rem; box-sizing: border-box;
-        }
-        .terms-container { margin-top: 25px; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 16px; font-size: 0.75rem; color: var(--text-dim); }
-        .term-item { display: flex; gap: 10px; margin-bottom: 14px; align-items: flex-start; line-height: 1.4; }
-        .term-item input { margin-top: 3px; cursor: pointer; }
-        .term-item label { cursor: pointer; transition: 0.3s; }
-        .term-item label:hover { color: #fff; }
-
-        /* PRICE CARD */
-        .price-card { background: rgba(56, 189, 248, 0.03); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 28px; padding: 35px; }
-        .savings-badge { background: #2dd4bf; color: #00332e; font-size: 0.65rem; font-weight: 900; padding: 6px 14px; border-radius: 100px; display: inline-block; margin-bottom: 15px; transition: 0.3s; }
-        .savings-badge.hidden { display: none; }
+        /* --- CARRUSEL INFINITO --- */
+        .marquee-wrapper { width: 100%; overflow: hidden; white-space: nowrap; margin-top: 40px; padding: 10px 0; }
+        .marquee-content { display: inline-block; animation: marquee 30s linear infinite; }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         
-        .selector-label { font-size: 0.65rem; font-weight: 800; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; }
-        .class-selector, .payment-selector, .sublevel-selector { display: flex; gap: 8px; background: rgba(0,0,0,0.3); padding: 6px; border-radius: 16px; margin: 10px 0 20px 0; }
-        .class-btn, .pay-btn, .sub-btn { flex: 1; padding: 12px 8px; border: none; background: transparent; color: var(--text-dim); font-weight: 800; border-radius: 12px; cursor: pointer; transition: 0.3s; font-size: 0.7rem; line-height: 1.2;}
-        .class-btn.active, .pay-btn.active, .sub-btn.active { background: #fff; color: #000; box-shadow: 0 4px 12px rgba(255,255,255,0.1); }
+        .spec-item {
+            display: inline-block;
+            background: var(--bg-deep); /* Color oscuro para resaltar */
+            border: 1px solid rgba(65, 193, 186, 0.2);
+            padding: 20px 45px;
+            margin-right: 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: 0.3s;
+            color: #fff;
+        }
+        .spec-item:hover { background: var(--accent); color: var(--bg-deep); border-color: #fff; transform: scale(1.05); }
 
-        .breakdown-item { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 8px; color: var(--text-dim); }
-        .breakdown-item.highlight { color: #fff; font-weight: 800; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 12px; margin-top: 12px; font-size: 1.1rem; }
+        /* --- PANEL DE INSCRIPCIÓN --- */
+        #scroll-target {
+            display: none;
+            max-width: 1100px;
+            margin: 50px auto;
+            background: var(--bg-petrol);
+            padding: 40px;
+            border-radius: 40px;
+            border: 1px solid rgba(65, 193, 186, 0.3);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+            animation: slideUp 0.6s ease;
+        }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+
+        .form-group label { display: block; margin-bottom: 8px; font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; font-weight: 800; letter-spacing: 1px; }
+        .form-group input { 
+            width: 100%; background: var(--bg-deep); border: 1px solid rgba(255,255,255,0.1); 
+            padding: 14px; border-radius: 12px; color: #fff; margin-bottom: 15px; box-sizing: border-box; font-family: inherit;
+        }
+
+        .pay-btn, .class-btn { 
+            background: var(--bg-deep); border: 1px solid rgba(255,255,255,0.1); 
+            color: #fff; padding: 14px; border-radius: 12px; cursor: pointer; flex: 1; font-weight: 800; transition: 0.3s;
+        }
+        .pay-btn.active, .class-btn.active { background: var(--accent); color: var(--bg-deep); border-color: #fff; }
 
         .btn-submit {
-            width: 100%; background: #25d366; color: #fff; border: none; padding: 22px; border-radius: 18px;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 800; font-size: 0.9rem; cursor: pointer; transition: 0.4s; margin-top: 15px;
-            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2); text-transform: uppercase; letter-spacing: 0.5px;
+            width: 100%; padding: 22px; border-radius: 18px; background: #25D366; 
+            color: #fff; border: none; font-weight: 800; font-size: 1rem; cursor: pointer; margin-top: 25px;
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2); transition: 0.3s;
         }
-        .btn-submit:hover { transform: translateY(-2px); filter: brightness(1.1); box-shadow: 0 15px 30px rgba(37, 211, 102, 0.3); }
-
-        .btn-matricula-cromo {
-            display: flex; width: 100%; box-sizing: border-box; background: var(--chromatic-gradient); background-size: 200% auto; color: #000; border: none; padding: 20px; border-radius: 18px;
-            font-weight: 800; text-decoration: none; align-items: center; justify-content: center; margin-top: 15px; animation: shift-cromo 3s linear infinite;
-        }
-
-        .sched-badge {
-            display: inline-block;
-            background: rgba(56, 189, 248, 0.15);
-            color: var(--accent);
-            padding: 4px 12px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin-top: 8px;
-            border: 1px solid rgba(56, 189, 248, 0.3);
-        }
-
-        .selected-title {
-            color: #fff;
-            background: linear-gradient(to right, #fff, #38bdf8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 900;
-        }
-
-        .click-hint {
-            display: block;
-            font-size: 0.75rem;
-            color: var(--text-dim);
-            margin-top: 10px;
-            font-weight: 500;
-            letter-spacing: 1px;
-            opacity: 0.8;
-        }
+        .btn-submit:hover { transform: translateY(-3px); filter: brightness(1.1); }
+        
+        .breakdown-box { background: #16242c; padding: 30px; border-radius: 25px; border: 1px solid rgba(65, 193, 186, 0.2); position: relative; overflow: hidden; }
+        .breakdown-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
     </style>
-<style>
-    <script>
+</head>
+<body style="background-color: #0B1622; margin: 0; color: #FFFFFF; font-family: 'Plus Jakarta Sans', sans-serif;">
+    <div class="bg-mesh"></div>
+
+    <header class="hero-header" style="padding: 60px 20px; text-align: center;">
+        <div class="enrollment-container" style="max-width: 480px; margin: 0 auto;">
+            <div class="enrollment-card" style="background: #223E4B; border: 1px solid rgba(65, 193, 186, 0.4); padding: 45px 30px; border-radius: 40px; box-shadow: 0 40px 100px rgba(0,0,0,0.6); position: relative; overflow: hidden; animation: float 6s ease-in-out infinite;">
+                <span class="web-exclusive" style="color: #41C1BA; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; font-size: 0.75rem; display: block; margin-bottom: 15px;">The Queen's Tea • 2026</span>
+                <div class="save-tag" style="background: #fbbf24; color: #000; display: inline-block; padding: 6px 18px; border-radius: 8px; font-weight: 900; font-size: 0.8rem; margin-bottom: 25px;">MATRÍCULA 62,5% OFF</div>
+                
+                <div style="margin-bottom: 30px;">
+                    <span class="old-price" style="text-decoration: line-through; color: #888888; font-size: 1.4rem; display: block; opacity: 0.6;">$80.000</span>
+                    <span class="price-big" style="color: #FFFFFF; font-size: 5rem; font-weight: 900; line-height: 0.9; letter-spacing: -3px;">$30.000</span>
+                </div>
+                
+                <button onclick="document.getElementById('levels-anchor').scrollIntoView({behavior: 'smooth'})" style="width: 100%; padding: 20px; border-radius: 15px; background: #2D7FF9; color: #FFFFFF; border: none; font-weight: 800; font-size: 1.1rem; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 10px 25px rgba(45, 127, 249, 0.4);">
+                    ELEGIR MI NIVEL
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section id="levels-anchor" class="selection-bubble" style="background: #223E4B; border-radius: 50px; padding: 60px 25px; margin: 20px auto; max-width: 1000px; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 30px 60px rgba(0,0,0,0.4);">
+        <div style="text-align: center; margin-bottom: 60px;">
+            <h2 style="font-size: 2.8rem; font-weight: 800; margin: 0; color: #fff;">Cursos y <span style="color: #41C1BA;">Niveles</span></h2>
+            <p style="color: #888888; margin-top: 15px; font-size: 1.1rem;">Seleccioná tu nivel para ver horarios e inscribirte</p>
+        </div>
+
+        <div class="chart-grid" style="display: flex; align-items: flex-end; justify-content: center; gap: 15px; height: 250px; margin-bottom: 60px; padding: 0 10px;">
+            <div class="bar-wrap" data-code="a1" onclick="selectCourse('A1 - Básico', 23000, 'Jueves 17 a 18 hs', 'a1')">
+                <div class="bar-body" style="height: 25%; background: linear-gradient(to top, #2D7FF9, #41C1BA); border-radius: 10px 10px 4px 4px; box-shadow: 0 0 15px rgba(65, 193, 186, 0.3); opacity: 0.8;"></div>
+                <span class="bar-tag">A1</span>
+            </div>
+            <div class="bar-wrap" data-code="a2" onclick="selectCourse('A2 - Pre-Int', 23000, 'Miércoles 19 a 20 hs', 'a2')">
+                <div class="bar-body" style="height: 38%; background: linear-gradient(to top, #2D7FF9, #41C1BA); border-radius: 10px 10px 4px 4px; box-shadow: 0 0 15px rgba(65, 193, 186, 0.3); opacity: 0.8;"></div>
+                <span class="bar-tag">A2</span>
+            </div>
+            <div class="bar-wrap" data-code="b1" onclick="selectCourse('B1 - Intermedio', 23200, 'Miércoles 20 a 21 hs', 'b1')">
+                <div class="bar-body" style="height: 55%; background: linear-gradient(to top, #2D7FF9, #41C1BA); border-radius: 10px 10px 4px 4px; box-shadow: 0 0 15px rgba(65, 193, 186, 0.3); opacity: 0.8;"></div>
+                <span class="bar-tag">B1</span>
+            </div>
+            <div class="bar-wrap" data-code="b2" onclick="selectCourse('B2 - First', 23400, 'Jueves 20 a 21 hs', 'b2')">
+                <div class="bar-body" style="height: 72%; background: linear-gradient(to top, #2D7FF9, #41C1BA); border-radius: 10px 10px 4px 4px; box-shadow: 0 0 15px rgba(65, 193, 186, 0.3); opacity: 0.8;"></div>
+                <span class="bar-tag">B2</span>
+            </div>
+            <div class="bar-wrap" data-code="c1" onclick="selectCourse('C1 - Advanced', 23600, 'Martes 20 a 21 hs', 'c1')">
+                <div class="bar-body" style="height: 88%; background: linear-gradient(to top, #2D7FF9, #41C1BA); border-radius: 10px 10px 4px 4px; box-shadow: 0 0 15px rgba(65, 193, 186, 0.3); opacity: 0.8;"></div>
+                <span class="bar-tag">C1</span>
+            </div>
+            <div class="bar-wrap" data-code="c2" onclick="selectCourse('C2 - Profic.', 25000, 'Jueves 19 a 20 hs', 'c2')">
+                <div class="bar-body" style="height: 100%; background: linear-gradient(to top, #2D7FF9, #41C1BA); border-radius: 10px 10px 4px 4px; box-shadow: 0 0 15px rgba(65, 193, 186, 0.3); opacity: 0.8;"></div>
+                <span class="bar-tag">C2</span>
+            </div>
+        </div>
+
+        <div class="marquee-wrapper" style="overflow: hidden; white-space: nowrap; margin-top: 50px;">
+            <div class="marquee-content" style="display: inline-block; animation: marquee 25s linear infinite;">
+                <div class="spec-item" onclick="selectCourse('Legal English', 28000, 'Jueves 18 a 19 hs', 'legal')">⚖️ Legal English</div>
+                <div class="spec-item" onclick="selectCourse('IELTS Prep', 25000, 'Martes 19 a 20 hs', 'ielts')">🎓 Exámenes</div>
+                <div class="spec-item" onclick="selectCourse('Medical English', 28000, 'Miércoles 17 a 18 hs', 'medical')">🩺 Médico</div>
+                <div class="spec-item" onclick="selectCourse('Aviation English', 28000, 'Miércoles 18 a 19 hs', 'tcp')">✈️ TCP</div>
+                <div class="spec-item" onclick="selectCourse('Legal English', 28000, 'Jueves 18 a 19 hs', 'legal')">⚖️ Legal English</div>
+                <div class="spec-item" onclick="selectCourse('IELTS Prep', 25000, 'Martes 19 a 20 hs', 'ielts')">🎓 Exámenes</div>
+            </div>
+        </div>
+    </section>
+
+    <div id="scroll-target" style="display: none;">
+        <div id="panel-content"></div>
+    </div>
+
+    <style>
+        .bar-wrap { flex: 1; max-width: 90px; cursor: pointer; text-align: center; transition: 0.3s; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; }
+        .bar-body { width: 100%; transition: all 0.4s ease; }
+        .bar-tag { display: block; margin-top: 15px; font-weight: 800; font-size: 1rem; color: #888; transition: 0.3s; }
+        
+        /* Interacción */
+        .bar-wrap:hover .bar-body, .bar-wrap.active .bar-body { 
+            opacity: 1 !important; 
+            transform: scaleX(1.1) translateY(-10px); 
+            filter: brightness(1.2);
+            box-shadow: 0 0 30px #41C1BA;
+        }
+        .bar-wrap:hover .bar-tag, .bar-wrap.active .bar-tag { color: #FFFFFF; transform: translateY(-5px); }
+
+        .spec-item {
+            display: inline-block; padding: 20px 45px; background: #0B1622; margin-right: 20px;
+            border-radius: 50px; color: #fff; font-weight: 700; border: 1px solid rgba(65, 193, 186, 0.3);
+            cursor: pointer; transition: 0.3s;
+        }
+        .spec-item:hover { background: #2D7FF9; border-color: #fff; transform: translateY(-5px); }
+
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
+    </style>
+</body>
+<script>
     // 1. OBJETO INICIAL ÚNICO
     let course = { 
         name: '', 
@@ -1402,6 +1456,8 @@ Me gustaría recibir el análisis y la información sobre el curso que me recomi
                     </div>
                 </div>
             </div>
+        `;
+    }
 
     // 5. FUNCIÓN DE WHATSAPP
     function sendInscription() {
@@ -1431,7 +1487,6 @@ Me gustaría recibir el análisis y la información sobre el curso que me recomi
         window.open(`https://wa.me/5492212229980?text=${message}`, '_blank');
     }
 </script>
-
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; margin: 0; }
 
