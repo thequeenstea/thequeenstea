@@ -1203,14 +1203,14 @@ Me gustaría recibir el análisis y la información sobre el curso que me recomi
     <div class="bg-mesh"></div>
 
     <header class="hero-header" style="padding: 60px 20px; text-align: center;">
-        <div class="enrollment-container" style="max-width: 480px; margin: 0 auto;">
-            <div class="enrollment-card" style="background: #223E4B; border: 1px solid rgba(65, 193, 186, 0.4); padding: 45px 30px; border-radius: 40px; box-shadow: 0 40px 100px rgba(0,0,0,0.6); position: relative; overflow: hidden; animation: float 6s ease-in-out infinite;">
+        <div class="enrollment-container" style="max-width: 480px; width: 100%; margin: 0 auto;">
+            <div class="enrollment-card" style="background: #223E4B; border: 1px solid rgba(65, 193, 186, 0.4); padding: 45px 20px; border-radius: 40px; box-shadow: 0 40px 100px rgba(0,0,0,0.6); position: relative; overflow: hidden; animation: float 6s ease-in-out infinite;">
                 <span class="web-exclusive" style="color: #41C1BA; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; font-size: 0.75rem; display: block; margin-bottom: 15px;">The Queen's Tea • 2026</span>
                 <div class="save-tag" style="background: #fbbf24; color: #000; display: inline-block; padding: 6px 18px; border-radius: 8px; font-weight: 900; font-size: 0.8rem; margin-bottom: 25px;">MATRÍCULA 62,5% OFF</div>
                 
                 <div style="margin-bottom: 30px;">
                     <span class="old-price" style="text-decoration: line-through; color: #888888; font-size: 1.4rem; display: block; opacity: 0.6;">$80.000</span>
-                    <span class="price-big" style="color: #FFFFFF; font-size: 5rem; font-weight: 900; line-height: 0.9; letter-spacing: -3px;">$30.000</span>
+                    <span class="price-big" style="color: #FFFFFF; font-weight: 900; line-height: 0.9; letter-spacing: -3px;">$30.000</span>
                 </div>
                 
                 <button onclick="document.getElementById('levels-anchor').scrollIntoView({behavior: 'smooth'})" style="width: 100%; padding: 20px; border-radius: 15px; background: #2D7FF9; color: #FFFFFF; border: none; font-weight: 800; font-size: 1.1rem; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 10px 25px rgba(45, 127, 249, 0.4);">
@@ -1220,13 +1220,13 @@ Me gustaría recibir el análisis y la información sobre el curso que me recomi
         </div>
     </header>
 
-    <section id="levels-anchor" class="selection-bubble" style="background: #223E4B; border-radius: 50px; padding: 60px 25px; margin: 20px auto; max-width: 1000px; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 30px 60px rgba(0,0,0,0.4);">
+    <section id="levels-anchor" class="selection-bubble" style="background: #223E4B; border-radius: 50px; padding: 60px 15px; margin: 20px auto; max-width: 1000px; width: 90%; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 30px 60px rgba(0,0,0,0.4);">
         <div style="text-align: center; margin-bottom: 60px;">
-            <h2 style="font-size: 2.8rem; font-weight: 800; margin: 0; color: #fff;">Cursos y <span style="color: #41C1BA;">Niveles</span></h2>
+            <h2 class="section-main-title" style="font-weight: 800; margin: 0; color: #fff;">Cursos y <span style="color: #41C1BA;">Niveles</span></h2>
             <p style="color: #888888; margin-top: 15px; font-size: 1.1rem;">Seleccioná tu nivel para ver horarios e inscribirte</p>
         </div>
 
-        <div class="chart-grid" style="display: flex; align-items: flex-end; justify-content: center; gap: 15px; height: 250px; margin-bottom: 60px; padding: 0 10px;">
+        <div class="chart-grid" style="display: flex; align-items: flex-end; justify-content: center; gap: 8px; height: 250px; margin-bottom: 60px; padding: 0 5px;">
             <div class="bar-wrap" data-code="a1" onclick="selectCourse('A1 - Básico', 23000, 'Jueves 17 a 18 hs', 'a1')">
                 <div class="bar-body" style="height: 25%; background: linear-gradient(to top, #2D7FF9, #41C1BA); border-radius: 10px 10px 4px 4px; box-shadow: 0 0 15px rgba(65, 193, 186, 0.3); opacity: 0.8;"></div>
                 <span class="bar-tag">A1</span>
@@ -1264,6 +1264,47 @@ Me gustaría recibir el análisis y la información sobre el curso que me recomi
             </div>
         </div>
     </section>
+
+    <div id="scroll-target" style="display: none; padding: 0 15px;">
+        <div id="panel-content"></div>
+    </div>
+
+    <style>
+        .price-big { font-size: 5rem; }
+        .section-main-title { font-size: 2.8rem; }
+        .bar-wrap { flex: 1; max-width: 90px; cursor: pointer; text-align: center; transition: 0.3s; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; }
+        .bar-body { width: 100%; transition: all 0.4s ease; }
+        .bar-tag { display: block; margin-top: 15px; font-weight: 800; font-size: 0.9rem; color: #888; transition: 0.3s; }
+        
+        .bar-wrap:hover .bar-body, .bar-wrap.active .bar-body { 
+            opacity: 1 !important; 
+            transform: scaleX(1.1) translateY(-10px); 
+            filter: brightness(1.2);
+            box-shadow: 0 0 30px #41C1BA;
+        }
+        .bar-wrap:hover .bar-tag, .bar-wrap.active .bar-tag { color: #FFFFFF; transform: translateY(-5px); }
+
+        .spec-item {
+            display: inline-block; padding: 15px 30px; background: #0B1622; margin-right: 15px;
+            border-radius: 50px; color: #fff; font-weight: 700; border: 1px solid rgba(65, 193, 186, 0.3);
+            cursor: pointer; transition: 0.3s; font-size: 0.9rem;
+        }
+        .spec-item:hover { background: #2D7FF9; border-color: #fff; transform: translateY(-5px); }
+
+        /* --- AJUSTES PARA CELULARES --- */
+        @media (max-width: 600px) {
+            .price-big { font-size: 3.5rem !important; }
+            .section-main-title { font-size: 1.8rem !important; }
+            .bar-tag { font-size: 0.7rem !important; }
+            .registration-grid { display: block !important; } /* Para que el formulario no se rompa */
+            .input-grid { grid-template-columns: 1fr !important; }
+            .dual-buttons { flex-direction: column; gap: 10px; }
+            .selection-bubble { border-radius: 30px !important; }
+        }
+
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
+    </style>
 
     <div id="scroll-target" style="display: none;">
         <div id="panel-content"></div>
