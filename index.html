@@ -1227,27 +1227,27 @@ Me gustaría recibir el análisis y la información sobre el curso que me recomi
         </div>
 
         <div class="chart-grid" style="display: flex; align-items: flex-end; justify-content: center; gap: 15px; height: 250px; margin-bottom: 60px; padding: 0 10px;">
-            <div class="bar-wrap" data-code="a1" onclick="selectCourse('A1 - Inicial', 23500, 'Jueves 17 a 18 hs', 'a1')">
+            <div class="bar-wrap" data-code="b1" onclick="selectCourse('B1 Intermediate', 23500, 'Miércoles 20 a 21 hs', 'b1')">
                 <div class="bar-body" style="height: 25%; background: linear-gradient(to top, #2D7FF9, #41C1BA); border-radius: 10px 10px 4px 4px; box-shadow: 0 0 15px rgba(65, 193, 186, 0.3); opacity: 0.8;"></div>
-                <span class="bar-tag">A1</span>
-            </div>
-            <div class="bar-wrap" data-code="a2" onclick="selectCourse('A2 - Pre-Intermediate', 23500, 'Miércoles 19 a 20 hs', 'a2')">
-                <div class="bar-body" style="height: 38%; background: linear-gradient(to top, #2D7FF9, #41C1BA); border-radius: 10px 10px 4px 4px; box-shadow: 0 0 15px rgba(65, 193, 186, 0.3); opacity: 0.8;"></div>
-                <span class="bar-tag">A2</span>
-            </div>
-            <div class="bar-wrap" data-code="b1" onclick="selectCourse('B1 - Intermediate', 23500, 'Miércoles 20 a 21 hs', 'b1')">
-                <div class="bar-body" style="height: 55%; background: linear-gradient(to top, #2D7FF9, #41C1BA); border-radius: 10px 10px 4px 4px; box-shadow: 0 0 15px rgba(65, 193, 186, 0.3); opacity: 0.8;"></div>
                 <span class="bar-tag">B1</span>
             </div>
-            <div class="bar-wrap" data-code="b2" onclick="selectCourse('B2 - First', 24000, 'Jueves 20 a 21 hs', 'b2')">
-                <div class="bar-body" style="height: 72%; background: linear-gradient(to top, #2D7FF9, #41C1BA); border-radius: 10px 10px 4px 4px; box-shadow: 0 0 15px rgba(65, 193, 186, 0.3); opacity: 0.8;"></div>
-                <span class="bar-tag">B2</span>
+<div class="bar-wrap" data-code="b2-first" onclick="selectCourse('B2 First', 24000, 'Jueves 20 a 21 hs o martes 19 a 20 hs (Ready for First)', 'B2')">
+    <div class="bar-body" style="height: 38%; background: linear-gradient(to top, #2D7FF9, #41C1BA); border-radius: 10px 10px 4px 4px; opacity: 0.8;"></div>
+    <span class="bar-tag">B2</span>
             </div>
-            <div class="bar-wrap" data-code="c1" onclick="selectCourse('C1 - Advanced', 24500, 'Martes 20 a 21 hs', 'c1')">
-                <div class="bar-body" style="height: 88%; background: linear-gradient(to top, #2D7FF9, #41C1BA); border-radius: 10px 10px 4px 4px; box-shadow: 0 0 15px rgba(65, 193, 186, 0.3); opacity: 0.8;"></div>
+            <div class="bar-wrap" data-code="b1" onclick="selectCourse('B2+', 24000, 'Miércoles 18 a 19 hs', 'b2+')">
+                <div class="bar-body" style="height: 55%; background: linear-gradient(to top, #2D7FF9, #41C1BA); border-radius: 10px 10px 4px 4px; box-shadow: 0 0 15px rgba(65, 193, 186, 0.3); opacity: 0.8;"></div>
+                <span class="bar-tag">B2+</span>
+            </div>
+            <div class="bar-wrap" data-code="c1" onclick="selectCourse('C1 Advanced', 24500, 'Martes 20 a 21 hs', 'c1')">
+                <div class="bar-body" style="height: 72%; background: linear-gradient(to top, #2D7FF9, #41C1BA); border-radius: 10px 10px 4px 4px; box-shadow: 0 0 15px rgba(65, 193, 186, 0.3); opacity: 0.8;"></div>
                 <span class="bar-tag">C1</span>
             </div>
-            <div class="bar-wrap" data-code="c2" onclick="selectCourse('C2 - Proficiency', 26000, 'Jueves 19 a 20 hs', 'c2')">
+            <div class="bar-wrap" data-code="c1" onclick="selectCourse('C1 to C2', 24500, 'Miércoles 19 a 20 hs', 'c1 to c2')">
+                <div class="bar-body" style="height: 88%; background: linear-gradient(to top, #2D7FF9, #41C1BA); border-radius: 10px 10px 4px 4px; box-shadow: 0 0 15px rgba(65, 193, 186, 0.3); opacity: 0.8;"></div>
+                <span class="bar-tag">C1/C2</span>
+            </div>
+            <div class="bar-wrap" data-code="c2" onclick="selectCourse('C2 Proficiency', 26000, 'Jueves 19 a 20 hs', 'c2')">
                 <div class="bar-body" style="height: 100%; background: linear-gradient(to top, #2D7FF9, #41C1BA); border-radius: 10px 10px 4px 4px; box-shadow: 0 0 15px rgba(65, 193, 186, 0.3); opacity: 0.8;"></div>
                 <span class="bar-tag">C2</span>
             </div>
@@ -1255,12 +1255,12 @@ Me gustaría recibir el análisis y la información sobre el curso que me recomi
 
         <div class="marquee-wrapper" style="overflow: hidden; white-space: nowrap; margin-top: 50px;">
             <div class="marquee-content" style="display: inline-block; animation: marquee 25s linear infinite;">
-                <div class="spec-item" onclick="selectCourse('Legal English', 28500, 'B2/C1: miércoles 19 a 20 hs', 'legal')">⚖️ Legal English</div>
-                <div class="spec-item" onclick="selectCourse('IELTS', 26000, 'Martes 19 a 20 hs', 'ielts')">🎓 Exámenes</div>
-                <div class="spec-item" onclick="selectCourse('Medical English', 30000, 'Miércoles 17 a 18 hs', 'medical')">🩺 Médico</div>
-                <div class="spec-item" onclick="selectCourse('Aviation English', 30000, 'Miércoles 18 a 19 hs', 'tcp')">✈️ TCP</div>
-                <div class="spec-item" onclick="selectCourse('Legal English', 28500, 'B2/C1: miércoles 19 a 20 hs', 'legal')">⚖️ Legal English</div>
-                <div class="spec-item" onclick="selectCourse('IELTS', 26000, 'Martes 19 a 20 hs', 'ielts')">🎓 Exámenes</div>
+                <div class="spec-item" onclick="selectCourse('Legal English', 28000, 'Completo - Nuevos horarios pronto', 'legal')">⚖️ Legal English</div>
+                <div class="spec-item" onclick="selectCourse('IELTS B2/C1', 25000, 'Jueves 18 a 19 hs', 'ielts')">🎓 IELTS</div>
+                <div class="spec-item" onclick="selectCourse('Medical English', 28000, 'Completo - Nuevos horarios pronto', 'medical')">🩺 Médico</div>
+                <div class="spec-item" onclick="selectCourse('Aviation English', 28000, 'Completo - Nuevos horarios pronto', 'tcp')">✈️ TCP</div>
+                <div class="spec-item" onclick="selectCourse('Legal English', 28000, 'Completo - Nuevos horarios pronto', 'legal')">⚖️ Legal English</div>
+                <div class="spec-item" onclick="selectCourse('IELTS B2/C1', 25000, 'Jueves 18 a 19 hs', 'ielts')">🎓 IELTS</div>
             </div>
         </div>
     </section>
