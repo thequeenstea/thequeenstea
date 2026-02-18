@@ -1429,8 +1429,8 @@ Me gustaría recibir el análisis y la información sobre el curso que me recomi
                             </div>
                         </div>
                         <div class="dual-buttons">
-                            <a href="https://thequeenstea.empretienda.com.ar/" target="_blank" class="btn-matricula">ABONAR MATRÍCULA</a>
-                            <button onclick="sendInscription()" class="btn-confirm">CONFIRMAR WHATSAPP</button>
+                            <a href="https://thequeenstea.empretienda.com.ar/matricula-2026/matricula-2026" target="_blank" class="btn-matricula">ABONAR MATRÍCULA</a>
+                            <button onclick="sendInscription()" class="btn-confirm">ENVIAR INSCRIPCIÓN</button>
                         </div>
                     </div>
                 </div>
@@ -1443,7 +1443,7 @@ Me gustaría recibir el análisis y la información sobre el curso que me recomi
         const checks = [document.getElementById('c1')?.checked, document.getElementById('c2')?.checked, document.getElementById('c3')?.checked, document.getElementById('c4')?.checked, document.getElementById('c5')?.checked];
         if(!name || !mail) return alert("Por favor, completa tu nombre y mail.");
         if(checks.includes(false)) return alert("Debes aceptar todos los compromisos.");
-        const msg = `¡Hola Queen's Tea! 👋%0AInscripción 2026:%0A*${course.name}*%0A*Nombre:* ${name}%0A*Total:* ${course.currency.toUpperCase()} ${course.price}`;
+        const msg = `¡Hola The Queen's Tea! 👋 %0AInscripción 2026:%0A*${course.name}*%0A*Nombre:* ${name}%0A*Total:* ${course.currency.toUpperCase()} ${course.price}`;
         window.open(`https://wa.me/5492212229980?text=${msg}`, '_blank');
     }
 </script>
