@@ -479,6 +479,32 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
   .reveal{opacity:1;transform:none}
 }
+
+/* ===================== CAMPUS Y TIENDA ===================== */
+.campus-sec{background:var(--ink);color:#fff;position:relative;overflow:hidden}
+.campus-sec::before{content:"";position:absolute;right:-140px;top:-140px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(95,212,204,.28),transparent 70%)}
+.campus-sec h2{color:#fff}
+.campus-sec .lead{color:#C9D3EE}
+.campus-head{max-width:760px;margin-bottom:46px;position:relative}
+.campus-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;position:relative}
+.campus-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:var(--radius);padding:26px;backdrop-filter:blur(4px);transition:transform .25s, background .25s}
+.campus-card:hover{transform:translateY(-4px);background:rgba(255,255,255,.1)}
+.campus-card .ic{display:flex;width:50px;height:50px;border-radius:14px;background:var(--accent);color:var(--ink);align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:16px}
+.campus-card h3{font-size:1.2rem;margin-bottom:8px;color:#fff}
+.campus-card p{margin:0;color:#C9D3EE;font-size:.95rem;line-height:1.5}
+.shop-band{margin-top:26px;position:relative;display:grid;grid-template-columns:1.4fr 1fr;gap:26px;align-items:center;background:#fff;color:var(--ink);border-radius:var(--radius-lg);padding:38px 42px}
+.shop-band h3{font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:10px}
+.shop-band p{margin:0;color:var(--muted)}
+.shop-band ul{list-style:none;padding:0;margin:16px 0 0;display:flex;flex-wrap:wrap;gap:8px}
+.shop-band li{background:var(--paper);color:var(--royal);font-weight:700;font-size:.85rem;padding:7px 13px;border-radius:999px}
+.campus-ctas{display:flex;flex-direction:column;gap:12px}
+.campus-top-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
+.nav-campus{padding:12px 20px;font-size:.92rem}
+.price-reveal{background:var(--paper);color:var(--royal);border:1.5px dashed var(--blue);border-radius:999px;padding:9px 16px;font-weight:700;font-size:.9rem;transition:background .2s, transform .2s}
+.price-reveal:hover{background:#E6EDFB;transform:translateY(-1px)}
+.c-price .pop{animation:fadeUp .35s ease both}
+@media (max-width:980px){.campus-grid{grid-template-columns:repeat(2,1fr)}.shop-band{grid-template-columns:1fr;padding:30px}}
+@media (max-width:560px){.campus-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -498,9 +524,11 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
     </a>
     <nav class="nav" id="nav" aria-label="Principal">
       <a href="#metodo">Método</a>
+      <a href="#campus">Campus</a>
       <a href="#cursos">Cursos y precios</a>
       <a href="#opiniones">Opiniones</a>
       <a href="#faq">Preguntas</a>
+      <a href="https://campus.thequeenstea.com.ar" class="btn btn-ghost nav-campus">Entrar al Campus</a>
       <button class="btn btn-accent js-open-test">Test de nivel gratis</button>
     </nav>
     <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
@@ -595,6 +623,38 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
   </div>
 </section>
 
+<!-- ===================== CAMPUS Y TIENDA ===================== -->
+<section class="campus-sec" id="campus">
+  <div class="wrap">
+    <div class="campus-head reveal">
+      <span class="kicker" style="color:var(--accent)">Campus propio</span>
+      <h2>Todo tu aprendizaje, en un solo lugar.</h2>
+      <p class="lead">Contamos con un campus virtual propio, creado para acompañar a cada alumno: clases, tareas, notas y pagos, desde la compu o el celu.</p>
+      <div class="campus-top-ctas">
+        <a href="https://campus.thequeenstea.com.ar" class="btn btn-accent">Entrar al Campus</a>
+        <a href="https://campus.thequeenstea.com.ar/tienda" class="btn btn-line">Ver la tienda de cursos</a>
+      </div>
+    </div>
+    <div class="campus-grid">
+      <article class="campus-card reveal"><span class="ic" aria-hidden="true">📚</span><h3>Clases y material</h3><p>Tus presentaciones, tareas y exámenes online, con avisos por mail cuando hay novedades.</p></article>
+      <article class="campus-card reveal"><span class="ic" aria-hidden="true">📈</span><h3>Seguimiento real</h3><p>Notas, asistencia, boletín en PDF y certificados para que veas tu progreso.</p></article>
+      <article class="campus-card reveal"><span class="ic" aria-hidden="true">🏆</span><h3>Logros y premios</h3><p>Rachas, insignias y premios de tu profe, con destinos del mundo de habla inglesa para desbloquear.</p></article>
+      <article class="campus-card reveal"><span class="ic" aria-hidden="true">💳</span><h3>Pagos claros</h3><p>Tus cuotas, descuentos y comprobantes a la vista. Pagá con tarjeta, QR o transferencia.</p></article>
+    </div>
+    <div class="shop-band reveal">
+      <div>
+        <h3>Tienda de cursos asincrónicos</h3>
+        <p>Aprendé a tu ritmo, cuando quieras: videos, tareas y un certificado de logro al terminar. Comprás y empezás al instante desde tu campus.</p>
+        <ul><li>Acceso inmediato</li><li>Videos y tareas</li><li>Certificado de logro</li><li>Tarjeta, QR o transferencia</li></ul>
+      </div>
+      <div class="campus-ctas">
+        <a href="https://campus.thequeenstea.com.ar/tienda" class="btn btn-primary">Ir a la tienda</a>
+        <a href="https://campus.thequeenstea.com.ar/login" class="btn btn-ghost">Ya soy alumno: ingresar</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===================== CURSOS Y PRECIOS ===================== -->
 <section class="courses" id="cursos">
   <div class="wrap">
@@ -616,7 +676,7 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
       <div class="ladder-top">
         <div>
           <h3>Tu camino de B1 a C2</h3>
-          <p>Cada barra es un nivel. Tocala para ver su horario y precio.</p>
+          <p>Cada barra es un nivel. Tocala para ver su horario y descubrir su precio.</p>
         </div>
         <div class="legend"><span><i></i> Cupos abiertos</span><span><i class="off"></i> Completo</span></div>
       </div>
@@ -710,7 +770,7 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
         <span class="brand-name">The Queen's Tea<span class="brand-sub">Educación a distancia</span></span>
       </a>
       <nav aria-label="Pie de página">
-        <a href="#inicio">Inicio</a><a href="#metodo">Método</a><a href="#cursos">Cursos</a><a href="#opiniones">Opiniones</a><a href="#faq">Preguntas</a>
+        <a href="#inicio">Inicio</a><a href="#metodo">Método</a><a href="#campus">Campus</a><a href="#cursos">Cursos</a><a href="#opiniones">Opiniones</a><a href="#faq">Preguntas</a>
       </nav>
     </div>
     <div class="copy">© <span id="year"></span> The Queen's Tea. Todos los derechos reservados.</div>
@@ -952,7 +1012,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
 /* ============================================================
    CURSOS Y PRECIOS
    ============================================================ */
-const state = { tab:'niveles', cur:'ars' };
+const state = { tab:'niveles', cur:'ars', shown:new Set() };
 const list = $('#courseList');
 
 function renderCourses(){
@@ -964,7 +1024,9 @@ function renderCourses(){
         ${c.full ? '<span class="pill full">Completo</span><small>Nuevos horarios pronto</small>'
                  : `<span class="pill open">Cupos abiertos</span><small>${c.sched}</small>`}
       </div>
-      <div class="c-price"><strong>${money(state.cur === 'usd' ? c.usd : c.price, state.cur)}</strong><small>por clase</small></div>
+      <div class="c-price">${state.shown.has(c.code)
+        ? `<div class="pop"><strong>${money(state.cur === 'usd' ? c.usd : c.price, state.cur)}</strong><small>por clase</small></div>`
+        : `<button class="price-reveal" data-reveal="${c.code}" aria-label="Ver el precio de ${c.name}">Ver precio</button>`}</div>
       <button class="btn ${c.full ? 'btn-ghost' : 'btn-primary'}" data-code="${c.code}">${c.full ? 'Avisarme cuando abra' : 'Inscribirme'}</button>
     </article>`).join('');
 }
@@ -976,6 +1038,8 @@ function pedirAviso(c){
 }
 function handleCourse(c){ c.full ? pedirAviso(c) : openReg(c); }
 list.addEventListener('click', e => {
+  const rv = e.target.closest('button[data-reveal]');
+  if (rv){ state.shown.add(rv.dataset.reveal); renderCourses(); return; }
   const btn = e.target.closest('button[data-code]'); if (!btn) return;
   handleCourse(findCourse(btn.dataset.code));
 });
@@ -995,7 +1059,7 @@ const chart = $('#levelChart');
 function renderChart(){
   chart.innerHTML = CURSOS.niveles.map((c, i) => `
     <button class="bar ${c.full ? 'is-full' : 'is-open'}" data-code="${c.code}" aria-label="${c.name}: ${c.full ? 'completo' : c.sched}">
-      <span class="bar-fill" style="height:calc((100% - 56px) * ${c.h / 100});transition-delay:${i * 110}ms"><span class="bar-price">${money(state.cur === 'usd' ? c.usd : c.price, state.cur)}</span></span>
+      <span class="bar-fill" style="height:calc((100% - 56px) * ${c.h / 100});transition-delay:${i * 110}ms"></span>
       <span class="bar-tag">${c.tag}</span>
       <span class="bar-state">${c.full ? 'Completo' : 'Abierto'}</span>
     </button>`).join('');
@@ -1009,6 +1073,7 @@ chart.addEventListener('click', e => {
   if (state.tab !== 'niveles'){
     state.tab = 'niveles'; setSeg($('#tabSeg'), $('#tabSeg button[data-tab="niveles"]')); renderCourses();
   }
+  state.shown.add(b.dataset.code); renderCourses();
   const row = $('#row-' + b.dataset.code);
   row.scrollIntoView({ behavior:'smooth', block:'center' });
   row.classList.remove('flash'); void row.offsetWidth; row.classList.add('flash');
