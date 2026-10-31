@@ -689,7 +689,7 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
     <div class="enroll-strip reveal">
       <div>
         <span class="off">Matrícula 2027</span>
-        <div class="enroll-price"><strong>$35.000</strong></div>
+        <div class="enroll-price"><strong>$30.000</strong></div>
         <p>Pago único para reservar tu lugar en 2027. Este valor es válido hasta el 31 de diciembre.</p>
       </div>
       <a href="https://campus.thequeenstea.com.ar/tienda/matricula-2027" class="btn btn-accent">Abonar matrícula</a>
@@ -888,7 +888,7 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
 
 <!-- ===================== BARRA FIJA DE INSCRIPCIÓN ===================== -->
 <div class="sticky-cta" id="stickyCta">
-  <span>Matrícula 2027: <strong>$35.000</strong> hasta el 31/12</span>
+  <span>Matrícula 2027: <strong>$30.000</strong> hasta el 31/12</span>
   <a href="#cursos" class="btn btn-accent">Reservar mi lugar</a>
 </div>
 
@@ -1512,7 +1512,7 @@ const AI_ENDPOINT = '/api/chat';
 const INFO_GENERAL = [
   '- Clases 100% online en vivo, en grupos de máximo 8 alumnos. Metodología comunicativa: inglés para la vida real, académico, profesional y para viajar.',
   '- Material incluido: e-books actualizados, audios y aula virtual las 24 hs. Sin costos extra de libros durante el año.',
-  '- Matrícula 2027: $35.000, valor válido hasta el 31 de diciembre. Se abona en https://campus.thequeenstea.com.ar/tienda/matricula-2027',
+  '- Matrícula 2027: $30.000, valor válido hasta el 31 de diciembre. Se abona en https://campus.thequeenstea.com.ar/tienda/matricula-2027',
   '- Pack mensual: se abona el mes completo y la cuota depende de cuántas clases tenga el mes (3, 4 o 5). El beneficio del pack no aplica si se abona el mismo día de la clase.',
   '- Pago por clase: cuesta 15% más en pesos, o USD 5 más por clase desde el exterior.',
   '- Las clases se abonan 24 hs antes. Las ausencias se abonan igual; se comparte el material trabajado y la grabación si la clase fue grabada. Tolerancia de espera: 15 minutos. Hay tareas semanales.',
@@ -1542,13 +1542,13 @@ function respuestaLocal(q){
   if (has('exterior','dolar','usd','afuera','otro pais'))
     return `Si vivís fuera de Argentina, abonás en dólares: ${abiertos.map(c => `**${c.name}** ${money(c.usd, 'usd')}`).join(', ')} por clase con el pack mensual. [[TEST]]`;
   if (has('precio','cuesta','cuanto','valor','cuota','sale','pagar','pago'))
-    return `Los valores son por clase con el pack mensual: ${abiertos.map(c => `**${c.name}** ${money(c.price, 'ars')}`).join(', ')}. La cuota depende de cuántas clases tenga el mes (3, 4 o 5). La matrícula 2027 está a **$35.000** hasta el 31 de diciembre. [[TEST]]`;
+    return `Los valores son por clase con el pack mensual: ${abiertos.map(c => `**${c.name}** ${money(c.price, 'ars')}`).join(', ')}. La cuota depende de cuántas clases tenga el mes (3, 4 o 5). La matrícula 2027 está a **$30.000** hasta el 31 de diciembre. [[TEST]]`;
   if (has('horario','dia','cuando','hora'))
     return `Estos son los grupos con cupos abiertos: ${abiertos.map(c => `**${c.name}** los ${c.sched}`).join('; ')}. Los demás están completos y abren nuevos horarios pronto. [[TEST]]`;
   if (has('nivel','test','examen'))
     return 'Hacé nuestro test de nivel gratis: son 120 preguntas y tarda unos 15 a 20 minutos. Al terminar te mostramos tu nivel y el curso ideal para vos. [[TEST]]';
   if (has('matricula'))
-    return 'La matrícula 2027 cuesta **$35.000** hasta el 31 de diciembre y reserva tu lugar para todo el año. La abonás desde el botón "Abonar matrícula" de la sección de cursos.';
+    return 'La matrícula 2027 cuesta **$30.000** hasta el 31 de diciembre y reserva tu lugar para todo el año. La abonás desde el botón "Abonar matrícula" de la sección de cursos.';
   if (has('inscrib','anot','empez','sumar','reservar'))
     return 'Es muy fácil: 1) hacé el test de nivel si no sabés tu nivel, 2) elegí tu curso y tocá "Inscribirme", 3) completá tus datos y enviá la inscripción por WhatsApp, 4) aboná la matrícula. ¡Y listo! [[TEST]]';
   if (has('falt','ausen','grab'))
