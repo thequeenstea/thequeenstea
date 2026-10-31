@@ -637,6 +637,7 @@ footer nav a:hover{color:#fff;text-decoration:underline}
 .mock-main .scr.on{display:grid;animation:scrIn .45s ease}
 .mock-ok{background:linear-gradient(135deg,#22C58B,#16A36F);color:#fff;border-radius:14px;padding:22px 18px;font-family:var(--display);font-weight:700;font-size:1.15rem}
 .mock-side span{white-space:nowrap}
+.mock-side em.grp{background:none;color:#8A96B8;font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;padding:8px 10px 2px;border-radius:0;display:block}
 .mock-side{overflow:hidden}
 .mock-card.big{padding:16px}.mock-card.big strong{font-size:.95rem}
 .mock-card.trophy{text-align:center;padding:22px 10px}.mock-card.trophy b{display:block;font-size:2rem;margin-bottom:6px}
@@ -668,6 +669,15 @@ footer nav a:hover{color:#fff;text-decoration:underline}
 .d-price small{display:block;color:var(--muted);font-size:.8rem}
 .d-sched{margin:-4px 0 14px;font-weight:600;font-size:.9rem}
 .ccard .btn{width:100%}
+
+.pay-row{background:var(--paper);border-radius:var(--radius);padding:22px 26px;margin:0 0 26px;display:grid;gap:12px}
+.pay-row strong{font-family:var(--display);font-size:1.15rem}
+.pay-chips{display:flex;flex-wrap:wrap;gap:8px}
+.pay-chips span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 15px;font-weight:700;font-size:.88rem;color:var(--royal)}
+.pay-row small{color:var(--muted);font-size:.9rem}
+.mock-top{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(90deg,#14275F,#1E3A8A);padding:9px 14px;color:#fff;font-size:.75rem;font-weight:700}
+.mock-top img{width:26px;height:26px;border-radius:50%;background:#fff}
+.mock-top i{font-style:normal;background:rgba(255,255,255,.18);border-radius:99px;padding:3px 10px}
 .pill.soon{background:#EEF2FF;color:var(--royal)}
 .price-reveal{background:var(--paper);color:var(--royal);border:1.5px dashed var(--blue);border-radius:999px;padding:9px 16px;font-weight:700;font-size:.9rem;transition:background .2s, transform .2s}
 .price-reveal:hover{background:#E6EDFB;transform:translateY(-1px)}
@@ -794,6 +804,61 @@ footer nav a:hover{color:#fff;text-decoration:underline}
   </div>
 </section>
 
+<!-- ===================== CURSOS Y PRECIOS ===================== -->
+<section class="courses" id="cursos">
+  <div class="wrap">
+    <div class="reveal">
+      <h2>Cursos</h2>
+      <p class="lead">Estamos armando los grupos 2027. Muy pronto publicamos horarios y valores: reservá tu lugar con la matrícula y anotate en el curso que te interesa para que te avisemos apenas abra. Si no sabés tu nivel, hacé primero el test gratis.</p>
+    </div>
+
+    <div class="enroll-strip reveal">
+      <div>
+        <span class="off">Matrícula 2027</span>
+        <div class="enroll-price"><strong>$30.000</strong></div>
+        <p>Pago único para reservar tu lugar en 2027. Este valor es válido hasta el 31 de diciembre.</p>
+      </div>
+      <a href="https://campus.thequeenstea.com.ar/tienda/matricula-2027" class="btn btn-accent">Abonar matrícula</a>
+    </div>
+
+    <div class="pay-row reveal"><strong>Pagá como prefieras</strong><div class="pay-chips"><span>Tarjeta de débito</span><span>Tarjeta de crédito</span><span>Mercado Pago</span><span>Cuenta DNI</span><span>Transferencia</span></div><small>Todos los pagos cuentan con su factura correspondiente.</small></div>
+    <div class="ladder-panel reveal">
+      <div class="ladder-top">
+        <div>
+          <h3>Tu camino de A1 a C2</h3>
+          <p>Cada barra es un nivel. Tocala para ver el curso y anotarte.</p>
+        </div>
+        <div class="legend"><span><i></i> Próximamente</span></div>
+      </div>
+      <div class="chart" id="levelChart"></div>
+      <p class="ladder-hint">¿No sabés en qué escalón estás? <button class="js-open-test" style="background:none;border:0;color:var(--accent);font-weight:700;text-decoration:underline;padding:0">Hacé el test de nivel (15-20 min)</button></p>
+    </div>
+
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Tipo de curso" id="tabSeg">
+        <span class="thumb"></span>
+        <button aria-pressed="true" data-tab="niveles">Niveles</button>
+        <button aria-pressed="false" data-tab="especialidades">Especialidades y exámenes</button>
+      </div>
+      <div class="seg" role="group" aria-label="Dónde vivís" id="curSeg">
+        <span class="thumb"></span>
+        <button aria-pressed="true" data-cur="ars">Vivo en Argentina</button>
+        <button aria-pressed="false" data-cur="usd">Vivo en el exterior</button>
+      </div>
+    </div>
+    <p class="price-note">Horarios y valores 2027: muy pronto. Tocá "Avisarme cuando abra" y te escribimos por WhatsApp apenas esté listo.</p>
+
+    <div class="course-list" id="courseList"></div>
+
+    <div class="steps">
+      <div class="step reveal"><h3>Hacé el test</h3><p>Gratis, online y en 15 a 20 minutos. <button class="js-open-test">Empezar ahora</button></p></div>
+      <div class="step reveal"><h3>Elegí tu curso</h3><p>Según tu nivel, tu objetivo y el horario que te quede cómodo.</p></div>
+      <div class="step reveal"><h3>Aboná la matrícula</h3><p>Reservás tu lugar para todo 2027.</p></div>
+      <div class="step reveal"><h3>Enviá tu inscripción</h3><p>Completás tus datos y nos llegan por WhatsApp.</p></div>
+    </div>
+  </div>
+</section>
+
 <!-- ===================== EXÁMENES INTERNACIONALES ===================== -->
 <section class="exams" id="examenes">
   <div class="wrap">
@@ -814,6 +879,73 @@ footer nav a:hover{color:#fff;text-decoration:underline}
       <li><svg class="i" aria-hidden="true"><use href="#i-chart"/></svg> Seguimiento de tu progreso, habilidad por habilidad</li>
     </ul>
     <p class="exam-note">Cambridge English e IELTS son marcas de sus respectivos titulares. The Queen's Tea prepara para estos exámenes y no es el organismo examinador.</p>
+  </div>
+</section>
+
+<!-- ===================== CAMPUS Y TIENDA ===================== -->
+<section class="campus-sec" id="campus">
+  <div class="wrap">
+    <div class="campus-split">
+      <div class="reveal">
+        <h2>Tu campus, siempre a mano.</h2>
+        <p class="lead">Un campus propio, hecho para acompañarte en cada paso. Funciona en la compu y en el celu.</p>
+        <ul class="feat"><li><svg class="i" aria-hidden="true"><use href="#i-video"/></svg><div><h3>Clases en vivo</h3><p>Tu link siempre a mano, con aviso al empezar.</p></div></li><li><svg class="i" aria-hidden="true"><use href="#i-book"/></svg><div><h3>Material y tareas</h3><p>Todo ordenado por curso. Entregás desde el campus.</p></div></li><li><svg class="i" aria-hidden="true"><use href="#i-chart"/></svg><div><h3>Notas y asistencia</h3><p>Tu progreso a la vista, con boletín en PDF.</p></div></li><li><svg class="i" aria-hidden="true"><use href="#i-trophy"/></svg><div><h3>Logros y premios</h3><p>Rachas, insignias y premios de tu profe.</p></div></li><li><svg class="i" aria-hidden="true"><use href="#i-card"/></svg><div><h3>Pagos claros</h3><p>Cuotas, descuentos y comprobantes en un solo lugar.</p></div></li><li><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg><div><h3>Certificados</h3><p>Un certificado de logro al terminar cada curso.</p></div></li></ul>
+        <div class="campus-top-ctas">
+          <a href="https://campus.thequeenstea.com.ar" class="btn btn-accent">Entrar al Campus</a>
+          <a href="https://campus.thequeenstea.com.ar/tienda" class="btn btn-line">Ver la tienda</a>
+        </div>
+      </div>
+      <div class="mock-wrap reveal">
+        <div class="mock" role="img" aria-label="Vista de ejemplo del campus del alumno">
+          <div class="mock-bar"><i></i><i></i><i></i><span>campus.thequeenstea.com.ar</span></div>
+          <div class="mock-top"><img src="img/logo.png" alt="" onerror="this.style.display='none'"><span>The Queen's Tea</span><i>Salir</i></div>
+          <div class="mock-body">
+            <aside class="mock-side" id="mside"><span class="on">Inicio</span><span>Mis pagos</span><em class="grp">Mi cursada</em><span>Mis cursos</span><span>Tareas</span><span>Exámenes</span><span>Calificaciones</span><span>Boletín</span><span>Mi asistencia</span><span>Mis logros</span><span>Tienda de cursos</span></aside>
+            <div class="mock-main"><div class="scr on" data-s="0">
+              <div class="mock-hello"><div class="mock-av">L</div><div><small>Vista de ejemplo</small><strong>¡Hola, Lucía!</strong><span>Tenés 2 cosas por hacer</span></div></div>
+              <div class="mock-row">
+                <div class="mock-card"><small>Tu racha</small><strong>12 clases seguidas</strong><div class="mock-days"><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i><i></i><i></i></div></div>
+                <div class="mock-card"><small>Clase de hoy</small><strong>Ya podés unirte</strong><span class="mock-btn">Unirme</span></div>
+              </div>
+              <div class="mock-row">
+                <div class="mock-card"><small>Tu cuota</small><strong>Al día</strong><div class="mock-prog"><i style="width:100%"></i></div></div>
+                <div class="mock-card"><small>Próxima tarea</small><strong>Writing: an essay</strong><div class="mock-prog"><i style="width:65%"></i></div></div>
+              </div>
+            </div>
+<div class="scr" data-s="1"><div class="mock-card big"><small>Mis cuotas</small><strong>Octubre · Pagada</strong><div class="mock-prog"><i style="width:100%"></i></div></div><div class="mock-card big"><small>Próxima cuota</small><strong>Vence el 10/11</strong><span class="mock-btn">Pagar con Mercado Pago</span></div><div class="mock-card big"><small>Comprobantes</small><strong>Recibo de octubre.pdf</strong></div></div>
+<div class="scr" data-s="2"><div class="mock-card big"><small>Cursos con clases</small><strong>B2 First</strong><span class="mock-btn">Entrar a la clase</span></div><div class="mock-card big"><small>Cursos online</small><strong>Reflective Essays + Práctica asincrónica</strong><div class="mock-prog"><i style="width:70%"></i></div></div></div>
+<div class="scr" data-s="3"><div class="mock-ok">¡No tenés tareas pendientes!</div><div class="mock-card big"><small>Última entregada</small><strong>Writing: Kitchen ✓ · 8,5</strong></div></div>
+<div class="scr" data-s="4"><div class="mock-card big"><small>Cambridge Writing assessment</small><strong>Content 4,5 · Communication 4 · Organisation 4 · Language 4</strong></div><div class="mock-card big"><small>Total</small><strong>17/20 · Grade A</strong></div></div>
+<div class="scr" data-s="5"><div class="mock-card big"><small>Writing: Kitchen</small><strong>8,5</strong></div><div class="mock-card big"><small>Unit 1</small><strong>10</strong></div><div class="mock-card big"><small>Promedio de Writing</small><strong>8,5</strong></div></div>
+<div class="scr" data-s="6"><div class="mock-row"><div class="mock-card trophy"><b>🏆</b><strong>Primera clase</strong></div><div class="mock-card trophy"><b>🔥</b><strong>12 seguidas</strong></div></div><div class="mock-row"><div class="mock-card trophy"><b>⭐</b><strong>Tarea perfecta</strong></div><div class="mock-card trophy"><b>🎓</b><strong>Nivel B1</strong></div></div></div>
+          </div>
+          </div>
+        </div>
+        <div class="mock-toast" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-bell"/></svg> Nota nueva en tu campus</div>
+      </div>
+    </div>
+    <div class="shop-head reveal">
+      <span class="kicker" style="color:var(--accent)">Tienda de The Queen's Tea</span>
+      <h2>Material docente y cursos asincrónicos.</h2>
+      <p class="lead">Aprendé a tu ritmo. Todo lo que comprás se usa dentro de nuestro campus.</p>
+    </div>
+    <div class="shop-grid">
+      <article class="shop-tile reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-board"/></svg></span><h3>Material docente</h3><p>Recursos probados en clase, listos para usar.</p></article>
+      <article class="shop-tile reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-film"/></svg></span><h3>Cursos asincrónicos con seguimiento</h3><p>Videos y tareas a tu ritmo, con tu avance registrado.</p></article>
+      <article class="shop-tile reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-lock"/></svg></span><h3>Acceso exclusivo en nuestro campus</h3><p>Comprás y empezás al instante.</p></article>
+      <article class="shop-tile reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg></span><h3>Certificado de logro</h3><p>Lo recibís al completar el curso.</p></article>
+    </div>
+    <div class="shop-band reveal">
+      <div>
+        <h3>Empezá hoy mismo</h3>
+        <p>Débito, crédito, Mercado Pago, Cuenta DNI o transferencia. Con factura.</p>
+        <ul><li>Acceso inmediato</li><li>A tu ritmo</li><li>Con seguimiento</li><li>Certificado de logro</li></ul>
+      </div>
+      <div class="campus-ctas">
+        <a href="https://campus.thequeenstea.com.ar/tienda" class="btn btn-primary">Ir a la tienda</a>
+        <a href="https://campus.thequeenstea.com.ar/login" class="btn btn-ghost">Ya soy alumno: ingresar</a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -865,135 +997,6 @@ footer nav a:hover{color:#fff;text-decoration:underline}
   </div>
 </section>
 
-<!-- ===================== CAMPUS Y TIENDA ===================== -->
-<section class="campus-sec" id="campus">
-  <div class="wrap">
-    <div class="campus-split">
-      <div class="reveal">
-        <h2>Tu campus, siempre a mano.</h2>
-        <p class="lead">Un campus propio, hecho para acompañarte en cada paso. Funciona en la compu y en el celu.</p>
-        <ul class="feat"><li><svg class="i" aria-hidden="true"><use href="#i-video"/></svg><div><h3>Clases en vivo</h3><p>Tu link siempre a mano, con aviso al empezar.</p></div></li><li><svg class="i" aria-hidden="true"><use href="#i-book"/></svg><div><h3>Material y tareas</h3><p>Todo ordenado por curso. Entregás desde el campus.</p></div></li><li><svg class="i" aria-hidden="true"><use href="#i-chart"/></svg><div><h3>Notas y asistencia</h3><p>Tu progreso a la vista, con boletín en PDF.</p></div></li><li><svg class="i" aria-hidden="true"><use href="#i-trophy"/></svg><div><h3>Logros y premios</h3><p>Rachas, insignias y premios de tu profe.</p></div></li><li><svg class="i" aria-hidden="true"><use href="#i-card"/></svg><div><h3>Pagos claros</h3><p>Cuotas, descuentos y comprobantes en un solo lugar.</p></div></li><li><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg><div><h3>Certificados</h3><p>Un certificado de logro al terminar cada curso.</p></div></li></ul>
-        <div class="campus-top-ctas">
-          <a href="https://campus.thequeenstea.com.ar" class="btn btn-accent">Entrar al Campus</a>
-          <a href="https://campus.thequeenstea.com.ar/tienda" class="btn btn-line">Ver la tienda</a>
-        </div>
-      </div>
-      <div class="mock-wrap reveal">
-        <div class="mock" role="img" aria-label="Vista de ejemplo del campus del alumno">
-          <div class="mock-bar"><i></i><i></i><i></i><span>campus.thequeenstea.com.ar</span></div>
-          <div class="mock-body">
-            <aside class="mock-side" id="mside"><span class="on">Inicio</span><span>Mis pagos</span><span>Mis cursos</span><span>Tareas</span><span>Exámenes</span><span>Calificaciones</span><span>Boletín</span><span>Mi asistencia</span><span>Mis logros</span><span>Tienda de cursos</span></aside>
-            <div class="mock-main"><div class="scr on" data-s="0">
-              <div class="mock-hello"><div class="mock-av">L</div><div><small>Vista de ejemplo</small><strong>¡Hola, Lucía!</strong><span>Tenés 2 cosas por hacer</span></div></div>
-              <div class="mock-row">
-                <div class="mock-card"><small>Tu racha</small><strong>12 clases seguidas</strong><div class="mock-days"><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i><i></i><i></i></div></div>
-                <div class="mock-card"><small>Clase de hoy</small><strong>Ya podés unirte</strong><span class="mock-btn">Unirme</span></div>
-              </div>
-              <div class="mock-row">
-                <div class="mock-card"><small>Tu cuota</small><strong>Al día</strong><div class="mock-prog"><i style="width:100%"></i></div></div>
-                <div class="mock-card"><small>Próxima tarea</small><strong>Writing: an essay</strong><div class="mock-prog"><i style="width:65%"></i></div></div>
-              </div>
-            </div>
-<div class="scr" data-s="1"><div class="mock-card big"><small>Mis cuotas</small><strong>Octubre · Pagada</strong><div class="mock-prog"><i style="width:100%"></i></div></div><div class="mock-card big"><small>Próxima cuota</small><strong>Vence el 10/11</strong><span class="mock-btn">Pagar con Mercado Pago</span></div><div class="mock-card big"><small>Comprobantes</small><strong>Recibo de octubre.pdf</strong></div></div>
-<div class="scr" data-s="2"><div class="mock-card big"><small>Cursos con clases</small><strong>B2 First</strong><span class="mock-btn">Entrar a la clase</span></div><div class="mock-card big"><small>Cursos online</small><strong>Reflective Essays + Práctica asincrónica</strong><div class="mock-prog"><i style="width:70%"></i></div></div></div>
-<div class="scr" data-s="3"><div class="mock-ok">¡No tenés tareas pendientes!</div><div class="mock-card big"><small>Última entregada</small><strong>Writing: Kitchen ✓ · 8,5</strong></div></div>
-<div class="scr" data-s="4"><div class="mock-card big"><small>Cambridge Writing assessment</small><strong>Content 4,5 · Communication 4 · Organisation 4 · Language 4</strong></div><div class="mock-card big"><small>Total</small><strong>17/20 · Grade A</strong></div></div>
-<div class="scr" data-s="5"><div class="mock-card big"><small>Writing: Kitchen</small><strong>8,5</strong></div><div class="mock-card big"><small>Unit 1</small><strong>10</strong></div><div class="mock-card big"><small>Promedio de Writing</small><strong>8,5</strong></div></div>
-<div class="scr" data-s="6"><div class="mock-row"><div class="mock-card trophy"><b>🏆</b><strong>Primera clase</strong></div><div class="mock-card trophy"><b>🔥</b><strong>12 seguidas</strong></div></div><div class="mock-row"><div class="mock-card trophy"><b>⭐</b><strong>Tarea perfecta</strong></div><div class="mock-card trophy"><b>🎓</b><strong>Nivel B1</strong></div></div></div>
-          </div>
-          </div>
-        </div>
-        <div class="mock-toast" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-bell"/></svg> Nota nueva en tu campus</div>
-      </div>
-    </div>
-    <div class="shop-head reveal">
-      <span class="kicker" style="color:var(--accent)">Tienda de The Queen's Tea</span>
-      <h2>Material docente y cursos asincrónicos.</h2>
-      <p class="lead">Aprendé a tu ritmo. Todo lo que comprás se usa dentro de nuestro campus.</p>
-    </div>
-    <div class="shop-grid">
-      <article class="shop-tile reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-board"/></svg></span><h3>Material docente</h3><p>Recursos probados en clase, listos para usar.</p></article>
-      <article class="shop-tile reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-film"/></svg></span><h3>Cursos asincrónicos con seguimiento</h3><p>Videos y tareas a tu ritmo, con tu avance registrado.</p></article>
-      <article class="shop-tile reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-lock"/></svg></span><h3>Acceso exclusivo en nuestro campus</h3><p>Comprás y empezás al instante.</p></article>
-      <article class="shop-tile reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg></span><h3>Certificado de logro</h3><p>Lo recibís al completar el curso.</p></article>
-    </div>
-    <div class="shop-band reveal">
-      <div>
-        <h3>Empezá hoy mismo</h3>
-        <p>Pagá con tarjeta, QR o transferencia.</p>
-        <ul><li>Acceso inmediato</li><li>A tu ritmo</li><li>Con seguimiento</li><li>Certificado de logro</li></ul>
-      </div>
-      <div class="campus-ctas">
-        <a href="https://campus.thequeenstea.com.ar/tienda" class="btn btn-primary">Ir a la tienda</a>
-        <a href="https://campus.thequeenstea.com.ar/login" class="btn btn-ghost">Ya soy alumno: ingresar</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== CURSOS Y PRECIOS ===================== -->
-<section class="courses" id="cursos">
-  <div class="wrap">
-    <div class="reveal">
-      <h2>Cursos</h2>
-      <p class="lead">Estamos armando los grupos 2027. Muy pronto publicamos horarios y valores: reservá tu lugar con la matrícula y anotate en el curso que te interesa para que te avisemos apenas abra. Si no sabés tu nivel, hacé primero el test gratis.</p>
-    </div>
-
-    <div class="enroll-strip reveal">
-      <div>
-        <span class="off">Matrícula 2027</span>
-        <div class="enroll-price"><strong>$30.000</strong></div>
-        <p>Pago único para reservar tu lugar en 2027. Este valor es válido hasta el 31 de diciembre.</p>
-      </div>
-      <a href="https://campus.thequeenstea.com.ar/tienda/matricula-2027" class="btn btn-accent">Abonar matrícula</a>
-    </div>
-
-    <div class="ladder-panel reveal">
-      <div class="ladder-top">
-        <div>
-          <h3>Tu camino de A1 a C2</h3>
-          <p>Cada barra es un nivel. Tocala para ver el curso y anotarte.</p>
-        </div>
-        <div class="legend"><span><i></i> Próximamente</span></div>
-      </div>
-      <div class="chart" id="levelChart"></div>
-      <p class="ladder-hint">¿No sabés en qué escalón estás? <button class="js-open-test" style="background:none;border:0;color:var(--accent);font-weight:700;text-decoration:underline;padding:0">Hacé el test de nivel (15-20 min)</button></p>
-    </div>
-
-    <div class="controls">
-      <div class="seg" role="group" aria-label="Tipo de curso" id="tabSeg">
-        <span class="thumb"></span>
-        <button aria-pressed="true" data-tab="niveles">Niveles</button>
-        <button aria-pressed="false" data-tab="especialidades">Especialidades y exámenes</button>
-      </div>
-      <div class="seg" role="group" aria-label="Dónde vivís" id="curSeg">
-        <span class="thumb"></span>
-        <button aria-pressed="true" data-cur="ars">Vivo en Argentina</button>
-        <button aria-pressed="false" data-cur="usd">Vivo en el exterior</button>
-      </div>
-    </div>
-    <p class="price-note">Horarios y valores 2027: muy pronto. Tocá "Avisarme cuando abra" y te escribimos por WhatsApp apenas esté listo.</p>
-
-    <div class="course-list" id="courseList"></div>
-
-    <div class="steps">
-      <div class="step reveal"><h3>Hacé el test</h3><p>Gratis, online y en 15 a 20 minutos. <button class="js-open-test">Empezar ahora</button></p></div>
-      <div class="step reveal"><h3>Elegí tu curso</h3><p>Según tu nivel, tu objetivo y el horario que te quede cómodo.</p></div>
-      <div class="step reveal"><h3>Aboná la matrícula</h3><p>Reservás tu lugar para todo 2027.</p></div>
-      <div class="step reveal"><h3>Enviá tu inscripción</h3><p>Completás tus datos y nos llegan por WhatsApp.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== TESTIMONIOS ===================== -->
-<section class="testi" id="opiniones">
-  <div class="wrap reveal">
-    <h2>Confianza que trasciende</h2>
-    <p class="lead">Una década acompañando procesos reales.</p>
-  </div>
-  <div class="t-track" id="tTrack"></div>
-</section>
-
 <!-- ===================== EMPRESAS Y GRUPOS ===================== -->
 <section class="biz" id="empresas">
   <div class="wrap biz-grid">
@@ -1010,6 +1013,15 @@ footer nav a:hover{color:#fff;text-decoration:underline}
       <li><svg class="i" aria-hidden="true"><use href="#i-chart"/></svg><div><h3>Seguimiento en el campus</h3><p>Asistencia, tareas y notas en el campus.</p></div></li>
     </ul>
   </div>
+</section>
+
+<!-- ===================== TESTIMONIOS ===================== -->
+<section class="testi" id="opiniones">
+  <div class="wrap reveal">
+    <h2>Confianza que trasciende</h2>
+    <p class="lead">Una década acompañando procesos reales.</p>
+  </div>
+  <div class="t-track" id="tTrack"></div>
 </section>
 
 <!-- ===================== NOSOTROS ===================== -->
@@ -1196,10 +1208,7 @@ footer nav a:hover{color:#fff;text-decoration:underline}
 </div>
 
 <!-- ===================== BARRA FIJA DE INSCRIPCIÓN ===================== -->
-<div class="sticky-cta" id="stickyCta">
-  <span>Matrícula 2027: <strong>$30.000</strong> hasta el 31/12</span>
-  <a href="#cursos" class="btn btn-accent">Reservar mi lugar</a>
-</div>
+
 
 <!-- ===================== ASISTENTE CON IA ===================== -->
 <div class="assist" id="assist">
@@ -1428,13 +1437,7 @@ chart.addEventListener('click', e => {
   row.classList.remove('flash'); void row.offsetWidth; row.classList.add('flash');
 });
 
-/* Barra fija "Reservar mi lugar" */
-const sticky = $('#stickyCta'), heroEl = $('#inicio');
-let cursosVisible = false, footerVisible = false;
-const updSticky = () => sticky.classList.toggle('show', scrollY > heroEl.offsetHeight - 120 && !cursosVisible && !footerVisible);
-new IntersectionObserver(es => { cursosVisible = es[0].isIntersecting; updSticky(); }).observe($('#cursos'));
-new IntersectionObserver(es => { footerVisible = es[0].isIntersecting; updSticky(); }).observe($('footer'));
-window.addEventListener('scroll', updSticky, { passive:true });
+
 
 /* ============================================================
    PANEL DE INSCRIPCIÓN
@@ -1526,7 +1529,7 @@ Acepto los términos y compromisos.`;
 (() => {
   const side = document.getElementById('mside'); if (!side) return;
   const scr = [...document.querySelectorAll('.mock-main .scr')], items = [...side.children];
-  const map = [0,1,2,3,4,5,8]; let k = 0;
+  const map = [0,1,3,4,5,6,9]; let k = 0;
   const go = n => { scr.forEach((e,j)=>e.classList.toggle('on',j===n)); items.forEach((e,j)=>e.classList.toggle('on',j===map[n])); };
   if (matchMedia('(prefers-reduced-motion:reduce)').matches) return;
   setInterval(() => { k = (k+1) % scr.length; go(k); }, 3200);
