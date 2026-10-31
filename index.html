@@ -507,6 +507,7 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
 .campus-ctas{display:flex;flex-direction:column;gap:12px}
 .campus-top-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
 .nav-campus{padding:12px 20px;font-size:.92rem}
+.pill.soon{background:#EEF2FF;color:var(--royal)}
 .price-reveal{background:var(--paper);color:var(--royal);border:1.5px dashed var(--blue);border-radius:999px;padding:9px 16px;font-weight:700;font-size:.9rem;transition:background .2s, transform .2s}
 .price-reveal:hover{background:#E6EDFB;transform:translateY(-1px)}
 .c-price .pop{animation:fadeUp .35s ease both}
@@ -691,7 +692,7 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
         <div class="enroll-price"><strong>$35.000</strong></div>
         <p>Pago único para reservar tu lugar en 2027. Este valor es válido hasta el 31 de diciembre.</p>
       </div>
-      <a href="https://thequeenstea.empretienda.com.ar/matricula-2027/matricula-2027" target="_blank" rel="noopener" class="btn btn-accent">Abonar matrícula</a>
+      <a href="https://campus.thequeenstea.com.ar/tienda/matricula-2027" class="btn btn-accent">Abonar matrícula</a>
     </div>
 
     <div class="ladder-panel reveal">
@@ -879,7 +880,7 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
     </div>
     <div class="form-error" id="regError"></div>
     <div class="dr-actions">
-      <a href="https://thequeenstea.empretienda.com.ar/matricula-2027/matricula-2027" target="_blank" rel="noopener" class="btn btn-violet">Abonar matrícula</a>
+      <a href="https://campus.thequeenstea.com.ar/tienda/matricula-2027" class="btn btn-violet">Abonar matrícula</a>
       <button class="btn btn-wa" id="regSend">Enviar inscripción</button>
     </div>
   </div>
@@ -932,12 +933,12 @@ const WHATSAPP = '5492212229980';
 // sched = horario. Si el curso está completo, poné full: true
 // h = altura de la "escalera" de nivel (solo visual)
 const CURSOS = {
-  // consultar: true = todavía sin precio/horario publicado: se consulta por WhatsApp
+  // pronto: true = todavía sin precio/horario publicado (se pueden anotar para que les avisemos)
   niveles: [
-    { code:'a1',     tag:'A1',  name:'A1 Inicial',      desc:'Tus primeros pasos en inglés, desde cero y sin miedo.', consultar:true, h:12 },
-    { code:'a2',     tag:'A2',  name:'A2 Elementary',   desc:'Comunicate en situaciones cotidianas con más seguridad.', consultar:true, h:24 },
+    { code:'a1',     tag:'A1',  name:'A1 Inicial',      desc:'Tus primeros pasos en inglés, desde cero y sin miedo.', pronto:true, h:12 },
+    { code:'a2',     tag:'A2',  name:'A2 Elementary',   desc:'Comunicate en situaciones cotidianas con más seguridad.', pronto:true, h:24 },
     { code:'b1',     tag:'B1',  name:'B1 Intermediate', desc:'Ganá fluidez y seguridad en conversaciones reales.', price:23500, usd:35, full:true,  h:36 },
-    { code:'b1plus', tag:'B1+', name:'B1+ Intermediate Plus', desc:'El puente hacia el B2: más fluidez, vocabulario y confianza.', consultar:true, h:48 },
+    { code:'b1plus', tag:'B1+', name:'B1+ Intermediate Plus', desc:'El puente hacia el B2: más fluidez, vocabulario y confianza.', pronto:true, h:48 },
     { code:'b2',     tag:'B2',  name:'B2 First',        desc:'Upper-Intermediate y preparación para el examen First.', price:24000, usd:40, sched:'Jueves 20 a 21 hs', h:60 },
     { code:'b2plus', tag:'B2+', name:'B2+ Pre-Advanced',desc:'Naturalidad y precisión, puente hacia el nivel C1.', price:24000, usd:40, full:true,  h:72 },
     { code:'c1',     tag:'C1',  name:'C1 Advanced',     desc:'Inglés académico, profesional y de negocios.', price:24500, usd:40, sched:'Martes 20 a 21 hs', h:82 },
@@ -1047,14 +1048,14 @@ function renderCourses(){
       <div class="lvl"><span class="lvl-tag">${c.tag}</span><span class="ladder" style="--h:${c.h}%"></span></div>
       <div class="c-info"><h3>${c.name}</h3><p>${c.desc}</p></div>
       <div class="c-sched ${c.full ? 'is-full' : ''}">
-        ${c.consultar ? '<span class="pill open">Consultá horarios</span><small>Escribinos por WhatsApp</small>'
+        ${c.pronto ? '<span class="pill soon">Próximamente</span><small>Horarios pronto</small>'
           : c.full ? '<span class="pill full">Completo</span><small>Nuevos horarios pronto</small>'
                  : `<span class="pill open">Cupos abiertos</span><small>${c.sched}</small>`}
       </div>
-      <div class="c-price">${c.consultar ? '<small>Consultá el valor</small>' : state.shown.has(c.code)
+      <div class="c-price">${c.pronto ? '<small>Valor pronto</small>' : state.shown.has(c.code)
         ? `<div class="pop"><strong>${money(state.cur === 'usd' ? c.usd : c.price, state.cur)}</strong><small>por clase</small></div>`
         : `<button class="price-reveal" data-reveal="${c.code}" aria-label="Ver el precio de ${c.name}">Ver precio</button>`}</div>
-      <button class="btn ${c.full || c.consultar ? 'btn-ghost' : 'btn-primary'}" data-code="${c.code}">${c.consultar ? 'Consultar' : c.full ? 'Avisarme cuando abra' : 'Inscribirme'}</button>
+      <button class="btn ${c.full || c.pronto ? 'btn-ghost' : 'btn-primary'}" data-code="${c.code}">${c.pronto || c.full ? 'Avisarme cuando abra' : 'Inscribirme'}</button>
     </article>`).join('');
 }
 const findCourse = code => [...CURSOS.niveles, ...CURSOS.especialidades].find(c => c.code === code);
@@ -1063,11 +1064,7 @@ function pedirAviso(c){
   const msg = `¡Hola The Queen's Tea! Me interesa el curso *${c.name}*. ¿Me avisan cuando abran nuevos horarios? ¡Gracias!`;
   window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
 }
-function consultarCurso(c){
-  const msg = `¡Hola The Queen's Tea! Me interesa el curso *${c.name}*. ¿Me pasan horarios, valores y cupos disponibles? ¡Gracias!`;
-  window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
-}
-function handleCourse(c){ c.consultar ? consultarCurso(c) : c.full ? pedirAviso(c) : openReg(c); }
+function handleCourse(c){ c.full || c.pronto ? pedirAviso(c) : openReg(c); }
 list.addEventListener('click', e => {
   const rv = e.target.closest('button[data-reveal]');
   if (rv){ state.shown.add(rv.dataset.reveal); renderCourses(); return; }
@@ -1089,10 +1086,10 @@ renderCourses();
 const chart = $('#levelChart');
 function renderChart(){
   chart.innerHTML = CURSOS.niveles.map((c, i) => `
-    <button class="bar ${c.full ? 'is-full' : 'is-open'}" data-code="${c.code}" aria-label="${c.name}: ${c.consultar ? 'consultar' : c.full ? 'completo' : c.sched}">
+    <button class="bar ${c.full ? 'is-full' : 'is-open'}" data-code="${c.code}" aria-label="${c.name}: ${c.pronto ? 'próximamente' : c.full ? 'completo' : c.sched}">
       <span class="bar-fill" style="height:calc((100% - 56px) * ${c.h / 100});transition-delay:${i * 110}ms"></span>
       <span class="bar-tag">${c.tag}</span>
-      <span class="bar-state">${c.consultar ? 'Consultar' : c.full ? 'Completo' : 'Abierto'}</span>
+      <span class="bar-state">${c.pronto ? 'Pronto' : c.full ? 'Completo' : 'Abierto'}</span>
     </button>`).join('');
 }
 renderChart();
@@ -1104,7 +1101,7 @@ chart.addEventListener('click', e => {
   if (state.tab !== 'niveles'){
     state.tab = 'niveles'; setSeg($('#tabSeg'), $('#tabSeg button[data-tab="niveles"]')); renderCourses();
   }
-  if (!findCourse(b.dataset.code).consultar) state.shown.add(b.dataset.code);
+  if (!findCourse(b.dataset.code).pronto) state.shown.add(b.dataset.code);
   renderCourses();
   const row = $('#row-' + b.dataset.code);
   row.scrollIntoView({ behavior:'smooth', block:'center' });
@@ -1515,17 +1512,17 @@ const AI_ENDPOINT = '/api/chat';
 const INFO_GENERAL = [
   '- Clases 100% online en vivo, en grupos de máximo 8 alumnos. Metodología comunicativa: inglés para la vida real, académico, profesional y para viajar.',
   '- Material incluido: e-books actualizados, audios y aula virtual las 24 hs. Sin costos extra de libros durante el año.',
-  '- Matrícula 2027: $35.000, valor válido hasta el 31 de diciembre. Se abona en https://thequeenstea.empretienda.com.ar/matricula-2027/matricula-2027',
+  '- Matrícula 2027: $35.000, valor válido hasta el 31 de diciembre. Se abona en https://campus.thequeenstea.com.ar/tienda/matricula-2027',
   '- Pack mensual: se abona el mes completo y la cuota depende de cuántas clases tenga el mes (3, 4 o 5). El beneficio del pack no aplica si se abona el mismo día de la clase.',
   '- Pago por clase: cuesta 15% más en pesos, o USD 5 más por clase desde el exterior.',
   '- Las clases se abonan 24 hs antes. Las ausencias se abonan igual; se comparte el material trabajado y la grabación si la clase fue grabada. Tolerancia de espera: 15 minutos. Hay tareas semanales.',
   '- Cómo inscribirse: 1) hacer el test de nivel si no conoce su nivel, 2) elegir el curso en la sección "Cursos y precios" y tocar "Inscribirme", 3) completar los datos y enviar la inscripción por WhatsApp, 4) abonar la matrícula.',
   '- Test de nivel gratis: 120 preguntas de opción múltiple, tarda unos 15 a 20 minutos, va de A1 a C2 y se puede terminar antes.',
-  '- Para los niveles A1, A2 y B1+ los horarios y valores se consultan por WhatsApp.',
+  '- Para los niveles A1, A2 y B1+ los horarios y valores se publican pronto: se puede pedir aviso por WhatsApp.',
   '- Más de 10 años enseñando. Respondemos consultas en menos de 24 hs. WhatsApp: +54 9 221 222-9980.'
 ];
 const CONTEXTO = (() => {
-  const linea = c => c.consultar ? `- ${c.name} (código ${c.code}): horarios y valores a consultar por WhatsApp. ${c.desc}` : `- ${c.name} (código ${c.code}): ${money(c.price, 'ars')} por clase en Argentina, ${money(c.usd, 'usd')} por clase desde el exterior. ${c.full ? 'Grupo completo, nuevos horarios pronto (se puede pedir aviso).' : 'Horario: ' + c.sched + '. Cupos abiertos.'} ${c.desc}`;
+  const linea = c => c.pronto ? `- ${c.name} (código ${c.code}): horarios y valores a confirmar pronto (se puede pedir aviso). ${c.desc}` : `- ${c.name} (código ${c.code}): ${money(c.price, 'ars')} por clase en Argentina, ${money(c.usd, 'usd')} por clase desde el exterior. ${c.full ? 'Grupo completo, nuevos horarios pronto (se puede pedir aviso).' : 'Horario: ' + c.sched + '. Cupos abiertos.'} ${c.desc}`;
   return ['CURSOS DE NIVELES (precio por clase con pack mensual):', ...CURSOS.niveles.map(linea),
           '', 'ESPECIALIDADES Y EXÁMENES:', ...CURSOS.especialidades.map(linea),
           '', 'INFORMACIÓN GENERAL:', ...INFO_GENERAL].join('\n');
@@ -1536,8 +1533,8 @@ function respuestaLocal(q){
   const n = q.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
   const has = (...w) => w.some(x => n.includes(x));
   const todos = [...CURSOS.niveles, ...CURSOS.especialidades];
-  const abiertos = todos.filter(c => !c.full && !c.consultar);
-  const ficha = c => c.consultar ? `**${c.name}**: los horarios y valores se consultan por WhatsApp.` : `**${c.name}**: ${money(c.price, 'ars')} por clase (${money(c.usd, 'usd')} desde el exterior). ${c.full ? 'Ahora está completo, pero podés pedir aviso para los próximos horarios.' : 'Se dicta los ' + c.sched + '.'}`;
+  const abiertos = todos.filter(c => !c.full && !c.pronto);
+  const ficha = c => c.pronto ? `**${c.name}**: los horarios y valores se publican pronto; podés pedir aviso.` : `**${c.name}**: ${money(c.price, 'ars')} por clase (${money(c.usd, 'usd')} desde el exterior). ${c.full ? 'Ahora está completo, pero podés pedir aviso para los próximos horarios.' : 'Se dicta los ' + c.sched + '.'}`;
   const especificos = [['a1','a1'],['inicial','a1'],['a2','a2'],['b1+','b1plus'],['b1 plus','b1plus'],['ielts','ielts'],['legal','legal'],['medic','medical'],['aviation','tcp'],['tcp','tcp'],['azafat','tcp'],['tripul','tcp'],['proficiency','c2'],['c2','c2'],['first','b2'],['c1','c1'],['b1','b1']];
   for (const [k, code] of especificos){
     if (n.includes(k)){ const c = findCourse(code); return `${ficha(c)} ${c.desc} [[CURSO:${c.code}]]`; }
