@@ -635,6 +635,9 @@ footer nav a:hover{color:#fff;text-decoration:underline}
 .mock-main{position:relative;min-height:300px}
 .mock-main .scr{display:none;gap:12px;align-content:start}
 .mock-main .scr.on{display:grid;animation:scrIn .45s ease}
+.mock-ok{background:linear-gradient(135deg,#22C58B,#16A36F);color:#fff;border-radius:14px;padding:22px 18px;font-family:var(--display);font-weight:700;font-size:1.15rem}
+.mock-side span{white-space:nowrap}
+.mock-side{overflow:hidden}
 .mock-card.big{padding:16px}.mock-card.big strong{font-size:.95rem}
 .mock-card.trophy{text-align:center;padding:22px 10px}.mock-card.trophy b{display:block;font-size:2rem;margin-bottom:6px}
 @keyframes scrIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
@@ -879,7 +882,7 @@ footer nav a:hover{color:#fff;text-decoration:underline}
         <div class="mock" role="img" aria-label="Vista de ejemplo del campus del alumno">
           <div class="mock-bar"><i></i><i></i><i></i><span>campus.thequeenstea.com.ar</span></div>
           <div class="mock-body">
-            <aside class="mock-side" id="mside"><span class="on">Inicio</span><span>Pagos</span><span>Mis cursos</span><span>Tareas <em>2</em></span><span>Exámenes</span><span>Notas</span><span>Mis logros</span></aside>
+            <aside class="mock-side" id="mside"><span class="on">Inicio</span><span>Mis pagos</span><span>Mis cursos</span><span>Tareas</span><span>Exámenes</span><span>Calificaciones</span><span>Boletín</span><span>Mi asistencia</span><span>Mis logros</span><span>Tienda de cursos</span></aside>
             <div class="mock-main"><div class="scr on" data-s="0">
               <div class="mock-hello"><div class="mock-av">L</div><div><small>Vista de ejemplo</small><strong>¡Hola, Lucía!</strong><span>Tenés 2 cosas por hacer</span></div></div>
               <div class="mock-row">
@@ -891,9 +894,13 @@ footer nav a:hover{color:#fff;text-decoration:underline}
                 <div class="mock-card"><small>Próxima tarea</small><strong>Writing: an essay</strong><div class="mock-prog"><i style="width:65%"></i></div></div>
               </div>
             </div>
-<div class="scr" data-s="1"><div class="mock-card big"><small>Tus cuotas</small><strong>Octubre · Pagada</strong><div class="mock-prog"><i style="width:100%"></i></div></div><div class="mock-card big"><small>Próxima cuota</small><strong>Vence el 10/11</strong><span class="mock-btn">Pagar con Mercado Pago</span></div><div class="mock-card big"><small>Comprobantes</small><strong>Recibo de octubre.pdf</strong></div></div>
-<div class="scr" data-s="2"><div class="mock-card big"><small>Pendiente</small><strong>Writing: an essay</strong><div class="mock-prog"><i style="width:65%"></i></div></div><div class="mock-card big"><small>Entregada</small><strong>Reading: unit 4 ✓</strong></div><div class="mock-card big"><small>Corregida</small><strong>Listening: unit 3 · 9/10</strong></div></div>
-<div class="scr" data-s="3"><div class="mock-row"><div class="mock-card trophy"><b>🏆</b><strong>Primera clase</strong></div><div class="mock-card trophy"><b>🔥</b><strong>12 seguidas</strong></div></div><div class="mock-row"><div class="mock-card trophy"><b>⭐</b><strong>Tarea perfecta</strong></div><div class="mock-card trophy"><b>🎓</b><strong>Nivel B1</strong></div></div></div></div>
+<div class="scr" data-s="1"><div class="mock-card big"><small>Mis cuotas</small><strong>Octubre · Pagada</strong><div class="mock-prog"><i style="width:100%"></i></div></div><div class="mock-card big"><small>Próxima cuota</small><strong>Vence el 10/11</strong><span class="mock-btn">Pagar con Mercado Pago</span></div><div class="mock-card big"><small>Comprobantes</small><strong>Recibo de octubre.pdf</strong></div></div>
+<div class="scr" data-s="2"><div class="mock-card big"><small>Cursos con clases</small><strong>B2 First</strong><span class="mock-btn">Entrar a la clase</span></div><div class="mock-card big"><small>Cursos online</small><strong>Reflective Essays + Práctica asincrónica</strong><div class="mock-prog"><i style="width:70%"></i></div></div></div>
+<div class="scr" data-s="3"><div class="mock-ok">¡No tenés tareas pendientes!</div><div class="mock-card big"><small>Última entregada</small><strong>Writing: Kitchen ✓ · 8,5</strong></div></div>
+<div class="scr" data-s="4"><div class="mock-card big"><small>Cambridge Writing assessment</small><strong>Content 4,5 · Communication 4 · Organisation 4 · Language 4</strong></div><div class="mock-card big"><small>Total</small><strong>17/20 · Grade A</strong></div></div>
+<div class="scr" data-s="5"><div class="mock-card big"><small>Writing: Kitchen</small><strong>8,5</strong></div><div class="mock-card big"><small>Unit 1</small><strong>10</strong></div><div class="mock-card big"><small>Promedio de Writing</small><strong>8,5</strong></div></div>
+<div class="scr" data-s="6"><div class="mock-row"><div class="mock-card trophy"><b>🏆</b><strong>Primera clase</strong></div><div class="mock-card trophy"><b>🔥</b><strong>12 seguidas</strong></div></div><div class="mock-row"><div class="mock-card trophy"><b>⭐</b><strong>Tarea perfecta</strong></div><div class="mock-card trophy"><b>🎓</b><strong>Nivel B1</strong></div></div></div>
+          </div>
           </div>
         </div>
         <div class="mock-toast" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-bell"/></svg> Nota nueva en tu campus</div>
@@ -1519,10 +1526,10 @@ Acepto los términos y compromisos.`;
 (() => {
   const side = document.getElementById('mside'); if (!side) return;
   const scr = [...document.querySelectorAll('.mock-main .scr')], items = [...side.children];
-  const map = [0,1,3,6]; let k = 0;
+  const map = [0,1,2,3,4,5,8]; let k = 0;
   const go = n => { scr.forEach((e,j)=>e.classList.toggle('on',j===n)); items.forEach((e,j)=>e.classList.toggle('on',j===map[n])); };
   if (matchMedia('(prefers-reduced-motion:reduce)').matches) return;
-  setInterval(() => { k = (k+1) % 4; go(k); }, 3600);
+  setInterval(() => { k = (k+1) % scr.length; go(k); }, 3200);
 })();
 
 /* Palabra que rota en la portada */
