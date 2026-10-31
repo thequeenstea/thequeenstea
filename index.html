@@ -627,6 +627,17 @@ footer nav a:hover{color:#fff;text-decoration:underline}
 @media (prefers-reduced-motion:reduce){.fl,.mock-toast{animation:none}.mock-toast{opacity:1}}
 @media (max-width:980px){.campus-split{grid-template-columns:1fr;gap:48px}.mock{transform:none}.how-grid::before{display:none}.fl-a{left:-8px}}
 @media (max-width:560px){.mock-body{grid-template-columns:1fr}.mock-side{display:none}.mock-toast{right:8px}.fl{display:none}.hero .lead{font-size:1.15rem}}
+
+.hero-logo{display:flex;align-items:center;gap:14px;margin-bottom:26px}
+.hero-logo img{width:78px;height:78px;border-radius:50%;background:#fff;padding:3px;box-shadow:0 14px 30px -12px rgba(0,0,0,.6)}
+.hero-logo span{font-family:var(--display);font-weight:700;font-size:1.25rem;line-height:1.1;color:#fff;letter-spacing:-.01em}
+.hero-logo small{display:block;font-family:var(--body);font-weight:500;font-size:.8rem;color:#C9D3EE;letter-spacing:0;margin-top:3px}
+.mock-main{position:relative;min-height:300px}
+.mock-main .scr{display:none;gap:12px;align-content:start}
+.mock-main .scr.on{display:grid;animation:scrIn .45s ease}
+.mock-card.big{padding:16px}.mock-card.big strong{font-size:.95rem}
+.mock-card.trophy{text-align:center;padding:22px 10px}.mock-card.trophy b{display:block;font-size:2rem;margin-bottom:6px}
+@keyframes scrIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .pill.soon{background:#EEF2FF;color:var(--royal)}
 .price-reveal{background:var(--paper);color:var(--royal);border:1.5px dashed var(--blue);border-radius:999px;padding:9px 16px;font-weight:700;font-size:.9rem;transition:background .2s, transform .2s}
 .price-reveal:hover{background:#E6EDFB;transform:translateY(-1px)}
@@ -692,7 +703,8 @@ footer nav a:hover{color:#fff;text-decoration:underline}
 <section class="hero" id="inicio">
   <div class="wrap hero-grid">
     <div>
-      <h1><span class="line"><span>Inglés para</span></span><span class="line"><span><em class="rot" id="rot">trabajar.</em></span></span></h1>
+      <div class="hero-logo"><img src="img/logo.png" alt="The Queen's Tea" onerror="this.parentNode.style.display='none'"><span>The Queen's Tea<small>Inglés online · Campus propio</small></span></div>
+      <h1><span class="line"><span>Inglés que</span></span><span class="line"><span><em class="rot" id="rot">te acompaña.</em></span></span></h1>
       <p class="lead">Clases en vivo, campus propio y preparación para Cambridge e IELTS.</p>
       <div class="hero-ctas">
         <button class="btn btn-accent js-open-test">Hacer el test de nivel gratis</button>
@@ -840,8 +852,8 @@ footer nav a:hover{color:#fff;text-decoration:underline}
         <div class="mock" role="img" aria-label="Vista de ejemplo del campus del alumno">
           <div class="mock-bar"><i></i><i></i><i></i><span>campus.thequeenstea.com.ar</span></div>
           <div class="mock-body">
-            <aside class="mock-side"><span class="on">Inicio</span><span>Pagos</span><span>Mis cursos</span><span>Tareas <em>2</em></span><span>Exámenes</span><span>Notas</span><span>Mis logros</span></aside>
-            <div class="mock-main">
+            <aside class="mock-side" id="mside"><span class="on">Inicio</span><span>Pagos</span><span>Mis cursos</span><span>Tareas <em>2</em></span><span>Exámenes</span><span>Notas</span><span>Mis logros</span></aside>
+            <div class="mock-main"><div class="scr on" data-s="0">
               <div class="mock-hello"><div class="mock-av">L</div><div><small>Vista de ejemplo</small><strong>¡Hola, Lucía!</strong><span>Tenés 2 cosas por hacer</span></div></div>
               <div class="mock-row">
                 <div class="mock-card"><small>Tu racha</small><strong>12 clases seguidas</strong><div class="mock-days"><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i><i></i><i></i></div></div>
@@ -852,6 +864,9 @@ footer nav a:hover{color:#fff;text-decoration:underline}
                 <div class="mock-card"><small>Próxima tarea</small><strong>Writing: an essay</strong><div class="mock-prog"><i style="width:65%"></i></div></div>
               </div>
             </div>
+<div class="scr" data-s="1"><div class="mock-card big"><small>Tus cuotas</small><strong>Octubre · Pagada</strong><div class="mock-prog"><i style="width:100%"></i></div></div><div class="mock-card big"><small>Próxima cuota</small><strong>Vence el 10/11</strong><span class="mock-btn">Pagar con Mercado Pago</span></div><div class="mock-card big"><small>Comprobantes</small><strong>Recibo de octubre.pdf</strong></div></div>
+<div class="scr" data-s="2"><div class="mock-card big"><small>Pendiente</small><strong>Writing: an essay</strong><div class="mock-prog"><i style="width:65%"></i></div></div><div class="mock-card big"><small>Entregada</small><strong>Reading: unit 4 ✓</strong></div><div class="mock-card big"><small>Corregida</small><strong>Listening: unit 3 · 9/10</strong></div></div>
+<div class="scr" data-s="3"><div class="mock-row"><div class="mock-card trophy"><b>🏆</b><strong>Primera clase</strong></div><div class="mock-card trophy"><b>🔥</b><strong>12 seguidas</strong></div></div><div class="mock-row"><div class="mock-card trophy"><b>⭐</b><strong>Tarea perfecta</strong></div><div class="mock-card trophy"><b>🎓</b><strong>Nivel B1</strong></div></div></div></div>
           </div>
         </div>
         <div class="mock-toast" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-bell"/></svg> Nota nueva en tu campus</div>
@@ -1462,11 +1477,22 @@ Acepto los términos y compromisos.`;
 });
 
 
+
+/* Recorrido animado del campus */
+(() => {
+  const side = document.getElementById('mside'); if (!side) return;
+  const scr = [...document.querySelectorAll('.mock-main .scr')], items = [...side.children];
+  const map = [0,1,3,6]; let k = 0;
+  const go = n => { scr.forEach((e,j)=>e.classList.toggle('on',j===n)); items.forEach((e,j)=>e.classList.toggle('on',j===map[n])); };
+  if (matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  setInterval(() => { k = (k+1) % 4; go(k); }, 3600);
+})();
+
 /* Palabra que rota en la portada */
 (() => {
   const el = document.getElementById('rot'); if (!el) return;
   if (matchMedia('(prefers-reduced-motion:reduce)').matches) return;
-  const words = ['trabajar.','viajar.','certificar.','crecer.','estudiar.']; let i = 0;
+  const words = ['te acompaña.','te certifica.','abre puertas.','se nota.']; let i = 0;
   setInterval(() => {
     el.classList.add('out');
     setTimeout(() => {
