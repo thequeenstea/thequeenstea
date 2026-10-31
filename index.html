@@ -247,7 +247,7 @@ footer .brand{color:#fff}
 footer nav{display:flex;gap:22px;flex-wrap:wrap}
 footer nav a{text-decoration:none;font-weight:600;font-size:.92rem}
 footer nav a:hover{color:var(--accent)}
-.copy{border-top:1px solid rgba(255,255,255,.1);margin-top:30px;padding-top:22px;font-size:.88rem}
+.copy{margin-top:26px;font-size:.88rem}
 
 /* ===================== MODALES (test e inscripción) ===================== */
 .overlay{position:fixed;inset:0;background:rgba(9,18,46,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:300;display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;visibility:hidden;transition:opacity .3s, visibility .3s}
@@ -536,6 +536,45 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
 .exam-note{margin:20px 0 0;font-size:.82rem;color:var(--muted);max-width:70ch}
 @media (max-width:980px){.how-grid{grid-template-columns:1fr}.exam-grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:560px){.exam-grid{grid-template-columns:1fr}.how-card,.exam-card{padding:26px}}
+
+/* ===================== PULIDO PROFESIONAL ===================== */
+.i{width:1.25em;height:1.25em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none;vertical-align:-.22em}
+.ic .i{width:26px;height:26px}
+.hero-chips a .i{width:1.1em;height:1.1em;color:var(--accent)}
+.exam-points li{display:inline-flex;align-items:center;gap:8px}
+.exam-points li .i{color:var(--blue)}
+.trust{background:#fff;border-bottom:1px solid var(--line)}
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+.trust-i{padding:30px 18px;text-align:center;border-right:1px solid var(--line)}
+.trust-i:last-child{border-right:0}
+.trust-i strong{display:block;font-family:var(--display);font-size:clamp(1.6rem,3vw,2.3rem);color:var(--ink);line-height:1.1}
+.trust-txt{font-size:clamp(1.2rem,2.1vw,1.6rem)!important;padding-top:.45em}
+.trust-i small{display:block;margin-top:6px;color:var(--muted);font-weight:600;font-size:.9rem}
+.biz{background:var(--paper)}
+.biz-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:center}
+.biz .btn{margin-top:26px}
+.biz-list{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.biz-list li{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;display:flex;flex-direction:column;gap:12px;transition:transform .25s,box-shadow .25s}
+.biz-list li:hover{transform:translateY(-3px);box-shadow:0 16px 36px -22px rgba(14,31,77,.4)}
+.biz-list li>.i{width:44px;height:44px;padding:11px;border-radius:12px;background:var(--ink);color:var(--accent)}
+.biz-list h3{font-size:1.2rem;margin-bottom:4px}
+.biz-list p{margin:0;color:var(--muted);font-size:.95rem}
+.about{background:#fff}
+.about-grid{display:grid;grid-template-columns:.7fr 1.3fr;gap:64px;align-items:center}
+.about-logo{display:flex;align-items:center;justify-content:center;aspect-ratio:1;max-width:340px;margin-inline:auto;width:100%;border-radius:50%;background:radial-gradient(circle at 30% 25%,#fff,var(--paper));box-shadow:0 30px 60px -30px rgba(14,31,77,.45),inset 0 0 0 1px var(--line);padding:34px}
+.about-logo img{width:100%;height:auto;border-radius:50%}
+.about-vals{list-style:none;padding:0;margin:24px 0 30px;display:flex;flex-wrap:wrap;gap:10px}
+.about-vals li{background:var(--paper);color:var(--royal);font-weight:700;font-size:.92rem;padding:9px 16px;border-radius:999px}
+.about .btn .i{color:var(--royal)}
+footer{padding:64px 0 34px}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:36px;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,.12)}
+.foot-brand p{margin:16px 0 0;max-width:34ch;font-size:.95rem;color:#B7C2E2}
+footer h4{margin:0 0 14px;color:#fff;font-size:.95rem;font-family:var(--body);font-weight:700}
+footer nav{display:flex;flex-direction:column;gap:9px;align-items:flex-start}
+footer nav a{color:#B7C2E2;text-decoration:none;font-size:.95rem}
+footer nav a:hover{color:#fff;text-decoration:underline}
+@media (max-width:980px){.biz-grid,.about-grid{grid-template-columns:1fr;gap:36px}.foot-grid{grid-template-columns:1fr 1fr}.trust-grid{grid-template-columns:1fr 1fr}.trust-i:nth-child(2){border-right:0}.trust-i:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+@media (max-width:560px){.biz-list{grid-template-columns:1fr}.foot-grid{grid-template-columns:1fr}.about-logo{max-width:240px}}
 .pill.soon{background:#EEF2FF;color:var(--royal)}
 .price-reveal{background:var(--paper);color:var(--royal);border:1.5px dashed var(--blue);border-radius:999px;padding:9px 16px;font-weight:700;font-size:.9rem;transition:background .2s, transform .2s}
 .price-reveal:hover{background:#E6EDFB;transform:translateY(-1px)}
@@ -548,6 +587,27 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
 
 <div id="scrollbar"></div>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-video" viewBox="0 0 24 24"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></symbol>
+<symbol id="i-edit" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></symbol>
+<symbol id="i-trophy" viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></symbol>
+<symbol id="i-card" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></symbol>
+<symbol id="i-cap" viewBox="0 0 24 24"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></symbol>
+<symbol id="i-laptop" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/></symbol>
+<symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></symbol>
+<symbol id="i-film" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2.2"/><path d="M7 2v20M17 2v20M2 12h20M2 7h5M2 17h5M17 17h5M17 7h5"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+<symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+<symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></symbol>
+<symbol id="i-board" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="13" rx="2"/><path d="M8 21l4-5 4 5"/></symbol>
+<symbol id="i-insta" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.8-.9L3 20l1.1-4.9A8.4 8.4 0 1 1 21 11.5z"/></symbol>
+</defs></svg>
 <!-- ===================== HEADER ===================== -->
 <header class="header" id="header">
   <div class="wrap">
@@ -564,8 +624,8 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
       <a href="#examenes">Exámenes</a>
       <a href="#campus">Campus</a>
       <a href="https://campus.thequeenstea.com.ar/tienda">Tienda</a>
-      <a href="#opiniones">Opiniones</a>
-      <a href="#faq">Preguntas</a>
+      <a href="#empresas">Empresas</a>
+      <a href="#nosotros">Nosotros</a>
       <a href="https://campus.thequeenstea.com.ar" class="btn btn-ghost nav-campus">Entrar al Campus</a>
       <button class="btn btn-accent js-open-test">Test de nivel gratis</button>
     </nav>
@@ -586,9 +646,9 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
         <a href="#cursos" class="btn btn-line">Ver cursos</a>
       </div>
       <div class="hero-chips">
-        <a href="#examenes">🎓 Exámenes internacionales</a>
-        <a href="#campus">💻 Campus propio</a>
-        <a href="https://campus.thequeenstea.com.ar/tienda">🛍️ Tienda de cursos</a>
+        <a href="#examenes"><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg> Exámenes internacionales</a>
+        <a href="#campus"><svg class="i" aria-hidden="true"><use href="#i-laptop"/></svg> Campus propio</a>
+        <a href="https://campus.thequeenstea.com.ar/tienda"><svg class="i" aria-hidden="true"><use href="#i-bag"/></svg> Tienda de cursos</a>
       </div>
       <div class="proof">
         <div class="proof-av" aria-hidden="true"><span>LM</span><span>RG</span><span>SP</span><span>+</span></div>
@@ -613,8 +673,18 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
 
 <div class="band" aria-hidden="true">
   <div class="band-track">
-    <span>Grupos de máximo 8 alumnos</span><span>Clases 100% online en vivo</span><span>Campus propio</span><span>Cambridge First · Advanced · Proficiency</span><span>IELTS</span><span>Tienda de cursos asincrónicos</span><span>Certificado de logro</span><span>Legal · Medical · Aviation English</span>
-    <span>Grupos de máximo 8 alumnos</span><span>Clases 100% online en vivo</span><span>Campus propio</span><span>Cambridge First · Advanced · Proficiency</span><span>IELTS</span><span>Tienda de cursos asincrónicos</span><span>Certificado de logro</span><span>Legal · Medical · Aviation English</span>
+    <span>Conversación</span><span>Cambridge First · Advanced · Proficiency</span><span>IELTS</span><span>Business English</span><span>Legal English</span><span>Medical English</span><span>Aviation English</span><span>Cursos asincrónicos</span>
+    <span>Conversación</span><span>Cambridge First · Advanced · Proficiency</span><span>IELTS</span><span>Business English</span><span>Legal English</span><span>Medical English</span><span>Aviation English</span><span>Cursos asincrónicos</span>
+  </div>
+</div>
+
+
+<div class="trust">
+  <div class="wrap trust-grid reveal">
+    <div class="trust-i"><strong><span data-count="10">0</span>+</strong><small>años enseñando inglés</small></div>
+    <div class="trust-i"><strong><span data-count="8">0</span></strong><small>alumnos como máximo por grupo</small></div>
+    <div class="trust-i"><strong><span data-count="100">0</span>%</strong><small>online y en vivo</small></div>
+    <div class="trust-i"><strong class="trust-txt">Cambridge · IELTS</strong><small>preparación para exámenes</small></div>
   </div>
 </div>
 
@@ -648,9 +718,9 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
       <article class="exam-card reveal"><span class="exam-lvl">IELTS</span><h3>IELTS</h3><p>Entrenamiento para IELTS: las cuatro habilidades, estrategias y práctica con tiempos reales.</p></article>
     </div>
     <ul class="exam-points reveal">
-      <li>📝 Exámenes de práctica estilo Cambridge dentro del campus</li>
-      <li>✍️ Correcciones de Writing con devolución detallada</li>
-      <li>📈 Seguimiento de tu progreso, habilidad por habilidad</li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-file"/></svg> Exámenes de práctica estilo Cambridge dentro del campus</li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-edit"/></svg> Correcciones de Writing con devolución detallada</li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-chart"/></svg> Seguimiento de tu progreso, habilidad por habilidad</li>
     </ul>
     <p class="exam-note">Cambridge English e IELTS son marcas de sus respectivos titulares. The Queen's Tea prepara para estos exámenes y no es el organismo examinador.</p>
   </div>
@@ -717,14 +787,14 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
       </div>
     </div>
     <div class="campus-grid">
-      <article class="campus-card reveal"><span class="ic" aria-hidden="true">🎥</span><h3>Clases en vivo</h3><p>Tu link de clase siempre a mano y un aviso cuando empieza. Si no podés asistir, te enviamos el material de trabajo.</p></article>
-      <article class="campus-card reveal"><span class="ic" aria-hidden="true">📚</span><h3>Material y presentaciones</h3><p>Presentaciones, audios, videos y tareas ordenados por curso, con avisos por mail cuando hay material nuevo.</p></article>
-      <article class="campus-card reveal"><span class="ic" aria-hidden="true">✏️</span><h3>Tareas y exámenes online</h3><p>Entregás desde el campus y tu profe te corrige y te deja comentarios. También hay exámenes con audio.</p></article>
-      <article class="campus-card reveal"><span class="ic" aria-hidden="true">📈</span><h3>Seguimiento real</h3><p>Notas, asistencia, calendario y boletín en PDF para que veas tu progreso en cualquier momento.</p></article>
-      <article class="campus-card reveal"><span class="ic" aria-hidden="true">🏆</span><h3>Logros y premios</h3><p>Rachas, niveles, insignias y premios de tu profe, con destinos del mundo de habla inglesa para desbloquear.</p></article>
-      <article class="campus-card reveal"><span class="ic" aria-hidden="true">💳</span><h3>Pagos claros</h3><p>Tus cuotas, descuentos y comprobantes a la vista. Pagá con tarjeta, QR o transferencia.</p></article>
-      <article class="campus-card reveal"><span class="ic" aria-hidden="true">🎓</span><h3>Certificados</h3><p>Al terminar un curso, un certificado de logro para guardar y compartir.</p></article>
-      <article class="campus-card reveal"><span class="ic" aria-hidden="true">📱</span><h3>Desde donde estés</h3><p>Funciona en la compu y en el celu, con modo oscuro y avisos para que no se te pase nada.</p></article>
+      <article class="campus-card reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-video"/></svg></span><h3>Clases en vivo</h3><p>Tu link de clase siempre a mano y un aviso cuando empieza. Si no podés asistir, te enviamos el material de trabajo.</p></article>
+      <article class="campus-card reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-book"/></svg></span><h3>Material y presentaciones</h3><p>Presentaciones, audios, videos y tareas ordenados por curso, con avisos por mail cuando hay material nuevo.</p></article>
+      <article class="campus-card reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-edit"/></svg></span><h3>Tareas y exámenes online</h3><p>Entregás desde el campus y tu profe te corrige y te deja comentarios. También hay exámenes con audio.</p></article>
+      <article class="campus-card reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-chart"/></svg></span><h3>Seguimiento real</h3><p>Notas, asistencia, calendario y boletín en PDF para que veas tu progreso en cualquier momento.</p></article>
+      <article class="campus-card reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-trophy"/></svg></span><h3>Logros y premios</h3><p>Rachas, niveles, insignias y premios de tu profe, con destinos del mundo de habla inglesa para desbloquear.</p></article>
+      <article class="campus-card reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-card"/></svg></span><h3>Pagos claros</h3><p>Tus cuotas, descuentos y comprobantes a la vista. Pagá con tarjeta, QR o transferencia.</p></article>
+      <article class="campus-card reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg></span><h3>Certificados</h3><p>Al terminar un curso, un certificado de logro para guardar y compartir.</p></article>
+      <article class="campus-card reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg></span><h3>Desde donde estés</h3><p>Funciona en la compu y en el celu, con modo oscuro y avisos para que no se te pase nada.</p></article>
     </div>
     <div class="shop-head reveal">
       <span class="kicker" style="color:var(--accent)">Tienda de The Queen's Tea</span>
@@ -732,10 +802,10 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
       <p class="lead">Aprendé a tu ritmo, cuando quieras, con el mismo cuidado de siempre. Todo lo que comprás se usa dentro de nuestro campus.</p>
     </div>
     <div class="shop-grid">
-      <article class="shop-tile reveal"><span class="ic" aria-hidden="true">🧑‍🏫</span><h3>Material docente</h3><p>Recursos pensados y probados en clase, listos para usar en tus propias clases o para estudiar por tu cuenta.</p></article>
-      <article class="shop-tile reveal"><span class="ic" aria-hidden="true">🎬</span><h3>Cursos asincrónicos con seguimiento</h3><p>Videos, audios y tareas para hacer a tu ritmo, con tu avance registrado lección por lección. No estás solo: tenés seguimiento.</p></article>
-      <article class="shop-tile reveal"><span class="ic" aria-hidden="true">🔐</span><h3>Acceso exclusivo en nuestro campus</h3><p>Comprás y empezás al instante: tu curso queda en tu cuenta del campus, disponible cuando quieras.</p></article>
-      <article class="shop-tile reveal"><span class="ic" aria-hidden="true">🎓</span><h3>Certificado de logro</h3><p>Al completar el curso recibís tu certificado de logro de The Queen's Tea.</p></article>
+      <article class="shop-tile reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-board"/></svg></span><h3>Material docente</h3><p>Recursos pensados y probados en clase, listos para usar en tus propias clases o para estudiar por tu cuenta.</p></article>
+      <article class="shop-tile reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-film"/></svg></span><h3>Cursos asincrónicos con seguimiento</h3><p>Videos, audios y tareas para hacer a tu ritmo, con tu avance registrado lección por lección. No estás solo: tenés seguimiento.</p></article>
+      <article class="shop-tile reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-lock"/></svg></span><h3>Acceso exclusivo en nuestro campus</h3><p>Comprás y empezás al instante: tu curso queda en tu cuenta del campus, disponible cuando quieras.</p></article>
+      <article class="shop-tile reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg></span><h3>Certificado de logro</h3><p>Al completar el curso recibís tu certificado de logro de The Queen's Tea.</p></article>
     </div>
     <div class="shop-band reveal">
       <div>
@@ -814,6 +884,38 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
   <div class="t-track" id="tTrack"></div>
 </section>
 
+<!-- ===================== EMPRESAS Y GRUPOS ===================== -->
+<section class="biz" id="empresas">
+  <div class="wrap biz-grid">
+    <div class="reveal">
+      <span class="kicker">Para empresas, equipos y grupos</span>
+      <h2>Armamos el grupo que necesitás.</h2>
+      <p class="lead">¿Tu empresa, tu equipo o un grupo de colegas necesita inglés? Escribinos y armamos un grupo a medida, según nivel, objetivo y horarios.</p>
+      <a class="btn btn-primary" href="https://wa.me/5492212229980?text=%C2%A1Hola%20The%20Queen's%20Tea!%20Quiero%20consultar%20por%20un%20grupo%20de%20ingl%C3%A9s%20para%20mi%20empresa%20o%20equipo." target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-chat"/></svg> Consultar por un grupo</a>
+    </div>
+    <ul class="biz-list reveal">
+      <li><svg class="i" aria-hidden="true"><use href="#i-users"/></svg><div><h3>Grupos a medida</h3><p>Reunimos a quienes comparten nivel y objetivo, con un máximo de 8 personas por grupo.</p></div></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-briefcase"/></svg><div><h3>Inglés profesional</h3><p>Business, Legal, Medical y Aviation English, además de preparación para exámenes internacionales.</p></div></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg><div><h3>Horarios a coordinar</h3><p>Definimos días y horarios que se ajusten a tu equipo, con clases 100% online en vivo.</p></div></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-chart"/></svg><div><h3>Seguimiento en el campus</h3><p>Asistencia, tareas y notas en nuestro campus propio, con avisos por mail.</p></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== NOSOTROS ===================== -->
+<section class="about" id="nosotros">
+  <div class="wrap about-grid">
+    <div class="about-logo reveal"><img src="img/logo.png" alt="The Queen's Tea" onerror="this.style.display='none'"></div>
+    <div class="reveal">
+      <span class="kicker">Quiénes somos</span>
+      <h2>Más de diez años acompañando a quienes aprenden inglés.</h2>
+      <p class="lead">The Queen's Tea nació con el sueño de derribar las barreras del idioma y acompañar a cada estudiante. Hoy, cientos de voces argentinas confirman que ese sueño se hizo realidad.</p>
+      <ul class="about-vals"><li>Trato cercano y personalizado</li><li>Grupos reducidos y clases en vivo</li><li>Campus propio con seguimiento real</li><li>Exigencia con calidez</li></ul>
+      <a class="btn btn-ghost" href="https://www.instagram.com/thequeenstea.ingles/" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-insta"/></svg> @thequeenstea.ingles</a>
+    </div>
+  </div>
+</section>
+
 <!-- ===================== FAQ ===================== -->
 <section id="faq">
   <div class="wrap faq-grid">
@@ -861,7 +963,7 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
     <p class="lead">Descubrí tu nivel en minutos y elegí el curso que mejor se adapta a vos.</p>
     <div class="hero-ctas">
       <button class="btn btn-accent js-open-test">Hacer el test de nivel</button>
-      <a href="#cursos" class="btn btn-line">Ver cursos y precios</a>
+      <a href="#cursos" class="btn btn-line">Ver cursos</a>
     </div>
   </div>
 </section>
@@ -869,16 +971,28 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
 
 <footer>
   <div class="wrap">
-    <div class="foot">
-      <a href="#inicio" class="brand">
-        <span class="brand-mark">
-          <img src="img/logo.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-          <svg viewBox="0 0 24 24" fill="#224097" aria-hidden="true"><path d="M3 18h18v2H3zM3 7l4.5 4L12 4l4.5 7L21 7l-1.5 9h-15z"/></svg>
-        </span>
-        <span class="brand-name">The Queen's Tea<span class="brand-sub">Educación a distancia</span></span>
-      </a>
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#inicio" class="brand">
+          <span class="brand-mark">
+            <img src="img/logo.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <svg viewBox="0 0 24 24" fill="#224097" aria-hidden="true"><path d="M3 18h18v2H3zM3 7l4.5 4L12 4l4.5 7L21 7l-1.5 9h-15z"/></svg>
+          </span>
+          <span class="brand-name">The Queen's Tea<span class="brand-sub">Educación a distancia</span></span>
+        </a>
+        <p>Inglés online en grupos reducidos, con campus propio y preparación para exámenes internacionales.</p>
+      </div>
       <nav aria-label="Pie de página">
-        <a href="#inicio">Inicio</a><a href="#cursos">Cursos</a><a href="#examenes">Exámenes</a><a href="#campus">Campus</a><a href="https://campus.thequeenstea.com.ar/tienda">Tienda</a><a href="#metodo">Método</a><a href="#opiniones">Opiniones</a><a href="#faq">Preguntas</a>
+        <h4>Explorá</h4>
+        <a href="#cursos">Cursos</a><a href="#examenes">Exámenes</a><a href="#empresas">Empresas y grupos</a><a href="#nosotros">Nosotros</a><a href="#faq">Preguntas frecuentes</a>
+      </nav>
+      <nav aria-label="Campus">
+        <h4>Campus y tienda</h4>
+        <a href="https://campus.thequeenstea.com.ar">Entrar al Campus</a><a href="https://campus.thequeenstea.com.ar/tienda">Tienda de cursos</a><a href="https://campus.thequeenstea.com.ar/tienda/matricula-2027">Matrícula 2027</a>
+      </nav>
+      <nav aria-label="Contacto">
+        <h4>Contacto</h4>
+        <a href="https://wa.me/5492212229980" target="_blank" rel="noopener">WhatsApp +54 9 221 222-9980</a><a href="https://www.instagram.com/thequeenstea.ingles/" target="_blank" rel="noopener">Instagram @thequeenstea.ingles</a>
       </nav>
     </div>
     <div class="copy">© <span id="year"></span> The Queen's Tea. Todos los derechos reservados.</div>
