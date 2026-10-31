@@ -492,6 +492,13 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
 .campus-card .ic{display:flex;width:50px;height:50px;border-radius:14px;background:var(--accent);color:var(--ink);align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:16px}
 .campus-card h3{font-size:1.2rem;margin-bottom:8px;color:#fff}
 .campus-card p{margin:0;color:#C9D3EE;font-size:.95rem;line-height:1.5}
+.shop-head{max-width:760px;margin:64px 0 34px;position:relative}
+.shop-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;position:relative}
+.shop-tile{background:#fff;color:var(--ink);border-radius:var(--radius);padding:26px;transition:transform .25s, box-shadow .25s}
+.shop-tile:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(0,0,0,.18)}
+.shop-tile .ic{display:flex;width:50px;height:50px;border-radius:14px;background:var(--paper);align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:16px}
+.shop-tile h3{font-size:1.15rem;margin-bottom:8px;color:var(--ink)}
+.shop-tile p{margin:0;color:var(--muted);font-size:.95rem;line-height:1.5}
 .shop-band{margin-top:26px;position:relative;display:grid;grid-template-columns:1.4fr 1fr;gap:26px;align-items:center;background:#fff;color:var(--ink);border-radius:var(--radius-lg);padding:38px 42px}
 .shop-band h3{font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:10px}
 .shop-band p{margin:0;color:var(--muted)}
@@ -503,8 +510,8 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
 .price-reveal{background:var(--paper);color:var(--royal);border:1.5px dashed var(--blue);border-radius:999px;padding:9px 16px;font-weight:700;font-size:.9rem;transition:background .2s, transform .2s}
 .price-reveal:hover{background:#E6EDFB;transform:translateY(-1px)}
 .c-price .pop{animation:fadeUp .35s ease both}
-@media (max-width:980px){.campus-grid{grid-template-columns:repeat(2,1fr)}.shop-band{grid-template-columns:1fr;padding:30px}}
-@media (max-width:560px){.campus-grid{grid-template-columns:1fr}}
+@media (max-width:980px){.campus-grid,.shop-grid{grid-template-columns:repeat(2,1fr)}.shop-band{grid-template-columns:1fr;padding:30px}}
+@media (max-width:560px){.campus-grid,.shop-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -629,23 +636,38 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
     <div class="campus-head reveal">
       <span class="kicker" style="color:var(--accent)">Campus propio</span>
       <h2>Todo tu aprendizaje, en un solo lugar.</h2>
-      <p class="lead">Contamos con un campus virtual propio, creado para acompañar a cada alumno: clases, tareas, notas y pagos, desde la compu o el celu.</p>
+      <p class="lead">No usamos plataformas de terceros: creamos nuestro propio campus virtual para acompañar a cada alumno de principio a fin. Clases, material, tareas, notas, asistencia, pagos y mucho más, en un solo lugar y desde la compu o el celu.</p>
       <div class="campus-top-ctas">
         <a href="https://campus.thequeenstea.com.ar" class="btn btn-accent">Entrar al Campus</a>
         <a href="https://campus.thequeenstea.com.ar/tienda" class="btn btn-line">Ver la tienda de cursos</a>
       </div>
     </div>
     <div class="campus-grid">
-      <article class="campus-card reveal"><span class="ic" aria-hidden="true">📚</span><h3>Clases y material</h3><p>Tus presentaciones, tareas y exámenes online, con avisos por mail cuando hay novedades.</p></article>
-      <article class="campus-card reveal"><span class="ic" aria-hidden="true">📈</span><h3>Seguimiento real</h3><p>Notas, asistencia, boletín en PDF y certificados para que veas tu progreso.</p></article>
-      <article class="campus-card reveal"><span class="ic" aria-hidden="true">🏆</span><h3>Logros y premios</h3><p>Rachas, insignias y premios de tu profe, con destinos del mundo de habla inglesa para desbloquear.</p></article>
+      <article class="campus-card reveal"><span class="ic" aria-hidden="true">🎥</span><h3>Clases en vivo</h3><p>Tu link de clase siempre a mano y un aviso cuando empieza. Si no podés asistir, te enviamos el material de trabajo.</p></article>
+      <article class="campus-card reveal"><span class="ic" aria-hidden="true">📚</span><h3>Material y presentaciones</h3><p>Presentaciones, audios, videos y tareas ordenados por curso, con avisos por mail cuando hay material nuevo.</p></article>
+      <article class="campus-card reveal"><span class="ic" aria-hidden="true">✏️</span><h3>Tareas y exámenes online</h3><p>Entregás desde el campus y tu profe te corrige y te deja comentarios. También hay exámenes con audio.</p></article>
+      <article class="campus-card reveal"><span class="ic" aria-hidden="true">📈</span><h3>Seguimiento real</h3><p>Notas, asistencia, calendario y boletín en PDF para que veas tu progreso en cualquier momento.</p></article>
+      <article class="campus-card reveal"><span class="ic" aria-hidden="true">🏆</span><h3>Logros y premios</h3><p>Rachas, niveles, insignias y premios de tu profe, con destinos del mundo de habla inglesa para desbloquear.</p></article>
       <article class="campus-card reveal"><span class="ic" aria-hidden="true">💳</span><h3>Pagos claros</h3><p>Tus cuotas, descuentos y comprobantes a la vista. Pagá con tarjeta, QR o transferencia.</p></article>
+      <article class="campus-card reveal"><span class="ic" aria-hidden="true">🎓</span><h3>Certificados</h3><p>Al terminar un curso, un certificado de logro para guardar y compartir.</p></article>
+      <article class="campus-card reveal"><span class="ic" aria-hidden="true">📱</span><h3>Desde donde estés</h3><p>Funciona en la compu y en el celu, con modo oscuro y avisos para que no se te pase nada.</p></article>
+    </div>
+    <div class="shop-head reveal">
+      <span class="kicker" style="color:var(--accent)">Tienda de The Queen's Tea</span>
+      <h2>Material docente y cursos asincrónicos.</h2>
+      <p class="lead">Aprendé a tu ritmo, cuando quieras, con el mismo cuidado de siempre. Todo lo que comprás se usa dentro de nuestro campus.</p>
+    </div>
+    <div class="shop-grid">
+      <article class="shop-tile reveal"><span class="ic" aria-hidden="true">🧑‍🏫</span><h3>Material docente</h3><p>Recursos pensados y probados en clase, listos para usar en tus propias clases o para estudiar por tu cuenta.</p></article>
+      <article class="shop-tile reveal"><span class="ic" aria-hidden="true">🎬</span><h3>Cursos asincrónicos con seguimiento</h3><p>Videos, audios y tareas para hacer a tu ritmo, con tu avance registrado lección por lección. No estás solo: tenés seguimiento.</p></article>
+      <article class="shop-tile reveal"><span class="ic" aria-hidden="true">🔐</span><h3>Acceso exclusivo en nuestro campus</h3><p>Comprás y empezás al instante: tu curso queda en tu cuenta del campus, disponible cuando quieras.</p></article>
+      <article class="shop-tile reveal"><span class="ic" aria-hidden="true">🎓</span><h3>Certificado de logro</h3><p>Al completar el curso recibís tu certificado de logro de The Queen's Tea.</p></article>
     </div>
     <div class="shop-band reveal">
       <div>
-        <h3>Tienda de cursos asincrónicos</h3>
-        <p>Aprendé a tu ritmo, cuando quieras: videos, tareas y un certificado de logro al terminar. Comprás y empezás al instante desde tu campus.</p>
-        <ul><li>Acceso inmediato</li><li>Videos y tareas</li><li>Certificado de logro</li><li>Tarjeta, QR o transferencia</li></ul>
+        <h3>Empezá hoy mismo</h3>
+        <p>Entrá a la tienda, elegí lo que te sirve y pagá con tarjeta, QR o transferencia.</p>
+        <ul><li>Acceso inmediato</li><li>A tu ritmo</li><li>Con seguimiento</li><li>Certificado de logro</li></ul>
       </div>
       <div class="campus-ctas">
         <a href="https://campus.thequeenstea.com.ar/tienda" class="btn btn-primary">Ir a la tienda</a>
