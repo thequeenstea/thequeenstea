@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Queen's Tea | Inglés online, exámenes internacionales y mucho más</title>
-<meta name="description" content="Aprendé inglés online con grupos de máximo 8 alumnos, material incluido y enfoque conversacional. Niveles, IELTS, First, Proficiency y cursos para profesionales.">
+<meta name="description" content="Inglés online en grupos de máximo 8 alumnos, campus propio con seguimiento real, tienda de cursos asincrónicos y preparación para exámenes internacionales: Cambridge First, Advanced, Proficiency e IELTS.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👑</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -92,7 +92,7 @@ section{padding:110px 0}
 @keyframes drift{to{transform:translate(-60px,50px) scale(1.12)}}
 .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:center}
 .hero .kicker{color:var(--accent)}
-.hero h1{font-size:clamp(3.2rem,8vw,6.6rem);font-weight:600;letter-spacing:-.035em}
+.hero h1{font-size:clamp(2.7rem,6.2vw,5.3rem);font-weight:600;letter-spacing:-.035em}
 .hero h1 .line{display:block;overflow:hidden;padding-bottom:.06em}
 .hero h1 .line > span{display:inline-block;transform:translateY(105%);animation:rise .9s cubic-bezier(.2,.8,.2,1) forwards}
 .hero h1 .line:nth-child(2) > span{animation-delay:.12s;color:var(--accent)}
@@ -507,6 +507,35 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
 .campus-ctas{display:flex;flex-direction:column;gap:12px}
 .campus-top-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
 .nav-campus{padding:12px 20px;font-size:.92rem}
+
+/* ===================== CÓMO FUNCIONA / EXÁMENES / CHIPS ===================== */
+.hero-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;opacity:0;animation:fadeUp .8s .65s ease forwards}
+.hero-chips a{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#fff;font-weight:600;font-size:.92rem;text-decoration:none;transition:background .2s,transform .2s}
+.hero-chips a:hover{background:rgba(255,255,255,.16);transform:translateY(-2px)}
+.how{background:var(--paper)}
+.how-head{max-width:640px;margin-bottom:44px}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.how-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:34px;display:flex;flex-direction:column;gap:10px;transition:transform .25s,box-shadow .25s}
+.how-card:hover{transform:translateY(-4px);box-shadow:0 18px 40px -20px rgba(14,31,77,.35)}
+.how-n{display:flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:50%;background:var(--ink);color:var(--accent);font-family:var(--display);font-weight:700;font-size:1.3rem;margin-bottom:6px}
+.how-card h3{font-size:1.5rem}
+.how-card p{margin:0;color:var(--muted)}
+.how-link{margin-top:auto;padding:12px 0 0;background:none;border:0;color:var(--royal);font-weight:700;text-decoration:none;text-align:left;font-size:1rem}
+.how-link:hover{text-decoration:underline}
+.exams{background:#fff}
+.exams-head{max-width:720px;margin-bottom:44px}
+.exam-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.exam-card{background:linear-gradient(160deg,var(--ink),var(--royal));color:#fff;border-radius:var(--radius-lg);padding:30px;position:relative;overflow:hidden;transition:transform .25s}
+.exam-card:hover{transform:translateY(-5px)}
+.exam-card::after{content:"";position:absolute;right:-40px;bottom:-40px;width:140px;height:140px;border-radius:50%;background:var(--sky);opacity:.18}
+.exam-lvl{display:inline-block;background:var(--accent);color:var(--ink);font-weight:800;border-radius:999px;padding:5px 14px;font-size:.9rem;margin-bottom:18px}
+.exam-card h3{font-size:1.5rem;color:#fff;margin-bottom:8px}
+.exam-card p{margin:0;color:#C9D3EE;font-size:.95rem;position:relative;z-index:1}
+.exam-points{list-style:none;padding:0;margin:30px 0 0;display:flex;flex-wrap:wrap;gap:10px}
+.exam-points li{background:var(--paper);color:var(--royal);font-weight:700;font-size:.92rem;padding:10px 16px;border-radius:999px}
+.exam-note{margin:20px 0 0;font-size:.82rem;color:var(--muted);max-width:70ch}
+@media (max-width:980px){.how-grid{grid-template-columns:1fr}.exam-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.exam-grid{grid-template-columns:1fr}.how-card,.exam-card{padding:26px}}
 .pill.soon{background:#EEF2FF;color:var(--royal)}
 .price-reveal{background:var(--paper);color:var(--royal);border:1.5px dashed var(--blue);border-radius:999px;padding:9px 16px;font-weight:700;font-size:.9rem;transition:background .2s, transform .2s}
 .price-reveal:hover{background:#E6EDFB;transform:translateY(-1px)}
@@ -531,9 +560,10 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
       <span class="brand-name">The Queen's Tea<span class="brand-sub">Educación a distancia</span></span>
     </a>
     <nav class="nav" id="nav" aria-label="Principal">
-      <a href="#metodo">Método</a>
+      <a href="#cursos">Cursos</a>
+      <a href="#examenes">Exámenes</a>
       <a href="#campus">Campus</a>
-      <a href="#cursos">Cursos y precios</a>
+      <a href="https://campus.thequeenstea.com.ar/tienda">Tienda</a>
       <a href="#opiniones">Opiniones</a>
       <a href="#faq">Preguntas</a>
       <a href="https://campus.thequeenstea.com.ar" class="btn btn-ghost nav-campus">Entrar al Campus</a>
@@ -548,12 +578,17 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
 <section class="hero" id="inicio">
   <div class="wrap hero-grid">
     <div>
-      <span class="kicker">Tu futuro a un click de distancia</span>
-      <h1><span class="line"><span>Aprendizaje</span></span><span class="line"><span>garantizado.</span></span></h1>
-      <p class="lead">Hace diez años soñábamos con derribar las barreras del idioma y acompañar a cada estudiante. Hoy, cientos de voces argentinas confirman que ese sueño se hizo realidad.</p>
+      <span class="kicker">Inglés online · Campus propio · Exámenes internacionales</span>
+      <h1><span class="line"><span>Inglés con</span></span><span class="line"><span>acompañamiento real.</span></span></h1>
+      <p class="lead">Clases en vivo en grupos de hasta 8 alumnos, un campus propio donde seguís tu progreso y preparación para exámenes internacionales como Cambridge e IELTS. Hace más de diez años acompañamos a cada estudiante.</p>
       <div class="hero-ctas">
-        <a href="#cursos" class="btn btn-accent">Ver cursos y precios</a>
-        <button class="btn btn-line js-open-test">Test de nivel gratis (15-20 min)</button>
+        <button class="btn btn-accent js-open-test">Hacer el test de nivel gratis</button>
+        <a href="#cursos" class="btn btn-line">Ver cursos</a>
+      </div>
+      <div class="hero-chips">
+        <a href="#examenes">🎓 Exámenes internacionales</a>
+        <a href="#campus">💻 Campus propio</a>
+        <a href="https://campus.thequeenstea.com.ar/tienda">🛍️ Tienda de cursos</a>
       </div>
       <div class="proof">
         <div class="proof-av" aria-hidden="true"><span>LM</span><span>RG</span><span>SP</span><span>+</span></div>
@@ -578,10 +613,48 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
 
 <div class="band" aria-hidden="true">
   <div class="band-track">
-    <span>Grupos de máximo 8 alumnos</span><span>Clases 100% online</span><span>IELTS</span><span>First y Proficiency</span><span>Legal English</span><span>Medical English</span><span>Aviation English</span><span>Material incluido</span>
-    <span>Grupos de máximo 8 alumnos</span><span>Clases 100% online</span><span>IELTS</span><span>First y Proficiency</span><span>Legal English</span><span>Medical English</span><span>Aviation English</span><span>Material incluido</span>
+    <span>Grupos de máximo 8 alumnos</span><span>Clases 100% online en vivo</span><span>Campus propio</span><span>Cambridge First · Advanced · Proficiency</span><span>IELTS</span><span>Tienda de cursos asincrónicos</span><span>Certificado de logro</span><span>Legal · Medical · Aviation English</span>
+    <span>Grupos de máximo 8 alumnos</span><span>Clases 100% online en vivo</span><span>Campus propio</span><span>Cambridge First · Advanced · Proficiency</span><span>IELTS</span><span>Tienda de cursos asincrónicos</span><span>Certificado de logro</span><span>Legal · Medical · Aviation English</span>
   </div>
 </div>
+
+<!-- ===================== CÓMO FUNCIONA ===================== -->
+<section class="how" id="como">
+  <div class="wrap">
+    <div class="reveal how-head">
+      <span class="kicker">Empezar es simple</span>
+      <h2>Tres pasos y ya estás adentro.</h2>
+    </div>
+    <div class="how-grid">
+      <article class="how-card reveal"><span class="how-n">1</span><h3>Descubrí tu nivel</h3><p>Hacé el test gratis, en 15 a 20 minutos. Te mostramos tu nivel estimado y el curso ideal para vos.</p><button class="how-link js-open-test">Hacer el test →</button></article>
+      <article class="how-card reveal"><span class="how-n">2</span><h3>Reservá tu lugar</h3><p>Elegí tu curso y abonás la matrícula 2027 para asegurar tu cupo en un grupo de hasta 8 alumnos.</p><a class="how-link" href="#cursos">Ver cursos →</a></article>
+      <article class="how-card reveal"><span class="how-n">3</span><h3>Cursá con tu campus</h3><p>Clases en vivo, material, tareas, notas y pagos en tu campus propio, desde la compu o el celu.</p><a class="how-link" href="#campus">Conocer el campus →</a></article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== EXÁMENES INTERNACIONALES ===================== -->
+<section class="exams" id="examenes">
+  <div class="wrap">
+    <div class="reveal exams-head">
+      <span class="kicker">Exámenes internacionales</span>
+      <h2>Preparate para certificar tu inglés.</h2>
+      <p class="lead">Preparamos para los exámenes de Cambridge e IELTS, con práctica de las cuatro habilidades, simulacros y corrección de Writing con criterios Cambridge.</p>
+    </div>
+    <div class="exam-grid">
+      <article class="exam-card reveal"><span class="exam-lvl">B2</span><h3>Cambridge First</h3><p>Preparación para el First (B2): Reading, Use of English, Writing, Listening y Speaking.</p></article>
+      <article class="exam-card reveal"><span class="exam-lvl">C1</span><h3>Cambridge Advanced</h3><p>Preparación para el Advanced (C1): inglés académico y profesional con práctica de examen.</p></article>
+      <article class="exam-card reveal"><span class="exam-lvl">C2</span><h3>Cambridge Proficiency</h3><p>Preparación para el Proficiency (C2), el nivel más alto de Cambridge.</p></article>
+      <article class="exam-card reveal"><span class="exam-lvl">IELTS</span><h3>IELTS</h3><p>Entrenamiento para IELTS: las cuatro habilidades, estrategias y práctica con tiempos reales.</p></article>
+    </div>
+    <ul class="exam-points reveal">
+      <li>📝 Exámenes de práctica estilo Cambridge dentro del campus</li>
+      <li>✍️ Correcciones de Writing con devolución detallada</li>
+      <li>📈 Seguimiento de tu progreso, habilidad por habilidad</li>
+    </ul>
+    <p class="exam-note">Cambridge English e IELTS son marcas de sus respectivos titulares. The Queen's Tea prepara para estos exámenes y no es el organismo examinador.</p>
+  </div>
+</section>
 
 <!-- ===================== MÉTODO ===================== -->
 <section id="metodo">
@@ -682,7 +755,7 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
 <section class="courses" id="cursos">
   <div class="wrap">
     <div class="reveal">
-      <h2>Cursos y precios</h2>
+      <h2>Cursos</h2>
       <p class="lead">Estamos armando los grupos 2027. Muy pronto publicamos horarios y valores: reservá tu lugar con la matrícula y anotate en el curso que te interesa para que te avisemos apenas abra. Si no sabés tu nivel, hacé primero el test gratis.</p>
     </div>
 
@@ -750,6 +823,18 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
     </div>
     <div class="reveal" id="faqList">
       <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">¿Preparan para exámenes internacionales?<span class="plus" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div><p>Sí. Preparamos para Cambridge First (B2), Advanced (C1) y Proficiency (C2), y para IELTS. Practicás las cuatro habilidades con exámenes estilo Cambridge y correcciones de Writing dentro del campus.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">¿Qué es el Campus?<span class="plus" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div><p>Es nuestro campus virtual propio: ahí ves tus clases, material, tareas, exámenes, notas, asistencia y pagos, con avisos por mail. Funciona desde la compu y desde el celular.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">¿Qué hay en la tienda de cursos?<span class="plus" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div><p>Material docente y cursos asincrónicos con seguimiento, con acceso exclusivo en nuestro campus y certificado de logro al terminar. Comprás y empezás al instante.</p></div></div>
+      </div>
+      <div class="faq-item">
         <button class="faq-q" aria-expanded="false">¿Cuál es el tamaño máximo de los grupos?<span class="plus" aria-hidden="true">+</span></button>
         <div class="faq-a"><div><p>Nuestros grupos son reducidos, con un máximo de 8 alumnos por clase. Así cada alumno tiene tiempo de práctica oral y atención personalizada del docente.</p></div></div>
       </div>
@@ -793,7 +878,7 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
         <span class="brand-name">The Queen's Tea<span class="brand-sub">Educación a distancia</span></span>
       </a>
       <nav aria-label="Pie de página">
-        <a href="#inicio">Inicio</a><a href="#metodo">Método</a><a href="#campus">Campus</a><a href="#cursos">Cursos</a><a href="#opiniones">Opiniones</a><a href="#faq">Preguntas</a>
+        <a href="#inicio">Inicio</a><a href="#cursos">Cursos</a><a href="#examenes">Exámenes</a><a href="#campus">Campus</a><a href="https://campus.thequeenstea.com.ar/tienda">Tienda</a><a href="#metodo">Método</a><a href="#opiniones">Opiniones</a><a href="#faq">Preguntas</a>
       </nav>
     </div>
     <div class="copy">© <span id="year"></span> The Queen's Tea. Todos los derechos reservados.</div>
