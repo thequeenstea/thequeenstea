@@ -8,7 +8,7 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👑</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 /* ===================== PALETA Y BASE ===================== */
@@ -26,7 +26,7 @@
   --bad:#B91C1C; --bad-bg:#FEE2E2;
   --wa:#1FAF55;
   --radius-lg:28px; --radius:18px; --radius-sm:12px;
-  --display:'Fraunces', Georgia, serif;
+  --display:'Bricolage Grotesque', 'Plus Jakarta Sans', system-ui, sans-serif;
   --body:'Plus Jakarta Sans', system-ui, sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box}
@@ -39,7 +39,8 @@ button{font:inherit;cursor:pointer}
 [hidden]{display:none!important}
 :focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
 .wrap{width:min(1180px,100% - 32px);margin-inline:auto}
-h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.05;letter-spacing:-.02em;margin:0}
+h1,h2,h3{font-family:var(--display);font-weight:700;line-height:1.04;letter-spacing:-.03em;margin:0;font-optical-sizing:auto}
+body{font-synthesis:none}
 h2{font-size:clamp(2.1rem,4.6vw,3.6rem)}
 .kicker{display:inline-block;font-weight:700;font-size:.95rem;color:var(--royal);margin-bottom:14px}
 .lead{font-size:1.15rem;color:var(--muted);max-width:60ch}
@@ -92,7 +93,7 @@ section{padding:110px 0}
 @keyframes drift{to{transform:translate(-60px,50px) scale(1.12)}}
 .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:center}
 .hero .kicker{color:var(--accent)}
-.hero h1{font-size:clamp(2.7rem,6.2vw,5.3rem);font-weight:600;letter-spacing:-.035em}
+.hero h1{font-size:clamp(3rem,7.4vw,6.4rem);font-weight:800;letter-spacing:-.045em;line-height:.98}
 .hero h1 .line{display:block;overflow:hidden;padding-bottom:.06em}
 .hero h1 .line > span{display:inline-block;transform:translateY(105%);animation:rise .9s cubic-bezier(.2,.8,.2,1) forwards}
 .hero h1 .line:nth-child(2) > span{animation-delay:.12s;color:var(--accent)}
@@ -576,6 +577,56 @@ footer nav a{color:#B7C2E2;text-decoration:none;font-size:.95rem}
 footer nav a:hover{color:#fff;text-decoration:underline}
 @media (max-width:980px){.biz-grid,.about-grid{grid-template-columns:1fr;gap:36px}.foot-grid{grid-template-columns:1fr 1fr}.trust-grid{grid-template-columns:1fr 1fr}.trust-i:nth-child(2){border-right:0}.trust-i:nth-child(-n+2){border-bottom:1px solid var(--line)}}
 @media (max-width:560px){.biz-list{grid-template-columns:1fr}.foot-grid{grid-template-columns:1fr}.about-logo{max-width:240px}}
+
+/* ===================== V3: PORTADA, MAQUETA DEL CAMPUS ===================== */
+.hero .lead{max-width:30ch;font-size:1.3rem}
+.rot{display:inline-block;font-style:normal;transition:opacity .38s ease,transform .38s ease}
+.rot.out{opacity:0;transform:translateY(-35%)}
+.rot.pre{opacity:0;transform:translateY(35%);transition:none}
+.fl{position:absolute;display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--ink);font-weight:800;font-size:.85rem;padding:9px 15px;border-radius:999px;box-shadow:0 18px 34px -14px rgba(0,0,0,.55);z-index:3;animation:flotar 5s ease-in-out infinite}
+.fl .i{color:var(--blue);width:1.15em;height:1.15em}
+.fl-a{left:28px;bottom:-22px}
+.fl-b{right:-20px;bottom:-20px;animation-delay:-2.4s}
+@keyframes flotar{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+.campus-split{display:grid;grid-template-columns:1fr 1.15fr;gap:72px;align-items:center;position:relative}
+.campus-split h2{margin-bottom:14px}
+.feat{list-style:none;padding:0;margin:30px 0 34px;display:grid;gap:18px}
+.feat li{display:flex;gap:14px;align-items:flex-start}
+.feat .i{width:42px;height:42px;padding:10px;border-radius:12px;background:rgba(255,255,255,.1);color:var(--accent)}
+.feat h3{font-family:var(--body);font-weight:700;font-size:1.05rem;letter-spacing:0;color:#fff;margin:0 0 2px}
+.feat p{margin:0;color:#C9D3EE;font-size:.95rem}
+.mock-wrap{position:relative}
+.mock{background:#fff;border-radius:18px;box-shadow:0 50px 90px -30px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.12);color:var(--ink);transform:perspective(1500px) rotateY(-6deg) rotateX(2deg);transform-origin:left center}
+.mock-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;background:#EEF2FB;border-radius:18px 18px 0 0}
+.mock-bar i{width:9px;height:9px;border-radius:50%;background:#C7D2EA}
+.mock-bar span{margin-left:10px;flex:1;background:#fff;border-radius:999px;padding:3px 12px;font-size:.72rem;color:var(--muted)}
+.mock-body{display:grid;grid-template-columns:150px 1fr;min-height:350px}
+.mock-side{padding:14px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:4px;border-radius:0 0 0 18px}
+.mock-side span{padding:8px 10px;border-radius:10px;font-size:.78rem;font-weight:600;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
+.mock-side span.on{background:linear-gradient(90deg,var(--royal),var(--blue));color:#fff}
+.mock-side em{font-style:normal;background:#E5484D;color:#fff;border-radius:99px;font-size:.65rem;padding:1px 7px}
+.mock-main{background:linear-gradient(#EEF2FB,#E3F1FB);padding:16px;display:grid;gap:12px;align-content:start;border-radius:0 0 18px 0}
+.mock-hello{background:linear-gradient(135deg,#3B82F6,#1E3A8A);border-radius:14px;color:#fff;padding:14px 16px;display:flex;gap:12px;align-items:center}
+.mock-av{width:40px;height:40px;border-radius:11px;background:rgba(255,255,255,.22);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:1.1rem}
+.mock-hello small{display:block;opacity:.75;font-size:.68rem}
+.mock-hello strong{display:block;font-family:var(--display);font-size:1.2rem;line-height:1.1;letter-spacing:-.02em}
+.mock-hello span{font-size:.75rem;opacity:.9}
+.mock-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mock-card{background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 6px 16px -10px rgba(14,31,77,.35)}
+.mock-card small{display:block;color:var(--muted);font-size:.68rem;font-weight:600}
+.mock-card strong{display:block;font-size:.88rem;margin-top:2px}
+.mock-btn{display:inline-block;margin-top:8px;background:var(--blue);color:#fff;border-radius:999px;padding:5px 14px;font-size:.72rem;font-weight:700}
+.mock-days{display:flex;gap:5px;margin-top:9px}.mock-days i{width:16px;height:16px;border-radius:50%;background:#DDE6F7}.mock-days i.d{background:var(--sky)}
+.mock-prog{height:6px;border-radius:99px;background:#DDE6F7;margin-top:10px;overflow:hidden}.mock-prog i{display:block;height:100%;background:linear-gradient(90deg,var(--sky),var(--blue));border-radius:99px}
+.mock-toast{position:absolute;right:-22px;top:62px;background:#fff;border-radius:14px;padding:11px 15px;box-shadow:0 22px 44px -14px rgba(0,0,0,.55);font-size:.8rem;font-weight:700;display:flex;gap:9px;align-items:center;color:var(--ink);animation:aviso 7s ease-in-out infinite}
+.mock-toast .i{color:var(--blue)}
+@keyframes aviso{0%,10%{opacity:0;transform:translateY(12px) scale(.96)}16%,72%{opacity:1;transform:none}80%,100%{opacity:0;transform:translateY(-8px)}}
+.how-grid{position:relative}
+.how-grid::before{content:"";position:absolute;left:12%;right:12%;top:57px;height:2px;background:repeating-linear-gradient(90deg,#BFCBE6 0 8px,transparent 8px 16px)}
+.how-card{position:relative;z-index:1}
+@media (prefers-reduced-motion:reduce){.fl,.mock-toast{animation:none}.mock-toast{opacity:1}}
+@media (max-width:980px){.campus-split{grid-template-columns:1fr;gap:48px}.mock{transform:none}.how-grid::before{display:none}.fl-a{left:-8px}}
+@media (max-width:560px){.mock-body{grid-template-columns:1fr}.mock-side{display:none}.mock-toast{right:8px}.fl{display:none}.hero .lead{font-size:1.15rem}}
 .pill.soon{background:#EEF2FF;color:var(--royal)}
 .price-reveal{background:var(--paper);color:var(--royal);border:1.5px dashed var(--blue);border-radius:999px;padding:9px 16px;font-weight:700;font-size:.9rem;transition:background .2s, transform .2s}
 .price-reveal:hover{background:#E6EDFB;transform:translateY(-1px)}
@@ -608,6 +659,7 @@ footer nav a:hover{color:#fff;text-decoration:underline}
 <symbol id="i-board" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="13" rx="2"/><path d="M8 21l4-5 4 5"/></symbol>
 <symbol id="i-insta" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></symbol>
 <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></symbol>
+<symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></symbol>
 <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.8-.9L3 20l1.1-4.9A8.4 8.4 0 1 1 21 11.5z"/></symbol>
 </defs></svg>
 <!-- ===================== HEADER ===================== -->
@@ -640,25 +692,20 @@ footer nav a:hover{color:#fff;text-decoration:underline}
 <section class="hero" id="inicio">
   <div class="wrap hero-grid">
     <div>
-      <span class="kicker">Inglés online · Campus propio · Exámenes internacionales</span>
-      <h1><span class="line"><span>Inglés con</span></span><span class="line"><span>acompañamiento real.</span></span></h1>
-      <p class="lead">Clases en vivo en grupos de hasta 8 alumnos, un campus propio donde seguís tu progreso y preparación para exámenes internacionales como Cambridge e IELTS. Hace más de diez años acompañamos a cada estudiante.</p>
+      <h1><span class="line"><span>Inglés para</span></span><span class="line"><span><em class="rot" id="rot">trabajar.</em></span></span></h1>
+      <p class="lead">Clases en vivo, campus propio y preparación para Cambridge e IELTS.</p>
       <div class="hero-ctas">
         <button class="btn btn-accent js-open-test">Hacer el test de nivel gratis</button>
         <a href="#cursos" class="btn btn-line">Ver cursos</a>
       </div>
-      <div class="hero-chips">
-        <a href="#examenes"><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg> Exámenes internacionales</a>
-        <a href="#campus"><svg class="i" aria-hidden="true"><use href="#i-laptop"/></svg> Campus propio</a>
-        <a href="https://campus.thequeenstea.com.ar/tienda"><svg class="i" aria-hidden="true"><use href="#i-bag"/></svg> Tienda de cursos</a>
-      </div>
       <div class="proof">
         <div class="proof-av" aria-hidden="true"><span>LM</span><span>RG</span><span>SP</span><span>+</span></div>
-        <small><b>★★★★★</b><br>Más de 10 años y cientos de alumnos en todo el país</small>
+        <small><b>★★★★★</b><br>Más de 10 años enseñando inglés</small>
       </div>
     </div>
 
     <div class="try-card" id="tryCard" aria-live="polite">
+      <span class="fl fl-a" aria-hidden="true"><svg class="i"><use href="#i-cap"/></svg>Cambridge</span><span class="fl fl-b" aria-hidden="true"><svg class="i"><use href="#i-chart"/></svg>IELTS</span>
       <div class="steam" aria-hidden="true"><i></i><i></i><i></i></div>
       <div class="cup" aria-hidden="true">☕</div>
       <small>Probá una pregunta del test de nivel</small>
@@ -698,9 +745,9 @@ footer nav a:hover{color:#fff;text-decoration:underline}
       <h2>Tres pasos y ya estás adentro.</h2>
     </div>
     <div class="how-grid">
-      <article class="how-card reveal"><span class="how-n">1</span><h3>Descubrí tu nivel</h3><p>Hacé el test gratis, en 15 a 20 minutos. Te mostramos tu nivel estimado y el curso ideal para vos.</p><button class="how-link js-open-test">Hacer el test →</button></article>
-      <article class="how-card reveal"><span class="how-n">2</span><h3>Reservá tu lugar</h3><p>Elegí tu curso y abonás la matrícula 2027 para asegurar tu cupo en un grupo de hasta 8 alumnos.</p><a class="how-link" href="#cursos">Ver cursos →</a></article>
-      <article class="how-card reveal"><span class="how-n">3</span><h3>Cursá con tu campus</h3><p>Clases en vivo, material, tareas, notas y pagos en tu campus propio, desde la compu o el celu.</p><a class="how-link" href="#campus">Conocer el campus →</a></article>
+      <article class="how-card reveal"><span class="how-n">1</span><h3>Descubrí tu nivel</h3><p>Un test gratis de 15 a 20 minutos te muestra tu nivel y el curso ideal.</p><button class="how-link js-open-test">Hacer el test →</button></article>
+      <article class="how-card reveal"><span class="how-n">2</span><h3>Reservá tu lugar</h3><p>Elegí tu curso y reservá tu cupo con la matrícula 2027.</p><a class="how-link" href="#cursos">Ver cursos →</a></article>
+      <article class="how-card reveal"><span class="how-n">3</span><h3>Cursá con tu campus</h3><p>Clases, tareas, notas y pagos en tu campus propio.</p><a class="how-link" href="#campus">Conocer el campus →</a></article>
     </div>
   </div>
 </section>
@@ -711,7 +758,7 @@ footer nav a:hover{color:#fff;text-decoration:underline}
     <div class="reveal exams-head">
       <span class="kicker">Exámenes internacionales</span>
       <h2>Preparate para certificar tu inglés.</h2>
-      <p class="lead">Preparamos para los exámenes de Cambridge e IELTS, con práctica de las cuatro habilidades, simulacros y corrección de Writing con criterios Cambridge.</p>
+      <p class="lead">Practicás las cuatro habilidades con exámenes de práctica y corrección de Writing.</p>
     </div>
     <div class="exam-grid">
       <article class="exam-card reveal"><span class="exam-lvl">B2</span><h3>Cambridge First</h3><p>Preparación para el First (B2): Reading, Use of English, Writing, Listening y Speaking.</p></article>
@@ -779,40 +826,52 @@ footer nav a:hover{color:#fff;text-decoration:underline}
 <!-- ===================== CAMPUS Y TIENDA ===================== -->
 <section class="campus-sec" id="campus">
   <div class="wrap">
-    <div class="campus-head reveal">
-      <span class="kicker" style="color:var(--accent)">Campus propio</span>
-      <h2>Todo tu aprendizaje, en un solo lugar.</h2>
-      <p class="lead">No usamos plataformas de terceros: creamos nuestro propio campus virtual para acompañar a cada alumno de principio a fin. Clases, material, tareas, notas, asistencia, pagos y mucho más, en un solo lugar y desde la compu o el celu.</p>
-      <div class="campus-top-ctas">
-        <a href="https://campus.thequeenstea.com.ar" class="btn btn-accent">Entrar al Campus</a>
-        <a href="https://campus.thequeenstea.com.ar/tienda" class="btn btn-line">Ver la tienda de cursos</a>
+    <div class="campus-split">
+      <div class="reveal">
+        <h2>Tu campus, siempre a mano.</h2>
+        <p class="lead">Un campus propio, hecho para acompañarte en cada paso. Funciona en la compu y en el celu.</p>
+        <ul class="feat"><li><svg class="i" aria-hidden="true"><use href="#i-video"/></svg><div><h3>Clases en vivo</h3><p>Tu link siempre a mano, con aviso al empezar.</p></div></li><li><svg class="i" aria-hidden="true"><use href="#i-book"/></svg><div><h3>Material y tareas</h3><p>Todo ordenado por curso. Entregás desde el campus.</p></div></li><li><svg class="i" aria-hidden="true"><use href="#i-chart"/></svg><div><h3>Notas y asistencia</h3><p>Tu progreso a la vista, con boletín en PDF.</p></div></li><li><svg class="i" aria-hidden="true"><use href="#i-trophy"/></svg><div><h3>Logros y premios</h3><p>Rachas, insignias y premios de tu profe.</p></div></li><li><svg class="i" aria-hidden="true"><use href="#i-card"/></svg><div><h3>Pagos claros</h3><p>Cuotas, descuentos y comprobantes en un solo lugar.</p></div></li><li><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg><div><h3>Certificados</h3><p>Un certificado de logro al terminar cada curso.</p></div></li></ul>
+        <div class="campus-top-ctas">
+          <a href="https://campus.thequeenstea.com.ar" class="btn btn-accent">Entrar al Campus</a>
+          <a href="https://campus.thequeenstea.com.ar/tienda" class="btn btn-line">Ver la tienda</a>
+        </div>
       </div>
-    </div>
-    <div class="campus-grid">
-      <article class="campus-card reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-video"/></svg></span><h3>Clases en vivo</h3><p>Tu link de clase siempre a mano y un aviso cuando empieza. Si no podés asistir, te enviamos el material de trabajo.</p></article>
-      <article class="campus-card reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-book"/></svg></span><h3>Material y presentaciones</h3><p>Presentaciones, audios, videos y tareas ordenados por curso, con avisos por mail cuando hay material nuevo.</p></article>
-      <article class="campus-card reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-edit"/></svg></span><h3>Tareas y exámenes online</h3><p>Entregás desde el campus y tu profe te corrige y te deja comentarios. También hay exámenes con audio.</p></article>
-      <article class="campus-card reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-chart"/></svg></span><h3>Seguimiento real</h3><p>Notas, asistencia, calendario y boletín en PDF para que veas tu progreso en cualquier momento.</p></article>
-      <article class="campus-card reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-trophy"/></svg></span><h3>Logros y premios</h3><p>Rachas, niveles, insignias y premios de tu profe, con destinos del mundo de habla inglesa para desbloquear.</p></article>
-      <article class="campus-card reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-card"/></svg></span><h3>Pagos claros</h3><p>Tus cuotas, descuentos y comprobantes a la vista. Pagá con tarjeta, QR o transferencia.</p></article>
-      <article class="campus-card reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg></span><h3>Certificados</h3><p>Al terminar un curso, un certificado de logro para guardar y compartir.</p></article>
-      <article class="campus-card reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg></span><h3>Desde donde estés</h3><p>Funciona en la compu y en el celu, con modo oscuro y avisos para que no se te pase nada.</p></article>
+      <div class="mock-wrap reveal">
+        <div class="mock" role="img" aria-label="Vista de ejemplo del campus del alumno">
+          <div class="mock-bar"><i></i><i></i><i></i><span>campus.thequeenstea.com.ar</span></div>
+          <div class="mock-body">
+            <aside class="mock-side"><span class="on">Inicio</span><span>Pagos</span><span>Mis cursos</span><span>Tareas <em>2</em></span><span>Exámenes</span><span>Notas</span><span>Mis logros</span></aside>
+            <div class="mock-main">
+              <div class="mock-hello"><div class="mock-av">L</div><div><small>Vista de ejemplo</small><strong>¡Hola, Lucía!</strong><span>Tenés 2 cosas por hacer</span></div></div>
+              <div class="mock-row">
+                <div class="mock-card"><small>Tu racha</small><strong>12 clases seguidas</strong><div class="mock-days"><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i><i></i><i></i></div></div>
+                <div class="mock-card"><small>Clase de hoy</small><strong>Ya podés unirte</strong><span class="mock-btn">Unirme</span></div>
+              </div>
+              <div class="mock-row">
+                <div class="mock-card"><small>Tu cuota</small><strong>Al día</strong><div class="mock-prog"><i style="width:100%"></i></div></div>
+                <div class="mock-card"><small>Próxima tarea</small><strong>Writing: an essay</strong><div class="mock-prog"><i style="width:65%"></i></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mock-toast" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-bell"/></svg> Nota nueva en tu campus</div>
+      </div>
     </div>
     <div class="shop-head reveal">
       <span class="kicker" style="color:var(--accent)">Tienda de The Queen's Tea</span>
       <h2>Material docente y cursos asincrónicos.</h2>
-      <p class="lead">Aprendé a tu ritmo, cuando quieras, con el mismo cuidado de siempre. Todo lo que comprás se usa dentro de nuestro campus.</p>
+      <p class="lead">Aprendé a tu ritmo. Todo lo que comprás se usa dentro de nuestro campus.</p>
     </div>
     <div class="shop-grid">
-      <article class="shop-tile reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-board"/></svg></span><h3>Material docente</h3><p>Recursos pensados y probados en clase, listos para usar en tus propias clases o para estudiar por tu cuenta.</p></article>
-      <article class="shop-tile reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-film"/></svg></span><h3>Cursos asincrónicos con seguimiento</h3><p>Videos, audios y tareas para hacer a tu ritmo, con tu avance registrado lección por lección. No estás solo: tenés seguimiento.</p></article>
-      <article class="shop-tile reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-lock"/></svg></span><h3>Acceso exclusivo en nuestro campus</h3><p>Comprás y empezás al instante: tu curso queda en tu cuenta del campus, disponible cuando quieras.</p></article>
-      <article class="shop-tile reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg></span><h3>Certificado de logro</h3><p>Al completar el curso recibís tu certificado de logro de The Queen's Tea.</p></article>
+      <article class="shop-tile reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-board"/></svg></span><h3>Material docente</h3><p>Recursos probados en clase, listos para usar.</p></article>
+      <article class="shop-tile reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-film"/></svg></span><h3>Cursos asincrónicos con seguimiento</h3><p>Videos y tareas a tu ritmo, con tu avance registrado.</p></article>
+      <article class="shop-tile reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-lock"/></svg></span><h3>Acceso exclusivo en nuestro campus</h3><p>Comprás y empezás al instante.</p></article>
+      <article class="shop-tile reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg></span><h3>Certificado de logro</h3><p>Lo recibís al completar el curso.</p></article>
     </div>
     <div class="shop-band reveal">
       <div>
         <h3>Empezá hoy mismo</h3>
-        <p>Entrá a la tienda, elegí lo que te sirve y pagá con tarjeta, QR o transferencia.</p>
+        <p>Pagá con tarjeta, QR o transferencia.</p>
         <ul><li>Acceso inmediato</li><li>A tu ritmo</li><li>Con seguimiento</li><li>Certificado de logro</li></ul>
       </div>
       <div class="campus-ctas">
@@ -892,14 +951,14 @@ footer nav a:hover{color:#fff;text-decoration:underline}
     <div class="reveal">
       <span class="kicker">Para empresas, equipos y grupos</span>
       <h2>Armamos el grupo que necesitás.</h2>
-      <p class="lead">¿Tu empresa, tu equipo o un grupo de colegas necesita inglés? Escribinos y armamos un grupo a medida, según nivel, objetivo y horarios.</p>
+      <p class="lead">¿Tu empresa, equipo o grupo de colegas necesita inglés? Armamos un grupo a medida.</p>
       <a class="btn btn-primary" href="https://wa.me/5492212229980?text=%C2%A1Hola%20The%20Queen's%20Tea!%20Quiero%20consultar%20por%20un%20grupo%20de%20ingl%C3%A9s%20para%20mi%20empresa%20o%20equipo." target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-chat"/></svg> Consultar por un grupo</a>
     </div>
     <ul class="biz-list reveal">
-      <li><svg class="i" aria-hidden="true"><use href="#i-users"/></svg><div><h3>Grupos a medida</h3><p>Reunimos a quienes comparten nivel y objetivo, con un máximo de 8 personas por grupo.</p></div></li>
-      <li><svg class="i" aria-hidden="true"><use href="#i-briefcase"/></svg><div><h3>Inglés profesional</h3><p>Business, Legal, Medical y Aviation English, además de preparación para exámenes internacionales.</p></div></li>
-      <li><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg><div><h3>Horarios a coordinar</h3><p>Definimos días y horarios que se ajusten a tu equipo, con clases 100% online en vivo.</p></div></li>
-      <li><svg class="i" aria-hidden="true"><use href="#i-chart"/></svg><div><h3>Seguimiento en el campus</h3><p>Asistencia, tareas y notas en nuestro campus propio, con avisos por mail.</p></div></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-users"/></svg><div><h3>Grupos a medida</h3><p>Mismo nivel y objetivo, hasta 8 personas.</p></div></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-briefcase"/></svg><div><h3>Inglés profesional</h3><p>Business, Legal, Medical y Aviation English.</p></div></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg><div><h3>Horarios a coordinar</h3><p>Días y horarios que se ajusten a tu equipo.</p></div></li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-chart"/></svg><div><h3>Seguimiento en el campus</h3><p>Asistencia, tareas y notas en el campus.</p></div></li>
     </ul>
   </div>
 </section>
@@ -1401,6 +1460,21 @@ Quiero inscribirme para 2027:
 Acepto los términos y compromisos.`;
   window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
 });
+
+
+/* Palabra que rota en la portada */
+(() => {
+  const el = document.getElementById('rot'); if (!el) return;
+  if (matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  const words = ['trabajar.','viajar.','certificar.','crecer.','estudiar.']; let i = 0;
+  setInterval(() => {
+    el.classList.add('out');
+    setTimeout(() => {
+      i = (i + 1) % words.length; el.textContent = words[i];
+      el.classList.add('pre'); void el.offsetWidth; el.classList.remove('out','pre');
+    }, 380);
+  }, 2800);
+})();
 
 /* ============================================================
    TESTIMONIOS
