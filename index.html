@@ -681,23 +681,23 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
 <section class="courses" id="cursos">
   <div class="wrap">
     <div class="reveal">
-      <h2>Cursos y precios 2026</h2>
+      <h2>Cursos y precios</h2>
       <p class="lead">Elegí tu curso, mirá el horario y el valor por clase. Si no sabés tu nivel, hacé primero el test gratis.</p>
     </div>
 
     <div class="enroll-strip reveal">
       <div>
-        <span class="off">Matrícula 62,5% off</span>
-        <div class="enroll-price"><strong>$30.000</strong><s>$80.000</s></div>
-        <p>Pago único para reservar tu lugar en 2026.</p>
+        <span class="off">Matrícula 2027</span>
+        <div class="enroll-price"><strong>$35.000</strong></div>
+        <p>Pago único para reservar tu lugar en 2027. Este valor es válido hasta el 31 de diciembre.</p>
       </div>
-      <a href="https://thequeenstea.empretienda.com.ar/matricula-2026/matricula-2026" target="_blank" rel="noopener" class="btn btn-accent">Abonar matrícula</a>
+      <a href="https://thequeenstea.empretienda.com.ar/matricula-2027/matricula-2027" target="_blank" rel="noopener" class="btn btn-accent">Abonar matrícula</a>
     </div>
 
     <div class="ladder-panel reveal">
       <div class="ladder-top">
         <div>
-          <h3>Tu camino de B1 a C2</h3>
+          <h3>Tu camino de A1 a C2</h3>
           <p>Cada barra es un nivel. Tocala para ver su horario y descubrir su precio.</p>
         </div>
         <div class="legend"><span><i></i> Cupos abiertos</span><span><i class="off"></i> Completo</span></div>
@@ -725,7 +725,7 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
     <div class="steps">
       <div class="step reveal"><h3>Hacé el test</h3><p>Gratis, online y en 15 a 20 minutos. <button class="js-open-test">Empezar ahora</button></p></div>
       <div class="step reveal"><h3>Elegí tu curso</h3><p>Según tu nivel, tu objetivo y el horario que te quede cómodo.</p></div>
-      <div class="step reveal"><h3>Aboná la matrícula</h3><p>Reservás tu lugar para todo 2026.</p></div>
+      <div class="step reveal"><h3>Aboná la matrícula</h3><p>Reservás tu lugar para todo 2027.</p></div>
       <div class="step reveal"><h3>Enviá tu inscripción</h3><p>Completás tus datos y nos llegan por WhatsApp.</p></div>
     </div>
   </div>
@@ -771,7 +771,7 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
 <!-- ===================== CTA FINAL ===================== -->
 <section class="final">
   <div class="wrap reveal">
-    <h2>Tu lugar en 2026 te está esperando.</h2>
+    <h2>Tu lugar en 2027 te está esperando.</h2>
     <p class="lead">Descubrí tu nivel en minutos y elegí el curso que mejor se adapta a vos.</p>
     <div class="hero-ctas">
       <button class="btn btn-accent js-open-test">Hacer el test de nivel</button>
@@ -840,7 +840,7 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
   <div class="drawer">
     <button class="x-btn" id="regClose" aria-label="Cerrar inscripción">×</button>
     <div class="dr-head">
-      <small style="color:var(--sky);font-weight:700">Confirmación de cupo 2026</small>
+      <small style="color:var(--sky);font-weight:700">Confirmación de cupo 2027</small>
       <h3 id="drName"></h3>
       <span class="sched" id="drSched"></span>
     </div>
@@ -879,7 +879,7 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
     </div>
     <div class="form-error" id="regError"></div>
     <div class="dr-actions">
-      <a href="https://thequeenstea.empretienda.com.ar/matricula-2026/matricula-2026" target="_blank" rel="noopener" class="btn btn-violet">Abonar matrícula</a>
+      <a href="https://thequeenstea.empretienda.com.ar/matricula-2027/matricula-2027" target="_blank" rel="noopener" class="btn btn-violet">Abonar matrícula</a>
       <button class="btn btn-wa" id="regSend">Enviar inscripción</button>
     </div>
   </div>
@@ -887,7 +887,7 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
 
 <!-- ===================== BARRA FIJA DE INSCRIPCIÓN ===================== -->
 <div class="sticky-cta" id="stickyCta">
-  <span>Matrícula 2026: <strong>$30.000</strong><s>$80.000</s></span>
+  <span>Matrícula 2027: <strong>$35.000</strong> hasta el 31/12</span>
   <a href="#cursos" class="btn btn-accent">Reservar mi lugar</a>
 </div>
 
@@ -932,12 +932,16 @@ const WHATSAPP = '5492212229980';
 // sched = horario. Si el curso está completo, poné full: true
 // h = altura de la "escalera" de nivel (solo visual)
 const CURSOS = {
+  // consultar: true = todavía sin precio/horario publicado: se consulta por WhatsApp
   niveles: [
-    { code:'b1',     tag:'B1',  name:'B1 Intermediate', desc:'Ganá fluidez y seguridad en conversaciones reales.', price:23500, usd:35, full:true,  h:30 },
-    { code:'b2',     tag:'B2',  name:'B2 First',        desc:'Upper-Intermediate y preparación para el examen First.', price:24000, usd:40, sched:'Jueves 20 a 21 hs', h:45 },
-    { code:'b2plus', tag:'B2+', name:'B2+ Pre-Advanced',desc:'Naturalidad y precisión, puente hacia el nivel C1.', price:24000, usd:40, full:true,  h:58 },
-    { code:'c1',     tag:'C1',  name:'C1 Advanced',     desc:'Inglés académico, profesional y de negocios.', price:24500, usd:40, sched:'Martes 20 a 21 hs', h:72 },
-    { code:'c1c2',   tag:'C1+', name:'C1 to C2',        desc:'Perfeccionamiento avanzado rumbo al C2.', price:24500, usd:40, full:true,  h:86 },
+    { code:'a1',     tag:'A1',  name:'A1 Inicial',      desc:'Tus primeros pasos en inglés, desde cero y sin miedo.', consultar:true, h:12 },
+    { code:'a2',     tag:'A2',  name:'A2 Elementary',   desc:'Comunicate en situaciones cotidianas con más seguridad.', consultar:true, h:24 },
+    { code:'b1',     tag:'B1',  name:'B1 Intermediate', desc:'Ganá fluidez y seguridad en conversaciones reales.', price:23500, usd:35, full:true,  h:36 },
+    { code:'b1plus', tag:'B1+', name:'B1+ Intermediate Plus', desc:'El puente hacia el B2: más fluidez, vocabulario y confianza.', consultar:true, h:48 },
+    { code:'b2',     tag:'B2',  name:'B2 First',        desc:'Upper-Intermediate y preparación para el examen First.', price:24000, usd:40, sched:'Jueves 20 a 21 hs', h:60 },
+    { code:'b2plus', tag:'B2+', name:'B2+ Pre-Advanced',desc:'Naturalidad y precisión, puente hacia el nivel C1.', price:24000, usd:40, full:true,  h:72 },
+    { code:'c1',     tag:'C1',  name:'C1 Advanced',     desc:'Inglés académico, profesional y de negocios.', price:24500, usd:40, sched:'Martes 20 a 21 hs', h:82 },
+    { code:'c1c2',   tag:'C1+', name:'C1 to C2',        desc:'Perfeccionamiento avanzado rumbo al C2.', price:24500, usd:40, full:true,  h:91 },
     { code:'c2',     tag:'C2',  name:'C2 Proficiency',  desc:'El nivel más alto y preparación para Proficiency.', price:26000, usd:45, sched:'Jueves 19 a 20 hs', h:100 }
   ],
   especialidades: [
@@ -1043,13 +1047,14 @@ function renderCourses(){
       <div class="lvl"><span class="lvl-tag">${c.tag}</span><span class="ladder" style="--h:${c.h}%"></span></div>
       <div class="c-info"><h3>${c.name}</h3><p>${c.desc}</p></div>
       <div class="c-sched ${c.full ? 'is-full' : ''}">
-        ${c.full ? '<span class="pill full">Completo</span><small>Nuevos horarios pronto</small>'
+        ${c.consultar ? '<span class="pill open">Consultá horarios</span><small>Escribinos por WhatsApp</small>'
+          : c.full ? '<span class="pill full">Completo</span><small>Nuevos horarios pronto</small>'
                  : `<span class="pill open">Cupos abiertos</span><small>${c.sched}</small>`}
       </div>
-      <div class="c-price">${state.shown.has(c.code)
+      <div class="c-price">${c.consultar ? '<small>Consultá el valor</small>' : state.shown.has(c.code)
         ? `<div class="pop"><strong>${money(state.cur === 'usd' ? c.usd : c.price, state.cur)}</strong><small>por clase</small></div>`
         : `<button class="price-reveal" data-reveal="${c.code}" aria-label="Ver el precio de ${c.name}">Ver precio</button>`}</div>
-      <button class="btn ${c.full ? 'btn-ghost' : 'btn-primary'}" data-code="${c.code}">${c.full ? 'Avisarme cuando abra' : 'Inscribirme'}</button>
+      <button class="btn ${c.full || c.consultar ? 'btn-ghost' : 'btn-primary'}" data-code="${c.code}">${c.consultar ? 'Consultar' : c.full ? 'Avisarme cuando abra' : 'Inscribirme'}</button>
     </article>`).join('');
 }
 const findCourse = code => [...CURSOS.niveles, ...CURSOS.especialidades].find(c => c.code === code);
@@ -1058,7 +1063,11 @@ function pedirAviso(c){
   const msg = `¡Hola The Queen's Tea! Me interesa el curso *${c.name}*. ¿Me avisan cuando abran nuevos horarios? ¡Gracias!`;
   window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
 }
-function handleCourse(c){ c.full ? pedirAviso(c) : openReg(c); }
+function consultarCurso(c){
+  const msg = `¡Hola The Queen's Tea! Me interesa el curso *${c.name}*. ¿Me pasan horarios, valores y cupos disponibles? ¡Gracias!`;
+  window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+function handleCourse(c){ c.consultar ? consultarCurso(c) : c.full ? pedirAviso(c) : openReg(c); }
 list.addEventListener('click', e => {
   const rv = e.target.closest('button[data-reveal]');
   if (rv){ state.shown.add(rv.dataset.reveal); renderCourses(); return; }
@@ -1080,10 +1089,10 @@ renderCourses();
 const chart = $('#levelChart');
 function renderChart(){
   chart.innerHTML = CURSOS.niveles.map((c, i) => `
-    <button class="bar ${c.full ? 'is-full' : 'is-open'}" data-code="${c.code}" aria-label="${c.name}: ${c.full ? 'completo' : c.sched}">
+    <button class="bar ${c.full ? 'is-full' : 'is-open'}" data-code="${c.code}" aria-label="${c.name}: ${c.consultar ? 'consultar' : c.full ? 'completo' : c.sched}">
       <span class="bar-fill" style="height:calc((100% - 56px) * ${c.h / 100});transition-delay:${i * 110}ms"></span>
       <span class="bar-tag">${c.tag}</span>
-      <span class="bar-state">${c.full ? 'Completo' : 'Abierto'}</span>
+      <span class="bar-state">${c.consultar ? 'Consultar' : c.full ? 'Completo' : 'Abierto'}</span>
     </button>`).join('');
 }
 renderChart();
@@ -1095,7 +1104,8 @@ chart.addEventListener('click', e => {
   if (state.tab !== 'niveles'){
     state.tab = 'niveles'; setSeg($('#tabSeg'), $('#tabSeg button[data-tab="niveles"]')); renderCourses();
   }
-  state.shown.add(b.dataset.code); renderCourses();
+  if (!findCourse(b.dataset.code).consultar) state.shown.add(b.dataset.code);
+  renderCourses();
   const row = $('#row-' + b.dataset.code);
   row.scrollIntoView({ behavior:'smooth', block:'center' });
   row.classList.remove('flash'); void row.offsetWidth; row.classList.add('flash');
@@ -1177,7 +1187,7 @@ $('#regSend').addEventListener('click', () => {
   const r = calc();
   const msg =
 `¡Hola The Queen's Tea! 👋
-Quiero inscribirme para 2026:
+Quiero inscribirme para 2027:
 
 *Curso:* ${reg.c.name}
 *Horario:* ${reg.c.sched}
@@ -1505,17 +1515,17 @@ const AI_ENDPOINT = '/api/chat';
 const INFO_GENERAL = [
   '- Clases 100% online en vivo, en grupos de máximo 8 alumnos. Metodología comunicativa: inglés para la vida real, académico, profesional y para viajar.',
   '- Material incluido: e-books actualizados, audios y aula virtual las 24 hs. Sin costos extra de libros durante el año.',
-  '- Matrícula 2026: $30.000 (antes $80.000, 62,5% off). Se abona en https://thequeenstea.empretienda.com.ar/matricula-2026/matricula-2026',
+  '- Matrícula 2027: $35.000, valor válido hasta el 31 de diciembre. Se abona en https://thequeenstea.empretienda.com.ar/matricula-2027/matricula-2027',
   '- Pack mensual: se abona el mes completo y la cuota depende de cuántas clases tenga el mes (3, 4 o 5). El beneficio del pack no aplica si se abona el mismo día de la clase.',
   '- Pago por clase: cuesta 15% más en pesos, o USD 5 más por clase desde el exterior.',
   '- Las clases se abonan 24 hs antes. Las ausencias se abonan igual; se comparte el material trabajado y la grabación si la clase fue grabada. Tolerancia de espera: 15 minutos. Hay tareas semanales.',
   '- Cómo inscribirse: 1) hacer el test de nivel si no conoce su nivel, 2) elegir el curso en la sección "Cursos y precios" y tocar "Inscribirme", 3) completar los datos y enviar la inscripción por WhatsApp, 4) abonar la matrícula.',
   '- Test de nivel gratis: 120 preguntas de opción múltiple, tarda unos 15 a 20 minutos, va de A1 a C2 y se puede terminar antes.',
-  '- Para niveles A1 y A2 no hay grupos publicados: consultar por WhatsApp.',
+  '- Para los niveles A1, A2 y B1+ los horarios y valores se consultan por WhatsApp.',
   '- Más de 10 años enseñando. Respondemos consultas en menos de 24 hs. WhatsApp: +54 9 221 222-9980.'
 ];
 const CONTEXTO = (() => {
-  const linea = c => `- ${c.name} (código ${c.code}): ${money(c.price, 'ars')} por clase en Argentina, ${money(c.usd, 'usd')} por clase desde el exterior. ${c.full ? 'Grupo completo, nuevos horarios pronto (se puede pedir aviso).' : 'Horario: ' + c.sched + '. Cupos abiertos.'} ${c.desc}`;
+  const linea = c => c.consultar ? `- ${c.name} (código ${c.code}): horarios y valores a consultar por WhatsApp. ${c.desc}` : `- ${c.name} (código ${c.code}): ${money(c.price, 'ars')} por clase en Argentina, ${money(c.usd, 'usd')} por clase desde el exterior. ${c.full ? 'Grupo completo, nuevos horarios pronto (se puede pedir aviso).' : 'Horario: ' + c.sched + '. Cupos abiertos.'} ${c.desc}`;
   return ['CURSOS DE NIVELES (precio por clase con pack mensual):', ...CURSOS.niveles.map(linea),
           '', 'ESPECIALIDADES Y EXÁMENES:', ...CURSOS.especialidades.map(linea),
           '', 'INFORMACIÓN GENERAL:', ...INFO_GENERAL].join('\n');
@@ -1526,22 +1536,22 @@ function respuestaLocal(q){
   const n = q.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
   const has = (...w) => w.some(x => n.includes(x));
   const todos = [...CURSOS.niveles, ...CURSOS.especialidades];
-  const abiertos = todos.filter(c => !c.full);
-  const ficha = c => `**${c.name}**: ${money(c.price, 'ars')} por clase (${money(c.usd, 'usd')} desde el exterior). ${c.full ? 'Ahora está completo, pero podés pedir aviso para los próximos horarios.' : 'Se dicta los ' + c.sched + '.'}`;
-  const especificos = [['ielts','ielts'],['legal','legal'],['medic','medical'],['aviation','tcp'],['tcp','tcp'],['azafat','tcp'],['tripul','tcp'],['proficiency','c2'],['c2','c2'],['first','b2'],['c1','c1'],['b1','b1']];
+  const abiertos = todos.filter(c => !c.full && !c.consultar);
+  const ficha = c => c.consultar ? `**${c.name}**: los horarios y valores se consultan por WhatsApp.` : `**${c.name}**: ${money(c.price, 'ars')} por clase (${money(c.usd, 'usd')} desde el exterior). ${c.full ? 'Ahora está completo, pero podés pedir aviso para los próximos horarios.' : 'Se dicta los ' + c.sched + '.'}`;
+  const especificos = [['a1','a1'],['inicial','a1'],['a2','a2'],['b1+','b1plus'],['b1 plus','b1plus'],['ielts','ielts'],['legal','legal'],['medic','medical'],['aviation','tcp'],['tcp','tcp'],['azafat','tcp'],['tripul','tcp'],['proficiency','c2'],['c2','c2'],['first','b2'],['c1','c1'],['b1','b1']];
   for (const [k, code] of especificos){
     if (n.includes(k)){ const c = findCourse(code); return `${ficha(c)} ${c.desc} [[CURSO:${c.code}]]`; }
   }
   if (has('exterior','dolar','usd','afuera','otro pais'))
     return `Si vivís fuera de Argentina, abonás en dólares: ${abiertos.map(c => `**${c.name}** ${money(c.usd, 'usd')}`).join(', ')} por clase con el pack mensual. [[TEST]]`;
   if (has('precio','cuesta','cuanto','valor','cuota','sale','pagar','pago'))
-    return `Los valores son por clase con el pack mensual: ${abiertos.map(c => `**${c.name}** ${money(c.price, 'ars')}`).join(', ')}. La cuota depende de cuántas clases tenga el mes (3, 4 o 5). La matrícula 2026 está a **$30.000** en lugar de $80.000. [[TEST]]`;
+    return `Los valores son por clase con el pack mensual: ${abiertos.map(c => `**${c.name}** ${money(c.price, 'ars')}`).join(', ')}. La cuota depende de cuántas clases tenga el mes (3, 4 o 5). La matrícula 2027 está a **$35.000** hasta el 31 de diciembre. [[TEST]]`;
   if (has('horario','dia','cuando','hora'))
     return `Estos son los grupos con cupos abiertos: ${abiertos.map(c => `**${c.name}** los ${c.sched}`).join('; ')}. Los demás están completos y abren nuevos horarios pronto. [[TEST]]`;
   if (has('nivel','test','examen'))
     return 'Hacé nuestro test de nivel gratis: son 120 preguntas y tarda unos 15 a 20 minutos. Al terminar te mostramos tu nivel y el curso ideal para vos. [[TEST]]';
   if (has('matricula'))
-    return 'La matrícula 2026 cuesta **$30.000** (antes $80.000, 62,5% off) y reserva tu lugar para todo el año. La abonás desde el botón "Abonar matrícula" de la sección de cursos.';
+    return 'La matrícula 2027 cuesta **$35.000** hasta el 31 de diciembre y reserva tu lugar para todo el año. La abonás desde el botón "Abonar matrícula" de la sección de cursos.';
   if (has('inscrib','anot','empez','sumar','reservar'))
     return 'Es muy fácil: 1) hacé el test de nivel si no sabés tu nivel, 2) elegí tu curso y tocá "Inscribirme", 3) completá tus datos y enviá la inscripción por WhatsApp, 4) aboná la matrícula. ¡Y listo! [[TEST]]';
   if (has('falt','ausen','grab'))
