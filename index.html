@@ -638,6 +638,33 @@ footer nav a:hover{color:#fff;text-decoration:underline}
 .mock-card.big{padding:16px}.mock-card.big strong{font-size:.95rem}
 .mock-card.trophy{text-align:center;padding:22px 10px}.mock-card.trophy b{display:block;font-size:2rem;margin-bottom:6px}
 @keyframes scrIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* Cursos como tarjetas desplegables */
+.course-list{grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px;align-items:start}
+.ccard{background:#fff;border:1px solid var(--line);border-radius:var(--radius);transition:border-color .25s,box-shadow .25s;animation:fadeUp .45s ease both;overflow:hidden}
+.ccard:hover,.ccard.open{border-color:var(--blue);box-shadow:0 18px 40px -26px rgba(34,64,151,.6)}
+.ccard-head{all:unset;box-sizing:border-box;width:100%;cursor:pointer;display:grid;grid-template-columns:auto 1fr auto;gap:6px 14px;align-items:start;padding:20px 22px}
+.ccard-head:focus-visible{outline:3px solid var(--blue);outline-offset:-3px}
+.ccard-head .lvl-tag{grid-row:1/3;font-size:1.9rem;min-width:52px;color:var(--blue)}
+.ccard-t h3{font-size:1.15rem;margin-bottom:3px}
+.ccard-t p{margin:0;color:var(--muted);font-size:.9rem;line-height:1.4}
+.ccard-head .pill{grid-column:2;justify-self:start;margin-top:4px}
+.plus{grid-column:3;grid-row:1;width:30px;height:30px;border-radius:50%;background:var(--paper);position:relative;transition:transform .3s,background .3s}
+.plus::before,.plus::after{content:"";position:absolute;left:8px;right:8px;top:14px;height:2px;background:var(--royal);border-radius:2px;transition:transform .3s}
+.plus::after{transform:rotate(90deg)}
+.ccard.open .plus{background:var(--blue)}.ccard.open .plus::before,.ccard.open .plus::after{background:#fff}.ccard.open .plus::after{transform:rotate(0)}
+.ccard-detail{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}
+.ccard.open .ccard-detail{grid-template-rows:1fr}
+.ccard-in{overflow:hidden;padding:0 22px}
+.ccard.open .ccard-in{padding-bottom:22px}
+.d-list{list-style:none;margin:0 0 16px;padding:14px 0 0;border-top:1px solid var(--line);display:grid;gap:7px;font-size:.92rem}
+.d-list li{padding-left:24px;position:relative}
+.d-list li::before{content:"✓";position:absolute;left:0;color:var(--blue);font-weight:800}
+.d-price{background:var(--paper);border-radius:14px;padding:14px 16px;margin-bottom:14px;display:flex;gap:22px;flex-wrap:wrap}
+.d-price strong{display:block;font-family:var(--display);font-size:1.35rem;line-height:1.15}
+.d-price small{display:block;color:var(--muted);font-size:.8rem}
+.d-sched{margin:-4px 0 14px;font-weight:600;font-size:.9rem}
+.ccard .btn{width:100%}
 .pill.soon{background:#EEF2FF;color:var(--royal)}
 .price-reveal{background:var(--paper);color:var(--royal);border:1.5px dashed var(--blue);border-radius:999px;padding:9px 16px;font-weight:700;font-size:.9rem;transition:background .2s, transform .2s}
 .price-reveal:hover{background:#E6EDFB;transform:translateY(-1px)}
@@ -1319,20 +1346,27 @@ const state = { tab:'niveles', cur:'ars', shown:new Set() };
 const list = $('#courseList');
 
 function renderCourses(){
-  list.innerHTML = CURSOS[state.tab].map((c, i) => `
-    <article class="course" id="row-${c.code}" style="animation-delay:${i * 60}ms">
-      <div class="lvl"><span class="lvl-tag">${c.tag}</span><span class="ladder" style="--h:${c.h}%"></span></div>
-      <div class="c-info"><h3>${c.name}</h3><p>${c.desc}</p></div>
-      <div class="c-sched ${c.full && !c.pronto ? 'is-full' : ''}">
-        ${c.pronto ? '<span class="pill soon">Próximamente</span><small>Horarios pronto</small>'
-          : c.full ? '<span class="pill full">Completo</span><small>Nuevos horarios pronto</small>'
-                 : `<span class="pill open">Cupos abiertos</span><small>${c.sched}</small>`}
-      </div>
-      <div class="c-price">${c.pronto ? '<small>Valor pronto</small>' : state.shown.has(c.code)
-        ? `<div class="pop"><strong>${money(state.cur === 'usd' ? c.usd : c.price, state.cur)}</strong><small>por clase</small></div>`
-        : `<button class="price-reveal" data-reveal="${c.code}" aria-label="Ver el precio de ${c.name}">Ver precio</button>`}</div>
-      <button class="btn ${c.full || c.pronto ? 'btn-ghost' : 'btn-primary'}" data-code="${c.code}">${c.pronto || c.full ? 'Avisarme cuando abra' : 'Inscribirme'}</button>
-    </article>`).join('');
+  list.innerHTML = CURSOS[state.tab].map((c, i) => {
+    const estado = c.pronto ? '<span class="pill soon">Próximamente</span>'
+      : c.full ? '<span class="pill full">Completo</span>' : '<span class="pill open">Cupos abiertos</span>';
+    const precio = c.pronto
+      ? '<div class="d-price"><strong>Valores y horarios pronto</strong><small>Reservá tu lugar con la matrícula 2027 y te avisamos primero.</small></div>'
+      : `<div class="d-price"><div><small>Pack mensual</small><strong>${money(state.cur === 'usd' ? c.usd : c.price, state.cur)}</strong><small>por clase</small></div>
+         <div><small>Clase suelta</small><strong>${money(state.cur === 'usd' ? c.usd + RECARGO_POR_CLASE_USD : c.price * RECARGO_POR_CLASE_ARS, state.cur)}</strong><small>por clase</small></div></div>
+         <p class="d-sched">${c.full ? 'Grupo completo, nuevos horarios pronto.' : 'Horario: ' + c.sched}</p>`;
+    return `<article class="ccard" id="row-${c.code}" style="animation-delay:${i * 50}ms">
+      <button class="ccard-head" data-toggle="${c.code}" aria-expanded="false" aria-controls="d-${c.code}">
+        <span class="lvl-tag">${c.tag}</span>
+        <span class="ccard-t"><h3>${c.name}</h3><p>${c.desc}</p></span>
+        ${estado}
+        <span class="plus" aria-hidden="true"></span>
+      </button>
+      <div class="ccard-detail" id="d-${c.code}"><div class="ccard-in">
+        <ul class="d-list"><li>Clases en vivo, en grupos de hasta 8</li><li>Campus propio con tareas, notas y material</li><li>Certificado de logro al terminar</li></ul>
+        ${precio}
+        <button class="btn ${c.full || c.pronto ? 'btn-ghost' : 'btn-primary'}" data-code="${c.code}">${c.pronto || c.full ? 'Avisarme cuando abra' : 'Inscribirme'}</button>
+      </div></div>
+    </article>`;}).join('');
 }
 const findCourse = code => [...CURSOS.niveles, ...CURSOS.especialidades].find(c => c.code === code);
 
@@ -1342,8 +1376,11 @@ function pedirAviso(c){
 }
 function handleCourse(c){ c.full || c.pronto ? pedirAviso(c) : openReg(c); }
 list.addEventListener('click', e => {
-  const rv = e.target.closest('button[data-reveal]');
-  if (rv){ state.shown.add(rv.dataset.reveal); renderCourses(); return; }
+  const t = e.target.closest('button[data-toggle]');
+  if (t){
+    const card = t.closest('.ccard'), open = !card.classList.contains('open');
+    card.classList.toggle('open', open); t.setAttribute('aria-expanded', open); return;
+  }
   const btn = e.target.closest('button[data-code]'); if (!btn) return;
   handleCourse(findCourse(btn.dataset.code));
 });
