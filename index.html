@@ -683,7 +683,7 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
   <div class="wrap">
     <div class="reveal">
       <h2>Cursos y precios</h2>
-      <p class="lead">Elegí tu curso, mirá el horario y el valor por clase. Si no sabés tu nivel, hacé primero el test gratis.</p>
+      <p class="lead">Estamos armando los grupos 2027. Muy pronto publicamos horarios y valores: reservá tu lugar con la matrícula y anotate en el curso que te interesa para que te avisemos apenas abra. Si no sabés tu nivel, hacé primero el test gratis.</p>
     </div>
 
     <div class="enroll-strip reveal">
@@ -699,9 +699,9 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
       <div class="ladder-top">
         <div>
           <h3>Tu camino de A1 a C2</h3>
-          <p>Cada barra es un nivel. Tocala para ver su horario y descubrir su precio.</p>
+          <p>Cada barra es un nivel. Tocala para ver el curso y anotarte.</p>
         </div>
-        <div class="legend"><span><i></i> Cupos abiertos</span><span><i class="off"></i> Completo</span></div>
+        <div class="legend"><span><i></i> Próximamente</span></div>
       </div>
       <div class="chart" id="levelChart"></div>
       <p class="ladder-hint">¿No sabés en qué escalón estás? <button class="js-open-test" style="background:none;border:0;color:var(--accent);font-weight:700;text-decoration:underline;padding:0">Hacé el test de nivel (15-20 min)</button></p>
@@ -719,7 +719,7 @@ body.lock .sticky-cta{transform:translate(-50%,140%)}
         <button aria-pressed="false" data-cur="usd">Vivo en el exterior</button>
       </div>
     </div>
-    <p class="price-note">Precios por clase con el pack mensual. La cuota del mes depende de cuántas clases tenga (3, 4 o 5).</p>
+    <p class="price-note">Horarios y valores 2027: muy pronto. Tocá "Avisarme cuando abra" y te escribimos por WhatsApp apenas esté listo.</p>
 
     <div class="course-list" id="courseList"></div>
 
@@ -933,23 +933,24 @@ const WHATSAPP = '5492212229980';
 // sched = horario. Si el curso está completo, poné full: true
 // h = altura de la "escalera" de nivel (solo visual)
 const CURSOS = {
-  // pronto: true = todavía sin precio/horario publicado (se pueden anotar para que les avisemos)
+  // pronto: true = todavía sin horario publicado (se anotan para que les avisemos).
+// Cuando tengas horarios, sacá 'pronto:true' de ese curso y cargá su 'sched' (y 'price'/'usd' si cambian).
   niveles: [
     { code:'a1',     tag:'A1',  name:'A1 Inicial',      desc:'Tus primeros pasos en inglés, desde cero y sin miedo.', pronto:true, h:12 },
     { code:'a2',     tag:'A2',  name:'A2 Elementary',   desc:'Comunicate en situaciones cotidianas con más seguridad.', pronto:true, h:24 },
-    { code:'b1',     tag:'B1',  name:'B1 Intermediate', desc:'Ganá fluidez y seguridad en conversaciones reales.', price:23500, usd:35, full:true,  h:36 },
+    { code:'b1',     tag:'B1',  name:'B1 Intermediate', desc:'Ganá fluidez y seguridad en conversaciones reales.', price:23500, usd:35, full:true,  pronto:true, h:36 },
     { code:'b1plus', tag:'B1+', name:'B1+ Intermediate Plus', desc:'El puente hacia el B2: más fluidez, vocabulario y confianza.', pronto:true, h:48 },
-    { code:'b2',     tag:'B2',  name:'B2 First',        desc:'Upper-Intermediate y preparación para el examen First.', price:24000, usd:40, sched:'Jueves 20 a 21 hs', h:60 },
-    { code:'b2plus', tag:'B2+', name:'B2+ Pre-Advanced',desc:'Naturalidad y precisión, puente hacia el nivel C1.', price:24000, usd:40, full:true,  h:72 },
-    { code:'c1',     tag:'C1',  name:'C1 Advanced',     desc:'Inglés académico, profesional y de negocios.', price:24500, usd:40, sched:'Martes 20 a 21 hs', h:82 },
-    { code:'c1c2',   tag:'C1+', name:'C1 to C2',        desc:'Perfeccionamiento avanzado rumbo al C2.', price:24500, usd:40, full:true,  h:91 },
-    { code:'c2',     tag:'C2',  name:'C2 Proficiency',  desc:'El nivel más alto y preparación para Proficiency.', price:26000, usd:45, sched:'Jueves 19 a 20 hs', h:100 }
+    { code:'b2',     tag:'B2',  name:'B2 First',        desc:'Upper-Intermediate y preparación para el examen First.', price:24000, usd:40, sched:'Jueves 20 a 21 hs', pronto:true, h:60 },
+    { code:'b2plus', tag:'B2+', name:'B2+ Pre-Advanced',desc:'Naturalidad y precisión, puente hacia el nivel C1.', price:24000, usd:40, full:true,  pronto:true, h:72 },
+    { code:'c1',     tag:'C1',  name:'C1 Advanced',     desc:'Inglés académico, profesional y de negocios.', price:24500, usd:40, sched:'Martes 20 a 21 hs', pronto:true, h:82 },
+    { code:'c1c2',   tag:'C1+', name:'C1 to C2',        desc:'Perfeccionamiento avanzado rumbo al C2.', price:24500, usd:40, full:true,  pronto:true, h:91 },
+    { code:'c2',     tag:'C2',  name:'C2 Proficiency',  desc:'El nivel más alto y preparación para Proficiency.', price:26000, usd:45, sched:'Jueves 19 a 20 hs', pronto:true, h:100 }
   ],
   especialidades: [
-    { code:'ielts',   tag:'IELTS', name:'IELTS B2/C1',            desc:'Entrenamiento intensivo para el examen IELTS.', price:26000, usd:40, sched:'Martes 19 a 20 hs', h:75 },
-    { code:'legal',   tag:'⚖️',    name:'Legal English',          desc:'Precisión técnica para el ámbito jurídico.', price:28000, usd:55, full:true, h:80 },
-    { code:'medical', tag:'🩺',    name:'Medical English',        desc:'Inglés para profesionales de la salud.', price:28000, usd:50, full:true, h:80 },
-    { code:'tcp',     tag:'✈️',    name:'Aviation English (TCP)', desc:'Práctica real para tripulantes de cabina y entrevistas.', price:28000, usd:50, full:true, h:80 }
+    { code:'ielts',   tag:'IELTS', name:'IELTS B2/C1',            desc:'Entrenamiento intensivo para el examen IELTS.', price:26000, usd:40, sched:'Martes 19 a 20 hs', pronto:true, h:75 },
+    { code:'legal',   tag:'⚖️',    name:'Legal English',          desc:'Precisión técnica para el ámbito jurídico.', price:28000, usd:55, full:true, pronto:true, h:80 },
+    { code:'medical', tag:'🩺',    name:'Medical English',        desc:'Inglés para profesionales de la salud.', price:28000, usd:50, full:true, pronto:true, h:80 },
+    { code:'tcp',     tag:'✈️',    name:'Aviation English (TCP)', desc:'Práctica real para tripulantes de cabina y entrevistas.', price:28000, usd:50, full:true, pronto:true, h:80 }
   ]
 };
 const RECARGO_POR_CLASE_ARS = 1.15; // pagar por clase cuesta 15% más
@@ -1047,7 +1048,7 @@ function renderCourses(){
     <article class="course" id="row-${c.code}" style="animation-delay:${i * 60}ms">
       <div class="lvl"><span class="lvl-tag">${c.tag}</span><span class="ladder" style="--h:${c.h}%"></span></div>
       <div class="c-info"><h3>${c.name}</h3><p>${c.desc}</p></div>
-      <div class="c-sched ${c.full ? 'is-full' : ''}">
+      <div class="c-sched ${c.full && !c.pronto ? 'is-full' : ''}">
         ${c.pronto ? '<span class="pill soon">Próximamente</span><small>Horarios pronto</small>'
           : c.full ? '<span class="pill full">Completo</span><small>Nuevos horarios pronto</small>'
                  : `<span class="pill open">Cupos abiertos</span><small>${c.sched}</small>`}
@@ -1086,7 +1087,7 @@ renderCourses();
 const chart = $('#levelChart');
 function renderChart(){
   chart.innerHTML = CURSOS.niveles.map((c, i) => `
-    <button class="bar ${c.full ? 'is-full' : 'is-open'}" data-code="${c.code}" aria-label="${c.name}: ${c.pronto ? 'próximamente' : c.full ? 'completo' : c.sched}">
+    <button class="bar ${c.pronto || !c.full ? 'is-open' : 'is-full'}" data-code="${c.code}" aria-label="${c.name}: ${c.pronto ? 'próximamente' : c.full ? 'completo' : c.sched}">
       <span class="bar-fill" style="height:calc((100% - 56px) * ${c.h / 100});transition-delay:${i * 110}ms"></span>
       <span class="bar-tag">${c.tag}</span>
       <span class="bar-state">${c.pronto ? 'Pronto' : c.full ? 'Completo' : 'Abierto'}</span>
