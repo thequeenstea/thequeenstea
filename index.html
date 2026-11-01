@@ -1548,6 +1548,19 @@ main,section,footer{overflow-x:clip}
 .chat .typing.on{opacity:1}
 .chat .typing.r{left:auto;right:0;background:#E3EBFF;border-bottom-left-radius:18px;border-bottom-right-radius:5px}
 @media (prefers-reduced-motion:reduce){.chat .bb{opacity:1!important;transform:none}.chat .typing{display:none}}
+
+/* Reseñas: carrusel de avatares más prolijo */
+.rv-nav{gap:10px}
+.rv-nav>button{width:44px;height:44px;font-size:1.15rem;display:grid;place-items:center;padding:0;flex-shrink:0}
+.rv-rail{width:232px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.rv-nav .rv-strip button{flex:0 0 36px;width:36px;height:36px;margin:4px;border:2px solid rgba(255,255,255,.55);color:#fff;font-size:.7rem;letter-spacing:.02em;text-shadow:0 1px 2px rgba(0,0,0,.35);transform:none;opacity:.45;filter:saturate(.85)}
+.rv-nav .rv-strip button.n1{transform:none;opacity:.75}
+.rv-nav .rv-strip button.n2{transform:none;opacity:.55}
+.rv-nav .rv-strip button.cur{transform:scale(1.3);opacity:1;filter:none;border-color:#fff;box-shadow:0 0 0 4px rgba(97,214,207,.7),0 12px 20px -8px rgba(0,0,0,.7)}
+.rv-nav .rv-strip button:hover{background:inherit;color:#fff;opacity:1;transform:scale(1.12)}
+.rv-nav .rv-strip button.cur:hover{transform:scale(1.3)}
+@media (max-width:560px){.rv-rail{width:172px}}
+.chat .bb .es{display:block;margin-top:5px;font-weight:500;font-size:.82rem;opacity:.72;line-height:1.3}
 .pill.soon{background:#EEF2FF;color:var(--royal)}
 .price-reveal{background:var(--paper);color:var(--royal);border:1.5px dashed var(--blue);border-radius:999px;padding:9px 16px;font-weight:700;font-size:.9rem;transition:background .2s, transform .2s}
 .price-reveal:hover{background:#E6EDFB;transform:translateY(-1px)}
@@ -1927,10 +1940,10 @@ main,section,footer{overflow-x:clip}
         <p>Nos importa que aprendas y uses el idioma con naturalidad, tanto en un ambiente académico y profesional como en un viaje de placer.</p>
         <div class="chat" aria-hidden="true">
           <span class="chat-h"><i></i>Una clase cualquiera</span>
-          <span class="bb l b1">How did the meeting with your new client go?</span>
-          <span class="bb r b2">Really well! I presented our proposal in English.</span>
-          <span class="bb l b3">A few months ago you wouldn't have dared. Proud of you 👏</span>
-          <span class="bb r b4">Thank you! Practising every week really works.</span>
+          <span class="bb l b1">How did the meeting with your new client go?<small class="es">¿Cómo te fue en la reunión con tu nuevo cliente?</small></span>
+          <span class="bb r b2">Really well! I presented our proposal in English.<small class="es">¡Muy bien! Presenté nuestra propuesta en inglés.</small></span>
+          <span class="bb l b3">A few months ago you wouldn't have dared. Proud of you 👏<small class="es">Hace unos meses no te hubieras animado. Orgullosa de vos 👏</small></span>
+          <span class="bb r b4">Thank you! Practising every week really works.<small class="es">¡Gracias! Practicar todas las semanas funciona de verdad.</small></span>
           <span class="typing"><i></i><i></i><i></i></span>
         </div>
         <span class="tag">Metodología comunicativa</span>
