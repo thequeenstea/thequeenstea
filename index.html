@@ -1416,20 +1416,10 @@ mark{background:none;color:inherit;background-image:linear-gradient(transparent 
 .xm-core strong{font-family:var(--display);font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;letter-spacing:-.04em;transition:opacity .25s,transform .25s}
 .xm-core span{font-weight:600;font-size:.85rem;color:#C9D3EE;margin-top:4px;line-height:1.15;max-width:90%}
 .xm-core.sw strong,.xm-core.sw span{opacity:0;transform:translateY(6px)}
-.xm-sk{position:absolute;display:flex;flex-direction:column;align-items:center;gap:6px;transform:translate(-50%,-50%);transition:transform .4s}
-.xm-sk i{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--blue);box-shadow:0 14px 26px -14px rgba(34,64,151,.7);border:2px solid #fff;transition:background .35s,color .35s,box-shadow .35s}
-.xm-sk i .i{width:26px;height:26px}
-.xm-sk b{font-size:.85rem;color:var(--ink)}
-.xm-sk.hot{transform:translate(-50%,-50%) scale(1.14)}
-.xm-sk.hot i{background:var(--accent);color:var(--ink);box-shadow:0 0 0 8px rgba(97,214,207,.28),0 16px 28px -12px rgba(65,193,186,.9)}
-.xm-sk.n1{left:50%;top:6%}.xm-sk.n2{left:94%;top:50%}.xm-sk.n3{left:50%;top:94%}.xm-sk.n4{left:6%;top:50%}
-.xm-use{position:absolute;left:0;top:2%;display:inline-flex;align-items:center;gap:7px;background:var(--ink);color:#fff;font-weight:700;font-size:.82rem;padding:7px 14px;border-radius:999px;transition:opacity .3s;white-space:nowrap}
-.xm-use .i{width:15px;height:15px;color:var(--accent)}
-.xm-use.off{opacity:0}
 .xm-scale{grid-column:1/3;display:flex;gap:6px;margin-top:6px}
 .xm-scale i{flex:1;text-align:center;font-style:normal;font-weight:700;font-size:.82rem;padding:9px 0;border-radius:12px;background:#E3EBFA;color:#7C8BB0;transition:background .4s,color .4s,transform .4s}
 .xm-scale i.hl{background:linear-gradient(135deg,var(--accent),#7CE3DC);color:var(--ink);transform:translateY(-3px);box-shadow:0 12px 20px -10px rgba(65,193,186,.9)}
-@media (max-width:900px){.xm{grid-template-columns:1fr}.xm-scale{grid-column:auto}.xm-ring{max-width:340px;margin:10px auto 22px}.xm-sk i{width:48px;height:48px}.xm-sk i .i{width:22px;height:22px}}
+@media (max-width:900px){.xm{grid-template-columns:1fr}.xm-scale{grid-column:auto}.xm-ring{margin:10px auto 22px}}
 @media (prefers-reduced-motion:reduce){.xm-orb circle{animation:none}.xm-it .d{transition:none}}
 
 /* Exámenes v4 */
@@ -1500,6 +1490,19 @@ main,section,footer{overflow-x:clip}
 
 .mat-same{display:inline-flex;align-items:center;gap:8px;margin:0 0 14px;padding:7px 14px 7px 8px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);font-weight:700;font-size:.92rem;color:#fff;position:relative;z-index:1}
 .mat-same .i{width:22px;height:22px;padding:4px;border-radius:50%;background:var(--accent);color:var(--ink)}
+
+/* Anillo de habilidades v2 */
+.xm-ring{max-width:500px}
+.xm-nodes{position:absolute;inset:0}
+.xm-nd{position:absolute;display:flex;align-items:center;gap:8px;white-space:nowrap;transform:translate(-50%,-50%) scale(.6);opacity:0;padding:6px 14px 6px 6px;border-radius:999px;background:#fff;border:1px solid #DCE6FA;box-shadow:0 16px 28px -16px rgba(34,64,151,.7);font-weight:700;font-size:.9rem;color:var(--ink);transition:transform .5s cubic-bezier(.2,.9,.3,1.3),opacity .4s,background .35s,color .35s,box-shadow .35s}
+.xm-nd.in{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.xm-nd i{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#EAF0FF;color:var(--blue);transition:background .35s,color .35s}
+.xm-nd i .i{width:18px;height:18px}
+.xm-nd.hot{background:var(--ink);color:#fff;transform:translate(-50%,-50%) scale(1.08);box-shadow:0 0 0 7px rgba(97,214,207,.25),0 20px 30px -14px rgba(14,31,77,.9)}
+.xm-nd.hot i{background:var(--accent);color:var(--ink)}
+@media (max-width:900px){.xm-ring{max-width:360px}}
+@media (max-width:480px){.xm-nd{font-size:.72rem;gap:5px;padding:4px 10px 4px 4px}.xm-nd i{width:26px;height:26px}.xm-nd i .i{width:14px;height:14px}}
+@media (prefers-reduced-motion:reduce){.xm-nd{transition:none}}
 .pill.soon{background:#EEF2FF;color:var(--royal)}
 .price-reveal{background:var(--paper);color:var(--royal);border:1.5px dashed var(--blue);border-radius:999px;padding:9px 16px;font-weight:700;font-size:.9rem;transition:background .2s, transform .2s}
 .price-reveal:hover{background:#E6EDFB;transform:translateY(-1px)}
@@ -1720,13 +1723,12 @@ main,section,footer{overflow-x:clip}
 <button class="xm-it on" role="tab" aria-selected="true" data-lv="B2" data-nm="Cambridge First" data-u="1" data-h="3"><span class="n">B2</span><span class="t">Cambridge First</span><span class="d"><span>Preparación para el First (B2): Reading, Use of English, Writing, Listening y Speaking.</span></span></button>
 <button class="xm-it" role="tab" aria-selected="false" data-lv="C1" data-nm="Cambridge Advanced" data-u="1" data-h="4"><span class="n">C1</span><span class="t">Cambridge Advanced</span><span class="d"><span>Preparación para el Advanced (C1): inglés académico y profesional con práctica de examen.</span></span></button>
 <button class="xm-it" role="tab" aria-selected="false" data-lv="C2" data-nm="Cambridge Proficiency" data-u="1" data-h="5"><span class="n">C2</span><span class="t">Cambridge Proficiency</span><span class="d"><span>Preparación para el Proficiency (C2), el nivel más alto de Cambridge.</span></span></button>
-<button class="xm-it" role="tab" aria-selected="false" data-lv="IELTS" data-nm="IELTS" data-u="0" data-h="3,4"><span class="n">IELTS</span><span class="t">International English Language Testing System</span><span class="d"><span>Entrenamiento para IELTS: las cuatro habilidades, estrategias y práctica con tiempos reales.</span></span></button>
+<button class="xm-it" role="tab" aria-selected="false" data-lv="IELTS" data-nm="Inglés internacional" data-u="0" data-h="3,4"><span class="n">IELTS</span><span class="t">International English Language Testing System</span><span class="d"><span>Entrenamiento para IELTS: las cuatro habilidades, estrategias y práctica con tiempos reales.</span></span></button>
       </div>
       <div class="xm-ring" aria-hidden="true">
         <svg class="xm-orb" viewBox="0 0 400 400"><circle cx="200" cy="200" r="150" class="o1"/><circle cx="200" cy="200" r="104" class="o2"/></svg>
         <div class="xm-core"><small>Nivel</small><strong id="xmLv">B2</strong><span id="xmNm">Cambridge First</span></div>
-        <div class="xm-sk n1"><i><svg class="i"><use href="#i-book"/></svg></i><b>Reading</b></div><div class="xm-sk n2"><i><svg class="i"><use href="#i-edit"/></svg></i><b>Writing</b></div><div class="xm-sk n3"><i><svg class="i"><use href="#i-headphones"/></svg></i><b>Listening</b></div><div class="xm-sk n4"><i><svg class="i"><use href="#i-chat"/></svg></i><b>Speaking</b></div>
-        <div class="xm-use" id="xmUse"><svg class="i"><use href="#i-file"/></svg> Use of English</div>
+        <div class="xm-nodes" id="xmNodes"></div>
       </div>
       <div class="xm-flow">
         <div class="xfl fl-us"><span class="fl-tag">Lo hacemos nosotros</span><span class="fl-ic"><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg></span><div><b>Te preparamos</b><p>Clases, práctica de examen, correcciones de Writing y seguimiento.</p></div></div>
@@ -2822,27 +2824,37 @@ $$('.faq-q').forEach(q => q.addEventListener('click', () => {
 
 (() => {
   const its = $$('.xm-it'); if (!its.length) return;
-  const core = $('.xm-core'), lv = $('#xmLv'), nm = $('#xmNm'), use = $('#xmUse'), sc = $$('.xm-scale i'), sks = $$('.xm-sk');
-  const lvls = ['A1','A2','B1','B2','C1','C2'];
-  let cur = 0, auto = null, pulse = null, hot = 0;
+  const core = $('.xm-core'), lv = $('#xmLv'), nm = $('#xmNm'), holder = $('#xmNodes');
+  const IC = { Reading:'book', Writing:'edit', Listening:'headphones', Speaking:'chat', 'Use of English':'file' };
+  const SETS = { cambridge:['Reading','Use of English','Writing','Listening','Speaking'], ielts:['Listening','Reading','Writing','Speaking'] };
+  let cur = 0, auto = null, pulse = null, hot = 0, nodes = [];
+  const R = 37.5;
+  const build = list => {
+    holder.innerHTML = '';
+    nodes = list.map((t,k) => {
+      const ang = (-90 + k * 360 / list.length) * Math.PI / 180;
+      const d = document.createElement('div'); d.className = 'xm-nd';
+      d.style.left = (50 + R * Math.cos(ang)) + '%'; d.style.top = (50 + R * Math.sin(ang)) + '%';
+      d.innerHTML = `<i><svg class="i"><use href="#i-${IC[t]}"/></svg></i>${t}`;
+      holder.appendChild(d); setTimeout(() => d.classList.add('in'), 60 + k * 90); return d;
+    });
+    hot = 0; setHot();
+  };
+  const setHot = () => nodes.forEach((e,k) => e.classList.toggle('hot', k === hot));
   const show = n => {
     cur = n; const it = its[n];
     its.forEach((e,k) => { e.classList.toggle('on', k === n); e.setAttribute('aria-selected', String(k === n)); });
     core.classList.add('sw');
     setTimeout(() => { lv.textContent = it.dataset.lv; nm.textContent = it.dataset.nm; core.classList.remove('sw'); }, 220);
-    use.classList.toggle('off', it.dataset.u !== '1');
-    const h = it.dataset.h.split(',').map(Number);
-    sc.forEach((e,k) => e.classList.toggle('hl', h.includes(k)));
+    build(it.dataset.u === '1' ? SETS.cambridge : SETS.ielts);
   };
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const start = () => { clearInterval(auto); if (reduce) return; auto = setInterval(() => show((cur + 1) % its.length), 5500); };
+  const start = () => { clearInterval(auto); if (reduce) return; auto = setInterval(() => show((cur + 1) % its.length), 6500); };
   its.forEach((e,k) => e.addEventListener('click', () => { clearInterval(auto); show(k); }));
   const box = $('.xm');
   box.addEventListener('mouseenter', () => clearInterval(auto));
   box.addEventListener('mouseleave', start);
-  const setHot = () => sks.forEach((e,k) => e.classList.toggle('hot', k === hot));
-  setHot();
-  if (!reduce) pulse = setInterval(() => { hot = (hot + 1) % sks.length; setHot(); }, 1300);
+  if (!reduce) pulse = setInterval(() => { hot = (hot + 1) % nodes.length; setHot(); }, 1200);
   show(0); start();
 })();
 $$('.faq-chip').forEach(c => c.addEventListener('click', () => {
