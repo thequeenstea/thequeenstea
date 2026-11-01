@@ -1064,6 +1064,22 @@ h2{font-size:clamp(2.3rem,4.8vw,3.9rem)}
 @media (max-width:1100px){.biz-grid2{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:560px){.biz-grid2{grid-template-columns:1fr}.biz-top{align-items:flex-start}}
 @media (prefers-reduced-motion:reduce){.av8 i{animation:none;transform:none;opacity:1}.biz-cta::after{animation:none;opacity:0}}
+
+/* ===== Reseñas reales ===== */
+.rv-head{display:flex;justify-content:space-between;align-items:flex-end;gap:28px;flex-wrap:wrap}
+.rv-head h2{max-width:none;font-size:clamp(2.2rem,4.6vw,3.8rem);margin-bottom:12px}
+.rv-head .lead{max-width:50ch;margin:0}
+.testi{background:radial-gradient(700px 360px at 90% 0,rgba(65,193,186,.22),transparent 60%),linear-gradient(165deg,#0B1A45,#14275F)}
+.testi .kicker{background:rgba(255,255,255,.1);color:var(--accent)}
+.rv-rows{display:grid;gap:22px;margin-top:50px;mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.rv-rows .t-track{margin-top:0}
+.t-track.rev{animation-direction:reverse;animation-duration:70s}
+.rv-rows .t-card{width:380px;background:linear-gradient(165deg,rgba(255,255,255,.12),rgba(255,255,255,.04));border-color:rgba(255,255,255,.18)}
+.rv-rows .t-badge{display:block;margin-bottom:12px}
+.rv-rows .t-card q{display:block;font-family:var(--body);font-size:1.02rem;line-height:1.55;font-weight:500;color:#EEF3FF}
+.t-who small{color:#AFBCE0;font-size:.82rem}
+@media (max-width:560px){.rv-rows .t-card{width:300px}}
+@media (prefers-reduced-motion:reduce){.t-track{animation:none}}
 .pill.soon{background:#EEF2FF;color:var(--royal)}
 .price-reveal{background:var(--paper);color:var(--royal);border:1.5px dashed var(--blue);border-radius:999px;padding:9px 16px;font-weight:700;font-size:.9rem;transition:background .2s, transform .2s}
 .price-reveal:hover{background:#E6EDFB;transform:translateY(-1px)}
@@ -1473,11 +1489,18 @@ h2{font-size:clamp(2.3rem,4.8vw,3.9rem)}
 
 <!-- ===================== TESTIMONIOS ===================== -->
 <section class="testi" id="opiniones">
-  <div class="wrap reveal">
-    <h2>Confianza que trasciende</h2>
-    <p class="lead">Una década acompañando procesos reales.</p>
+  <div class="wrap reveal rv-head">
+    <div>
+      <span class="kicker">Reseñas reales en Google</span>
+      <h2>Confianza que trasciende</h2>
+      <p class="lead">Más de 50 alumnos dejaron su reseña en Google. Esto es lo que cuentan, con sus propias palabras.</p>
+    </div>
+    <a class="btn btn-accent" href="https://share.google/aE0K9xauQWOwXtZRZ" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-chat"/></svg> Ver todas las reseñas en Google</a>
   </div>
-  <div class="t-track" id="tTrack"></div>
+  <div class="rv-rows" aria-label="Reseñas de alumnos en Google">
+    <div class="t-track" id="tTrack"></div>
+    <div class="t-track rev" id="tTrack2"></div>
+  </div>
 </section>
 
 <!-- ===================== NOSOTROS ===================== -->
@@ -2069,20 +2092,76 @@ Acepto los términos y compromisos.`;
 /* ============================================================
    TESTIMONIOS
    ============================================================ */
-const testimonios = [
-  { badge:"Safe Space / Conversation", quote:"Siendo colega docente, me costaba encontrar un lugar donde practicar sin sentir que me evaluaban. Encontré un refugio.", name:"Luciana M.", initial:"LM", since:"2015" },
-  { badge:"IELTS Preparation", quote:"El acompañamiento para rendir fue clave. No solo por el contenido, sino por la seguridad emocional que me dieron.", name:"Rodrigo G.", initial:"RG", since:"2018" },
-  { badge:"Advanced C1 Level", quote:"Lo que más valoro es la constancia y el vínculo. Después de tantos años, las charlas fluyen con naturalidad.", name:"Silvina P.", initial:"SP", since:"2017" },
-  { badge:"TOEFL Success", quote:"Superar el miedo a hablar era mi meta. Hoy me siento capaz de expresarme en cualquier contexto académico.", name:"Julián C.", initial:"JC", since:"2019" },
-  { badge:"First Certificate", quote:"Inicié con dudas y hoy el inglés es parte de mi vida diaria. La paciencia y calidez son únicas.", name:"Mónica B.", initial:"MB", since:"2016" },
-  { badge:"Professional Speaking", quote:"Como profesional, buscaba excelencia técnica y empatía. Es el balance perfecto para aprender sin miedo.", name:"Agustina T.", initial:"AT", since:"2020" }
+const resenas = [
+ {
+  "name": "Gaby M.",
+  "initial": "GM",
+  "badge": "",
+  "quote": "Las mejores clases!✨️Dinámicas, entretenidas y se enfoca en que el alumno aprenda de verdad! Adapta el aprendizaje a las tendencias del momento. Recomiendo❣️"
+ },
+ {
+  "name": "Paula P.",
+  "initial": "PP",
+  "badge": "Curso asincrónico de essay writing",
+  "quote": "Excelente el curso asincrónico de essay writing. La profe se toma el trabajo de corregir oración por oración y sugerirte formas para hacerlo de una mejor manera. Además, resuelve las dudas que tengas sin importar las veces que le consultes."
+ },
+ {
+  "name": "Gabriela L.",
+  "initial": "GL",
+  "badge": "",
+  "quote": "Las clases son tan amenas que se nos pasa la hora volando! por primera vez despues de estudiar ingles toda mi vida me siento cómoda , tranquila y con la certeza de que voy aprendiendo, gracias Cynthia!!!!"
+ },
+ {
+  "name": "Lucio Y.",
+  "initial": "LY",
+  "badge": "Preparación para First Certificate",
+  "quote": "Desde Uruguay 🇺🇾 tomando clases en The Queen's Tea y preparándome para rendir First Certificate in English. El mejor lugar para estudiar!!!"
+ },
+ {
+  "name": "Liliana C.",
+  "initial": "LC",
+  "badge": "",
+  "quote": "Realmente la experiencia en las clases son muy enriquecedoras. Clases dinámicas, con mucha empatía hacia el aprendizaje de cada uno de nosotros y sus tiempos en aprender. Muy feliz de ser alumna en The Queen's Tea. El valor humano de Cyn es impagable."
+ },
+ {
+  "name": "Laura B.",
+  "initial": "LB",
+  "badge": "",
+  "quote": "Cyn es tremenda profe. Clases didácticas, actualizadas, con temas de actualidad, conversaciones en inglés fluidas. Muuuuucho material para entretenerte. Excelente programa de tareas semanales. La entrega y dedicación de la profe, pocas veces visto. 😊"
+ },
+ {
+  "name": "Andrea T.",
+  "initial": "AT",
+  "badge": "",
+  "quote": "Me decidí a retomar mis estudios en la pandemia y superó por mucho mis expectativas. También soy docente y me emociona el amor y el compromiso que le pone a cada clase la profe Cyntia. Lo recomiendo al 100%."
+ },
+ {
+  "name": "Sabrina H.",
+  "initial": "SH",
+  "badge": "",
+  "quote": "Estoy retomando mis clases en nivel intermedio, me siento muy conforme con las clases con Cyn. Son dinámicas, utiliza distintas plataformas y te acompaña en todo momento. Si necesitas retomar o comenzar es sin dudas el mejor lugar para estudiar inglés!"
+ },
+ {
+  "name": "Eli P.",
+  "initial": "EP",
+  "badge": "Curso intensivo de verano",
+  "quote": "Excelente el curso intensivo de verano, la profe super atenta siempre sacando dudas y asegurándose que se entienda todo! Seguiré aprendiendo!😊😊"
+ },
+ {
+  "name": "Anahí M.",
+  "initial": "AM",
+  "badge": "",
+  "quote": "Cyn apareció sin querer, por medio de instagram y la verdad cambió mi manera de aprender inglés! Sus clases son sencillas y prácticas, al igual que sus tareas. Super flexible, con buena onda y amor cada vez que prende la cámara o te responde un mensaje!"
+ }
 ];
-const tHTML = testimonios.map(t => `
+const rCard = r => `
   <figure class="t-card" style="margin:0">
-    <div><span class="t-badge">${t.badge}</span><div class="t-stars" aria-label="5 estrellas">★★★★★</div><q>${t.quote}</q></div>
-    <figcaption class="t-who"><span class="t-av">${t.initial}</span><span><strong>${t.name}</strong><small>Alumna/o desde ${t.since}</small></span></figcaption>
-  </figure>`).join('');
-$('#tTrack').innerHTML = tHTML + tHTML;
+    <div>${r.badge ? `<span class="t-badge">${r.badge}</span>` : ''}<q>${r.quote}</q></div>
+    <figcaption class="t-who"><span class="t-av">${r.initial}</span><span><strong>${r.name}</strong><small>Reseña en Google</small></span></figcaption>
+  </figure>`;
+const rA = resenas.slice(0, 5).map(rCard).join(''), rB = resenas.slice(5).map(rCard).join('');
+$('#tTrack').innerHTML = rA + rA;
+$('#tTrack2').innerHTML = rB + rB;
 
 /* ============================================================
    PREGUNTAS FRECUENTES
