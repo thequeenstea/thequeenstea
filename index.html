@@ -884,6 +884,28 @@ h2{font-size:clamp(2.3rem,4.8vw,3.9rem)}
 .trail-hint{margin:20px 0 0;text-align:center;color:#AFBCE0;font-size:.92rem}
 .trail-hint button{background:none;border:0;padding:0;color:var(--accent);font-weight:700;text-decoration:underline}
 @media (max-width:980px){.trail{padding:24px 16px 20px}.trail-card{grid-template-columns:1fr;gap:18px;padding:24px 22px}.tc-left{flex-direction:row;align-items:center;gap:16px}.trail-map{height:250px}.tflag{display:none}}
+
+/* ===== Camino: versión más pulida ===== */
+.trail{background:radial-gradient(520px 300px at 88% -5%,rgba(65,193,186,.4),transparent 62%),radial-gradient(600px 340px at 0 100%,rgba(79,110,255,.25),transparent 60%),linear-gradient(165deg,#0B1A45,#14275F 70%,#173A7A);position:relative}
+.trail::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.35) 1px,transparent 1.5px),radial-gradient(rgba(255,255,255,.2) 1px,transparent 1.5px);background-size:90px 90px,53px 53px;background-position:0 0,27px 31px;opacity:.35;pointer-events:none;mask-image:linear-gradient(180deg,#000,transparent 70%)}
+.trail > *{position:relative}
+.tr-mount{position:absolute;left:0;right:0;bottom:-10px;width:100%;height:55%;pointer-events:none}
+.tr-base{stroke:rgba(255,255,255,.28);stroke-width:3;stroke-dasharray:1 10}
+.tr-fill{stroke:url(#trg);stroke-width:6;filter:drop-shadow(0 0 10px rgba(97,214,207,.9))}
+.tnode{background:linear-gradient(160deg,rgba(255,255,255,.16),rgba(255,255,255,.04));backdrop-filter:blur(6px);border:1.5px solid rgba(255,255,255,.4);box-shadow:0 10px 22px -10px rgba(0,0,0,.6)}
+.tnode.done{background:linear-gradient(160deg,#5B8BFF,#2A5BD7);border-color:rgba(255,255,255,.7)}
+.tnode.cur{background:linear-gradient(160deg,#7CE3DC,#41C1BA);animation:nodepulse 2.2s ease-in-out infinite}
+@keyframes nodepulse{0%,100%{box-shadow:0 0 0 6px rgba(97,214,207,.3),0 18px 30px -10px rgba(97,214,207,.9)}50%{box-shadow:0 0 0 14px rgba(97,214,207,.08),0 18px 30px -10px rgba(97,214,207,.9)}}
+.tflag{background:rgba(11,26,69,.7);backdrop-filter:blur(6px);border-color:rgba(255,255,255,.3)}
+.tr-me{width:clamp(36px,5vw,52px);height:clamp(36px,5vw,52px);box-shadow:0 18px 30px -8px rgba(0,0,0,.8),0 0 0 3px #fff,0 0 0 6px rgba(97,214,207,.5);transform:translate(-50%,calc(-100% - clamp(30px,4.6vw,48px)));animation:flota 2.6s ease-in-out infinite}
+@keyframes flota{50%{margin-top:-7px}}
+.trail-card{position:relative;overflow:hidden;box-shadow:0 30px 60px -30px rgba(0,0,0,.7);border:1px solid rgba(255,255,255,.7)}
+.trail-card::after{content:attr(data-tag);position:absolute;right:20px;bottom:-26px;font-family:var(--display);font-weight:800;font-size:9rem;line-height:1;letter-spacing:-.06em;color:#F4F7FD;z-index:0;pointer-events:none}
+.trail-card > *{position:relative;z-index:1}
+.trail-card > .tc-bar{position:absolute;left:0;right:0;top:0;height:5px;background:#E6ECF8;z-index:2}
+.tc-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--blue));border-radius:0 5px 5px 0;transition:width .7s cubic-bezier(.2,.8,.2,1)}
+@media (prefers-reduced-motion:reduce){.tr-me,.tnode.cur{animation:none}}
+@media (max-width:980px){.trail-card::after{font-size:6rem}}
 .pill.soon{background:#EEF2FF;color:var(--royal)}
 .price-reveal{background:var(--paper);color:var(--royal);border:1.5px dashed var(--blue);border-radius:999px;padding:9px 16px;font-weight:700;font-size:.9rem;transition:background .2s, transform .2s}
 .price-reveal:hover{background:#E6EDFB;transform:translateY(-1px)}
@@ -1617,15 +1639,26 @@ const FLAGS = { b2:'Cambridge First', c1:'Cambridge Advanced', c2:'Cambridge Pro
 const tr = { i:0, auto:true, timer:null, visible:false };
 const trMap = $('#trailMap'), trCard = $('#trailCard');
 const trList = () => CURSOS[state.tab];
+const trCurve = pts => { // curva suave que pasa por todos los puntos
+  if (pts.length < 2) return '';
+  let d = `M${pts[0][0]},${pts[0][1]}`;
+  for (let k = 0; k < pts.length - 1; k++){
+    const p0 = pts[k - 1] || pts[k], p1 = pts[k], p2 = pts[k + 1], p3 = pts[k + 2] || p2;
+    d += ` C${p1[0] + (p2[0] - p0[0]) / 6},${p1[1] + (p2[1] - p0[1]) / 6} ${p2[0] - (p3[0] - p1[0]) / 6},${p2[1] - (p3[1] - p1[1]) / 6} ${p2[0]},${p2[1]}`;
+  }
+  return d;
+};
 const trPts = () => { const n = trList().length; return trList().map((c, k) => [ n > 1 ? 5 + k / (n - 1) * 90 : 50, 80 - (n > 1 ? k / (n - 1) : 0) * 56 ]); };
 
 function trailBuild(i){
   const list = trList(), pts = trPts(); tr.i = i;
-  const path = pts.map(p => p.join(',')).join(' ');
+  const path = trCurve(pts);
   trMap.innerHTML = `
+    <svg class="tr-mount" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40V26L9 18 17 27 27 12 38 28 49 16 60 30 72 10 84 26 93 17 100 24V40z" fill="rgba(255,255,255,.05)"/><path d="M0 40V32L12 25 24 33 36 22 50 34 64 24 78 35 90 27 100 33V40z" fill="rgba(255,255,255,.07)"/></svg>
     <svg class="tr-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-      <polyline class="tr-base" points="${path}" vector-effect="non-scaling-stroke"/>
-      <polyline class="tr-fill" id="trFill" points="" pathLength="1" vector-effect="non-scaling-stroke"/>
+      <defs><linearGradient id="trg" x1="0" x2="1"><stop offset="0" stop-color="#41C1BA"/><stop offset="1" stop-color="#7AA2FF"/></linearGradient></defs>
+      <path class="tr-base" d="${path}" vector-effect="non-scaling-stroke"/>
+      <path class="tr-fill" id="trFill" d="" pathLength="1" vector-effect="non-scaling-stroke"/>
     </svg>
     ${list.map((c, k) => `<button class="tnode" data-i="${k}" style="left:${pts[k][0]}%;top:${pts[k][1]}%" aria-label="${c.name}"><span>${c.tag}</span>${state.tab === 'niveles' && FLAGS[c.code] ? `<em class="tflag">${FLAGS[c.code]}</em>` : ''}</button>`).join('')}
     <div class="tr-me" id="trMe" aria-hidden="true"><img src="img/logo.png" alt="" onerror="this.parentNode.textContent='★'"></div>`;
@@ -1634,7 +1667,7 @@ function trailBuild(i){
 function trailSelect(i, first){
   const list = trList(), pts = trPts(); tr.i = i;
   $$('.tnode', trMap).forEach((b, k) => { b.classList.toggle('cur', k === i); b.classList.toggle('done', k < i); });
-  const fill = $('#trFill'); fill.setAttribute('points', pts.slice(0, i + 1).map(p => p.join(',')).join(' '));
+  const fill = $('#trFill'); fill.setAttribute('d', trCurve(pts.slice(0, i + 1)));
   fill.style.animation = 'none'; void fill.getBoundingClientRect(); fill.style.animation = '';
   const me = $('#trMe'); me.style.left = pts[i][0] + '%'; me.style.top = pts[i][1] + '%';
   trailCard(first);
@@ -1647,7 +1680,9 @@ function trailCard(first){
     : `<div class="d-price"><div><small>Pack mensual</small><strong>${money(state.cur === 'usd' ? c.usd : c.price, state.cur)}</strong><small>por clase</small></div>
        <div><small>Clase suelta</small><strong>${money(state.cur === 'usd' ? c.usd + RECARGO_POR_CLASE_USD : c.price * RECARGO_POR_CLASE_ARS, state.cur)}</strong><small>por clase</small></div></div>
        <p class="d-sched">${c.full ? 'Grupo completo, nuevos horarios pronto.' : 'Horario: ' + c.sched}</p>`;
+  trCard.dataset.tag = c.tag;
   trCard.innerHTML = `
+    <div class="tc-bar" aria-hidden="true"><i style="width:${(tr.i + 1) / list.length * 100}%"></i></div>
     <div class="tc-left"><span class="tc-tag">${c.tag}</span>${estado}</div>
     <div class="tc-main">
       <h4>${c.name}</h4><p class="tc-desc">${c.desc}</p>
