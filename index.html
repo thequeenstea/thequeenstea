@@ -1389,6 +1389,48 @@ mark{background:none;color:inherit;background-image:linear-gradient(transparent 
 @media (max-width:900px){.ex-stage{grid-template-columns:1fr;padding:20px}.ex-tabs{flex-direction:row;overflow-x:auto;padding-bottom:4px}.ex-tab{flex:0 0 auto}.ex-tab .ex-nm{display:none}.ex-tab.on .ex-nm{display:inline}.ex-tab:hover,.ex-tab.on{transform:none}.ex-pts{grid-template-columns:1fr}}
 @media (max-width:520px){.ex-panel{padding:24px 20px}}
 @media (prefers-reduced-motion:reduce){.ex-tab.on .ex-pg em{animation:none;width:100%}.ex-panel{transition:none}}
+
+/* Exámenes v3 */
+.xm{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:20px 40px;align-items:center;padding:clamp(24px,4vw,48px);border-radius:40px;background:radial-gradient(520px 360px at 85% 20%,rgba(65,193,186,.25),transparent 65%),linear-gradient(150deg,#EAF2FF,#fff 70%);border:1px solid #D9E4FA;box-shadow:0 40px 70px -46px rgba(34,64,151,.5)}
+.xm-list{display:flex;flex-direction:column;gap:6px}
+.xm-it{display:grid;grid-template-columns:auto 1fr;column-gap:18px;align-items:baseline;text-align:left;background:none;border:0;border-bottom:1px solid #D5E0F7;padding:18px 4px;cursor:pointer;font-family:inherit;color:#7C8BB0;transition:color .35s,padding .35s}
+.xm-it:last-child{border-bottom:0}
+.xm-it .n{font-family:var(--display);font-weight:800;font-size:clamp(2rem,4.4vw,3.2rem);letter-spacing:-.04em;line-height:1;min-width:2.3ch;transition:color .35s,transform .35s;transform-origin:left bottom}
+.xm-it .t{font-weight:700;font-size:1.15rem}
+.xm-it .d{grid-column:2;display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s ease}
+.xm-it .d>span{overflow:hidden;color:var(--muted);font-size:.98rem;max-width:46ch}
+.xm-it:hover{color:var(--blue)}
+.xm-it.on{color:var(--ink)}
+.xm-it.on .n{color:var(--blue);transform:scale(1.08)}
+.xm-it.on .d{grid-template-rows:1fr}
+.xm-it.on .d>span{padding-top:8px}
+.xm-it:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:12px}
+.xm-ring{position:relative;aspect-ratio:1;max-width:460px;width:100%;margin:0 auto}
+.xm-orb{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.xm-orb circle{fill:none;transform-origin:200px 200px}
+.xm-orb .o1{stroke:#9FB4E6;stroke-width:1.5;stroke-dasharray:3 9;stroke-linecap:round;animation:xmrot 60s linear infinite}
+.xm-orb .o2{stroke:var(--accent);stroke-width:2;stroke-dasharray:60 40;opacity:.7;animation:xmrot 22s linear infinite reverse}
+@keyframes xmrot{to{transform:rotate(360deg)}}
+.xm-core{position:absolute;left:50%;top:50%;width:46%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:linear-gradient(150deg,#1E3A8A,#0E1F4D);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 30px 50px -22px rgba(14,31,77,.8),0 0 0 10px rgba(255,255,255,.7);padding:10px}
+.xm-core small{color:#9DB0E8;font-weight:600;font-size:.8rem}
+.xm-core strong{font-family:var(--display);font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;letter-spacing:-.04em;transition:opacity .25s,transform .25s}
+.xm-core span{font-weight:600;font-size:.85rem;color:#C9D3EE;margin-top:4px;line-height:1.15;max-width:90%}
+.xm-core.sw strong,.xm-core.sw span{opacity:0;transform:translateY(6px)}
+.xm-sk{position:absolute;display:flex;flex-direction:column;align-items:center;gap:6px;transform:translate(-50%,-50%);transition:transform .4s}
+.xm-sk i{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--blue);box-shadow:0 14px 26px -14px rgba(34,64,151,.7);border:2px solid #fff;transition:background .35s,color .35s,box-shadow .35s}
+.xm-sk i .i{width:26px;height:26px}
+.xm-sk b{font-size:.85rem;color:var(--ink)}
+.xm-sk.hot{transform:translate(-50%,-50%) scale(1.14)}
+.xm-sk.hot i{background:var(--accent);color:var(--ink);box-shadow:0 0 0 8px rgba(97,214,207,.28),0 16px 28px -12px rgba(65,193,186,.9)}
+.xm-sk.n1{left:50%;top:6%}.xm-sk.n2{left:94%;top:50%}.xm-sk.n3{left:50%;top:94%}.xm-sk.n4{left:6%;top:50%}
+.xm-use{position:absolute;left:50%;top:75.5%;transform:translateX(-50%);display:inline-flex;align-items:center;gap:7px;background:var(--ink);color:#fff;font-weight:700;font-size:.82rem;padding:7px 14px;border-radius:999px;transition:opacity .3s;white-space:nowrap}
+.xm-use .i{width:15px;height:15px;color:var(--accent)}
+.xm-use.off{opacity:0}
+.xm-scale{grid-column:1/3;display:flex;gap:6px;margin-top:6px}
+.xm-scale i{flex:1;text-align:center;font-style:normal;font-weight:700;font-size:.82rem;padding:9px 0;border-radius:12px;background:#E3EBFA;color:#7C8BB0;transition:background .4s,color .4s,transform .4s}
+.xm-scale i.hl{background:linear-gradient(135deg,var(--accent),#7CE3DC);color:var(--ink);transform:translateY(-3px);box-shadow:0 12px 20px -10px rgba(65,193,186,.9)}
+@media (max-width:900px){.xm{grid-template-columns:1fr}.xm-scale{grid-column:auto}.xm-ring{max-width:340px;margin:10px auto 22px}.xm-sk i{width:48px;height:48px}.xm-sk i .i{width:22px;height:22px}}
+@media (prefers-reduced-motion:reduce){.xm-orb circle{animation:none}.xm-it .d{transition:none}}
 .pill.soon{background:#EEF2FF;color:var(--royal)}
 .price-reveal{background:var(--paper);color:var(--royal);border:1.5px dashed var(--blue);border-radius:999px;padding:9px 16px;font-weight:700;font-size:.9rem;transition:background .2s, transform .2s}
 .price-reveal:hover{background:#E6EDFB;transform:translateY(-1px)}
@@ -1601,20 +1643,20 @@ mark{background:none;color:inherit;background-image:linear-gradient(transparent 
       <h2>Preparate para certificar tu inglés.</h2>
       <p class="lead">Practicás las cuatro habilidades con exámenes de práctica y corrección de Writing.</p>
     </div>
-    <div class="ex-stage reveal">
-      <span class="ex-glow" aria-hidden="true"></span>
-      <div class="ex-tabs" role="tablist" aria-label="Exámenes">
-<button class="ex-tab on" role="tab" aria-selected="true" data-i="0"><span class="ex-lv">B2</span><span class="ex-nm">Cambridge First</span><span class="ex-pg"><em></em></span></button>
-<button class="ex-tab" role="tab" aria-selected="false" data-i="1"><span class="ex-lv">C1</span><span class="ex-nm">Cambridge Advanced</span><span class="ex-pg"><em></em></span></button>
-<button class="ex-tab" role="tab" aria-selected="false" data-i="2"><span class="ex-lv">C2</span><span class="ex-nm">Cambridge Proficiency</span><span class="ex-pg"><em></em></span></button>
-<button class="ex-tab" role="tab" aria-selected="false" data-i="3"><span class="ex-lv">IELTS</span><span class="ex-nm">IELTS</span><span class="ex-pg"><em></em></span></button>
+    <div class="xm reveal">
+      <div class="xm-list" role="tablist" aria-label="Exámenes">
+<button class="xm-it on" role="tab" aria-selected="true" data-lv="B2" data-nm="Cambridge First" data-u="1" data-h="3"><span class="n">B2</span><span class="t">Cambridge First</span><span class="d"><span>Preparación para el First (B2): Reading, Use of English, Writing, Listening y Speaking.</span></span></button>
+<button class="xm-it" role="tab" aria-selected="false" data-lv="C1" data-nm="Cambridge Advanced" data-u="1" data-h="4"><span class="n">C1</span><span class="t">Cambridge Advanced</span><span class="d"><span>Preparación para el Advanced (C1): inglés académico y profesional con práctica de examen.</span></span></button>
+<button class="xm-it" role="tab" aria-selected="false" data-lv="C2" data-nm="Cambridge Proficiency" data-u="1" data-h="5"><span class="n">C2</span><span class="t">Cambridge Proficiency</span><span class="d"><span>Preparación para el Proficiency (C2), el nivel más alto de Cambridge.</span></span></button>
+<button class="xm-it" role="tab" aria-selected="false" data-lv="IELTS" data-nm="IELTS" data-u="0" data-h="3,4"><span class="n">IELTS</span><span class="t">International English Language Testing System</span><span class="d"><span>Entrenamiento para IELTS: las cuatro habilidades, estrategias y práctica con tiempos reales.</span></span></button>
       </div>
-      <div class="ex-panels">
-<div class="ex-panel on" role="tabpanel" data-i="0"><span class="ex-big" aria-hidden="true">B2</span><h3>Cambridge First</h3><p>Preparación para el First (B2): Reading, Use of English, Writing, Listening y Speaking.</p><div class="ex-sk"><span>Reading</span><span>Use of English</span><span>Writing</span><span>Listening</span><span>Speaking</span></div><div class="ex-scale" aria-hidden="true"><i class="">A1</i><i class="">A2</i><i class="">B1</i><i class="hl">B2</i><i class="">C1</i><i class="">C2</i></div></div>
-<div class="ex-panel" role="tabpanel" data-i="1"><span class="ex-big" aria-hidden="true">C1</span><h3>Cambridge Advanced</h3><p>Preparación para el Advanced (C1): inglés académico y profesional con práctica de examen.</p><div class="ex-sk"><span>Reading</span><span>Use of English</span><span>Writing</span><span>Listening</span><span>Speaking</span></div><div class="ex-scale" aria-hidden="true"><i class="">A1</i><i class="">A2</i><i class="">B1</i><i class="">B2</i><i class="hl">C1</i><i class="">C2</i></div></div>
-<div class="ex-panel" role="tabpanel" data-i="2"><span class="ex-big" aria-hidden="true">C2</span><h3>Cambridge Proficiency</h3><p>Preparación para el Proficiency (C2), el nivel más alto de Cambridge.</p><div class="ex-sk"><span>Reading</span><span>Use of English</span><span>Writing</span><span>Listening</span><span>Speaking</span></div><div class="ex-scale" aria-hidden="true"><i class="">A1</i><i class="">A2</i><i class="">B1</i><i class="">B2</i><i class="">C1</i><i class="hl">C2</i></div></div>
-<div class="ex-panel" role="tabpanel" data-i="3"><span class="ex-big" aria-hidden="true">IELTS</span><h3>IELTS</h3><p>Entrenamiento para IELTS: las cuatro habilidades, estrategias y práctica con tiempos reales.</p><div class="ex-sk"><span>Reading</span><span>Writing</span><span>Listening</span><span>Speaking</span></div><div class="ex-scale" aria-hidden="true"><i class="">A1</i><i class="">A2</i><i class="">B1</i><i class="hl">B2</i><i class="hl">C1</i><i class="">C2</i></div></div>
+      <div class="xm-ring" aria-hidden="true">
+        <svg class="xm-orb" viewBox="0 0 400 400"><circle cx="200" cy="200" r="150" class="o1"/><circle cx="200" cy="200" r="104" class="o2"/></svg>
+        <div class="xm-core"><small>Nivel</small><strong id="xmLv">B2</strong><span id="xmNm">Cambridge First</span></div>
+        <div class="xm-sk n1"><i><svg class="i"><use href="#i-book"/></svg></i><b>Reading</b></div><div class="xm-sk n2"><i><svg class="i"><use href="#i-edit"/></svg></i><b>Writing</b></div><div class="xm-sk n3"><i><svg class="i"><use href="#i-headphones"/></svg></i><b>Listening</b></div><div class="xm-sk n4"><i><svg class="i"><use href="#i-chat"/></svg></i><b>Speaking</b></div>
+        <div class="xm-use" id="xmUse"><svg class="i"><use href="#i-file"/></svg> Use of English</div>
       </div>
+      <div class="xm-scale" aria-hidden="true"><i>A1</i><i>A2</i><i>B1</i><i>B2</i><i>C1</i><i>C2</i></div>
     </div>
     <ul class="ex-pts">
       <li class="reveal"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-file"/></svg></span><b>Exámenes de práctica</b><p>Estilo Cambridge, dentro del campus.</p></li>
@@ -2690,6 +2732,32 @@ $$('.faq-q').forEach(q => q.addEventListener('click', () => {
   st.addEventListener('mouseenter', () => { st.classList.add('paused'); clearInterval(timer); });
   st.addEventListener('mouseleave', () => { st.classList.remove('paused'); show(cur); start(); });
   start();
+})();
+
+(() => {
+  const its = $$('.xm-it'); if (!its.length) return;
+  const core = $('.xm-core'), lv = $('#xmLv'), nm = $('#xmNm'), use = $('#xmUse'), sc = $$('.xm-scale i'), sks = $$('.xm-sk');
+  const lvls = ['A1','A2','B1','B2','C1','C2'];
+  let cur = 0, auto = null, pulse = null, hot = 0;
+  const show = n => {
+    cur = n; const it = its[n];
+    its.forEach((e,k) => { e.classList.toggle('on', k === n); e.setAttribute('aria-selected', String(k === n)); });
+    core.classList.add('sw');
+    setTimeout(() => { lv.textContent = it.dataset.lv; nm.textContent = it.dataset.nm; core.classList.remove('sw'); }, 220);
+    use.classList.toggle('off', it.dataset.u !== '1');
+    const h = it.dataset.h.split(',').map(Number);
+    sc.forEach((e,k) => e.classList.toggle('hl', h.includes(k)));
+  };
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const start = () => { clearInterval(auto); if (reduce) return; auto = setInterval(() => show((cur + 1) % its.length), 5500); };
+  its.forEach((e,k) => e.addEventListener('click', () => { clearInterval(auto); show(k); }));
+  const box = $('.xm');
+  box.addEventListener('mouseenter', () => clearInterval(auto));
+  box.addEventListener('mouseleave', start);
+  const setHot = () => sks.forEach((e,k) => e.classList.toggle('hot', k === hot));
+  setHot();
+  if (!reduce) pulse = setInterval(() => { hot = (hot + 1) % sks.length; setHot(); }, 1300);
+  show(0); start();
 })();
 $$('.faq-chip').forEach(c => c.addEventListener('click', () => {
   $$('.faq-chip').forEach(o => o.classList.toggle('on', o === c));
