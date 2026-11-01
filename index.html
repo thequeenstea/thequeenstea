@@ -792,6 +792,40 @@ h2{font-size:clamp(2.3rem,4.8vw,3.9rem)}
 .mat-fac{display:flex;gap:12px;align-items:center;margin:auto 0 0;background:#EAF8F6;border-radius:16px;padding:14px 16px;color:#0E6F68;font-weight:700;font-size:.92rem}
 .mat-fac .i{width:24px;height:24px;flex-shrink:0}
 @media (max-width:900px){.mat{grid-template-columns:1fr}.mat-main{padding:34px 26px}.mat-side{padding:30px 24px}.mat-main::after{font-size:6rem}}
+
+/* ===== Inscripción paso a paso ===== */
+.enr{margin-top:64px;background:linear-gradient(160deg,#F4F8FF,#fff);border:1px solid var(--line);border-radius:32px;padding:46px 40px 40px}
+.enr-title{text-align:center;font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:38px}
+.enr-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative;counter-reset:e}
+.enr-steps::before{content:"";position:absolute;left:12.5%;right:12.5%;top:35px;height:3px;border-radius:3px;background:#DCE5F5}
+.enr-steps::after{content:"";position:absolute;left:12.5%;top:35px;height:3px;border-radius:3px;width:0;background:linear-gradient(90deg,var(--accent),var(--blue));transition:width 1.8s .4s cubic-bezier(.2,.8,.2,1)}
+.enr.in-view .enr-steps::after{width:75%}
+.enr-steps li{position:relative;z-index:1;text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px;padding:0 6px}
+.enr-dot{display:grid;place-items:center;width:72px;height:72px;border-radius:50%;background:#fff;color:var(--royal);box-shadow:0 0 0 3px #DCE5F5,0 16px 28px -14px rgba(34,64,151,.6);margin-bottom:12px;transition:transform .3s,background .3s,color .3s}
+.enr-dot .i{width:30px;height:30px}
+.enr-steps li:hover .enr-dot{transform:translateY(-5px) scale(1.06);background:linear-gradient(135deg,var(--blue),var(--royal));color:#fff}
+.enr-steps li.last .enr-dot{background:linear-gradient(135deg,var(--accent),#7CE3DC);color:var(--ink);box-shadow:0 0 0 3px rgba(97,214,207,.45),0 16px 28px -12px rgba(97,214,207,.9)}
+.enr-steps h4{font-family:var(--display);font-size:1.25rem;letter-spacing:-.02em;margin:0}
+.enr-steps p{margin:0;color:var(--muted);font-size:.95rem;max-width:24ch}
+.enr-link{background:var(--ink);color:#fff;border:0;border-radius:99px;padding:9px 18px;font-weight:700;font-size:.88rem;margin-top:8px;transition:background .25s}
+.enr-link:hover{background:var(--blue)}
+@media (max-width:900px){.enr{padding:34px 22px}.enr-steps{grid-template-columns:1fr;gap:26px}.enr-steps::before,.enr-steps::after{left:35px;right:auto;top:36px;bottom:36px;width:3px;height:auto}.enr-steps::after{display:none}.enr-steps li{flex-direction:column;align-items:flex-start;text-align:left;padding-left:92px;min-height:72px;justify-content:center}.enr-dot{position:absolute;left:0;top:0;margin:0}.enr-steps p{max-width:none}}
+/* ===== Banda final de tienda ===== */
+.cta-band{margin-top:30px;position:relative;overflow:hidden;display:grid;grid-template-columns:1.5fr 1fr;gap:34px;align-items:center;border-radius:32px;padding:52px 52px;background:radial-gradient(500px 300px at 100% 0,rgba(65,193,186,.55),transparent 65%),linear-gradient(135deg,#2A5BD7,#14275F);box-shadow:0 40px 80px -40px rgba(0,0,0,.8);border:1px solid rgba(255,255,255,.18)}
+.cta-band::after{content:"";position:absolute;left:-80px;bottom:-120px;width:300px;height:300px;border-radius:50%;border:2px dashed rgba(255,255,255,.16);animation:orbita 50s linear infinite}
+.cta-txt,.cta-btns{position:relative;z-index:1}
+.cta-band h3{font-size:clamp(2.2rem,4vw,3.2rem);color:#fff;margin-bottom:8px}
+.cta-band p{color:#D6DEF7;margin:0;font-size:1.1rem}
+.cta-feats{list-style:none;padding:0;margin:24px 0;display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;max-width:520px}
+.cta-feats li{display:flex;align-items:center;gap:10px;color:#fff;font-weight:700}
+.cta-feats .i{width:34px;height:34px;padding:8px;border-radius:10px;background:rgba(255,255,255,.14);color:var(--accent);flex-shrink:0}
+.cta-pay{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:.85rem}
+.cta-pay span{color:#B7C6EE;font-weight:600;margin-right:4px}
+.cta-pay b{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:99px;padding:5px 12px;color:#fff}
+.cta-pay em{font-style:normal;color:var(--accent);font-weight:700}
+.cta-btns{display:flex;flex-direction:column;gap:14px}
+.cta-btns .btn{width:100%;padding:18px 24px;font-size:1.05rem}
+@media (max-width:900px){.cta-band{grid-template-columns:1fr;padding:34px 24px}.cta-feats{grid-template-columns:1fr}}
 .pill.soon{background:#EEF2FF;color:var(--royal)}
 .price-reveal{background:var(--paper);color:var(--royal);border:1.5px dashed var(--blue);border-radius:999px;padding:9px 16px;font-weight:700;font-size:.9rem;transition:background .2s, transform .2s}
 .price-reveal:hover{background:#E6EDFB;transform:translateY(-1px)}
@@ -981,11 +1015,15 @@ h2{font-size:clamp(2.3rem,4.8vw,3.9rem)}
 
     <div class="course-list" id="courseList"></div>
 
-    <div class="steps">
-      <div class="step reveal"><h3>Hacé el test</h3><p>Gratis, online y en 15 a 20 minutos. <button class="js-open-test">Empezar ahora</button></p></div>
-      <div class="step reveal"><h3>Elegí tu curso</h3><p>Según tu nivel, tu objetivo y el horario que te quede cómodo.</p></div>
-      <div class="step reveal"><h3>Aboná la matrícula</h3><p>Reservás tu lugar para todo 2027.</p></div>
-      <div class="step reveal"><h3>Enviá tu inscripción</h3><p>Completás tus datos y nos llegan por WhatsApp.</p></div>
+    <div class="enr reveal">
+      <h3 class="enr-title">Cómo inscribirte, paso a paso</h3>
+      <ol class="enr-steps">
+        <li><span class="enr-dot"><svg class="i" aria-hidden="true"><use href="#i-edit"/></svg></span><h4>Hacé el test</h4><p>Gratis, online y en 15 a 20 minutos.</p><button class="enr-link js-open-test">Empezar ahora</button></li>
+        <li><span class="enr-dot"><svg class="i" aria-hidden="true"><use href="#i-book"/></svg></span><h4>Elegí tu curso</h4><p>Según tu nivel, tu objetivo y el horario que te quede cómodo.</p></li>
+        <li><span class="enr-dot"><svg class="i" aria-hidden="true"><use href="#i-card"/></svg></span><h4>Aboná la matrícula</h4><p>Reservás tu lugar para todo 2027.</p></li>
+        <li class="last"><span class="enr-dot"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg></span><h4>Enviá tu inscripción</h4><p>Completás tus datos y nos llegan por WhatsApp.</p></li>
+      </ol>
+    </div>
     </div>
   </div>
 </section>
@@ -1066,15 +1104,21 @@ h2{font-size:clamp(2.3rem,4.8vw,3.9rem)}
       <article class="shop-tile reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-lock"/></svg></span><h3>Acceso exclusivo en nuestro campus</h3><p>Comprás y empezás al instante.</p></article>
       <article class="shop-tile reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg></span><h3>Certificado de logro</h3><p>Lo recibís al completar el curso.</p></article>
     </div>
-    <div class="shop-band reveal">
-      <div>
+    <div class="cta-band reveal">
+      <div class="cta-txt">
         <h3>Empezá hoy mismo</h3>
-        <p>Pagás con débito, crédito, Mercado Pago, Cuenta DNI o transferencia. Todo con factura.</p>
-        <ul><li>Acceso inmediato</li><li>A tu ritmo</li><li>Con seguimiento</li><li>Certificado de logro</li></ul>
+        <p>Comprás, pagás y entrás a tu curso al instante.</p>
+        <ul class="cta-feats">
+          <li><svg class="i" aria-hidden="true"><use href="#i-lock"/></svg>Acceso inmediato</li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg>A tu ritmo</li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-chart"/></svg>Con seguimiento</li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg>Certificado de logro</li>
+        </ul>
+        <div class="cta-pay"><span>Medios de pago</span><b>Débito</b><b>Crédito</b><b>Mercado Pago</b><b>Cuenta DNI</b><b>Transferencia</b><em>· con factura</em></div>
       </div>
-      <div class="campus-ctas">
-        <a href="https://campus.thequeenstea.com.ar/tienda" class="btn btn-primary">Ir a la tienda</a>
-        <a href="https://campus.thequeenstea.com.ar/login" class="btn btn-ghost">Ya soy alumno: ingresar</a>
+      <div class="cta-btns">
+        <a href="https://campus.thequeenstea.com.ar/tienda" class="btn btn-accent">Ir a la tienda</a>
+        <a href="https://campus.thequeenstea.com.ar/login" class="btn btn-line">Ya soy alumno: ingresar</a>
       </div>
     </div>
   </div>
