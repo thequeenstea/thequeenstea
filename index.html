@@ -1088,7 +1088,7 @@ h2{font-size:clamp(2.3rem,4.8vw,3.9rem)}
 .rv-big{display:flex;align-items:center;gap:18px;margin-bottom:28px}
 .rv-big strong{font-family:var(--display);font-weight:800;font-size:clamp(3.6rem,7vw,5.6rem);line-height:.9;letter-spacing:-.05em;background:linear-gradient(135deg,#fff,var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
 .rv-big span{color:#C9D3EE;font-weight:600;line-height:1.3}
-.rv-spot{position:relative;background:linear-gradient(160deg,rgba(255,255,255,.16),rgba(255,255,255,.05));border:1px solid rgba(255,255,255,.22);border-radius:32px;padding:44px 42px 34px;overflow:hidden;box-shadow:0 40px 80px -40px rgba(0,0,0,.8),0 0 80px -20px rgba(97,214,207,.25);min-height:380px;display:flex;flex-direction:column;justify-content:space-between;gap:24px}
+.rv-spot{position:relative;background:linear-gradient(160deg,rgba(255,255,255,.16),rgba(255,255,255,.05));border:1px solid rgba(255,255,255,.22);border-radius:32px;padding:44px 42px 34px;overflow:clip;box-shadow:0 40px 80px -40px rgba(0,0,0,.8),0 0 80px -20px rgba(97,214,207,.25);min-height:380px;display:flex;flex-direction:column;justify-content:space-between;gap:24px}
 .rv-spot::before{content:"";position:absolute;right:-70px;top:-70px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(97,214,207,.35),transparent 70%)}
 .rv-qm{width:54px;fill:var(--accent);opacity:.9;position:relative}
 .rv-body{position:relative;transition:opacity .28s ease,transform .28s ease}
@@ -1112,6 +1112,14 @@ mark{background:none;color:inherit;background-image:linear-gradient(transparent 
 @media (max-width:980px){.rv-feat{grid-template-columns:1fr;gap:36px}.rv-spot{min-height:340px;padding:32px 24px 28px}}
 @media (max-width:560px){.rv-rows .t-card{width:280px}.rv-dots{display:none}}
 @media (prefers-reduced-motion:reduce){.rv-prog{animation:none;width:0}}
+
+.rv-nav{margin-left:auto;display:flex;align-items:center;gap:12px;color:#C9D3EE;font-weight:700;font-size:.9rem}
+.rv-nav button{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);color:#fff;font-size:1.1rem;transition:background .25s,color .25s,transform .25s}
+.rv-nav button:hover{background:var(--accent);color:var(--ink);transform:scale(1.08)}
+.rv-spot{min-height:430px}
+.rv-body p{font-size:clamp(1.2rem,1.9vw,1.55rem)}
+.testi{padding-bottom:110px}
+@media (max-width:560px){.rv-dots{display:none}}
 .pill.soon{background:#EEF2FF;color:var(--royal)}
 .price-reveal{background:var(--paper);color:var(--royal);border:1.5px dashed var(--blue);border-radius:999px;padding:9px 16px;font-weight:700;font-size:.9rem;transition:background .2s, transform .2s}
 .price-reveal:hover{background:#E6EDFB;transform:translateY(-1px)}
@@ -1532,14 +1540,11 @@ mark{background:none;color:inherit;background-image:linear-gradient(transparent 
     <div class="rv-spot reveal" id="rvSpot" aria-live="polite">
       <svg class="rv-qm" viewBox="0 0 48 36" aria-hidden="true"><path d="M0 36V20C0 8 7 1 19 0v7c-6 1-9 5-9 11h9v18H0zm27 0V20C27 8 34 1 46 0v7c-6 1-9 5-9 11h9v18H27z"/></svg>
       <div class="rv-body"><span class="t-badge" id="rvBadge"></span><p id="rvQ"></p></div>
-      <div class="rv-who"><span class="t-av" id="rvAv"></span><span><strong id="rvName"></strong><small>Reseña en Google</small></span><div class="rv-dots" id="rvDots"></div></div>
+      <div class="rv-who"><span class="t-av" id="rvAv"></span><span><strong id="rvName"></strong><small>Reseña en Google</small></span><div class="rv-nav"><button id="rvPrev" aria-label="Reseña anterior">←</button><span id="rvCount">1 / 21</span><button id="rvNext" aria-label="Reseña siguiente">→</button></div></div>
       <i class="rv-prog" id="rvProg"></i>
     </div>
   </div>
-  <div class="rv-rows" aria-label="Reseñas de alumnos en Google">
-    <div class="t-track" id="tTrack"></div>
-  </div>
-</section>
+  </section>
 
 <!-- ===================== NOSOTROS ===================== -->
 <section class="about" id="nosotros">
@@ -2191,6 +2196,73 @@ const resenas = [
   "badge": "",
   "quote": "Cyn apareció sin querer, por medio de instagram y la verdad cambió mi manera de aprender inglés! Sus clases son sencillas y prácticas, al igual que sus tareas. Super flexible, con buena onda y amor cada vez que prende la cámara o te responde un mensaje!"
  }
+,
+{
+  "name": "Guillermina G.",
+  "initial": "GG",
+  "badge": "",
+  "quote": "Las clases son entretenidas, se me pasa la hora rapido. Ademas, las tasks en classroom son buenisimas! Gracias Cynthia por este mes compartido."
+ },
+ {
+  "name": "Diana S.",
+  "initial": "DS",
+  "badge": "",
+  "quote": "Las clases son muy interesantes, va cambiando la dinámica y hace que te enganches un montón. Además usan la plataforma Google classroom que te organiza muchísimo a la hora de realizar tareas y demás. Complementan con videos en Youtube por si querés repasar ciertos temas. Super recomiendo!"
+ },
+ {
+  "name": "Julieta M.",
+  "initial": "JM",
+  "badge": "",
+  "quote": "Clases super dinámicas y llevaderas. La profe siempre está atenta a nuestros requerimientos y dificultades individuales. Recomiendo 100% tomar clases con esta academia."
+ },
+ {
+  "name": "Malena G.",
+  "initial": "MG",
+  "badge": "",
+  "quote": "Las clases son dinámicas y entretenidas. La profe Cyn es muy buena y siempre está disponible para ayudar ante cualquier duda!"
+ },
+ {
+  "name": "Agustín G.",
+  "initial": "AG",
+  "badge": "",
+  "quote": "Las clases de 10 y la predisposición de la profe para atender todas las dudas siempre hacen que las clases sean muy productivas y divertidas. Recomendadisimo!!"
+ },
+ {
+  "name": "Joaco M.",
+  "initial": "JM",
+  "badge": "",
+  "quote": "Cynthia es una de las profesoras más comprensivas y dedicada a su trabajo,cada clase es única y divertida,ella se adapta al tipo de alumno/a que tiene dicho esto vamos por más clases 2024."
+ },
+ {
+  "name": "Pau S.",
+  "initial": "PS",
+  "badge": "",
+  "quote": "Retome las clases y por lejos el mejor instituto al que fui, las clases son súper organizadas y dinamicas; la profe esta siempre a disposición y con la mejor de las ondas!"
+ },
+ {
+  "name": "Agus C.",
+  "initial": "AC",
+  "badge": "",
+  "quote": "El inglés siempre me costó mucho pero la profe explica todo excelente y me hizo tomarle el gustito al idioma. Las clases son súper entretenidas y se me pasan rapidísimo. Además a un precio súper accesible. Recomiendo muchísimo!"
+ },
+ {
+  "name": "Romina V.",
+  "initial": "RV",
+  "badge": "Curso de adulto inicial",
+  "quote": "Estoy haciendo el curso de adulto inicial. Las clases son muy didácticas y se super entiende cada tema. Cyn esta a disposición de cualquier duda o consulta que se pueda tener, tanto el día de la clase como días posteriores. Muy conforme con mis clases y mi profe que es una genia!!🤗"
+ },
+ {
+  "name": "Guadalupe R.",
+  "initial": "GR",
+  "badge": "",
+  "quote": "Después de 20 años volví a ser alumna. Clases divertidas, llenas de contenido y todo el material disponible. Sin dudas, excelente elección. Cyn, you are great! I love your classes :D"
+ },
+ {
+  "name": "Verónica C.",
+  "initial": "VC",
+  "badge": "",
+  "quote": "Gran anfitriona de lindas charlas en Inglés, algo nuevo siempre! Gracias"
+ }
 ];
 const HL = /(dinámicas|entretenidas|amenas|cómoda|personalizadas|corregir oración por oración|el mejor lugar|mejor lugar para estudiar|didácticas|empatía|compromiso|flexible|buena onda|cambió mi manera de aprender inglés|superó por mucho mis expectativas|Excelente)/gi;
 const hl = t => t.replace(HL, '<mark>$1</mark>');
@@ -2200,27 +2272,26 @@ const rCard = r => `
     <div>${r.badge ? `<span class="t-badge">${r.badge}</span>` : ''}<q>${hl(r.quote)}</q></div>
     <figcaption class="t-who"><span class="t-av" style="background:hsl(${hue(r.name)} 62% 62%)">${r.initial}</span><span><strong>${r.name}</strong><small>Reseña en Google</small></span></figcaption>
   </figure>`;
-const rAll = resenas.map(rCard).join('');
-$('#tTrack').innerHTML = rAll + rAll;
 
 /* Reseña destacada que va cambiando */
 (() => {
   const spot = $('#rvSpot'); if (!spot) return;
-  const q = $('#rvQ'), nm = $('#rvName'), av = $('#rvAv'), bd = $('#rvBadge'), dots = $('#rvDots'), prog = $('#rvProg');
+  const q = $('#rvQ'), nm = $('#rvName'), av = $('#rvAv'), bd = $('#rvBadge'), prog = $('#rvProg');
   let k = 0, timer = null, hover = false;
-  dots.innerHTML = resenas.map((_, j) => `<button aria-label="Reseña ${j + 1}" data-j="${j}"></button>`).join('');
+  
   const show = (j, anim = true) => {
     k = j; const r = resenas[j];
     const put = () => {
       q.innerHTML = hl(r.quote); nm.textContent = r.name; av.textContent = r.initial; av.style.background = `hsl(${hue(r.name)} 62% 62%)`;
       bd.textContent = r.badge; bd.style.display = r.badge ? 'block' : 'none';
-      $$('button', dots).forEach((b, i) => b.classList.toggle('on', i === j));
+      $('#rvCount').textContent = (j + 1) + ' / ' + resenas.length;
       prog.style.animation = 'none'; void prog.offsetWidth; prog.style.animation = '';
       spot.classList.remove('out');
     };
     if (anim){ spot.classList.add('out'); setTimeout(put, 280); } else put();
   };
-  dots.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; show(+b.dataset.j); });
+  $('#rvPrev').addEventListener('click', () => show((k - 1 + resenas.length) % resenas.length));
+  $('#rvNext').addEventListener('click', () => show((k + 1) % resenas.length));
   spot.addEventListener('mouseenter', () => { hover = true; spot.classList.add('paused'); });
   spot.addEventListener('mouseleave', () => { hover = false; spot.classList.remove('paused'); });
   show(0, false);
