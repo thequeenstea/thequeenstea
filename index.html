@@ -1331,6 +1331,17 @@ mark{background:none;color:inherit;background-image:linear-gradient(transparent 
 .bd i .i{width:20px;height:20px}
 @media (prefers-reduced-motion:reduce){.bd-track{animation:none}.bd-row{overflow-x:auto}}
 @media (max-width:600px){.bd{font-size:1rem}.bd i{width:34px;height:34px}}
+
+.co-m{min-height:68px}
+.co-m.logo{gap:12px}
+.co-m .mk{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;flex-shrink:0;color:#fff}
+.co-m .mk .i{width:22px;height:22px;color:#fff}
+.mk.k1{background:linear-gradient(135deg,#3B6BE8,#1E3A8A)}
+.mk.k2{background:linear-gradient(135deg,#41C1BA,#1F8F89)}
+.mk.k3{background:linear-gradient(135deg,#192C3F,#31506F)}
+.co-m.logo b{font-family:var(--display);font-size:1.05rem;line-height:1.1;color:#1F2A44;font-weight:700}
+.co-m.logo:not(.wide) img{max-height:40px}
+.co-m.wide{justify-content:center}
 .pill.soon{background:#EEF2FF;color:var(--royal)}
 .price-reveal{background:var(--paper);color:var(--royal);border:1.5px dashed var(--blue);border-radius:999px;padding:9px 16px;font-weight:700;font-size:.9rem;transition:background .2s, transform .2s}
 .price-reveal:hover{background:#E6EDFB;transform:translateY(-1px)}
@@ -1652,9 +1663,9 @@ mark{background:none;color:inherit;background-image:linear-gradient(transparent 
         <div class="co-grid" id="coGrid">
           <div class="co-m logo"><img src="img/pay-mercadopago.png" alt="Mercado Pago" loading="lazy"><i class="co-ok"><svg class="i"><use href="#i-check"/></svg></i></div>
           <div class="co-m logo"><img src="img/pay-cuentadni.png" alt="Cuenta DNI" loading="lazy"><i class="co-ok"><svg class="i"><use href="#i-check"/></svg></i></div>
-          <div class="co-m"><svg class="i" aria-hidden="true"><use href="#i-card"/></svg><b>Tarjeta de crédito</b><i class="co-ok"><svg class="i"><use href="#i-check"/></svg></i></div>
-          <div class="co-m"><svg class="i" aria-hidden="true"><use href="#i-card"/></svg><b>Tarjeta de débito</b><i class="co-ok"><svg class="i"><use href="#i-check"/></svg></i></div>
-          <div class="co-m wide"><svg class="i" aria-hidden="true"><use href="#i-briefcase"/></svg><b>Transferencia bancaria</b><i class="co-ok"><svg class="i"><use href="#i-check"/></svg></i></div>
+          <div class="co-m logo"><span class="mk k1"><svg class="i" aria-hidden="true"><use href="#i-card"/></svg></span><b>Tarjeta de<br>crédito</b><i class="co-ok"><svg class="i"><use href="#i-check"/></svg></i></div>
+          <div class="co-m logo"><span class="mk k2"><svg class="i" aria-hidden="true"><use href="#i-card"/></svg></span><b>Tarjeta de<br>débito</b><i class="co-ok"><svg class="i"><use href="#i-check"/></svg></i></div>
+          <div class="co-m logo wide"><span class="mk k3"><svg class="i" aria-hidden="true"><use href="#i-briefcase"/></svg></span><b>Transferencia<br>bancaria</b><i class="co-ok"><svg class="i"><use href="#i-check"/></svg></i></div>
         </div>
         <div class="cta-btns">
           <a href="https://campus.thequeenstea.com.ar/tienda" class="btn btn-accent">Ir a la tienda</a>
