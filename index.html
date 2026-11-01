@@ -1080,6 +1080,38 @@ h2{font-size:clamp(2.3rem,4.8vw,3.9rem)}
 .t-who small{color:#AFBCE0;font-size:.82rem}
 @media (max-width:560px){.rv-rows .t-card{width:300px}}
 @media (prefers-reduced-motion:reduce){.t-track{animation:none}}
+
+/* ===== Reseñas v2: destacada + cinta ===== */
+.rv-feat{display:grid;grid-template-columns:1fr 1.15fr;gap:56px;align-items:center}
+.rv-left h2{font-size:clamp(2.2rem,4.4vw,3.6rem);margin-bottom:14px}
+.rv-left .lead{max-width:34ch;margin-bottom:26px}
+.rv-big{display:flex;align-items:center;gap:18px;margin-bottom:28px}
+.rv-big strong{font-family:var(--display);font-weight:800;font-size:clamp(3.6rem,7vw,5.6rem);line-height:.9;letter-spacing:-.05em;background:linear-gradient(135deg,#fff,var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+.rv-big span{color:#C9D3EE;font-weight:600;line-height:1.3}
+.rv-spot{position:relative;background:linear-gradient(160deg,rgba(255,255,255,.16),rgba(255,255,255,.05));border:1px solid rgba(255,255,255,.22);border-radius:32px;padding:44px 42px 34px;overflow:hidden;box-shadow:0 40px 80px -40px rgba(0,0,0,.8),0 0 80px -20px rgba(97,214,207,.25);min-height:380px;display:flex;flex-direction:column;justify-content:space-between;gap:24px}
+.rv-spot::before{content:"";position:absolute;right:-70px;top:-70px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(97,214,207,.35),transparent 70%)}
+.rv-qm{width:54px;fill:var(--accent);opacity:.9;position:relative}
+.rv-body{position:relative;transition:opacity .28s ease,transform .28s ease}
+.rv-spot.out .rv-body{opacity:0;transform:translateY(10px)}
+.rv-body p{margin:0;font-family:var(--display);font-weight:600;font-size:clamp(1.25rem,2vw,1.65rem);line-height:1.38;letter-spacing:-.015em;color:#fff}
+.rv-body .t-badge{margin-bottom:14px}
+mark{background:none;color:inherit;background-image:linear-gradient(transparent 62%,rgba(97,214,207,.45) 62%);padding:0 2px;border-radius:2px}
+.rv-who{position:relative;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.rv-who strong{display:block}.rv-who small{color:#AFBCE0}
+.rv-dots{margin-left:auto;display:flex;gap:7px;flex-wrap:wrap}
+.rv-dots button{width:9px;height:9px;border-radius:50%;border:0;background:rgba(255,255,255,.28);padding:0;transition:width .3s,background .3s}
+.rv-dots button.on{width:26px;border-radius:99px;background:var(--accent)}
+.rv-prog{position:absolute;left:0;bottom:0;height:4px;width:0;background:linear-gradient(90deg,var(--accent),#7AA2FF);animation:rvp 7s linear forwards}
+.rv-spot.paused .rv-prog{animation-play-state:paused}
+@keyframes rvp{to{width:100%}}
+.rv-rows{margin-top:56px}
+.rv-rows .t-card{width:340px;transition:transform .35s cubic-bezier(.2,.8,.2,1),background .3s,border-color .3s}
+.rv-rows .t-card:hover{transform:translateY(-8px);border-color:rgba(97,214,207,.6)}
+.rv-rows .t-card q{font-size:.96rem}
+.t-track{animation-duration:80s}
+@media (max-width:980px){.rv-feat{grid-template-columns:1fr;gap:36px}.rv-spot{min-height:340px;padding:32px 24px 28px}}
+@media (max-width:560px){.rv-rows .t-card{width:280px}.rv-dots{display:none}}
+@media (prefers-reduced-motion:reduce){.rv-prog{animation:none;width:0}}
 .pill.soon{background:#EEF2FF;color:var(--royal)}
 .price-reveal{background:var(--paper);color:var(--royal);border:1.5px dashed var(--blue);border-radius:999px;padding:9px 16px;font-weight:700;font-size:.9rem;transition:background .2s, transform .2s}
 .price-reveal:hover{background:#E6EDFB;transform:translateY(-1px)}
@@ -1489,17 +1521,23 @@ h2{font-size:clamp(2.3rem,4.8vw,3.9rem)}
 
 <!-- ===================== TESTIMONIOS ===================== -->
 <section class="testi" id="opiniones">
-  <div class="wrap reveal rv-head">
-    <div>
+  <div class="wrap rv-feat">
+    <div class="rv-left reveal">
       <span class="kicker">Reseñas reales en Google</span>
       <h2>Confianza que trasciende</h2>
-      <p class="lead">Más de 50 alumnos dejaron su reseña en Google. Esto es lo que cuentan, con sus propias palabras.</p>
+      <p class="lead">Lo que cuentan nuestros alumnos, con sus propias palabras.</p>
+      <div class="rv-big"><strong><span data-count="50">0</span>+</strong><span>reseñas de alumnos<br>en Google</span></div>
+      <a class="btn btn-accent" href="https://share.google/aE0K9xauQWOwXtZRZ" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-chat"/></svg> Ver todas las reseñas en Google</a>
     </div>
-    <a class="btn btn-accent" href="https://share.google/aE0K9xauQWOwXtZRZ" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-chat"/></svg> Ver todas las reseñas en Google</a>
+    <div class="rv-spot reveal" id="rvSpot" aria-live="polite">
+      <svg class="rv-qm" viewBox="0 0 48 36" aria-hidden="true"><path d="M0 36V20C0 8 7 1 19 0v7c-6 1-9 5-9 11h9v18H0zm27 0V20C27 8 34 1 46 0v7c-6 1-9 5-9 11h9v18H27z"/></svg>
+      <div class="rv-body"><span class="t-badge" id="rvBadge"></span><p id="rvQ"></p></div>
+      <div class="rv-who"><span class="t-av" id="rvAv"></span><span><strong id="rvName"></strong><small>Reseña en Google</small></span><div class="rv-dots" id="rvDots"></div></div>
+      <i class="rv-prog" id="rvProg"></i>
+    </div>
   </div>
   <div class="rv-rows" aria-label="Reseñas de alumnos en Google">
     <div class="t-track" id="tTrack"></div>
-    <div class="t-track rev" id="tTrack2"></div>
   </div>
 </section>
 
@@ -2154,14 +2192,42 @@ const resenas = [
   "quote": "Cyn apareció sin querer, por medio de instagram y la verdad cambió mi manera de aprender inglés! Sus clases son sencillas y prácticas, al igual que sus tareas. Super flexible, con buena onda y amor cada vez que prende la cámara o te responde un mensaje!"
  }
 ];
+const HL = /(dinámicas|entretenidas|amenas|cómoda|personalizadas|corregir oración por oración|el mejor lugar|mejor lugar para estudiar|didácticas|empatía|compromiso|flexible|buena onda|cambió mi manera de aprender inglés|superó por mucho mis expectativas|Excelente)/gi;
+const hl = t => t.replace(HL, '<mark>$1</mark>');
+const hue = n => [...n].reduce((a, c) => a + c.charCodeAt(0), 0) % 360;
 const rCard = r => `
   <figure class="t-card" style="margin:0">
-    <div>${r.badge ? `<span class="t-badge">${r.badge}</span>` : ''}<q>${r.quote}</q></div>
-    <figcaption class="t-who"><span class="t-av">${r.initial}</span><span><strong>${r.name}</strong><small>Reseña en Google</small></span></figcaption>
+    <div>${r.badge ? `<span class="t-badge">${r.badge}</span>` : ''}<q>${hl(r.quote)}</q></div>
+    <figcaption class="t-who"><span class="t-av" style="background:hsl(${hue(r.name)} 62% 62%)">${r.initial}</span><span><strong>${r.name}</strong><small>Reseña en Google</small></span></figcaption>
   </figure>`;
-const rA = resenas.slice(0, 5).map(rCard).join(''), rB = resenas.slice(5).map(rCard).join('');
-$('#tTrack').innerHTML = rA + rA;
-$('#tTrack2').innerHTML = rB + rB;
+const rAll = resenas.map(rCard).join('');
+$('#tTrack').innerHTML = rAll + rAll;
+
+/* Reseña destacada que va cambiando */
+(() => {
+  const spot = $('#rvSpot'); if (!spot) return;
+  const q = $('#rvQ'), nm = $('#rvName'), av = $('#rvAv'), bd = $('#rvBadge'), dots = $('#rvDots'), prog = $('#rvProg');
+  let k = 0, timer = null, hover = false;
+  dots.innerHTML = resenas.map((_, j) => `<button aria-label="Reseña ${j + 1}" data-j="${j}"></button>`).join('');
+  const show = (j, anim = true) => {
+    k = j; const r = resenas[j];
+    const put = () => {
+      q.innerHTML = hl(r.quote); nm.textContent = r.name; av.textContent = r.initial; av.style.background = `hsl(${hue(r.name)} 62% 62%)`;
+      bd.textContent = r.badge; bd.style.display = r.badge ? 'block' : 'none';
+      $$('button', dots).forEach((b, i) => b.classList.toggle('on', i === j));
+      prog.style.animation = 'none'; void prog.offsetWidth; prog.style.animation = '';
+      spot.classList.remove('out');
+    };
+    if (anim){ spot.classList.add('out'); setTimeout(put, 280); } else put();
+  };
+  dots.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; show(+b.dataset.j); });
+  spot.addEventListener('mouseenter', () => { hover = true; spot.classList.add('paused'); });
+  spot.addEventListener('mouseleave', () => { hover = false; spot.classList.remove('paused'); });
+  show(0, false);
+  if (matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  prog.addEventListener('animationend', () => { if (!hover) show((k + 1) % resenas.length); else prog.style.animation = 'none'; });
+  spot.addEventListener('mouseleave', () => show((k + 1) % resenas.length));
+})();
 
 /* ============================================================
    PREGUNTAS FRECUENTES
