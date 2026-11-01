@@ -826,6 +826,26 @@ h2{font-size:clamp(2.3rem,4.8vw,3.9rem)}
 .cta-btns{display:flex;flex-direction:column;gap:14px}
 .cta-btns .btn{width:100%;padding:18px 24px;font-size:1.05rem}
 @media (max-width:900px){.cta-band{grid-template-columns:1fr;padding:34px 24px}.cta-feats{grid-template-columns:1fr}}
+
+/* ===== Tarjeta del test: pulido ===== */
+.try-card{box-shadow:0 50px 90px -34px rgba(0,0,0,.75),0 0 0 1px rgba(255,255,255,.5),0 0 90px -10px rgba(97,214,207,.35)}
+.try-card .cup{overflow:hidden;padding:0;background:#fff;box-shadow:0 14px 28px -10px rgba(97,214,207,.9),0 0 0 4px rgba(97,214,207,.35)}
+.try-card .cup img{width:100%;height:100%;object-fit:cover}
+.try-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;padding-right:56px}
+.try-live{display:inline-flex;align-items:center;gap:8px;background:#EAF8F6;color:#0E6F68;font-weight:800;font-size:.8rem;padding:6px 12px;border-radius:99px}
+.try-live i{width:8px;height:8px;border-radius:50%;background:#1FB5A8;animation:pulse 1.6s infinite}
+.try-prog{height:6px;border-radius:99px;background:#E6ECF8;overflow:hidden;margin-bottom:6px}
+.try-prog i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--blue));animation:tp 1.6s .9s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes tp{to{width:18%}}
+.opt{background:#fff;box-shadow:0 8px 18px -14px rgba(14,31,77,.5)}
+.opt:not([disabled]):hover{background:#F4F8FF;box-shadow:0 14px 26px -16px rgba(34,64,151,.7)}
+.try-opts .opt{opacity:0;animation:fadeUp .5s ease forwards}
+.try-opts .opt:nth-child(1){animation-delay:.9s}.try-opts .opt:nth-child(2){animation-delay:1.05s}.try-opts .opt:nth-child(3){animation-delay:1.2s}.try-opts .opt:nth-child(4){animation-delay:1.35s}
+.fl-a{left:-104px;bottom:auto;top:46%}
+.fl-b{right:-26px;bottom:auto;top:56%}
+.fl-c{left:-30px;top:-18px;animation-delay:-1.2s}
+@media (max-width:980px){.fl-a{left:-6px;top:30%}.fl-c{left:6px}}
+@media (prefers-reduced-motion:reduce){.try-opts .opt{opacity:1;animation:none}.try-prog i{animation:none;width:18%}}
 .pill.soon{background:#EEF2FF;color:var(--royal)}
 .price-reveal{background:var(--paper);color:var(--royal);border:1.5px dashed var(--blue);border-radius:999px;padding:9px 16px;font-weight:700;font-size:.9rem;transition:background .2s, transform .2s}
 .price-reveal:hover{background:#E6EDFB;transform:translateY(-1px)}
@@ -905,10 +925,11 @@ h2{font-size:clamp(2.3rem,4.8vw,3.9rem)}
     </div>
 
     <div class="try-card" id="tryCard" aria-live="polite">
-      <span class="fl fl-a" aria-hidden="true"><svg class="i"><use href="#i-cap"/></svg>Cambridge</span><span class="fl fl-b" aria-hidden="true"><svg class="i"><use href="#i-chart"/></svg>IELTS</span>
+      <span class="fl fl-a" aria-hidden="true"><svg class="i"><use href="#i-cap"/></svg>Cambridge</span><span class="fl fl-b" aria-hidden="true"><svg class="i"><use href="#i-chart"/></svg>IELTS</span><span class="fl fl-c" aria-hidden="true"><svg class="i"><use href="#i-trophy"/></svg>De A1 a C2</span>
       <div class="steam" aria-hidden="true"><i></i><i></i><i></i></div>
-      <div class="cup" aria-hidden="true">☕</div>
-      <small>Probá una pregunta del test de nivel</small>
+      <div class="cup" aria-hidden="true"><img src="img/logo.png" alt="" onerror="this.parentNode.textContent='☕'"></div>
+      <div class="try-head"><span class="try-live"><i></i>Test de nivel gratis</span><small>Pregunta de ejemplo</small></div>
+      <div class="try-prog" aria-hidden="true"><i></i></div>
       <h3 id="tryQ"></h3>
       <div class="try-opts" id="tryOpts"></div>
       <div class="try-result" id="tryResult">
