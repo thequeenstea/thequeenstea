@@ -1250,6 +1250,40 @@ mark{background:none;color:inherit;background-image:linear-gradient(transparent 
 @media (max-width:980px){.sb{grid-template-columns:1fr 1fr}.sb-main{grid-row:auto;grid-column:1/3}.sb-cert{grid-column:1/3}}
 @media (max-width:560px){.sb{grid-template-columns:1fr}.sb-main,.sb-cert{grid-column:auto}.sb-cert{grid-template-columns:1fr}.sb-diploma{width:100%;max-width:230px}}
 @media (prefers-reduced-motion:reduce){.ls{opacity:1;transform:none}.sb-prog em{width:72%;animation:none!important}.sb-files span,.sb-swap .a,.sb-swap .b,.sb-diploma::after{animation:none}.sb-swap .a{display:none}.sb-swap .b{opacity:1}}
+
+/* Tienda bento v2 */
+.sb{gap:22px}
+.sb-c{border-radius:32px;padding:34px;border:0;background:linear-gradient(165deg,rgba(255,255,255,.14),rgba(255,255,255,.035));box-shadow:inset 0 0 0 1px rgba(255,255,255,.16),0 30px 60px -40px rgba(0,0,0,.7)}
+.sb-c::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(135deg,rgba(97,214,207,.9),transparent 38%,transparent 62%,rgba(140,170,255,.7));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .4s;pointer-events:none}
+.sb-c:hover::before{opacity:1}
+.sb-c::after{content:"";position:absolute;width:260px;height:260px;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(97,214,207,.22),transparent 68%);right:-90px;bottom:-110px}
+.sb-mat::after{background:radial-gradient(circle,rgba(140,170,255,.28),transparent 68%)}
+.sb-acc::after{background:radial-gradient(circle,rgba(97,214,207,.3),transparent 68%)}
+.sb-cert::after{width:420px;height:420px;right:-60px;bottom:-200px;background:radial-gradient(circle,rgba(255,214,120,.2),transparent 68%)}
+.sb-c>*{position:relative;z-index:1}
+.sb-c h3{font-size:1.35rem;letter-spacing:-.01em}
+.sb-c .ic{width:56px;height:56px;border-radius:18px;margin-bottom:20px}
+.sb-lessons{position:relative;gap:12px}
+.sb-lessons::before{content:"";position:absolute;left:29px;top:22px;bottom:50px;width:2px;background:linear-gradient(var(--accent),rgba(255,255,255,.12));opacity:.55}
+.ls{position:relative;border-radius:18px;padding:13px 16px;backdrop-filter:blur(4px)}
+.ls.cur{box-shadow:0 18px 34px -16px rgba(0,0,0,.6),0 0 0 4px rgba(97,214,207,.25)}
+.sb-files span{border-radius:14px;padding:11px 15px;font-size:.9rem}
+.sb-swap{height:46px}
+.sb-swap .b{box-shadow:0 14px 30px -12px rgba(97,214,207,.8)}
+.sb-cert{grid-template-columns:1fr 280px;gap:24px;padding-right:44px}
+.sb-diploma{position:relative;width:280px;padding:26px 22px 28px;border-radius:20px;background:linear-gradient(160deg,#fff,#F3F7FF);box-shadow:0 36px 60px -24px rgba(0,0,0,.75);outline:2px solid #E7C873;outline-offset:-10px;transform:rotate(3deg)}
+.sb-diploma .i{width:34px;height:34px}
+.sb-diploma small{display:block;font-weight:700;font-size:.72rem;letter-spacing:.04em;color:var(--blue);margin-top:4px}
+.sb-diploma b{font-size:1.15rem;margin:4px 0 10px;color:var(--ink)}
+.sb-diploma em{display:block;font-style:normal;font-size:.72rem;color:var(--muted)}
+.sb-diploma .dp-name{height:auto;background:none;width:auto;margin:2px 0 0;font-family:var(--display);font-style:italic;font-size:1.25rem;color:var(--blue);font-weight:700}
+.sb-diploma .dp-line{height:2px;width:60%;background:#E7C873;margin:4px auto 0;border-radius:2px}
+.sb-diploma .dp-seal{position:absolute;right:16px;bottom:14px;width:40px;height:40px;margin:0;border-radius:50%;background:radial-gradient(circle at 35% 30%,#F6D77A,#D9A12B);display:grid;place-items:center;color:#fff;box-shadow:0 8px 14px -6px rgba(150,100,0,.7);transform:rotate(-8deg)}
+.sb-diploma .dp-seal .i{width:20px;height:20px;color:#fff}
+.dp-ribbon{position:absolute;right:20px;top:-6px;width:20px;height:44px;background:linear-gradient(var(--accent),#2C9C96);clip-path:polygon(0 0,100% 0,100% 100%,50% 82%,0 100%)}
+@media (max-width:980px){.sb-cert{grid-template-columns:1fr 260px;padding-right:34px}}
+@media (max-width:640px){.sb-cert{grid-template-columns:1fr;padding-right:34px}.sb-diploma{width:100%;max-width:290px;margin:0 auto}}
+@media (max-width:560px){.sb-c{padding:28px}}
 .pill.soon{background:#EEF2FF;color:var(--royal)}
 .price-reveal{background:var(--paper);color:var(--royal);border:1.5px dashed var(--blue);border-radius:999px;padding:9px 16px;font-weight:700;font-size:.9rem;transition:background .2s, transform .2s}
 .price-reveal:hover{background:#E6EDFB;transform:translateY(-1px)}
@@ -1553,7 +1587,7 @@ mark{background:none;color:inherit;background-image:linear-gradient(transparent 
           <h3>Certificado de logro</h3>
           <p>Lo recibís al completar el curso.</p>
         </div>
-        <div class="sb-diploma" aria-hidden="true"><svg class="i"><use href="#i-trophy"/></svg><b>Certificado de logro</b><span></span><span></span></div>
+        <div class="sb-diploma" aria-hidden="true"><i class="dp-ribbon"></i><svg class="i"><use href="#i-trophy"/></svg><small>The Queen's Tea</small><b>Certificado de logro</b><em>Se otorga a</em><span class="dp-name">Tu nombre</span><span class="dp-line"></span><span class="dp-seal"><svg class="i"><use href="#i-check"/></svg></span></div>
       </article>
     </div>
     <div class="cta-band reveal">
