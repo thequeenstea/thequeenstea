@@ -1529,6 +1529,15 @@ main,section,footer{overflow-x:clip}
 .mt-follow.in-view .fj-dot{opacity:1;transition-delay:2.6s}
 @media (max-width:560px){.fj{min-height:250px}.fj-n{font-size:.78rem}.fj-n.n2{left:26%;top:34%}}
 @media (prefers-reduced-motion:reduce){.fj-line{stroke-dashoffset:0;animation:none!important}.fj-area,.fj-n{opacity:1;transform:none;animation:none!important}.fj-dot{display:none}}
+
+.fj-pt{position:absolute;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:#fff;border:3px solid #BFD0FF;transition:background .3s,border-color .3s,transform .3s}
+.fj-pt.hit{background:var(--accent);border-color:#fff;box-shadow:0 0 0 6px rgba(97,214,207,.35);transform:scale(1.25)}
+.fj-pt.end b{position:absolute;left:50%;top:50%;width:6px;height:6px;border-radius:50%;opacity:0}
+.fj-pt.end b:nth-child(odd){background:var(--accent)}.fj-pt.end b:nth-child(even){background:#5A82FF}
+.fj-pt.end.boom b{animation:fjb .9s ease-out forwards}
+.fj-pt.end b:nth-child(1){--a:0deg}.fj-pt.end b:nth-child(2){--a:45deg}.fj-pt.end b:nth-child(3){--a:90deg}.fj-pt.end b:nth-child(4){--a:135deg}.fj-pt.end b:nth-child(5){--a:180deg}.fj-pt.end b:nth-child(6){--a:225deg}.fj-pt.end b:nth-child(7){--a:270deg}.fj-pt.end b:nth-child(8){--a:315deg}
+@keyframes fjb{0%{opacity:1;transform:rotate(var(--a)) translateX(4px)}100%{opacity:0;transform:rotate(var(--a)) translateX(30px) scale(.4)}}
+@media (prefers-reduced-motion:reduce){.fj-pt.end b{display:none}}
 .pill.soon{background:#EEF2FF;color:var(--royal)}
 .price-reveal{background:var(--paper);color:var(--royal);border:1.5px dashed var(--blue);border-radius:999px;padding:9px 16px;font-weight:700;font-size:.9rem;transition:background .2s, transform .2s}
 .price-reveal:hover{background:#E6EDFB;transform:translateY(-1px)}
@@ -1940,6 +1949,7 @@ main,section,footer{overflow-x:clip}
             <path class="fj-area" d="M24 222 C 90 218, 120 152, 180 142 S 290 72, 336 34 L336 260 L24 260 Z"/>
             <path class="fj-line" pathLength="1" d="M24 222 C 90 218, 120 152, 180 142 S 290 72, 336 34"/>
           </svg>
+          <span class="fj-pt" data-x="24" data-y="222"></span><span class="fj-pt" data-x="180" data-y="142"></span><span class="fj-pt end" data-x="336" data-y="34"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></span>
           <span class="fj-dot"></span>
           <div class="fj-n n1"><i><svg class="i"><use href="#i-chart"/></svg></i>Tus objetivos</div>
           <div class="fj-n n2"><i><svg class="i"><use href="#i-edit"/></svg></i>Tus dificultades</div>
@@ -2889,14 +2899,19 @@ $$('.faq-q').forEach(q => q.addEventListener('click', () => {
 })();
 (() => {
   const box = $('.fj'); if (!box) return;
-  const path = box.querySelector('.fj-line'), dot = box.querySelector('.fj-dot');
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const len = path.getTotalLength(); let t0 = null;
+  const path = box.querySelector('.fj-line'), dot = box.querySelector('.fj-dot'), pts = [...box.querySelectorAll('.fj-pt')];
+  const place = () => { const r = box.getBoundingClientRect(); pts.forEach(p => { p.style.left = (p.dataset.x / 360 * r.width) + 'px'; p.style.top = (p.dataset.y / 260 * r.height) + 'px'; }); };
+  place(); addEventListener('resize', place);
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { pts.forEach(p => p.classList.add('hit')); return; }
+  const len = path.getTotalLength(), marks = [0, .5, .985]; let t0 = null, lastK = 0;
   const step = ts => {
     if (t0 === null) t0 = ts;
-    const k = (((ts - t0) / 5200) % 1), e = k < .5 ? 2*k*k : 1 - Math.pow(-2*k + 2, 2) / 2;
+    const k = (((ts - t0) / 6000) % 1), e = k < .5 ? 2*k*k : 1 - Math.pow(-2*k + 2, 2) / 2;
+    if (k < lastK) pts.forEach(p => p.classList.remove('hit', 'boom'));
+    lastK = k;
     const pt = path.getPointAtLength(len * e), r = box.getBoundingClientRect();
     dot.style.left = (pt.x / 360 * r.width) + 'px'; dot.style.top = (pt.y / 260 * r.height) + 'px';
+    pts.forEach((p, i) => { if (e >= marks[i] && !p.classList.contains('hit')) { p.classList.add('hit'); if (i === 2) p.classList.add('boom'); } });
     requestAnimationFrame(step);
   };
   requestAnimationFrame(step);
