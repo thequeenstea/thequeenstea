@@ -701,6 +701,31 @@ footer nav a:hover{color:#fff;text-decoration:underline}
 .pay-chips span::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent);margin-right:8px}
 .pay-row small{grid-column:2}
 @media (max-width:640px){.pay-row{grid-template-columns:1fr}.pay-row strong{grid-row:auto;max-width:none}.pay-row small{grid-column:1}}
+
+/* ===== v9: confianza y pasos ===== */
+.trust{background:var(--paper);border:0;padding:44px 0 0}
+.trust-grid{background:#fff;border-radius:var(--radius-lg);box-shadow:0 30px 60px -34px rgba(14,31,77,.45),0 0 0 1px var(--line);margin-top:-0px}
+.trust-i{position:relative;padding:30px 18px 28px;transition:background .3s}
+.trust-i:hover{background:#F4F8FF}
+.trust-i .i{width:46px;height:46px;padding:11px;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--royal));color:#fff;margin:0 auto 12px;display:block;box-shadow:0 12px 22px -10px rgba(34,64,151,.7)}
+.how{padding-top:70px}
+.how-head{max-width:none;text-align:center;margin-inline:auto}
+.how-head h2{font-size:clamp(2.2rem,4.6vw,3.6rem)}
+.how-grid{gap:26px}
+.how-grid::before{left:16%;right:16%;top:78px;height:3px;border-radius:3px;background:#DCE5F5}
+.how-grid::after{content:"";position:absolute;left:16%;top:78px;height:3px;border-radius:3px;width:0;background:linear-gradient(90deg,var(--accent),var(--blue));transition:width 1.6s .5s cubic-bezier(.2,.8,.2,1)}
+.how-grid.in-view::after{width:68%}
+.how-card{overflow:hidden;padding:36px 30px 30px;text-align:center;align-items:center;border-radius:26px}
+.how-card::after{content:attr(data-n);position:absolute;right:16px;bottom:-34px;font-family:var(--display);font-weight:800;font-size:9rem;line-height:1;color:var(--paper);z-index:-1}
+.how-card:hover{border-color:var(--blue)}
+.how-ic{display:grid;place-items:center;width:84px;height:84px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#7CE3DC);color:var(--ink);box-shadow:0 0 0 8px #fff,0 0 0 9px var(--line),0 18px 30px -12px rgba(97,214,207,.8);margin-bottom:12px;position:relative}
+.how-ic .i{width:36px;height:36px}
+.how-step{font-weight:800;font-size:.82rem;color:var(--blue);background:#EAF1FF;padding:4px 12px;border-radius:99px}
+.how-card h3{font-size:1.6rem}
+.how-link{align-self:center;margin-top:14px;background:var(--ink);color:#fff;padding:11px 20px;border-radius:99px;transition:background .25s,transform .25s}
+.how-link:hover{background:var(--blue);text-decoration:none;transform:translateX(3px)}
+.how-card{isolation:isolate}
+@media (max-width:980px){.how-grid::after{display:none}}
 .pill.soon{background:#EEF2FF;color:var(--royal)}
 .price-reveal{background:var(--paper);color:var(--royal);border:1.5px dashed var(--blue);border-radius:999px;padding:9px 16px;font-weight:700;font-size:.9rem;transition:background .2s, transform .2s}
 .price-reveal:hover{background:#E6EDFB;transform:translateY(-1px)}
@@ -804,11 +829,13 @@ footer nav a:hover{color:#fff;text-decoration:underline}
 
 
 <div class="trust">
-  <div class="wrap trust-grid reveal">
-    <div class="trust-i"><strong><span data-count="10">0</span>+</strong><small>años enseñando inglés</small></div>
-    <div class="trust-i"><strong><span data-count="8">0</span></strong><small>alumnos como máximo por grupo</small></div>
-    <div class="trust-i"><strong><span data-count="100">0</span>%</strong><small>online y en vivo</small></div>
-    <div class="trust-i"><strong class="trust-txt">Cambridge · IELTS</strong><small>preparación para exámenes</small></div>
+  <div class="wrap">
+    <div class="trust-grid reveal">
+      <div class="trust-i"><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg><strong><span data-count="10">0</span>+</strong><small>años enseñando inglés</small></div>
+      <div class="trust-i"><svg class="i" aria-hidden="true"><use href="#i-users"/></svg><strong><span data-count="8">0</span></strong><small>alumnos como máximo por grupo</small></div>
+      <div class="trust-i"><svg class="i" aria-hidden="true"><use href="#i-laptop"/></svg><strong><span data-count="100">0</span>%</strong><small>online y en vivo</small></div>
+      <div class="trust-i"><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg><strong class="trust-txt">Cambridge · IELTS</strong><small>preparación para exámenes</small></div>
+    </div>
   </div>
 </div>
 
@@ -819,10 +846,10 @@ footer nav a:hover{color:#fff;text-decoration:underline}
       <span class="kicker">Empezar es simple</span>
       <h2>Tres pasos y ya estás adentro.</h2>
     </div>
-    <div class="how-grid">
-      <article class="how-card reveal"><span class="how-n">1</span><h3>Descubrí tu nivel</h3><p>Un test gratis de 15 a 20 minutos te muestra tu nivel y el curso ideal.</p><button class="how-link js-open-test">Hacer el test →</button></article>
-      <article class="how-card reveal"><span class="how-n">2</span><h3>Reservá tu lugar</h3><p>Elegí tu curso y reservá tu cupo con la matrícula 2027.</p><a class="how-link" href="#cursos">Ver cursos →</a></article>
-      <article class="how-card reveal"><span class="how-n">3</span><h3>Cursá con tu campus</h3><p>Clases, tareas, notas y pagos en tu campus propio.</p><a class="how-link" href="#campus">Conocer el campus →</a></article>
+    <div class="how-grid reveal">
+      <article class="how-card" data-n="1"><span class="how-ic"><svg class="i" aria-hidden="true"><use href="#i-edit"/></svg></span><span class="how-step">Paso 1</span><h3>Descubrí tu nivel</h3><p>Un test gratis de 15 a 20 minutos te muestra tu nivel y el curso ideal.</p><button class="how-link js-open-test">Hacer el test →</button></article>
+      <article class="how-card" data-n="2"><span class="how-ic"><svg class="i" aria-hidden="true"><use href="#i-bag"/></svg></span><span class="how-step">Paso 2</span><h3>Reservá tu lugar</h3><p>Elegí tu curso y reservá tu cupo con la matrícula 2027.</p><a class="how-link" href="#cursos">Ver cursos →</a></article>
+      <article class="how-card" data-n="3"><span class="how-ic"><svg class="i" aria-hidden="true"><use href="#i-video"/></svg></span><span class="how-step">Paso 3</span><h3>Cursá con tu campus</h3><p>Clases, tareas, notas y pagos en tu campus propio.</p><a class="how-link" href="#campus">Conocer el campus →</a></article>
     </div>
   </div>
 </section>
