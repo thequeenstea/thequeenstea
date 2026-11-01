@@ -846,6 +846,44 @@ h2{font-size:clamp(2.3rem,4.8vw,3.9rem)}
 .fl-c{left:-30px;top:-18px;animation-delay:-1.2s}
 @media (max-width:980px){.fl-a{left:-6px;top:30%}.fl-c{left:6px}}
 @media (prefers-reduced-motion:reduce){.try-opts .opt{opacity:1;animation:none}.try-prog i{animation:none;width:18%}}
+
+/* ===== Camino de niveles ===== */
+.trail-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin:10px 0 22px}
+.trail-head h3{font-size:clamp(1.8rem,3.4vw,2.6rem)}
+.trail-head p{margin:6px 0 0;color:var(--muted)}
+.trail-head .controls{margin:0;gap:12px}
+.trail{background:radial-gradient(700px 360px at 85% 0,rgba(65,193,186,.28),transparent 60%),linear-gradient(160deg,#0E1F4D,#14275F);border-radius:34px;padding:34px 34px 26px;margin-bottom:34px;color:#fff;box-shadow:0 40px 80px -44px rgba(14,31,77,.9);overflow:hidden}
+.trail-map{position:relative;height:300px;margin:0 6px 20px}
+.tr-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.tr-base{fill:none;stroke:rgba(255,255,255,.18);stroke-width:4;stroke-dasharray:2 9;stroke-linecap:round;stroke-linejoin:round}
+.tr-fill{fill:none;stroke:var(--accent);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:0;filter:drop-shadow(0 0 8px rgba(97,214,207,.8));animation:trdraw 1s ease both}
+@keyframes trdraw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+.tnode{position:absolute;transform:translate(-50%,-50%);width:clamp(34px,5.2vw,56px);height:clamp(34px,5.2vw,56px);border-radius:50%;border:2px solid rgba(255,255,255,.3);background:#14275F;color:#C9D3EE;font-family:var(--display);font-weight:800;font-size:clamp(.62rem,1.2vw,.95rem);display:grid;place-items:center;cursor:pointer;transition:transform .35s cubic-bezier(.2,.8,.2,1),background .3s,border-color .3s,color .3s,box-shadow .3s;z-index:2;padding:0}
+.tnode:hover{transform:translate(-50%,-50%) scale(1.15);border-color:#fff;color:#fff}
+.tnode.done{background:var(--blue);border-color:var(--blue);color:#fff}
+.tnode.cur{background:var(--accent);border-color:#fff;color:var(--ink);transform:translate(-50%,-50%) scale(1.25);box-shadow:0 0 0 7px rgba(97,214,207,.28),0 18px 30px -10px rgba(97,214,207,.9)}
+.tnode:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.tflag{position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);font-style:normal;font-family:var(--body);font-weight:700;font-size:.72rem;white-space:nowrap;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);color:#fff;border-radius:99px;padding:4px 10px}
+.tflag::before{content:"★ ";color:var(--accent)}
+.tr-me{position:absolute;width:clamp(30px,4.4vw,44px);height:clamp(30px,4.4vw,44px);border-radius:50%;background:#fff;transform:translate(-50%,calc(-100% - clamp(30px,4.4vw,46px)));transition:left .75s cubic-bezier(.34,1.4,.64,1),top .75s cubic-bezier(.34,1.4,.64,1);display:grid;place-items:center;overflow:hidden;box-shadow:0 14px 26px -8px rgba(0,0,0,.7),0 0 0 3px var(--accent);z-index:3;pointer-events:none;color:var(--ink)}
+.tr-me img{width:100%;height:100%;object-fit:cover}
+.trail-card{display:grid;grid-template-columns:auto 1.3fr 1fr;gap:34px;align-items:center;background:#fff;color:var(--ink);border-radius:26px;padding:30px 34px}
+.trail-card.swap{animation:trSwap .5s cubic-bezier(.2,.8,.2,1)}
+@keyframes trSwap{from{opacity:.2;transform:translateY(14px)}to{opacity:1;transform:none}}
+.tc-left{display:flex;flex-direction:column;gap:12px;align-items:flex-start;min-width:120px}
+.tc-tag{font-family:var(--display);font-weight:800;font-size:clamp(3rem,6vw,4.6rem);line-height:.9;letter-spacing:-.05em;background:linear-gradient(135deg,var(--blue),var(--royal));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tc-main h4{font-family:var(--display);font-size:clamp(1.5rem,2.6vw,2rem);letter-spacing:-.03em;margin:0 0 6px}
+.tc-desc{margin:0 0 14px;color:var(--muted)}
+.trail-card .d-list{margin:0;padding-top:12px}
+.tc-side .d-price{margin-bottom:12px}
+.tc-side .btn{width:100%}
+.tc-nav{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:12px;color:var(--muted);font-weight:700;font-size:.9rem}
+.tc-nav button{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:1.1rem;color:var(--royal);transition:background .2s,color .2s}
+.tc-nav button:hover:not([disabled]){background:var(--blue);color:#fff;border-color:var(--blue)}
+.tc-nav button[disabled]{opacity:.35;cursor:default}
+.trail-hint{margin:20px 0 0;text-align:center;color:#AFBCE0;font-size:.92rem}
+.trail-hint button{background:none;border:0;padding:0;color:var(--accent);font-weight:700;text-decoration:underline}
+@media (max-width:980px){.trail{padding:24px 16px 20px}.trail-card{grid-template-columns:1fr;gap:18px;padding:24px 22px}.tc-left{flex-direction:row;align-items:center;gap:16px}.trail-map{height:250px}.tflag{display:none}}
 .pill.soon{background:#EEF2FF;color:var(--royal)}
 .price-reveal{background:var(--paper);color:var(--royal);border:1.5px dashed var(--blue);border-radius:999px;padding:9px 16px;font-weight:700;font-size:.9rem;transition:background .2s, transform .2s}
 .price-reveal:hover{background:#E6EDFB;transform:translateY(-1px)}
@@ -986,12 +1024,12 @@ h2{font-size:clamp(2.3rem,4.8vw,3.9rem)}
     <div class="mat reveal">
       <div class="mat-main">
         <span class="mat-tag">Matrícula 2027</span>
-        <div class="mat-price"><strong>$30.000</strong><span>pago único</span></div>
+        <div class="mat-price"><strong>$30.000</strong><span>para reservar tu lugar</span></div>
         <div class="mat-count" id="matCount"><i></i><span>Valor válido hasta el 31 de diciembre</span></div>
         <ul class="mat-list">
           <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Tu lugar asegurado en un grupo de hasta 8</li>
           <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Te avisamos primero cuando abran horarios y valores</li>
-          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Pago único para todo 2027</li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Matrícula para reservar tu lugar en 2027</li>
         </ul>
         <a href="https://campus.thequeenstea.com.ar/tienda/matricula-2027" class="btn btn-accent mat-cta">Reservar mi lugar</a>
       </div>
@@ -1008,33 +1046,30 @@ h2{font-size:clamp(2.3rem,4.8vw,3.9rem)}
       </div>
     </div>
 
-    <div class="ladder-panel reveal">
-      <div class="ladder-top">
-        <div>
-          <h3>Tu camino de A1 a C2</h3>
-          <p>Cada barra es un nivel. Tocala para ver el curso y anotarte.</p>
+    <div class="trail-head reveal">
+      <div>
+        <h3>Tu camino de A1 a C2</h3>
+        <p>Recorrelo nivel por nivel. Tocá un escalón para ver el curso.</p>
+      </div>
+      <div class="controls">
+        <div class="seg" role="group" aria-label="Tipo de curso" id="tabSeg">
+          <span class="thumb"></span>
+          <button aria-pressed="true" data-tab="niveles">Niveles</button>
+          <button aria-pressed="false" data-tab="especialidades">Especialidades y exámenes</button>
         </div>
-        <div class="legend"><span><i></i> Próximamente</span></div>
-      </div>
-      <div class="chart" id="levelChart"></div>
-      <p class="ladder-hint">¿No sabés en qué escalón estás? <button class="js-open-test" style="background:none;border:0;color:var(--accent);font-weight:700;text-decoration:underline;padding:0">Hacé el test de nivel (15-20 min)</button></p>
-    </div>
-
-    <div class="controls">
-      <div class="seg" role="group" aria-label="Tipo de curso" id="tabSeg">
-        <span class="thumb"></span>
-        <button aria-pressed="true" data-tab="niveles">Niveles</button>
-        <button aria-pressed="false" data-tab="especialidades">Especialidades y exámenes</button>
-      </div>
-      <div class="seg" role="group" aria-label="Dónde vivís" id="curSeg">
-        <span class="thumb"></span>
-        <button aria-pressed="true" data-cur="ars">Vivo en Argentina</button>
-        <button aria-pressed="false" data-cur="usd">Vivo en el exterior</button>
+        <div class="seg" role="group" aria-label="Dónde vivís" id="curSeg">
+          <span class="thumb"></span>
+          <button aria-pressed="true" data-cur="ars">Vivo en Argentina</button>
+          <button aria-pressed="false" data-cur="usd">Vivo en el exterior</button>
+        </div>
       </div>
     </div>
-    <p class="price-note">Horarios y valores 2027: muy pronto. Tocá "Avisarme cuando abra" y te escribimos por WhatsApp apenas esté listo.</p>
 
-    <div class="course-list" id="courseList"></div>
+    <div class="trail reveal" id="trail">
+      <div class="trail-map" id="trailMap"></div>
+      <div class="trail-card" id="trailCard" aria-live="polite"></div>
+      <p class="trail-hint">¿No sabés en qué escalón estás? <button class="js-open-test">Hacé el test de nivel (15-20 min)</button></p>
+    </div>
 
     <div class="enr reveal">
       <h3 class="enr-title">Cómo inscribirte, paso a paso</h3>
@@ -1556,31 +1591,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
    CURSOS Y PRECIOS
    ============================================================ */
 const state = { tab:'niveles', cur:'ars', shown:new Set() };
-const list = $('#courseList');
 
-function renderCourses(){
-  list.innerHTML = CURSOS[state.tab].map((c, i) => {
-    const estado = c.pronto ? '<span class="pill soon">Próximamente</span>'
-      : c.full ? '<span class="pill full">Completo</span>' : '<span class="pill open">Cupos abiertos</span>';
-    const precio = c.pronto
-      ? '<div class="d-price"><strong>Valores y horarios pronto</strong><small>Reservá tu lugar con la matrícula 2027 y te avisamos primero.</small></div>'
-      : `<div class="d-price"><div><small>Pack mensual</small><strong>${money(state.cur === 'usd' ? c.usd : c.price, state.cur)}</strong><small>por clase</small></div>
-         <div><small>Clase suelta</small><strong>${money(state.cur === 'usd' ? c.usd + RECARGO_POR_CLASE_USD : c.price * RECARGO_POR_CLASE_ARS, state.cur)}</strong><small>por clase</small></div></div>
-         <p class="d-sched">${c.full ? 'Grupo completo, nuevos horarios pronto.' : 'Horario: ' + c.sched}</p>`;
-    return `<article class="ccard" id="row-${c.code}" style="animation-delay:${i * 50}ms">
-      <button class="ccard-head" data-toggle="${c.code}" aria-expanded="false" aria-controls="d-${c.code}">
-        <span class="lvl-tag">${c.tag}</span>
-        <span class="ccard-t"><h3>${c.name}</h3><p>${c.desc}</p></span>
-        ${estado}
-        <span class="plus" aria-hidden="true"></span>
-      </button>
-      <div class="ccard-detail" id="d-${c.code}"><div class="ccard-in">
-        <ul class="d-list"><li>Clases en vivo, en grupos de hasta 8</li><li>Campus propio con tareas, notas y material</li><li>Certificado de logro al terminar</li></ul>
-        ${precio}
-        <button class="btn ${c.full || c.pronto ? 'btn-ghost' : 'btn-primary'}" data-code="${c.code}">${c.pronto || c.full ? 'Avisarme cuando abra' : 'Inscribirme'}</button>
-      </div></div>
-    </article>`;}).join('');
-}
 const findCourse = code => [...CURSOS.niveles, ...CURSOS.especialidades].find(c => c.code === code);
 
 function pedirAviso(c){
@@ -1588,53 +1599,78 @@ function pedirAviso(c){
   window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
 }
 function handleCourse(c){ c.full || c.pronto ? pedirAviso(c) : openReg(c); }
-list.addEventListener('click', e => {
-  const t = e.target.closest('button[data-toggle]');
-  if (t){
-    const card = t.closest('.ccard'), open = !card.classList.contains('open');
-    card.classList.toggle('open', open); t.setAttribute('aria-expanded', open); return;
-  }
-  const btn = e.target.closest('button[data-code]'); if (!btn) return;
-  handleCourse(findCourse(btn.dataset.code));
-});
-
 $('#tabSeg').addEventListener('click', e => {
   const b = e.target.closest('button'); if (!b) return;
-  state.tab = b.dataset.tab; setSeg($('#tabSeg'), b); renderCourses();
+  state.tab = b.dataset.tab; setSeg($('#tabSeg'), b); tr.auto = false; trailBuild(0);
 });
 $('#curSeg').addEventListener('click', e => {
   const b = e.target.closest('button'); if (!b) return;
-  state.cur = b.dataset.cur; setSeg($('#curSeg'), b); renderCourses(); renderChart();
+  state.cur = b.dataset.cur; setSeg($('#curSeg'), b); trailCard();
 });
-renderCourses();
 
-/* Gráfico de niveles: barras que crecen al aparecer */
-const chart = $('#levelChart');
-function renderChart(){
-  chart.innerHTML = CURSOS.niveles.map((c, i) => `
-    <button class="bar ${c.pronto || !c.full ? 'is-open' : 'is-full'}" data-code="${c.code}" aria-label="${c.name}: ${c.pronto ? 'próximamente' : c.full ? 'completo' : c.sched}">
-      <span class="bar-fill" style="height:calc((100% - 56px) * ${c.h / 100});transition-delay:${i * 110}ms"></span>
-      <span class="bar-tag">${c.tag}</span>
-      <span class="bar-state">${c.pronto ? 'Pronto' : c.full ? 'Completo' : 'Abierto'}</span>
-    </button>`).join('');
+/* ============================================================
+   CAMINO DE NIVELES (escalera interactiva)
+   ============================================================ */
+const FLAGS = { b2:'Cambridge First', c1:'Cambridge Advanced', c2:'Cambridge Proficiency' };
+const tr = { i:0, auto:true, timer:null, visible:false };
+const trMap = $('#trailMap'), trCard = $('#trailCard');
+const trList = () => CURSOS[state.tab];
+const trPts = () => { const n = trList().length; return trList().map((c, k) => [ n > 1 ? 5 + k / (n - 1) * 90 : 50, 80 - (n > 1 ? k / (n - 1) : 0) * 56 ]); };
+
+function trailBuild(i){
+  const list = trList(), pts = trPts(); tr.i = i;
+  const path = pts.map(p => p.join(',')).join(' ');
+  trMap.innerHTML = `
+    <svg class="tr-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      <polyline class="tr-base" points="${path}" vector-effect="non-scaling-stroke"/>
+      <polyline class="tr-fill" id="trFill" points="" pathLength="1" vector-effect="non-scaling-stroke"/>
+    </svg>
+    ${list.map((c, k) => `<button class="tnode" data-i="${k}" style="left:${pts[k][0]}%;top:${pts[k][1]}%" aria-label="${c.name}"><span>${c.tag}</span>${state.tab === 'niveles' && FLAGS[c.code] ? `<em class="tflag">${FLAGS[c.code]}</em>` : ''}</button>`).join('')}
+    <div class="tr-me" id="trMe" aria-hidden="true"><img src="img/logo.png" alt="" onerror="this.parentNode.textContent='★'"></div>`;
+  trailSelect(i, true);
 }
-renderChart();
-new IntersectionObserver((es, ob) => {
-  if (es[0].isIntersecting){ chart.classList.add('grown'); ob.disconnect(); }
-}, { threshold: .35 }).observe(chart);
-chart.addEventListener('click', e => {
-  const b = e.target.closest('.bar'); if (!b) return;
-  if (state.tab !== 'niveles'){
-    state.tab = 'niveles'; setSeg($('#tabSeg'), $('#tabSeg button[data-tab="niveles"]')); renderCourses();
-  }
-  if (!findCourse(b.dataset.code).pronto) state.shown.add(b.dataset.code);
-  renderCourses();
-  const row = $('#row-' + b.dataset.code);
-  row.scrollIntoView({ behavior:'smooth', block:'center' });
-  row.classList.remove('flash'); void row.offsetWidth; row.classList.add('flash');
+function trailSelect(i, first){
+  const list = trList(), pts = trPts(); tr.i = i;
+  $$('.tnode', trMap).forEach((b, k) => { b.classList.toggle('cur', k === i); b.classList.toggle('done', k < i); });
+  const fill = $('#trFill'); fill.setAttribute('points', pts.slice(0, i + 1).map(p => p.join(',')).join(' '));
+  fill.style.animation = 'none'; void fill.getBoundingClientRect(); fill.style.animation = '';
+  const me = $('#trMe'); me.style.left = pts[i][0] + '%'; me.style.top = pts[i][1] + '%';
+  trailCard(first);
+}
+function trailCard(first){
+  const c = trList()[tr.i], list = trList();
+  const estado = c.pronto ? '<span class="pill soon">Próximamente</span>' : c.full ? '<span class="pill full">Completo</span>' : '<span class="pill open">Cupos abiertos</span>';
+  const precio = c.pronto
+    ? '<div class="d-price"><strong>Valores y horarios pronto</strong><small>Reservá tu lugar con la matrícula 2027 y te avisamos primero.</small></div>'
+    : `<div class="d-price"><div><small>Pack mensual</small><strong>${money(state.cur === 'usd' ? c.usd : c.price, state.cur)}</strong><small>por clase</small></div>
+       <div><small>Clase suelta</small><strong>${money(state.cur === 'usd' ? c.usd + RECARGO_POR_CLASE_USD : c.price * RECARGO_POR_CLASE_ARS, state.cur)}</strong><small>por clase</small></div></div>
+       <p class="d-sched">${c.full ? 'Grupo completo, nuevos horarios pronto.' : 'Horario: ' + c.sched}</p>`;
+  trCard.innerHTML = `
+    <div class="tc-left"><span class="tc-tag">${c.tag}</span>${estado}</div>
+    <div class="tc-main">
+      <h4>${c.name}</h4><p class="tc-desc">${c.desc}</p>
+      <ul class="d-list"><li>Clases en vivo, en grupos de hasta 8</li><li>Campus propio con tareas, notas y material</li><li>Certificado de logro al terminar</li></ul>
+    </div>
+    <div class="tc-side">${precio}
+      <button class="btn ${c.full || c.pronto ? 'btn-accent' : 'btn-primary'}" data-code="${c.code}">${c.pronto || c.full ? 'Avisarme cuando abra' : 'Inscribirme'}</button>
+      <div class="tc-nav"><button data-nav="-1" aria-label="Nivel anterior" ${tr.i === 0 ? 'disabled' : ''}>←</button><span>${tr.i + 1} / ${list.length}</span><button data-nav="1" aria-label="Nivel siguiente" ${tr.i === list.length - 1 ? 'disabled' : ''}>→</button></div>
+    </div>`;
+  if (!first){ trCard.classList.remove('swap'); void trCard.offsetWidth; trCard.classList.add('swap'); }
+}
+const trUser = () => { tr.auto = false; };
+trMap.addEventListener('click', e => { const b = e.target.closest('.tnode'); if (!b) return; trUser(); trailSelect(+b.dataset.i); });
+trCard.addEventListener('click', e => {
+  const nav = e.target.closest('button[data-nav]');
+  if (nav){ trUser(); trailSelect(Math.min(Math.max(tr.i + +nav.dataset.nav, 0), trList().length - 1)); return; }
+  const btn = e.target.closest('button[data-code]'); if (!btn) return;
+  handleCourse(findCourse(btn.dataset.code));
 });
-
-
+trailBuild(0);
+// Recorrido automático hasta que la persona toque algo
+new IntersectionObserver(es => { tr.visible = es[0].isIntersecting; }, { threshold: .4 }).observe($('#trail'));
+if (!matchMedia('(prefers-reduced-motion:reduce)').matches){
+  setInterval(() => { if (tr.auto && tr.visible) trailSelect((tr.i + 1) % trList().length); }, 3800);
+}
 
 /* ============================================================
    PANEL DE INSCRIPCIÓN
