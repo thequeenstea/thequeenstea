@@ -1129,6 +1129,50 @@ mark{background:none;color:inherit;background-image:linear-gradient(transparent 
 .rv-strip button.cur{transform:scale(1.05);opacity:1;box-shadow:0 0 0 3px #fff,0 0 0 6px rgba(97,214,207,.65),0 12px 20px -8px rgba(0,0,0,.7);z-index:2}
 .rv-strip button:hover{opacity:1}
 @media (max-width:560px){.rv-rail{width:176px}.rv-nav{width:100%;justify-content:space-between;margin-left:0}}
+
+/* FAQ v2 */
+.faq-grid{grid-template-columns:.85fr 1.15fr;gap:64px}
+.faq-wa{position:relative;margin-top:30px;background:linear-gradient(160deg,#1E3A8A,#0E1F4D);color:#fff;border-radius:24px;padding:26px 26px 28px;overflow:hidden;box-shadow:0 26px 50px -30px rgba(14,31,77,.9)}
+.faq-wa::after{content:"";position:absolute;right:-60px;bottom:-70px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(97,214,207,.45),transparent 70%)}
+.faq-wa strong{display:block;font-family:var(--display);font-size:1.3rem;margin-bottom:6px}
+.faq-wa p{color:#D6DEF7;margin:0 0 18px;font-size:.98rem;position:relative}
+.faq-wa .btn{position:relative;z-index:1}
+.faq-wa-dot{position:absolute;top:26px;right:26px;width:12px;height:12px;border-radius:50%;background:#4ADE80;box-shadow:0 0 0 0 rgba(74,222,128,.6);animation:fwa 2.2s infinite}
+@keyframes fwa{70%{box-shadow:0 0 0 12px rgba(74,222,128,0)}100%{box-shadow:0 0 0 0 rgba(74,222,128,0)}}
+.faq-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.faq-chip{border:1px solid var(--line);background:#fff;color:var(--ink);font-weight:700;font-size:.9rem;padding:9px 16px;border-radius:999px;cursor:pointer;transition:background .25s,color .25s,border-color .25s,transform .25s}
+.faq-chip:hover{border-color:var(--blue);transform:translateY(-1px)}
+.faq-chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.faq-item{border-radius:22px;padding:0 20px 0 14px;position:relative;overflow:hidden}
+.faq-item::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(var(--accent),var(--blue));transform:scaleY(0);transform-origin:top;transition:transform .4s}
+.faq-item:has(.faq-q[aria-expanded="true"]){background:linear-gradient(180deg,#fff,#F3F7FF)}
+.faq-item:has(.faq-q[aria-expanded="true"])::before{transform:scaleY(1)}
+.faq-item[hidden]{display:none}
+.faq-q{gap:14px;font-size:1.08rem;padding:18px 0;cursor:pointer}
+.faq-t{flex:1}
+.faq-ic{width:44px;height:44px;border-radius:14px;background:#EAF0FF;color:var(--blue);display:grid;place-items:center;flex-shrink:0;transition:background .3s,color .3s,transform .4s}
+.faq-ic .i{width:22px;height:22px}
+.faq-q:hover .faq-ic{transform:rotate(-6deg) scale(1.05)}
+.faq-q[aria-expanded="true"] .faq-ic{background:var(--blue);color:#fff}
+.faq-a p{margin:0 0 22px 58px}
+.faq-q:focus-visible,.faq-chip:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:14px}
+/* Cierre v2 */
+.final{background:var(--paper);padding:70px 0 90px;color:#fff}
+.fin-card{position:relative;overflow:hidden;border-radius:36px;padding:clamp(48px,7vw,88px) 24px;background:radial-gradient(700px 380px at 50% 125%,rgba(65,193,186,.4),transparent 60%),linear-gradient(160deg,#1E3A8A,#0E1F4D);box-shadow:0 40px 80px -40px rgba(14,31,77,.85)}
+.fin-card>*{position:relative;z-index:1}
+.fin-orb{position:absolute!important;border-radius:50%;z-index:0!important;filter:blur(2px)}
+.fo1{width:260px;height:260px;left:-80px;top:-90px;background:radial-gradient(circle,rgba(97,214,207,.35),transparent 70%);animation:fflot 9s ease-in-out infinite}
+.fo2{width:320px;height:320px;right:-100px;top:30%;background:radial-gradient(circle,rgba(120,150,255,.35),transparent 70%);animation:fflot 11s ease-in-out infinite reverse}
+@keyframes fflot{50%{transform:translateY(26px) scale(1.08)}}
+.fin-path{display:flex;justify-content:center;gap:8px;margin-bottom:30px;flex-wrap:wrap}
+.fin-path i{font-style:normal;font-weight:800;font-size:.85rem;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);color:#E6ECFF;animation:fstep 7.2s infinite}
+.fin-path i:nth-child(2){animation-delay:.6s}.fin-path i:nth-child(3){animation-delay:1.2s}.fin-path i:nth-child(4){animation-delay:1.8s}.fin-path i:nth-child(5){animation-delay:2.4s}.fin-path i:nth-child(6){animation-delay:3s}
+@keyframes fstep{0%,14%,100%{background:rgba(255,255,255,.1);color:#E6ECFF;transform:none}5%,9%{background:var(--accent);color:#0E1F4D;transform:translateY(-5px)}}
+.fin-note{margin:26px 0 0;color:#B9C6EE;font-size:.95rem}
+.fin-card h2{max-width:16ch}
+@media (max-width:980px){.faq-grid{grid-template-columns:1fr;gap:28px}}
+@media (max-width:600px){.faq-a p{margin-left:0}.faq-ic{width:38px;height:38px}.faq-q{font-size:1rem}.fin-card{border-radius:26px}}
+@media (prefers-reduced-motion:reduce){.faq-wa-dot,.fo1,.fo2,.fin-path i{animation:none}}
 .pill.soon{background:#EEF2FF;color:var(--royal)}
 .price-reveal{background:var(--paper);color:var(--royal);border:1.5px dashed var(--blue);border-radius:999px;padding:9px 16px;font-weight:700;font-size:.9rem;transition:background .2s, transform .2s}
 .price-reveal:hover{background:#E6EDFB;transform:translateY(-1px)}
@@ -1573,38 +1617,52 @@ mark{background:none;color:inherit;background-image:linear-gradient(transparent 
 <!-- ===================== FAQ ===================== -->
 <section id="faq">
   <div class="wrap faq-grid">
-    <div class="reveal">
+    <div class="reveal faq-side">
       <h2>Preguntas frecuentes</h2>
-      <p class="lead">¿Te queda alguna duda? Escribinos por WhatsApp y te respondemos en menos de 24 horas.</p>
+      <p class="lead">Lo que más nos preguntan antes de empezar.</p>
+      <div class="faq-wa">
+        <span class="faq-wa-dot" aria-hidden="true"></span>
+        <strong>¿Te queda alguna duda?</strong>
+        <p>Escribinos por WhatsApp y te respondemos en menos de 24 horas.</p>
+        <a class="btn btn-accent" href="https://wa.me/5492212229980?text=%C2%A1Hola%20The%20Queen's%20Tea!%20Tengo%20una%20consulta." target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-chat"/></svg> Escribir por WhatsApp</a>
+      </div>
     </div>
-    <div class="reveal" id="faqList">
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">¿Preparan para exámenes internacionales?<span class="plus" aria-hidden="true">+</span></button>
+    <div class="reveal">
+      <div class="faq-chips" role="group" aria-label="Filtrar preguntas">
+        <button class="faq-chip on" data-f="all">Todas</button>
+        <button class="faq-chip" data-f="cursos">Cursos y nivel</button>
+        <button class="faq-chip" data-f="campus">Campus</button>
+        <button class="faq-chip" data-f="clases">Clases</button>
+      </div>
+      <div id="faqList">
+      <div class="faq-item" data-cat="cursos">
+        <button class="faq-q" aria-expanded="false"><span class="faq-ic"><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg></span><span class="faq-t">¿Preparan para exámenes internacionales?</span><span class="plus" aria-hidden="true">+</span></button>
         <div class="faq-a"><div><p>Sí. Preparamos para Cambridge First (B2), Advanced (C1) y Proficiency (C2), y para IELTS. Practicás las cuatro habilidades con exámenes estilo Cambridge y correcciones de Writing dentro del campus.</p></div></div>
       </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">¿Qué es el Campus?<span class="plus" aria-hidden="true">+</span></button>
+      <div class="faq-item" data-cat="campus">
+        <button class="faq-q" aria-expanded="false"><span class="faq-ic"><svg class="i" aria-hidden="true"><use href="#i-laptop"/></svg></span><span class="faq-t">¿Qué es el Campus?</span><span class="plus" aria-hidden="true">+</span></button>
         <div class="faq-a"><div><p>Es nuestro campus virtual propio: ahí ves tus clases, material, tareas, exámenes, notas, asistencia y pagos, con avisos por mail. Funciona desde la compu y desde el celular.</p></div></div>
       </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">¿Qué hay en la tienda de cursos?<span class="plus" aria-hidden="true">+</span></button>
+      <div class="faq-item" data-cat="campus">
+        <button class="faq-q" aria-expanded="false"><span class="faq-ic"><svg class="i" aria-hidden="true"><use href="#i-bag"/></svg></span><span class="faq-t">¿Qué hay en la tienda de cursos?</span><span class="plus" aria-hidden="true">+</span></button>
         <div class="faq-a"><div><p>Material docente y cursos asincrónicos con seguimiento, con acceso exclusivo en nuestro campus y certificado de logro al terminar. Comprás y empezás al instante.</p></div></div>
       </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">¿Cómo son los grupos?<span class="plus" aria-hidden="true">+</span></button>
+      <div class="faq-item" data-cat="clases">
+        <button class="faq-q" aria-expanded="false"><span class="faq-ic"><svg class="i" aria-hidden="true"><use href="#i-users"/></svg></span><span class="faq-t">¿Cómo son los grupos?</span><span class="plus" aria-hidden="true">+</span></button>
         <div class="faq-a"><div><p>Nuestros grupos son reducidos. Así cada alumno tiene tiempo de práctica oral y atención personalizada del docente.</p></div></div>
       </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">¿El material de estudio está incluido?<span class="plus" aria-hidden="true">+</span></button>
+      <div class="faq-item" data-cat="cursos">
+        <button class="faq-q" aria-expanded="false"><span class="faq-ic"><svg class="i" aria-hidden="true"><use href="#i-book"/></svg></span><span class="faq-t">¿El material de estudio está incluido?</span><span class="plus" aria-hidden="true">+</span></button>
         <div class="faq-a"><div><p>Sí, todos los materiales digitales están incluidos en el valor del curso. No vas a tener costos extra de libros durante el año lectivo.</p></div></div>
       </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">¿Qué pasa si falto a una clase?<span class="plus" aria-hidden="true">+</span></button>
+      <div class="faq-item" data-cat="clases">
+        <button class="faq-q" aria-expanded="false"><span class="faq-ic"><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg></span><span class="faq-t">¿Qué pasa si falto a una clase?</span><span class="plus" aria-hidden="true">+</span></button>
         <div class="faq-a"><div><p>Como los cupos son limitados, la clase se abona igual. Igualmente te pasamos el material trabajado y, si la clase fue grabada, el acceso a la grabación para que no pierdas el hilo del curso.</p></div></div>
       </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">¿Cómo sé qué nivel tengo?<span class="plus" aria-hidden="true">+</span></button>
+      <div class="faq-item" data-cat="cursos">
+        <button class="faq-q" aria-expanded="false"><span class="faq-ic"><svg class="i" aria-hidden="true"><use href="#i-chart"/></svg></span><span class="faq-t">¿Cómo sé qué nivel tengo?</span><span class="plus" aria-hidden="true">+</span></button>
         <div class="faq-a"><div><p>Hacé nuestro test de nivel gratuito: son 120 preguntas y tarda unos 15 a 20 minutos. Al terminar te mostramos tu nivel estimado y podés mandarnos el resultado por WhatsApp para que te recomendemos un curso.</p></div></div>
+      </div>
       </div>
     </div>
   </div>
@@ -1612,12 +1670,17 @@ mark{background:none;color:inherit;background-image:linear-gradient(transparent 
 
 <!-- ===================== CTA FINAL ===================== -->
 <section class="final">
-  <div class="wrap reveal">
-    <h2>Tu lugar en 2027 te está esperando.</h2>
-    <p class="lead">Descubrí tu nivel en minutos y elegí el curso que mejor se adapta a vos.</p>
-    <div class="hero-ctas">
-      <button class="btn btn-accent js-open-test">Hacer el test de nivel</button>
-      <a href="#cursos" class="btn btn-line">Ver cursos</a>
+  <div class="wrap">
+    <div class="fin-card reveal">
+      <span class="fin-orb fo1" aria-hidden="true"></span><span class="fin-orb fo2" aria-hidden="true"></span>
+      <div class="fin-path" aria-hidden="true"><i>A1</i><i>A2</i><i>B1</i><i>B2</i><i>C1</i><i>C2</i></div>
+      <h2>Tu lugar en 2027 te está esperando.</h2>
+      <p class="lead">Descubrí tu nivel en minutos y elegí el curso que mejor se adapta a vos.</p>
+      <div class="hero-ctas">
+        <button class="btn btn-accent js-open-test">Hacer el test de nivel</button>
+        <a href="#cursos" class="btn btn-line">Ver cursos</a>
+      </div>
+      <p class="fin-note" id="finNote">Test gratuito · 15 a 20 minutos</p>
     </div>
   </div>
 </section>
@@ -2320,6 +2383,16 @@ $$('.faq-q').forEach(q => q.addEventListener('click', () => {
   const open = q.getAttribute('aria-expanded') === 'true';
   $$('.faq-q').forEach(o => o.setAttribute('aria-expanded', 'false'));
   q.setAttribute('aria-expanded', String(!open));
+}));
+
+$$('.faq-chip').forEach(c => c.addEventListener('click', () => {
+  $$('.faq-chip').forEach(o => o.classList.toggle('on', o === c));
+  const f = c.dataset.f;
+  $$('.faq-item').forEach(it => {
+    const show = f === 'all' || it.dataset.cat === f;
+    it.hidden = !show;
+    if (!show) it.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+  });
 }));
 
 /* ============================================================
