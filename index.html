@@ -1423,7 +1423,7 @@ mark{background:none;color:inherit;background-image:linear-gradient(transparent 
 .xm-sk.hot{transform:translate(-50%,-50%) scale(1.14)}
 .xm-sk.hot i{background:var(--accent);color:var(--ink);box-shadow:0 0 0 8px rgba(97,214,207,.28),0 16px 28px -12px rgba(65,193,186,.9)}
 .xm-sk.n1{left:50%;top:6%}.xm-sk.n2{left:94%;top:50%}.xm-sk.n3{left:50%;top:94%}.xm-sk.n4{left:6%;top:50%}
-.xm-use{position:absolute;left:50%;top:75.5%;transform:translateX(-50%);display:inline-flex;align-items:center;gap:7px;background:var(--ink);color:#fff;font-weight:700;font-size:.82rem;padding:7px 14px;border-radius:999px;transition:opacity .3s;white-space:nowrap}
+.xm-use{position:absolute;left:0;top:2%;display:inline-flex;align-items:center;gap:7px;background:var(--ink);color:#fff;font-weight:700;font-size:.82rem;padding:7px 14px;border-radius:999px;transition:opacity .3s;white-space:nowrap}
 .xm-use .i{width:15px;height:15px;color:var(--accent)}
 .xm-use.off{opacity:0}
 .xm-scale{grid-column:1/3;display:flex;gap:6px;margin-top:6px}
@@ -1480,6 +1480,17 @@ mark{background:none;color:inherit;background-image:linear-gradient(transparent 
 .mat-grid .co-m.logo:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 18px 28px -16px rgba(34,64,151,.6)}
 @media (max-width:900px){.mat-side::before{left:26px;right:26px;top:0;bottom:auto;border-left:0;border-top:2px dashed #C7D4F0}.mat-main{padding:36px 24px}.mat-clock div{min-width:0;flex:1}}
 @media (prefers-reduced-motion:reduce){.mat-cta::after{animation:none}}
+
+/* Matrícula lado derecho v3 */
+.mat-side{gap:20px;padding:44px 38px 38px}
+.mat-grid .co-m{min-height:78px}
+.mat-steps{list-style:none;margin:2px 0 0;padding:0;position:relative;display:grid;gap:14px;counter-reset:ms}
+.mat-steps::before{content:"";position:absolute;left:17px;top:16px;bottom:16px;width:2px;background:linear-gradient(var(--accent),#C7D4F0)}
+.mat-steps li{position:relative;padding-left:52px;counter-increment:ms;min-height:36px}
+.mat-steps li::before{content:counter(ms);position:absolute;left:0;top:0;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:800;color:#fff;background:linear-gradient(135deg,var(--blue),var(--royal));box-shadow:0 0 0 5px #fff}
+.mat-steps b{display:block;font-family:var(--display);font-size:1.02rem;color:var(--ink)}
+.mat-steps span{color:var(--muted);font-size:.92rem}
+.mat-fac{margin-top:2px}
 .pill.soon{background:#EEF2FF;color:var(--royal)}
 .price-reveal{background:var(--paper);color:var(--royal);border:1.5px dashed var(--blue);border-radius:999px;padding:9px 16px;font-weight:700;font-size:.9rem;transition:background .2s, transform .2s}
 .price-reveal:hover{background:#E6EDFB;transform:translateY(-1px)}
@@ -1639,6 +1650,11 @@ mark{background:none;color:inherit;background-image:linear-gradient(transparent 
       <div class="mat-side">
         <h3>Pagá como prefieras</h3>
         <div class="co-grid mat-grid"><div class="co-m logo"><img src="img/pay-mercadopago.png" alt="Mercado Pago" loading="lazy"></div><div class="co-m logo"><img src="img/pay-cuentadni.png" alt="Cuenta DNI" loading="lazy"></div><div class="co-m logo"><span class="mk k1"><svg class="i" aria-hidden="true"><use href="#i-card"/></svg></span><b>Tarjeta de<br>crédito</b></div><div class="co-m logo"><span class="mk k2"><svg class="i" aria-hidden="true"><use href="#i-card"/></svg></span><b>Tarjeta de<br>débito</b></div><div class="co-m logo wide"><span class="mk k3"><svg class="i" aria-hidden="true"><use href="#i-briefcase"/></svg></span><b>Transferencia<br>bancaria</b></div></div>
+        <ol class="mat-steps">
+          <li><b>Tocás "Reservar mi lugar"</b><span>Entrás a la tienda del campus.</span></li>
+          <li><b>Pagás como prefieras</b><span>Con cualquiera de estos medios.</span></li>
+          <li><b>Te llega la confirmación</b><span>Por mail, con tu comprobante.</span></li>
+        </ol>
         <p class="mat-fac"><svg class="i" aria-hidden="true"><use href="#i-file"/></svg><span>Todos los pagos cuentan con su factura correspondiente.</span></p>
       </div>
     </div>
