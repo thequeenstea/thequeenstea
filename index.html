@@ -1284,6 +1284,36 @@ mark{background:none;color:inherit;background-image:linear-gradient(transparent 
 @media (max-width:980px){.sb-cert{grid-template-columns:1fr 260px;padding-right:34px}}
 @media (max-width:640px){.sb-cert{grid-template-columns:1fr;padding-right:34px}.sb-diploma{width:100%;max-width:290px;margin:0 auto}}
 @media (max-width:560px){.sb-c{padding:28px}}
+
+/* Empezá hoy v2 */
+.cta-band{grid-template-columns:1fr 1.05fr;gap:44px;padding:56px;background:radial-gradient(520px 320px at 0 100%,rgba(65,193,186,.4),transparent 65%),radial-gradient(520px 320px at 100% 0,rgba(120,150,255,.45),transparent 65%),linear-gradient(135deg,#2A5BD7,#14275F)}
+.cta-tag{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:.88rem;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);color:#E6ECFF;margin-bottom:20px}
+.cta-tag i{width:9px;height:9px;border-radius:50%;background:#4ADE80;animation:fwa 2.2s infinite}
+.cta-feats{grid-template-columns:1fr 1fr;max-width:none;margin-bottom:0}
+.cta-feats li{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:10px 12px;transition:transform .3s,background .3s}
+.cta-feats li:hover{transform:translateY(-3px);background:rgba(255,255,255,.14)}
+.cta-co{position:relative;z-index:1;background:rgba(255,255,255,.96);color:var(--ink);border-radius:28px;padding:26px;box-shadow:0 40px 70px -34px rgba(0,0,0,.8)}
+.co-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:16px}
+.co-head strong{font-family:var(--display);font-size:1.2rem}
+.co-inv{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:.82rem;color:#0C7F79;background:#DDF6F4;padding:6px 11px;border-radius:999px}
+.co-inv .i{width:15px;height:15px}
+.co-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.co-m{position:relative;display:flex;align-items:center;gap:10px;min-height:62px;padding:10px 14px;border-radius:16px;background:#F3F6FD;border:2px solid transparent;transition:border-color .35s,background .35s,transform .35s,box-shadow .35s}
+.co-m.logo{justify-content:center;background:#fff;border-color:#E6ECF8}
+.co-m.logo img{max-height:38px;max-width:78%;width:auto;object-fit:contain}
+.co-m .i{width:22px;height:22px;color:var(--blue);flex-shrink:0}
+.co-m b{font-size:.9rem;line-height:1.2}
+.co-m.wide{grid-column:1/3}
+.co-ok{position:absolute;right:8px;top:8px;width:20px;height:20px;border-radius:50%;background:var(--accent);display:grid;place-items:center;opacity:0;transform:scale(.4);transition:.35s}
+.co-ok .i{width:12px;height:12px;color:var(--ink)}
+.co-m.on{border-color:var(--accent);background:#fff;transform:translateY(-3px);box-shadow:0 16px 26px -16px rgba(34,64,151,.6)}
+.co-m.on .co-ok{opacity:1;transform:none}
+.cta-co .cta-btns{margin-top:18px;flex-direction:row;gap:10px;flex-wrap:wrap}
+.cta-co .cta-btns .btn{flex:1 1 180px;width:auto;padding:15px 18px;font-size:1rem}
+.cta-co .btn-line{color:var(--ink);border-color:#C7D4F0}
+.cta-co .btn-line:hover{background:#EEF3FF}
+@media (max-width:900px){.cta-band{grid-template-columns:1fr;padding:30px 20px;gap:28px}.cta-feats{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.cta-feats{grid-template-columns:1fr}.co-grid{grid-template-columns:1fr}.co-m.wide{grid-column:auto}.cta-co{padding:20px}}
 .pill.soon{background:#EEF2FF;color:var(--royal)}
 .price-reveal{background:var(--paper);color:var(--royal);border:1.5px dashed var(--blue);border-radius:999px;padding:9px 16px;font-weight:700;font-size:.9rem;transition:background .2s, transform .2s}
 .price-reveal:hover{background:#E6EDFB;transform:translateY(-1px)}
@@ -1592,6 +1622,7 @@ mark{background:none;color:inherit;background-image:linear-gradient(transparent 
     </div>
     <div class="cta-band reveal">
       <div class="cta-txt">
+        <span class="cta-tag"><i></i> Tienda abierta</span>
         <h3>Empezá hoy mismo</h3>
         <p>Comprás, pagás y entrás a tu curso al instante.</p>
         <ul class="cta-feats">
@@ -1600,11 +1631,20 @@ mark{background:none;color:inherit;background-image:linear-gradient(transparent 
           <li><svg class="i" aria-hidden="true"><use href="#i-chart"/></svg>Con seguimiento</li>
           <li><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg>Certificado de logro</li>
         </ul>
-        <div class="cta-pay"><span>Medios de pago</span><b>Débito</b><b>Crédito</b><b>Mercado Pago</b><b>Cuenta DNI</b><b>Transferencia</b><em>· con factura</em></div>
       </div>
-      <div class="cta-btns">
-        <a href="https://campus.thequeenstea.com.ar/tienda" class="btn btn-accent">Ir a la tienda</a>
-        <a href="https://campus.thequeenstea.com.ar/login" class="btn btn-line">Ya soy alumno: ingresar</a>
+      <div class="cta-co">
+        <div class="co-head"><strong>Elegí cómo pagar</strong><span class="co-inv"><svg class="i" aria-hidden="true"><use href="#i-file"/></svg>Con factura</span></div>
+        <div class="co-grid" id="coGrid">
+          <div class="co-m logo"><img src="img/pay-mercadopago.png" alt="Mercado Pago" loading="lazy"><i class="co-ok"><svg class="i"><use href="#i-check"/></svg></i></div>
+          <div class="co-m logo"><img src="img/pay-cuentadni.png" alt="Cuenta DNI" loading="lazy"><i class="co-ok"><svg class="i"><use href="#i-check"/></svg></i></div>
+          <div class="co-m"><svg class="i" aria-hidden="true"><use href="#i-card"/></svg><b>Tarjeta de crédito</b><i class="co-ok"><svg class="i"><use href="#i-check"/></svg></i></div>
+          <div class="co-m"><svg class="i" aria-hidden="true"><use href="#i-card"/></svg><b>Tarjeta de débito</b><i class="co-ok"><svg class="i"><use href="#i-check"/></svg></i></div>
+          <div class="co-m wide"><svg class="i" aria-hidden="true"><use href="#i-briefcase"/></svg><b>Transferencia bancaria</b><i class="co-ok"><svg class="i"><use href="#i-check"/></svg></i></div>
+        </div>
+        <div class="cta-btns">
+          <a href="https://campus.thequeenstea.com.ar/tienda" class="btn btn-accent">Ir a la tienda</a>
+          <a href="https://campus.thequeenstea.com.ar/login" class="btn btn-line">Ya soy alumno: ingresar</a>
+        </div>
       </div>
     </div>
   </div>
@@ -2540,6 +2580,14 @@ $$('.faq-q').forEach(q => q.addEventListener('click', () => {
   show(i);
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   setInterval(() => { i = (i + 1) % 6; show(i); }, 1500);
+})();
+
+(() => {
+  const ms = $$('#coGrid .co-m'); if (!ms.length) return;
+  let i = 0; const go = n => ms.forEach((e,k) => e.classList.toggle('on', k === n));
+  go(0);
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  setInterval(() => { i = (i + 1) % ms.length; go(i); }, 1800);
 })();
 $$('.faq-chip').forEach(c => c.addEventListener('click', () => {
   $$('.faq-chip').forEach(o => o.classList.toggle('on', o === c));
