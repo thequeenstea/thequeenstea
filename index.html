@@ -768,6 +768,30 @@ h2{font-size:clamp(2.3rem,4.8vw,3.9rem)}
 .final h2{font-size:clamp(2.4rem,5.4vw,4.4rem)}
 @media (prefers-reduced-motion:reduce){.about-logo::before{animation:none}}
 @media (max-width:980px){.faq-grid>div:first-child{position:static}}
+
+/* ===== Matrícula 2027 ===== */
+.mat{display:grid;grid-template-columns:1.25fr 1fr;border-radius:32px;overflow:hidden;margin:34px 0 30px;box-shadow:0 40px 80px -40px rgba(14,31,77,.75)}
+.mat-main{position:relative;background:radial-gradient(600px 300px at 90% -10%,rgba(65,193,186,.45),transparent 60%),linear-gradient(150deg,#0E1F4D,#1E3A8A);color:#fff;padding:46px 46px 42px;overflow:hidden}
+.mat-main::after{content:"2027";position:absolute;right:-6px;bottom:-34px;font-family:var(--display);font-weight:800;font-size:9.5rem;line-height:1;color:rgba(255,255,255,.06);letter-spacing:-.05em;pointer-events:none}
+.mat-tag{display:inline-block;background:var(--accent);color:var(--ink);font-weight:800;font-size:.85rem;padding:6px 14px;border-radius:99px}
+.mat-price{display:flex;align-items:baseline;gap:14px;margin:20px 0 6px}
+.mat-price strong{font-family:var(--display);font-weight:800;font-size:clamp(3.4rem,7vw,5.4rem);line-height:1;letter-spacing:-.04em}
+.mat-price span{color:#C9D3EE;font-weight:600}
+.mat-count{display:flex;align-items:center;gap:10px;color:var(--accent);font-weight:700;margin-bottom:26px}
+.mat-count i{width:10px;height:10px;border-radius:50%;background:var(--accent);animation:pulse 1.8s infinite}
+.mat-list{list-style:none;padding:0;margin:0 0 30px;display:grid;gap:12px;position:relative;z-index:1}
+.mat-list li{display:flex;gap:12px;align-items:center;color:#E3EAFB}
+.mat-list .i{width:24px;height:24px;padding:5px;border-radius:50%;background:rgba(97,214,207,.2);color:var(--accent);flex-shrink:0}
+.mat-cta{position:relative;z-index:1;font-size:1.05rem;padding:16px 32px}
+.mat-side{background:#fff;padding:42px 38px;display:flex;flex-direction:column;gap:18px}
+.mat-side h3{font-size:1.5rem}
+.mat-pay{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.mat-pay li{display:flex;align-items:center;gap:14px;padding:13px 16px;border:1px solid var(--line);border-radius:16px;font-weight:700;color:var(--ink);transition:transform .25s,border-color .25s,background .25s}
+.mat-pay li:hover{transform:translateX(5px);border-color:var(--blue);background:#F4F8FF}
+.mat-pay .i{width:38px;height:38px;padding:9px;border-radius:11px;background:linear-gradient(135deg,var(--blue),var(--royal));color:#fff;flex-shrink:0}
+.mat-fac{display:flex;gap:12px;align-items:center;margin:auto 0 0;background:#EAF8F6;border-radius:16px;padding:14px 16px;color:#0E6F68;font-weight:700;font-size:.92rem}
+.mat-fac .i{width:24px;height:24px;flex-shrink:0}
+@media (max-width:900px){.mat{grid-template-columns:1fr}.mat-main{padding:34px 26px}.mat-side{padding:30px 24px}.mat-main::after{font-size:6rem}}
 .pill.soon{background:#EEF2FF;color:var(--royal)}
 .price-reveal{background:var(--paper);color:var(--royal);border:1.5px dashed var(--blue);border-radius:999px;padding:9px 16px;font-weight:700;font-size:.9rem;transition:background .2s, transform .2s}
 .price-reveal:hover{background:#E6EDFB;transform:translateY(-1px)}
@@ -901,19 +925,34 @@ h2{font-size:clamp(2.3rem,4.8vw,3.9rem)}
   <div class="wrap">
     <div class="reveal">
       <h2>Cursos</h2>
-      <p class="lead">Estamos armando los grupos 2027. Muy pronto publicamos horarios y valores: reservá tu lugar con la matrícula y anotate en el curso que te interesa para que te avisemos apenas abra. Si no sabés tu nivel, hacé primero el test gratis.</p>
+      <p class="lead">Estamos armando los grupos 2027. Reservá tu lugar con la matrícula y te avisamos apenas abran horarios y valores.</p>
     </div>
 
-    <div class="enroll-strip reveal">
-      <div>
-        <span class="off">Matrícula 2027</span>
-        <div class="enroll-price"><strong>$30.000</strong></div>
-        <p>Pago único para reservar tu lugar en 2027. Este valor es válido hasta el 31 de diciembre.</p>
+    <div class="mat reveal">
+      <div class="mat-main">
+        <span class="mat-tag">Matrícula 2027</span>
+        <div class="mat-price"><strong>$30.000</strong><span>pago único</span></div>
+        <div class="mat-count" id="matCount"><i></i><span>Valor válido hasta el 31 de diciembre</span></div>
+        <ul class="mat-list">
+          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Tu lugar asegurado en un grupo de hasta 8</li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Te avisamos primero cuando abran horarios y valores</li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Pago único para todo 2027</li>
+        </ul>
+        <a href="https://campus.thequeenstea.com.ar/tienda/matricula-2027" class="btn btn-accent mat-cta">Reservar mi lugar</a>
       </div>
-      <a href="https://campus.thequeenstea.com.ar/tienda/matricula-2027" class="btn btn-accent">Abonar matrícula</a>
+      <div class="mat-side">
+        <h3>Pagá como prefieras</h3>
+        <ul class="mat-pay">
+          <li><svg class="i" aria-hidden="true"><use href="#i-card"/></svg>Tarjeta de débito</li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-card"/></svg>Tarjeta de crédito</li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg>Mercado Pago</li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg>Cuenta DNI</li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-bag"/></svg>Transferencia</li>
+        </ul>
+        <p class="mat-fac"><svg class="i" aria-hidden="true"><use href="#i-file"/></svg><span>Todos los pagos cuentan con su factura correspondiente.</span></p>
+      </div>
     </div>
 
-    <div class="pay-row reveal"><strong>Pagá como prefieras</strong><div class="pay-chips"><span>Tarjeta de débito</span><span>Tarjeta de crédito</span><span>Mercado Pago</span><span>Cuenta DNI</span><span>Transferencia</span></div><small>Todos los pagos cuentan con su factura correspondiente.</small></div>
     <div class="ladder-panel reveal">
       <div class="ladder-top">
         <div>
@@ -1617,6 +1656,14 @@ Acepto los términos y compromisos.`;
 });
 
 
+
+
+/* Cuenta regresiva de la matrícula */
+(() => {
+  const el = document.querySelector('#matCount span'); if (!el) return;
+  const fin = new Date(new Date().getFullYear(), 11, 31, 23, 59, 59), d = Math.ceil((fin - new Date()) / 864e5);
+  if (d > 0 && d <= 90) el.textContent = d === 1 ? 'Último día: valor válido hasta hoy' : `Quedan ${d} días: valor válido hasta el 31 de diciembre`;
+})();
 
 /* Recorrido animado del campus */
 (() => {
