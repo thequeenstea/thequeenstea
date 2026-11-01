@@ -1314,6 +1314,23 @@ mark{background:none;color:inherit;background-image:linear-gradient(transparent 
 .cta-co .btn-line:hover{background:#EEF3FF}
 @media (max-width:900px){.cta-band{grid-template-columns:1fr;padding:30px 20px;gap:28px}.cta-feats{grid-template-columns:1fr 1fr}}
 @media (max-width:480px){.cta-feats{grid-template-columns:1fr}.co-grid{grid-template-columns:1fr}.co-m.wide{grid-column:auto}.cta-co{padding:20px}}
+
+/* Franja v2 */
+.band{background:linear-gradient(160deg,#14275F,#0E1F4D);padding:22px 0;border:0;display:flex;flex-direction:column;gap:14px;position:relative}
+.band::before,.band::after{content:"";position:absolute;top:0;bottom:0;width:90px;z-index:2;pointer-events:none}
+.band::before{left:0;background:linear-gradient(90deg,#14275F,transparent)}
+.band::after{right:0;background:linear-gradient(-90deg,#14275F,transparent)}
+.bd-row{overflow:hidden}
+.bd-track{display:flex;gap:14px;width:max-content;animation:bdm 45s linear infinite;padding-right:14px}
+.bd-row.rev .bd-track{animation-direction:reverse;animation-duration:52s}
+.bd-row:hover .bd-track{animation-play-state:paused}
+@keyframes bdm{to{transform:translateX(-25%)}}
+.bd{display:inline-flex;align-items:center;gap:12px;white-space:nowrap;padding:8px 22px 8px 8px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);color:#fff;font-family:var(--display);font-weight:600;font-size:1.1rem;transition:background .3s,border-color .3s}
+.bd:hover{background:rgba(97,214,207,.18);border-color:var(--accent)}
+.bd i{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),#7CE3DC);color:var(--ink)}
+.bd i .i{width:20px;height:20px}
+@media (prefers-reduced-motion:reduce){.bd-track{animation:none}.bd-row{overflow-x:auto}}
+@media (max-width:600px){.bd{font-size:1rem}.bd i{width:34px;height:34px}}
 .pill.soon{background:#EEF2FF;color:var(--royal)}
 .price-reveal{background:var(--paper);color:var(--royal);border:1.5px dashed var(--blue);border-radius:999px;padding:9px 16px;font-weight:700;font-size:.9rem;transition:background .2s, transform .2s}
 .price-reveal:hover{background:#E6EDFB;transform:translateY(-1px)}
@@ -1412,10 +1429,8 @@ mark{background:none;color:inherit;background-image:linear-gradient(transparent 
 </section>
 
 <div class="band" aria-hidden="true">
-  <div class="band-track">
-    <span>Conversación</span><span>Cambridge First · Advanced · Proficiency</span><span>IELTS</span><span>Business English</span><span>Legal English</span><span>Medical English</span><span>Aviation English</span><span>Cursos asincrónicos</span>
-    <span>Conversación</span><span>Cambridge First · Advanced · Proficiency</span><span>IELTS</span><span>Business English</span><span>Legal English</span><span>Medical English</span><span>Aviation English</span><span>Cursos asincrónicos</span>
-  </div>
+  <div class="bd-row "><div class="bd-track"><span class="bd"><i><svg class="i"><use href="#i-chat"/></svg></i>Conversación</span><span class="bd"><i><svg class="i"><use href="#i-cap"/></svg></i>Cambridge First · Advanced · Proficiency</span><span class="bd"><i><svg class="i"><use href="#i-trophy"/></svg></i>IELTS</span><span class="bd"><i><svg class="i"><use href="#i-briefcase"/></svg></i>Business English</span><span class="bd"><i><svg class="i"><use href="#i-chat"/></svg></i>Conversación</span><span class="bd"><i><svg class="i"><use href="#i-cap"/></svg></i>Cambridge First · Advanced · Proficiency</span><span class="bd"><i><svg class="i"><use href="#i-trophy"/></svg></i>IELTS</span><span class="bd"><i><svg class="i"><use href="#i-briefcase"/></svg></i>Business English</span><span class="bd"><i><svg class="i"><use href="#i-chat"/></svg></i>Conversación</span><span class="bd"><i><svg class="i"><use href="#i-cap"/></svg></i>Cambridge First · Advanced · Proficiency</span><span class="bd"><i><svg class="i"><use href="#i-trophy"/></svg></i>IELTS</span><span class="bd"><i><svg class="i"><use href="#i-briefcase"/></svg></i>Business English</span><span class="bd"><i><svg class="i"><use href="#i-chat"/></svg></i>Conversación</span><span class="bd"><i><svg class="i"><use href="#i-cap"/></svg></i>Cambridge First · Advanced · Proficiency</span><span class="bd"><i><svg class="i"><use href="#i-trophy"/></svg></i>IELTS</span><span class="bd"><i><svg class="i"><use href="#i-briefcase"/></svg></i>Business English</span></div></div>
+  <div class="bd-row rev"><div class="bd-track"><span class="bd"><i><svg class="i"><use href="#i-board"/></svg></i>Legal English</span><span class="bd"><i><svg class="i"><use href="#i-check"/></svg></i>Medical English</span><span class="bd"><i><svg class="i"><use href="#i-laptop"/></svg></i>Aviation English</span><span class="bd"><i><svg class="i"><use href="#i-film"/></svg></i>Cursos asincrónicos</span><span class="bd"><i><svg class="i"><use href="#i-board"/></svg></i>Legal English</span><span class="bd"><i><svg class="i"><use href="#i-check"/></svg></i>Medical English</span><span class="bd"><i><svg class="i"><use href="#i-laptop"/></svg></i>Aviation English</span><span class="bd"><i><svg class="i"><use href="#i-film"/></svg></i>Cursos asincrónicos</span><span class="bd"><i><svg class="i"><use href="#i-board"/></svg></i>Legal English</span><span class="bd"><i><svg class="i"><use href="#i-check"/></svg></i>Medical English</span><span class="bd"><i><svg class="i"><use href="#i-laptop"/></svg></i>Aviation English</span><span class="bd"><i><svg class="i"><use href="#i-film"/></svg></i>Cursos asincrónicos</span><span class="bd"><i><svg class="i"><use href="#i-board"/></svg></i>Legal English</span><span class="bd"><i><svg class="i"><use href="#i-check"/></svg></i>Medical English</span><span class="bd"><i><svg class="i"><use href="#i-laptop"/></svg></i>Aviation English</span><span class="bd"><i><svg class="i"><use href="#i-film"/></svg></i>Cursos asincrónicos</span></div></div>
 </div>
 
 
