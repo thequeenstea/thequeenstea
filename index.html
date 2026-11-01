@@ -1200,6 +1200,56 @@ mark{background:none;color:inherit;background-image:linear-gradient(transparent 
 @media (max-width:900px){.fin-card{grid-template-columns:1fr}.fin-vis{height:300px}.fin-stairs{top:70px}.fin-res{left:0;width:170px;padding:12px 14px}.fin-res strong{font-size:2rem}}
 @media (max-width:600px){.fin-card{padding:36px 22px 30px}.fin-card h2{max-width:none}}
 @media (prefers-reduced-motion:reduce){.fin-tag i{animation:none}}
+
+/* Tienda bento */
+.sb{display:grid;grid-template-columns:1.15fr 1fr 1fr;grid-template-rows:auto auto;gap:18px;position:relative}
+.sb-c{position:relative;overflow:hidden;border-radius:28px;padding:28px;color:#fff;background:linear-gradient(160deg,rgba(255,255,255,.13),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.18);transition:transform .35s,border-color .35s,box-shadow .35s}
+.sb-c:hover{transform:translateY(-5px);border-color:rgba(97,214,207,.6);box-shadow:0 28px 50px -24px rgba(0,0,0,.65)}
+.sb-c .ic{display:flex;width:52px;height:52px;border-radius:16px;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),#7CE3DC);color:var(--ink);margin-bottom:16px;box-shadow:0 12px 24px -10px rgba(97,214,207,.7)}
+.sb-c h3{color:#fff;font-size:1.25rem;margin:0 0 8px}
+.sb-c p{margin:0;color:#C9D3EE;font-size:.97rem}
+.sb-main{grid-row:1/3}
+.sb-lessons{margin-top:24px;display:flex;flex-direction:column;gap:10px}
+.ls{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:12px 14px;opacity:0;transform:translateX(-14px)}
+.ls i{width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--ink);display:grid;place-items:center;flex-shrink:0}
+.ls i .i{width:16px;height:16px}
+.ls b{flex:1;font-size:.95rem}
+.ls small{color:#B9C6EE;font-weight:600}
+.ls.cur{background:#fff;color:var(--ink)}
+.ls.cur i{background:var(--blue);color:#fff}
+.ls.cur small{color:var(--blue)}
+.sb-prog{display:flex;align-items:center;gap:12px;margin-top:6px;font-weight:700;font-size:.9rem;color:#DCE5FF}
+.sb-prog .bar{flex:1;height:9px;border-radius:9px;background:rgba(255,255,255,.15);overflow:hidden}
+.sb-prog em{display:block;height:100%;width:0;border-radius:9px;background:linear-gradient(90deg,var(--accent),#9AF0EA)}
+.sb-main.in-view .ls{animation:lsin .6s forwards}
+.sb-main.in-view .ls:nth-child(2){animation-delay:.25s}.sb-main.in-view .ls:nth-child(3){animation-delay:.5s}.sb-main.in-view .ls:nth-child(4){animation-delay:.75s}
+.sb-main.in-view .sb-prog em{animation:pgr 1.4s .9s forwards}
+@keyframes lsin{to{opacity:1;transform:none}}
+@keyframes pgr{to{width:72%}}
+.sb-files{display:flex;gap:8px;margin-top:20px;flex-wrap:wrap}
+.sb-files span{display:inline-flex;align-items:center;gap:7px;background:#fff;color:var(--ink);font-weight:700;font-size:.85rem;padding:9px 13px;border-radius:12px;box-shadow:0 10px 20px -12px rgba(0,0,0,.6);animation:fbob 5s ease-in-out infinite}
+.sb-files span:nth-child(2){animation-delay:-1.6s;transform:rotate(2deg)}.sb-files span:nth-child(3){animation-delay:-3.2s}
+.sb-files .i{width:17px;height:17px;color:var(--blue)}
+@keyframes fbob{50%{translate:0 -6px}}
+.sb-swap{position:relative;height:42px;margin-top:20px}
+.sb-swap span{position:absolute;inset:0 auto 0 0;display:inline-flex;align-items:center;gap:8px;padding:0 16px;border-radius:999px;font-weight:700;font-size:.9rem;white-space:nowrap}
+.sb-swap .a{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);animation:swa 5s infinite}
+.sb-swap .b{background:var(--accent);color:var(--ink);animation:swb 5s infinite}
+.sb-swap .b .i{width:17px;height:17px}
+@keyframes swa{0%,40%{opacity:1;transform:none}50%,90%{opacity:0;transform:translateY(-10px)}100%{opacity:1;transform:none}}
+@keyframes swb{0%,40%{opacity:0;transform:translateY(10px)}50%,90%{opacity:1;transform:none}100%{opacity:0;transform:translateY(10px)}}
+.sb-cert{grid-column:2/4;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center}
+.sb-diploma{width:210px;background:#fff;color:var(--ink);border-radius:16px;padding:18px 16px;text-align:center;box-shadow:0 24px 40px -20px rgba(0,0,0,.7);transform:rotate(3deg);transition:transform .4s;position:relative;overflow:hidden}
+.sb-c:hover .sb-diploma{transform:rotate(0) scale(1.04)}
+.sb-diploma .i{width:30px;height:30px;color:#E0A526}
+.sb-diploma b{display:block;font-family:var(--display);font-size:.95rem;margin:6px 0 10px}
+.sb-diploma span{display:block;height:6px;border-radius:6px;background:#E5ECFB;margin:6px auto;width:80%}
+.sb-diploma span+span{width:55%}
+.sb-diploma::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(97,214,207,.35) 50%,transparent 65%);transform:translateX(-120%);animation:dshine 4.5s infinite}
+@keyframes dshine{60%,100%{transform:translateX(120%)}}
+@media (max-width:980px){.sb{grid-template-columns:1fr 1fr}.sb-main{grid-row:auto;grid-column:1/3}.sb-cert{grid-column:1/3}}
+@media (max-width:560px){.sb{grid-template-columns:1fr}.sb-main,.sb-cert{grid-column:auto}.sb-cert{grid-template-columns:1fr}.sb-diploma{width:100%;max-width:230px}}
+@media (prefers-reduced-motion:reduce){.ls{opacity:1;transform:none}.sb-prog em{width:72%;animation:none!important}.sb-files span,.sb-swap .a,.sb-swap .b,.sb-diploma::after{animation:none}.sb-swap .a{display:none}.sb-swap .b{opacity:1}}
 .pill.soon{background:#EEF2FF;color:var(--royal)}
 .price-reveal{background:var(--paper);color:var(--royal);border:1.5px dashed var(--blue);border-radius:999px;padding:9px 16px;font-weight:700;font-size:.9rem;transition:background .2s, transform .2s}
 .price-reveal:hover{background:#E6EDFB;transform:translateY(-1px)}
@@ -1472,11 +1522,39 @@ mark{background:none;color:inherit;background-image:linear-gradient(transparent 
       <h2>Material docente y cursos asincrónicos.</h2>
       <p class="lead">Aprendé a tu ritmo. Todo lo que comprás se usa dentro de nuestro campus.</p>
     </div>
-    <div class="shop-grid">
-      <article class="shop-tile reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-board"/></svg></span><h3>Material docente</h3><p>Recursos probados en clase, listos para usar.</p></article>
-      <article class="shop-tile reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-film"/></svg></span><h3>Cursos asincrónicos con seguimiento</h3><p>Videos y tareas a tu ritmo, con tu avance registrado.</p></article>
-      <article class="shop-tile reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-lock"/></svg></span><h3>Acceso exclusivo en nuestro campus</h3><p>Comprás y empezás al instante.</p></article>
-      <article class="shop-tile reveal"><span class="ic" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg></span><h3>Certificado de logro</h3><p>Lo recibís al completar el curso.</p></article>
+    <div class="sb">
+      <article class="sb-c sb-main reveal">
+        <span class="ic"><svg class="i" aria-hidden="true"><use href="#i-film"/></svg></span>
+        <h3>Cursos asincrónicos con seguimiento</h3>
+        <p>Videos y tareas a tu ritmo, con tu avance registrado.</p>
+        <div class="sb-lessons" aria-hidden="true">
+          <div class="ls"><i><svg class="i"><use href="#i-check"/></svg></i><b>Video de la clase</b><small>Listo</small></div>
+          <div class="ls"><i><svg class="i"><use href="#i-check"/></svg></i><b>Tarea con corrección</b><small>Listo</small></div>
+          <div class="ls"><i><svg class="i"><use href="#i-check"/></svg></i><b>Video de la clase</b><small>Listo</small></div>
+          <div class="ls cur"><i><svg class="i"><use href="#i-film"/></svg></i><b>Tarea con corrección</b><small>En curso</small></div>
+          <div class="sb-prog"><span>Tu avance</span><span class="bar"><em></em></span></div>
+        </div>
+      </article>
+      <article class="sb-c sb-mat reveal">
+        <span class="ic"><svg class="i" aria-hidden="true"><use href="#i-board"/></svg></span>
+        <h3>Material docente</h3>
+        <p>Recursos probados en clase, listos para usar.</p>
+        <div class="sb-files" aria-hidden="true"><span><svg class="i"><use href="#i-file"/></svg>Fichas</span><span><svg class="i"><use href="#i-headphones"/></svg>Audios</span><span><svg class="i"><use href="#i-book"/></svg>Guías</span></div>
+      </article>
+      <article class="sb-c sb-acc reveal">
+        <span class="ic"><svg class="i" aria-hidden="true"><use href="#i-lock"/></svg></span>
+        <h3>Acceso exclusivo en nuestro campus</h3>
+        <p>Comprás y empezás al instante.</p>
+        <div class="sb-swap" aria-hidden="true"><span class="a">Pago acreditado</span><span class="b"><svg class="i"><use href="#i-check"/></svg> Ya estás adentro</span></div>
+      </article>
+      <article class="sb-c sb-cert reveal">
+        <div class="sb-cert-t">
+          <span class="ic"><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg></span>
+          <h3>Certificado de logro</h3>
+          <p>Lo recibís al completar el curso.</p>
+        </div>
+        <div class="sb-diploma" aria-hidden="true"><svg class="i"><use href="#i-trophy"/></svg><b>Certificado de logro</b><span></span><span></span></div>
+      </article>
     </div>
     <div class="cta-band reveal">
       <div class="cta-txt">
