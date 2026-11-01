@@ -726,6 +726,48 @@ footer nav a:hover{color:#fff;text-decoration:underline}
 .how-link:hover{background:var(--blue);text-decoration:none;transform:translateX(3px)}
 .how-card{isolation:isolate}
 @media (max-width:980px){.how-grid::after{display:none}}
+
+/* ===== v10: capa de pulido general ===== */
+.kicker{background:#EAF1FF;color:var(--royal);padding:7px 14px 7px 12px;border-radius:99px;font-size:.85rem;display:inline-flex;align-items:center;gap:8px}
+.kicker::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(97,214,207,.25)}
+.shop-head .kicker,.campus-sec .kicker{background:rgba(255,255,255,.1);color:var(--accent)}
+section{position:relative}
+h2{font-size:clamp(2.3rem,4.8vw,3.9rem)}
+/* Exámenes */
+.exams{background:linear-gradient(180deg,#fff,#F4F8FF)}
+.exam-card{padding:34px 30px 38px;min-height:290px;box-shadow:0 30px 50px -34px rgba(14,31,77,.8)}
+.exam-card::before{content:attr(data-w);position:absolute;right:14px;top:6px;font-family:var(--display);font-weight:800;font-size:5.5rem;line-height:1;color:rgba(255,255,255,.07);letter-spacing:-.05em}
+.exam-card:hover{transform:translateY(-8px) rotate(-.6deg)}
+.exam-card:nth-child(2){background:linear-gradient(160deg,#1E3A8A,#2A5BD7)}
+.exam-card:nth-child(3){background:linear-gradient(160deg,#14275F,#0E7C86)}
+.exam-card:nth-child(4){background:linear-gradient(160deg,#0E1F4D,#41C1BA 180%)}
+.exam-points li{background:#fff;border:1px solid var(--line);box-shadow:0 10px 22px -16px rgba(14,31,77,.5)}
+/* Empresas: sección oscura */
+.biz{background:radial-gradient(900px 500px at 85% 0,rgba(65,193,186,.22),transparent 60%),linear-gradient(160deg,#0E1F4D,#14275F);color:#fff}
+.biz h2{color:#fff}.biz .lead{color:#C9D3EE}
+.biz .kicker{background:rgba(255,255,255,.1);color:var(--accent)}
+.biz-list li{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(6px)}
+.biz-list li:hover{background:rgba(255,255,255,.12);border-color:rgba(97,214,207,.6);box-shadow:0 22px 40px -22px rgba(0,0,0,.6)}
+.biz-list li>.i{background:linear-gradient(135deg,var(--accent),#7CE3DC);color:var(--ink)}
+.biz-list h3{color:#fff}.biz-list p{color:#C9D3EE}
+/* Nosotros */
+.about{background:radial-gradient(700px 400px at 0 50%,rgba(65,193,186,.14),transparent 65%),#fff}
+.about-logo{position:relative;overflow:visible}
+.about-logo::before{content:"";position:absolute;inset:-22px;border-radius:50%;border:2px dashed #BFCBE6;animation:orbita 40s linear infinite}
+.about-logo::after{content:"";position:absolute;width:18px;height:18px;border-radius:50%;background:var(--accent);top:9%;right:6%;box-shadow:0 0 0 7px rgba(97,214,207,.25)}
+@keyframes orbita{to{transform:rotate(360deg)}}
+.about-vals li{background:#fff;border:1px solid var(--line);box-shadow:0 10px 22px -16px rgba(14,31,77,.5)}
+/* FAQ */
+.faq-item{background:#fff;border:1px solid var(--line);border-radius:20px;padding:0 24px;margin-bottom:12px;transition:box-shadow .3s,border-color .3s}
+.faq-item:hover{border-color:#C7D4F0}
+.faq-item:has(.faq-q[aria-expanded="true"]){border-color:var(--blue);box-shadow:0 22px 44px -28px rgba(34,64,151,.6)}
+.faq-q{padding:22px 0}
+.faq-grid>div:first-child{position:sticky;top:110px}
+/* Cierre */
+.final{background:radial-gradient(800px 420px at 50% 120%,rgba(65,193,186,.35),transparent 60%),linear-gradient(160deg,#1E3A8A,#0E1F4D)}
+.final h2{font-size:clamp(2.4rem,5.4vw,4.4rem)}
+@media (prefers-reduced-motion:reduce){.about-logo::before{animation:none}}
+@media (max-width:980px){.faq-grid>div:first-child{position:static}}
 .pill.soon{background:#EEF2FF;color:var(--royal)}
 .price-reveal{background:var(--paper);color:var(--royal);border:1.5px dashed var(--blue);border-radius:999px;padding:9px 16px;font-weight:700;font-size:.9rem;transition:background .2s, transform .2s}
 .price-reveal:hover{background:#E6EDFB;transform:translateY(-1px)}
@@ -918,10 +960,10 @@ footer nav a:hover{color:#fff;text-decoration:underline}
       <p class="lead">Practicás las cuatro habilidades con exámenes de práctica y corrección de Writing.</p>
     </div>
     <div class="exam-grid">
-      <article class="exam-card reveal"><span class="exam-lvl">B2</span><h3>Cambridge First</h3><p>Preparación para el First (B2): Reading, Use of English, Writing, Listening y Speaking.</p></article>
-      <article class="exam-card reveal"><span class="exam-lvl">C1</span><h3>Cambridge Advanced</h3><p>Preparación para el Advanced (C1): inglés académico y profesional con práctica de examen.</p></article>
-      <article class="exam-card reveal"><span class="exam-lvl">C2</span><h3>Cambridge Proficiency</h3><p>Preparación para el Proficiency (C2), el nivel más alto de Cambridge.</p></article>
-      <article class="exam-card reveal"><span class="exam-lvl">IELTS</span><h3>IELTS</h3><p>Entrenamiento para IELTS: las cuatro habilidades, estrategias y práctica con tiempos reales.</p></article>
+      <article class="exam-card reveal" data-w="B2"><span class="exam-lvl">B2</span><h3>Cambridge First</h3><p>Preparación para el First (B2): Reading, Use of English, Writing, Listening y Speaking.</p></article>
+      <article class="exam-card reveal" data-w="C1"><span class="exam-lvl">C1</span><h3>Cambridge Advanced</h3><p>Preparación para el Advanced (C1): inglés académico y profesional con práctica de examen.</p></article>
+      <article class="exam-card reveal" data-w="C2"><span class="exam-lvl">C2</span><h3>Cambridge Proficiency</h3><p>Preparación para el Proficiency (C2), el nivel más alto de Cambridge.</p></article>
+      <article class="exam-card reveal" data-w="B2+"><span class="exam-lvl">IELTS</span><h3>IELTS</h3><p>Entrenamiento para IELTS: las cuatro habilidades, estrategias y práctica con tiempos reales.</p></article>
     </div>
     <ul class="exam-points reveal">
       <li><svg class="i" aria-hidden="true"><use href="#i-file"/></svg> Exámenes de práctica estilo Cambridge dentro del campus</li>
