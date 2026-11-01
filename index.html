@@ -1503,6 +1503,32 @@ main,section,footer{overflow-x:clip}
 @media (max-width:900px){.xm-ring{max-width:360px}}
 @media (max-width:480px){.xm-nd{font-size:.72rem;gap:5px;padding:4px 10px 4px 4px}.xm-nd i{width:26px;height:26px}.xm-nd i .i{width:14px;height:14px}}
 @media (prefers-reduced-motion:reduce){.xm-nd{transition:none}}
+
+/* Seguimiento: recorrido */
+.mt-follow{align-items:center;grid-template-columns:1fr 1fr}
+.mt-follow .fj{min-height:300px}
+.fj{position:relative;min-height:290px;border-radius:26px;background:linear-gradient(160deg,#F1F6FF,#fff);border:1px solid var(--line);overflow:hidden;background-image:linear-gradient(rgba(34,64,151,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(34,64,151,.07) 1px,transparent 1px),linear-gradient(160deg,#F1F6FF,#fff);background-size:36px 36px,36px 36px,auto}
+.fj-svg{position:absolute;inset:0;width:100%;height:100%}
+.fj-line{fill:none;stroke:url(#fjg);stroke-width:5;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;vector-effect:non-scaling-stroke}
+.fj-area{fill:rgba(90,130,255,.1);opacity:0}
+.mt-follow.in-view .fj-line{animation:fjdraw 2.2s .3s cubic-bezier(.5,0,.2,1) forwards}
+.mt-follow.in-view .fj-area{animation:fjfade 1.2s 1.6s forwards}
+@keyframes fjdraw{to{stroke-dashoffset:0}}
+@keyframes fjfade{to{opacity:1}}
+.fj-dot{position:absolute;left:0;top:0;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:#fff;border:4px solid var(--accent);box-shadow:0 0 0 8px rgba(97,214,207,.25);opacity:0;transition:opacity .5s}
+.fj-n{position:absolute;display:flex;align-items:center;gap:8px;white-space:nowrap;background:#fff;border:1px solid #D9E4FA;border-radius:999px;padding:6px 14px 6px 6px;font-weight:700;font-size:.9rem;box-shadow:0 14px 24px -14px rgba(34,64,151,.7);opacity:0;transform:translateY(8px)}
+.fj-n i{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#EAF0FF;color:var(--blue)}
+.fj-n i .i{width:16px;height:16px}
+.fj-n.n1{left:4%;top:56%}
+.fj-n.n2{left:30%;top:32%}
+.fj-n.n3{right:4%;top:6%;background:var(--ink);color:#fff;border-color:var(--ink)}
+.fj-n.n3 i{background:var(--accent);color:var(--ink)}
+.mt-follow.in-view .fj-n{animation:fjn .6s forwards}
+.mt-follow.in-view .n1{animation-delay:.4s}.mt-follow.in-view .n2{animation-delay:1.2s}.mt-follow.in-view .n3{animation-delay:2.1s}
+@keyframes fjn{to{opacity:1;transform:none}}
+.mt-follow.in-view .fj-dot{opacity:1;transition-delay:2.6s}
+@media (max-width:560px){.fj{min-height:250px}.fj-n{font-size:.78rem}.fj-n.n2{left:26%;top:34%}}
+@media (prefers-reduced-motion:reduce){.fj-line{stroke-dashoffset:0;animation:none!important}.fj-area,.fj-n{opacity:1;transform:none;animation:none!important}.fj-dot{display:none}}
 .pill.soon{background:#EEF2FF;color:var(--royal)}
 .price-reveal{background:var(--paper);color:var(--royal);border:1.5px dashed var(--blue);border-radius:999px;padding:9px 16px;font-weight:700;font-size:.9rem;transition:background .2s, transform .2s}
 .price-reveal:hover{background:#E6EDFB;transform:translateY(-1px)}
@@ -1907,13 +1933,17 @@ main,section,footer{overflow-x:clip}
           <h3>Seguimiento real</h3>
           <p class="fw-big">No sos un número más.</p>
           <p class="fw-sub">Conocemos tus objetivos, tus dificultades y celebramos tus avances.</p>
-          <ul class="fw-chips"><li><svg class="i" aria-hidden="true"><use href="#i-chart"/></svg>Tus objetivos</li><li><svg class="i" aria-hidden="true"><use href="#i-edit"/></svg>Tus dificultades</li><li><svg class="i" aria-hidden="true"><use href="#i-trophy"/></svg>Tus avances</li></ul>
         </div>
-        <div class="fw-stats">
-          <div class="fs"><span class="fs-ic"><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg></span><strong><span data-count="24">0</span> h</strong><small>Tiempo de respuesta</small><i class="fs-bar"></i></div>
-          <div class="fs"><span class="fs-ic"><svg class="i" aria-hidden="true"><use href="#i-laptop"/></svg></span><strong><span data-count="100">0</span>%</strong><small>Online y en vivo</small><i class="fs-bar"></i></div>
-          <div class="fs"><span class="fs-ic"><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg></span><strong><span data-count="10">0</span>+</strong><small>Años enseñando</small><i class="fs-bar"></i></div>
-          <div class="fs"><span class="fs-ic"><svg class="i" aria-hidden="true"><use href="#i-users"/></svg></span><strong class="fs-txt">Grupos reducidos</strong><small>Atención personalizada</small><i class="fs-bar"></i></div>
+        <div class="fj" aria-hidden="true">
+          <svg viewBox="0 0 360 260" preserveAspectRatio="none" class="fj-svg">
+            <defs><linearGradient id="fjg" x1="0" x2="1"><stop offset="0" stop-color="#5A82FF"/><stop offset="1" stop-color="#41C1BA"/></linearGradient></defs>
+            <path class="fj-area" d="M24 222 C 90 218, 120 152, 180 142 S 290 72, 336 34 L336 260 L24 260 Z"/>
+            <path class="fj-line" pathLength="1" d="M24 222 C 90 218, 120 152, 180 142 S 290 72, 336 34"/>
+          </svg>
+          <span class="fj-dot"></span>
+          <div class="fj-n n1"><i><svg class="i"><use href="#i-chart"/></svg></i>Tus objetivos</div>
+          <div class="fj-n n2"><i><svg class="i"><use href="#i-edit"/></svg></i>Tus dificultades</div>
+          <div class="fj-n n3"><i><svg class="i"><use href="#i-trophy"/></svg></i>Tus avances</div>
         </div>
       </article>
     </div>
@@ -2856,6 +2886,20 @@ $$('.faq-q').forEach(q => q.addEventListener('click', () => {
   box.addEventListener('mouseleave', start);
   if (!reduce) pulse = setInterval(() => { hot = (hot + 1) % nodes.length; setHot(); }, 1200);
   show(0); start();
+})();
+(() => {
+  const box = $('.fj'); if (!box) return;
+  const path = box.querySelector('.fj-line'), dot = box.querySelector('.fj-dot');
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const len = path.getTotalLength(); let t0 = null;
+  const step = ts => {
+    if (t0 === null) t0 = ts;
+    const k = (((ts - t0) / 5200) % 1), e = k < .5 ? 2*k*k : 1 - Math.pow(-2*k + 2, 2) / 2;
+    const pt = path.getPointAtLength(len * e), r = box.getBoundingClientRect();
+    dot.style.left = (pt.x / 360 * r.width) + 'px'; dot.style.top = (pt.y / 260 * r.height) + 'px';
+    requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
 })();
 $$('.faq-chip').forEach(c => c.addEventListener('click', () => {
   $$('.faq-chip').forEach(o => o.classList.toggle('on', o === c));
