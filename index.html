@@ -1120,6 +1120,15 @@ mark{background:none;color:inherit;background-image:linear-gradient(transparent 
 .rv-body p{font-size:clamp(1.2rem,1.9vw,1.55rem)}
 .testi{padding-bottom:110px}
 @media (max-width:560px){.rv-dots{display:none}}
+
+.rv-rail{width:236px;padding:10px 0;margin:-10px 0;overflow:clip;-webkit-mask-image:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent);mask-image:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent)}
+.rv-strip{display:flex;gap:0;transition:transform .6s cubic-bezier(.34,1.2,.64,1);width:max-content}
+.rv-strip button{flex:0 0 44px;width:44px;height:44px;border:0;background:#999;color:var(--ink);font-weight:800;font-size:.72rem;display:grid;place-items:center;padding:0;border-radius:50%;transform:scale(.62);opacity:.55;transition:transform .5s cubic-bezier(.34,1.4,.64,1),opacity .4s,box-shadow .4s;cursor:pointer}
+.rv-strip button.n1{transform:scale(.8);opacity:.85}
+.rv-strip button.n2{transform:scale(.66);opacity:.6}
+.rv-strip button.cur{transform:scale(1.05);opacity:1;box-shadow:0 0 0 3px #fff,0 0 0 6px rgba(97,214,207,.65),0 12px 20px -8px rgba(0,0,0,.7);z-index:2}
+.rv-strip button:hover{opacity:1}
+@media (max-width:560px){.rv-rail{width:176px}.rv-nav{width:100%;justify-content:space-between;margin-left:0}}
 .pill.soon{background:#EEF2FF;color:var(--royal)}
 .price-reveal{background:var(--paper);color:var(--royal);border:1.5px dashed var(--blue);border-radius:999px;padding:9px 16px;font-weight:700;font-size:.9rem;transition:background .2s, transform .2s}
 .price-reveal:hover{background:#E6EDFB;transform:translateY(-1px)}
@@ -1540,7 +1549,7 @@ mark{background:none;color:inherit;background-image:linear-gradient(transparent 
     <div class="rv-spot reveal" id="rvSpot" aria-live="polite">
       <svg class="rv-qm" viewBox="0 0 48 36" aria-hidden="true"><path d="M0 36V20C0 8 7 1 19 0v7c-6 1-9 5-9 11h9v18H0zm27 0V20C27 8 34 1 46 0v7c-6 1-9 5-9 11h9v18H27z"/></svg>
       <div class="rv-body"><span class="t-badge" id="rvBadge"></span><p id="rvQ"></p></div>
-      <div class="rv-who"><span class="t-av" id="rvAv"></span><span><strong id="rvName"></strong><small>Reseña en Google</small></span><div class="rv-nav"><button id="rvPrev" aria-label="Reseña anterior">←</button><span id="rvCount">1 / 21</span><button id="rvNext" aria-label="Reseña siguiente">→</button></div></div>
+      <div class="rv-who"><span class="t-av" id="rvAv"></span><span><strong id="rvName"></strong><small>Reseña en Google</small></span><div class="rv-nav"><button id="rvPrev" aria-label="Reseña anterior">←</button><div class="rv-rail"><div class="rv-strip" id="rvStrip"></div></div><button id="rvNext" aria-label="Reseña siguiente">→</button></div></div>
       <i class="rv-prog" id="rvProg"></i>
     </div>
   </div>
@@ -2284,7 +2293,9 @@ const rCard = r => `
     const put = () => {
       q.innerHTML = hl(r.quote); nm.textContent = r.name; av.textContent = r.initial; av.style.background = `hsl(${hue(r.name)} 62% 62%)`;
       bd.textContent = r.badge; bd.style.display = r.badge ? 'block' : 'none';
-      $('#rvCount').textContent = (j + 1) + ' / ' + resenas.length;
+      const st = $('#rvStrip'), slot = 44, off = Math.min(Math.max(j - 2, 0), resenas.length - 5);
+      st.style.transform = `translateX(${-off * slot}px)`;
+      $$('button', st).forEach((b, i) => { const d = Math.abs(i - j); b.className = d === 0 ? 'cur' : d === 1 ? 'n1' : d === 2 ? 'n2' : 'far'; });
       prog.style.animation = 'none'; void prog.offsetWidth; prog.style.animation = '';
       spot.classList.remove('out');
     };
@@ -2294,6 +2305,8 @@ const rCard = r => `
   $('#rvNext').addEventListener('click', () => show((k + 1) % resenas.length));
   spot.addEventListener('mouseenter', () => { hover = true; spot.classList.add('paused'); });
   spot.addEventListener('mouseleave', () => { hover = false; spot.classList.remove('paused'); });
+  $('#rvStrip').innerHTML = resenas.map((r, j) => `<button data-j="${j}" aria-label="Reseña de ${r.name}" style="background:hsl(${hue(r.name)} 62% 62%)">${r.initial}</button>`).join('');
+  $('#rvStrip').addEventListener('click', e => { const b = e.target.closest('button'); if (b) show(+b.dataset.j); });
   show(0, false);
   if (matchMedia('(prefers-reduced-motion:reduce)').matches) return;
   prog.addEventListener('animationend', () => { if (!hover) show((k + 1) % resenas.length); else prog.style.animation = 'none'; });
