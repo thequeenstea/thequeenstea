@@ -1458,6 +1458,28 @@ mark{background:none;color:inherit;background-image:linear-gradient(transparent 
 @keyframes flar{40%{opacity:1}}
 @media (max-width:900px){.xm-flow{grid-column:auto;grid-template-columns:1fr}.fl-arrow{justify-content:center;transform:rotate(90deg);height:24px}}
 @media (prefers-reduced-motion:reduce){.fl-arrow i{animation:none;opacity:.8}}
+
+/* Matrícula v2 */
+.mat{border-radius:36px;box-shadow:0 50px 90px -46px rgba(14,31,77,.9)}
+.mat-main{padding:52px 50px 48px;background:radial-gradient(520px 320px at 100% 0,rgba(65,193,186,.5),transparent 62%),radial-gradient(420px 300px at 0 100%,rgba(90,130,255,.4),transparent 65%),linear-gradient(150deg,#0E1F4D,#1E3A8A)}
+.mat-price strong{background:linear-gradient(180deg,#fff,#BFD0FF);-webkit-background-clip:text;background-clip:text;color:transparent}
+.mat-count{margin-bottom:16px}
+.mat-clock{display:flex;gap:10px;margin-bottom:28px;position:relative;z-index:1}
+.mat-clock[hidden]{display:none}
+.mat-clock div{min-width:70px;text-align:center;padding:12px 8px 9px;border-radius:18px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(6px)}
+.mat-clock b{display:block;font-family:var(--display);font-weight:800;font-size:1.9rem;line-height:1;font-variant-numeric:tabular-nums}
+.mat-clock small{color:#B9C6EE;font-weight:600;font-size:.78rem}
+.mat-list li{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:11px 14px;transition:transform .3s,background .3s}
+.mat-list li:hover{transform:translateX(6px);background:rgba(255,255,255,.13)}
+.mat-cta{display:inline-flex;align-items:center;gap:10px;position:relative;overflow:hidden;box-shadow:0 20px 40px -16px rgba(97,214,207,.9)}
+.mat-cta::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%);transform:translateX(-130%);animation:matsh 4s infinite}
+@keyframes matsh{55%,100%{transform:translateX(130%)}}
+.mat-side{position:relative;background:linear-gradient(180deg,#fff,#F3F7FF);padding:46px 38px}
+.mat-side::before{content:"";position:absolute;left:0;top:26px;bottom:26px;border-left:2px dashed #C7D4F0}
+.mat-grid .co-m.logo{background:#fff;border-color:#E0E8F8;box-shadow:0 12px 22px -18px rgba(34,64,151,.6);transition:transform .3s,border-color .3s,box-shadow .3s}
+.mat-grid .co-m.logo:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 18px 28px -16px rgba(34,64,151,.6)}
+@media (max-width:900px){.mat-side::before{left:26px;right:26px;top:0;bottom:auto;border-left:0;border-top:2px dashed #C7D4F0}.mat-main{padding:36px 24px}.mat-clock div{min-width:0;flex:1}}
+@media (prefers-reduced-motion:reduce){.mat-cta::after{animation:none}}
 .pill.soon{background:#EEF2FF;color:var(--royal)}
 .price-reveal{background:var(--paper);color:var(--royal);border:1.5px dashed var(--blue);border-radius:999px;padding:9px 16px;font-weight:700;font-size:.9rem;transition:background .2s, transform .2s}
 .price-reveal:hover{background:#E6EDFB;transform:translateY(-1px)}
@@ -1604,22 +1626,19 @@ mark{background:none;color:inherit;background-image:linear-gradient(transparent 
         <span class="mat-tag">Matrícula 2027</span>
         <div class="mat-price"><strong>$30.000</strong><span>para reservar tu lugar</span></div>
         <div class="mat-count" id="matCount"><i></i><span>Valor válido hasta el 31 de diciembre</span></div>
+        <div class="mat-clock" id="matClock" hidden aria-label="Tiempo restante">
+          <div><b data-u="d">00</b><small>días</small></div><div><b data-u="h">00</b><small>horas</small></div><div><b data-u="m">00</b><small>min</small></div><div><b data-u="s">00</b><small>seg</small></div>
+        </div>
         <ul class="mat-list">
           <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Tu lugar asegurado en un grupo reducido</li>
           <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Te avisamos primero cuando abran horarios y valores</li>
           <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Matrícula para reservar tu lugar en 2027</li>
         </ul>
-        <a href="https://campus.thequeenstea.com.ar/tienda/matricula-2027" class="btn btn-accent mat-cta">Reservar mi lugar</a>
+        <a href="https://campus.thequeenstea.com.ar/tienda/matricula-2027" class="btn btn-accent mat-cta">Reservar mi lugar <svg class="i" aria-hidden="true"><use href="#i-check"/></svg></a>
       </div>
       <div class="mat-side">
         <h3>Pagá como prefieras</h3>
-        <ul class="mat-pay">
-          <li><svg class="i" aria-hidden="true"><use href="#i-card"/></svg>Tarjeta de débito</li>
-          <li><svg class="i" aria-hidden="true"><use href="#i-card"/></svg>Tarjeta de crédito</li>
-          <li><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg>Mercado Pago</li>
-          <li><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg>Cuenta DNI</li>
-          <li><svg class="i" aria-hidden="true"><use href="#i-bag"/></svg>Transferencia</li>
-        </ul>
+        <div class="co-grid mat-grid"><div class="co-m logo"><img src="img/pay-mercadopago.png" alt="Mercado Pago" loading="lazy"></div><div class="co-m logo"><img src="img/pay-cuentadni.png" alt="Cuenta DNI" loading="lazy"></div><div class="co-m logo"><span class="mk k1"><svg class="i" aria-hidden="true"><use href="#i-card"/></svg></span><b>Tarjeta de<br>crédito</b></div><div class="co-m logo"><span class="mk k2"><svg class="i" aria-hidden="true"><use href="#i-card"/></svg></span><b>Tarjeta de<br>débito</b></div><div class="co-m logo wide"><span class="mk k3"><svg class="i" aria-hidden="true"><use href="#i-briefcase"/></svg></span><b>Transferencia<br>bancaria</b></div></div>
         <p class="mat-fac"><svg class="i" aria-hidden="true"><use href="#i-file"/></svg><span>Todos los pagos cuentan con su factura correspondiente.</span></p>
       </div>
     </div>
@@ -2494,9 +2513,19 @@ Acepto los términos y compromisos.`;
 
 /* Cuenta regresiva de la matrícula */
 (() => {
-  const el = document.querySelector('#matCount span'); if (!el) return;
-  const fin = new Date(new Date().getFullYear(), 11, 31, 23, 59, 59), d = Math.ceil((fin - new Date()) / 864e5);
-  if (d > 0 && d <= 90) el.textContent = d === 1 ? 'Último día: valor válido hasta hoy' : `Quedan ${d} días: valor válido hasta el 31 de diciembre`;
+  const clock = document.getElementById('matClock'), txt = document.querySelector('#matCount span'); if (!clock || !txt) return;
+  const fin = new Date(new Date().getFullYear(), 11, 31, 23, 59, 59);
+  const els = {}; clock.querySelectorAll('b').forEach(b => els[b.dataset.u] = b);
+  const tick = () => {
+    let ms = fin - new Date();
+    if (ms <= 0 || ms > 90 * 864e5) { clock.hidden = true; return false; }
+    clock.hidden = false;
+    const d = Math.floor(ms / 864e5), h = Math.floor(ms % 864e5 / 36e5), m = Math.floor(ms % 36e5 / 6e4), sc = Math.floor(ms % 6e4 / 1e3);
+    const pad = n => String(n).padStart(2, '0');
+    els.d.textContent = pad(d); els.h.textContent = pad(h); els.m.textContent = pad(m); els.s.textContent = pad(sc);
+    return true;
+  };
+  if (tick()) setInterval(tick, 1000);
 })();
 
 
