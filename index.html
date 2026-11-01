@@ -1026,6 +1026,43 @@ h2{font-size:clamp(2.3rem,4.8vw,3.9rem)}
 .in-view .fs-bar{width:100%}
 .mt-follow blockquote,.spark{display:none}
 @media (max-width:560px){.ct u{width:32px;height:32px;font-size:.9rem}.ct small{font-size:.6rem}.vc-sub{flex-direction:column;gap:2px}}
+
+/* ===== Empresas v2 ===== */
+.biz-top{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:46px}
+.biz-top h2{font-size:clamp(2.4rem,5vw,4.2rem);line-height:1;margin-bottom:14px}
+.biz-top .lead{max-width:44ch;color:#C9D3EE}
+.biz-cta{font-size:1.05rem;padding:18px 30px;position:relative}
+.biz-cta::after{content:"";position:absolute;inset:-6px;border-radius:99px;border:2px solid rgba(97,214,207,.55);animation:ringp 2.4s ease-out infinite}
+@keyframes ringp{0%{transform:scale(.96);opacity:.9}100%{transform:scale(1.12);opacity:0}}
+.biz-grid2{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.bz{position:relative;background:linear-gradient(165deg,rgba(255,255,255,.12),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.16);border-radius:26px;padding:22px 22px 26px;backdrop-filter:blur(6px);transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .3s}
+.bz:hover{transform:translateY(-8px);border-color:rgba(97,214,207,.65);box-shadow:0 30px 50px -28px rgba(0,0,0,.7)}
+.bz-vis{height:150px;border-radius:18px;background:rgba(6,16,46,.45);border:1px solid rgba(255,255,255,.1);margin-bottom:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:14px;overflow:hidden;position:relative}
+.bz-ic{position:absolute;right:20px;top:152px;width:44px;height:44px;padding:11px;border-radius:14px;background:linear-gradient(135deg,var(--accent),#7CE3DC);color:var(--ink);box-shadow:0 12px 22px -10px rgba(97,214,207,.9);transform:translateY(-50%)}
+.bz h3{font-size:1.3rem;color:#fff;margin:0 0 6px;font-family:var(--display)}
+.bz p{margin:0;color:#C9D3EE;font-size:.95rem}
+.bz-pill{white-space:nowrap;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;font-weight:700;font-size:.75rem;padding:5px 12px;border-radius:99px;transition:opacity .3s}
+.av8{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.av8 i{width:30px;height:30px;border-radius:50%;background:hsl(var(--h) 70% 58%);box-shadow:0 6px 12px -6px rgba(0,0,0,.6);animation:pop 6s ease-in-out infinite;animation-delay:var(--d)}
+@keyframes pop{0%{transform:scale(0);opacity:0}8%,86%{transform:scale(1);opacity:1}94%,100%{transform:scale(0);opacity:0}}
+.bz-pro{text-align:center}
+.bz-tag{background:linear-gradient(135deg,var(--accent),#7CE3DC);color:var(--ink);font-weight:800;font-size:.78rem;padding:5px 12px;border-radius:99px}
+.bz-pro q{quotes:none;color:#fff;font-family:var(--display);font-weight:600;font-size:1.05rem;line-height:1.25;letter-spacing:-.01em;transition:opacity .3s,transform .3s}
+.bz-pro.swap q,.bz-pro.swap .bz-tag{opacity:0;transform:translateY(6px)}
+.bz-tag{transition:opacity .3s,transform .3s}
+.wk{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;width:100%}
+.wk b{text-align:center;font-size:.7rem;color:#AFBCE0;font-weight:700}
+.wk.slots i{height:34px;border-radius:9px;background:rgba(255,255,255,.1);transition:background .4s,transform .4s,box-shadow .4s}
+.wk.slots i.on{background:linear-gradient(160deg,var(--accent),#7CE3DC);transform:translateY(-3px);box-shadow:0 10px 18px -8px rgba(97,214,207,.8)}
+.bz-track{align-items:stretch;gap:11px}
+.tk{display:grid;gap:5px}
+.tk span{font-size:.72rem;font-weight:700;color:#C9D3EE}
+.tk i{height:8px;border-radius:99px;background:rgba(255,255,255,.12);overflow:hidden;display:block}
+.tk b{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--accent),#7AA2FF);transition:width 1.4s .5s cubic-bezier(.2,.8,.2,1)}
+.in-view .tk b{width:var(--w)}
+@media (max-width:1100px){.biz-grid2{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.biz-grid2{grid-template-columns:1fr}.biz-top{align-items:flex-start}}
+@media (prefers-reduced-motion:reduce){.av8 i{animation:none;transform:none;opacity:1}.biz-cta::after{animation:none;opacity:0}}
 .pill.soon{background:#EEF2FF;color:var(--royal)}
 .price-reveal{background:var(--paper);color:var(--royal);border:1.5px dashed var(--blue);border-radius:999px;padding:9px 16px;font-weight:700;font-size:.9rem;transition:background .2s, transform .2s}
 .price-reveal:hover{background:#E6EDFB;transform:translateY(-1px)}
@@ -1390,19 +1427,46 @@ h2{font-size:clamp(2.3rem,4.8vw,3.9rem)}
 
 <!-- ===================== EMPRESAS Y GRUPOS ===================== -->
 <section class="biz" id="empresas">
-  <div class="wrap biz-grid">
-    <div class="reveal">
-      <span class="kicker">Para empresas, equipos y grupos</span>
-      <h2>Armamos el grupo que necesitás.</h2>
-      <p class="lead">¿Tu empresa, equipo o grupo de colegas necesita inglés? Armamos un grupo a medida.</p>
-      <a class="btn btn-primary" href="https://wa.me/5492212229980?text=%C2%A1Hola%20The%20Queen's%20Tea!%20Quiero%20consultar%20por%20un%20grupo%20de%20ingl%C3%A9s%20para%20mi%20empresa%20o%20equipo." target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-chat"/></svg> Consultar por un grupo</a>
+  <div class="wrap">
+    <div class="biz-top reveal">
+      <div>
+        <span class="kicker">Para empresas, equipos y grupos</span>
+        <h2>Armamos el grupo<br>que necesitás.</h2>
+        <p class="lead">¿Tu empresa, equipo o grupo de colegas necesita inglés? Armamos un grupo a medida.</p>
+      </div>
+      <a class="btn btn-accent biz-cta" href="https://wa.me/5492212229980?text=%C2%A1Hola%20The%20Queen's%20Tea!%20Quiero%20consultar%20por%20un%20grupo%20de%20ingl%C3%A9s%20para%20mi%20empresa%20o%20equipo." target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-chat"/></svg> Consultar por un grupo</a>
     </div>
-    <ul class="biz-list reveal">
-      <li><svg class="i" aria-hidden="true"><use href="#i-users"/></svg><div><h3>Grupos a medida</h3><p>Mismo nivel y objetivo, hasta 8 personas.</p></div></li>
-      <li><svg class="i" aria-hidden="true"><use href="#i-briefcase"/></svg><div><h3>Inglés profesional</h3><p>Business, Legal, Medical y Aviation English.</p></div></li>
-      <li><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg><div><h3>Horarios a coordinar</h3><p>Días y horarios que se ajusten a tu equipo.</p></div></li>
-      <li><svg class="i" aria-hidden="true"><use href="#i-chart"/></svg><div><h3>Seguimiento en el campus</h3><p>Asistencia, tareas y notas en el campus.</p></div></li>
-    </ul>
+
+    <div class="biz-grid2">
+      <article class="bz reveal">
+        <div class="bz-vis bz-team" aria-hidden="true"><div class="av8"><i style="--h:200;--d:0.0s"></i><i style="--h:24;--d:0.18s"></i><i style="--h:330;--d:0.36s"></i><i style="--h:160;--d:0.54s"></i><i style="--h:270;--d:0.72s"></i><i style="--h:45;--d:0.8999999999999999s"></i><i style="--h:100;--d:1.08s"></i><i style="--h:300;--d:1.26s"></i></div><span class="bz-pill">Mismo nivel y objetivo</span></div>
+        <div class="bz-ic"><svg class="i" aria-hidden="true"><use href="#i-users"/></svg></div>
+        <h3>Grupos a medida</h3><p>Mismo nivel y objetivo, hasta 8 personas.</p>
+      </article>
+      <article class="bz reveal">
+        <div class="bz-vis bz-pro" aria-hidden="true"><span class="bz-tag" id="bzTag">Business English</span><q id="bzPhrase">Let's schedule a call for Monday.</q></div>
+        <div class="bz-ic"><svg class="i" aria-hidden="true"><use href="#i-briefcase"/></svg></div>
+        <h3>Inglés profesional</h3><p>Business, Legal, Medical y Aviation English.</p>
+      </article>
+      <article class="bz reveal">
+        <div class="bz-vis bz-week" aria-hidden="true">
+          <div class="wk"><b>Lu</b><b>Ma</b><b>Mi</b><b>Ju</b><b>Vi</b></div>
+          <div class="wk slots"><i></i><i></i><i></i><i></i><i></i></div>
+          <span class="bz-pill" id="bzSlot">Martes · 19 hs</span>
+        </div>
+        <div class="bz-ic"><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg></div>
+        <h3>Horarios a coordinar</h3><p>Días y horarios que se ajusten a tu equipo.</p>
+      </article>
+      <article class="bz reveal">
+        <div class="bz-vis bz-track" aria-hidden="true">
+          <div class="tk"><span>Asistencia</span><i><b style="--w:92%"></b></i></div>
+          <div class="tk"><span>Tareas</span><i><b style="--w:74%"></b></i></div>
+          <div class="tk"><span>Notas</span><i><b style="--w:86%"></b></i></div>
+        </div>
+        <div class="bz-ic"><svg class="i" aria-hidden="true"><use href="#i-chart"/></svg></div>
+        <h3>Seguimiento en el campus</h3><p>Asistencia, tareas y notas en el campus.</p>
+      </article>
+    </div>
   </div>
 </section>
 
@@ -1963,6 +2027,18 @@ Acepto los términos y compromisos.`;
   if (matchMedia('(prefers-reduced-motion:reduce)').matches) return;
   setInterval(() => { line.style.opacity = 0; setTimeout(() => { k = (k + 1 + Math.floor(Math.random() * 3)) % tiles.length; show(); line.style.opacity = 1; }, 220); }, 2600);
   setInterval(() => { sec++; time.textContent = String(Math.floor(sec / 60)).padStart(2, '0') + ':' + String(sec % 60).padStart(2, '0'); }, 1000);
+})();
+
+/* Empresas: frases y horarios que cambian */
+(() => {
+  const tag = document.getElementById('bzTag'), ph = document.getElementById('bzPhrase'); if (!tag) return;
+  const box = tag.parentNode, data = [['Business English','Let\'s schedule a call for Monday.'],['Legal English','The contract is legally binding.'],['Medical English','Where does it hurt exactly?'],['Aviation English','Cabin crew, prepare for landing.']];
+  const slots = [...document.querySelectorAll('.bz-week .slots i')], lab = document.getElementById('bzSlot');
+  const dias = ['Lunes','Martes','Miércoles','Jueves','Viernes'], hs = ['18 hs','19 hs','20 hs','9 hs','12 hs'];
+  let k = 0, j = 1; slots[1].classList.add('on');
+  if (matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  setInterval(() => { box.classList.add('swap'); setTimeout(() => { k = (k + 1) % data.length; tag.textContent = data[k][0]; ph.textContent = data[k][1]; box.classList.remove('swap'); }, 320); }, 3200);
+  setInterval(() => { slots[j].classList.remove('on'); j = (j + 1 + Math.floor(Math.random() * 3)) % 5; slots[j].classList.add('on'); lab.textContent = dias[j] + ' · ' + hs[Math.floor(Math.random() * hs.length)]; }, 2000);
 })();
 
 /* Recorrido animado del campus */
