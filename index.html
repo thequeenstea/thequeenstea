@@ -2503,6 +2503,31 @@ trCard.addEventListener('click', e => {
   handleCourse(findCourse(btn.dataset.code));
 });
 trailBuild(0);
+/* Precios, cupos y horarios en vivo desde el Campus (panel: Clases y cuotas → Precios).
+   Si no responde, queda lo que está escrito arriba en CURSOS. */
+(function(){
+  const NIVEL = { a1:['A1'], a2:['A2'], b1:['B1'], b1plus:['B1+'], b2:['B2'], b2plus:['B2+'], c1:['C1'], c1c2:['C1+'], c2:['C2'], ielts:['IELTS'], legal:['Legal English (TOLES)'], medical:['Medical English'], tcp:['TCP','Aviation English'] };
+  fetch('https://campus.thequeenstea.com.ar/api/public/cursos', { cache:'no-store' })
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(d => {
+      const api = Array.isArray(d.cursos) ? d.cursos : [];
+      if (!api.length) return;
+      [...CURSOS.niveles, ...CURSOS.especialidades].forEach(c => {
+        const nv = NIVEL[c.code] || [];
+        const lista = api.filter(a => nv.includes(a.nivel));
+        const a = lista.find(x => x.estado === 'abierto') || lista[0];
+        if (!a){ c.pronto = true; c.full = false; return; }   // no está marcado para la web: queda como próximamente
+        c.pronto = a.estado === 'pronto';
+        c.full = a.estado === 'completo';
+        if (a.precio){ c.price = a.precio; c.usd = a.usd || c.usd || Math.round(a.precio / 1200); }
+        if (a.horario) c.sched = a.horario;
+        if (!c.sched) c.sched = 'A coordinar';
+        if (!c.price) c.pronto = true;
+      });
+      trailBuild(tr.i);
+    })
+    .catch(() => {});
+})();
 if (matchMedia('(hover:hover) and (prefers-reduced-motion:no-preference)').matches){
   $('#trail').addEventListener('mousemove', e => {
     const r = trMap.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5;
