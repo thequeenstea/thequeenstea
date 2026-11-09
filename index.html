@@ -812,6 +812,23 @@ h2{font-size:clamp(2.3rem,4.8vw,3.9rem)}
 @keyframes reconUp{0%{transform:translateY(0);opacity:0}15%{opacity:.8}100%{transform:translateY(-260px);opacity:0}}
 @media(max-width:720px){.recon{padding:26px 18px}.recon-top{flex-direction:column;align-items:flex-start;gap:18px}.recon-grid{grid-template-columns:repeat(2,1fr)}.recon-cta{width:100%;justify-content:center}}
 @media(prefers-reduced-motion:reduce){.recon,.recon-ic,.recon-ic span,.recon-spark{animation:none}.recon-grid li{opacity:1;transform:none}}
+
+.recon{display:grid;grid-template-columns:1.15fr 1fr;align-items:center;gap:30px;padding:28px 30px;margin-bottom:28px}
+.recon-left{display:flex;flex-direction:column;align-items:flex-start;gap:18px}
+.recon-top{gap:18px;align-items:flex-start}
+.recon-ic{width:84px;height:84px;border-radius:24px}
+.recon-ic span{font-size:1.3rem;margin-bottom:2px}
+.recon-ic b{font-size:1.6rem}
+.recon-ic small{font-size:.7rem}
+.recon h3{font-size:1.4rem;margin-bottom:6px}
+.recon p{font-size:.95rem;line-height:1.55}
+.recon-cta{margin:0;width:auto}
+.recon-grid{margin:0;grid-template-columns:repeat(2,1fr);gap:12px}
+.recon-grid li{padding:16px 8px 13px;border-radius:18px}
+.recon-grid li span{font-size:2rem;margin-bottom:5px}
+.recon-grid li b{font-size:1rem}
+.recon-grid li small{font-size:.78rem}
+@media(max-width:860px){.recon{grid-template-columns:1fr;gap:22px;padding:24px 18px}.recon-cta{width:100%;justify-content:center}}
 .mat{display:grid;grid-template-columns:1.25fr 1fr;border-radius:32px;overflow:hidden;margin:34px 0 30px;box-shadow:0 40px 80px -40px rgba(14,31,77,.75)}
 .mat-main{position:relative;background:radial-gradient(600px 300px at 90% -10%,rgba(65,193,186,.45),transparent 60%),linear-gradient(150deg,#0E1F4D,#1E3A8A);color:#fff;padding:46px 46px 42px;overflow:hidden}
 .mat-main::after{content:"2027";position:absolute;right:-6px;bottom:-34px;font-family:var(--display);font-weight:800;font-size:9.5rem;line-height:1;color:rgba(255,255,255,.06);letter-spacing:-.05em;pointer-events:none}
@@ -1775,13 +1792,16 @@ main,section,footer{overflow-x:clip}
     </div>
 
     <div class="recon reveal" id="reconocimiento">
+      <div class="recon-left">
       <div class="recon-top">
         <div class="recon-ic" aria-hidden="true"><span>🎖️</span><b><i id="reconNum" data-to="10">10</i>%</b><small>extra</small></div>
         <div class="recon-copy">
           <span class="recon-tag">Descuento extra</span>
           <h3>Para quienes cuidan a los demás</h3>
-          <p>Un <b>10% menos en tus cuotas</b>, que se suma a los demás descuentos. Lo pedís al pagar la matrícula (o desde tu cuenta si ya sos alumno/a), subís tu certificado y lo verificamos al instante. Es personal e intransferible.</p>
+          <p><b>10% menos en tus cuotas</b>, además de otros descuentos. Lo pedís al pagar la matrícula (o desde tu cuenta), subís tu certificado y lo verificamos al instante. Es personal e intransferible.</p>
         </div>
+      </div>
+      <a href="https://campus.thequeenstea.com.ar/tienda/matricula-2027" class="btn btn-accent recon-cta">Pedirlo con mi matrícula</a>
       </div>
       <i class="recon-spark s1"></i><i class="recon-spark s2"></i><i class="recon-spark s3"></i><i class="recon-spark s4"></i>
       <ul class="recon-grid">
@@ -1790,7 +1810,6 @@ main,section,footer{overflow-x:clip}
         <li><span>🚒</span><b>Bomberos</b><em>−10%</em><small>voluntarios y de carrera</small></li>
         <li><span>👮</span><b>Policía</b><em>−10%</em><small>y fuerzas del Estado</small></li>
       </ul>
-      <a href="https://campus.thequeenstea.com.ar/tienda/matricula-2027" class="btn btn-accent recon-cta">Pedirlo con mi matrícula</a>
     </div>
 
     <div class="trail-head reveal">
