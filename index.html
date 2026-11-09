@@ -1741,9 +1741,9 @@ main,section,footer{overflow-x:clip}
       <div class="rec-ic" aria-hidden="true">🎖️</div>
       <div>
         <h3>10% de descuento para quienes cuidan a los demás</h3>
-        <p>Si sos <b>jubilado/a o pensionado/a, personal de salud, bombero/a o parte de las fuerzas de seguridad</b>, tenés un 10% de descuento en tus cuotas. Se suma a los demás descuentos. Es personal e intransferible: subís tu certificado desde tu cuenta del Campus y lo verificamos.</p>
+        <p>Si sos <b>jubilado/a o pensionado/a, personal de salud, bombero/a o parte de las fuerzas de seguridad</b>, tenés un 10% de descuento en tus cuotas. Se suma a los demás descuentos. Es personal e intransferible: lo pedís al pagar la matrícula (o desde tu cuenta si ya sos alumno/a), subís tu certificado y lo verificamos.</p>
       </div>
-      <a href="https://campus.thequeenstea.com.ar/dashboard/cuenta" class="btn btn-accent">Pedir mi descuento</a>
+      <a href="https://campus.thequeenstea.com.ar/tienda/matricula-2027" class="btn btn-accent">Pedirlo con mi matrícula</a>
     </div>
 
     <div class="trail-head reveal">
@@ -2105,7 +2105,7 @@ main,section,footer{overflow-x:clip}
       </div>
       <div class="faq-item" data-cat="cursos">
         <button class="faq-q" aria-expanded="false"><span class="faq-ic"><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg></span><span class="faq-t">¿Tienen descuentos para jubilados, personal de salud o bomberos?</span><span class="plus" aria-hidden="true">+</span></button>
-        <div class="faq-a"><div><p>Sí: 10% de descuento en las cuotas para jubilados y pensionados, personal de salud, bomberos y fuerzas de seguridad. Se suma a los demás descuentos. Subís tu certificado desde tu cuenta del Campus, lo verificamos y el descuento se aplica solo. Es personal, no se transfiere, y se renueva cada año.</p></div></div>
+        <div class="faq-a"><div><p>Sí: 10% de descuento en las cuotas para jubilados y pensionados, personal de salud, bomberos y fuerzas de seguridad. Se suma a los demás descuentos. Lo pedís al pagar la matrícula (o desde tu cuenta del Campus si ya sos alumno/a), subís tu certificado, lo verificamos y el descuento queda cargado en tu cuenta. Es personal, no se transfiere, y se renueva cada año.</p></div></div>
       </div>
       <div class="faq-item" data-cat="campus">
         <button class="faq-q" aria-expanded="false"><span class="faq-ic"><svg class="i" aria-hidden="true"><use href="#i-laptop"/></svg></span><span class="faq-t">¿Qué es el Campus?</span><span class="plus" aria-hidden="true">+</span></button>
@@ -3328,7 +3328,7 @@ const INFO_GENERAL = [
   '- Clases 100% online en vivo, en grupos reducidos. Metodología comunicativa: inglés para la vida real, académico, profesional y para viajar.',
   '- Material incluido: e-books actualizados, audios y aula virtual las 24 hs. Sin costos extra de libros durante el año.',
   '- Matrícula 2027: $35.000. Es el valor hasta el 21 de diciembre. Mis alumnos actuales que la abonan hasta esa fecha conservan su día y horario; el resto de los horarios se disponen según cómo se armen los grupos. Se abona en https://campus.thequeenstea.com.ar/tienda/matricula-2027',
-  '- Reconocimiento: 10% de descuento en las cuotas para jubilados/pensionados, personal de salud, bomberos y fuerzas de seguridad. Se suma a los demás descuentos. Es personal e intransferible, se pide con un certificado desde la cuenta del Campus y se renueva cada año.',
+  '- Reconocimiento: 10% de descuento en las cuotas para jubilados/pensionados, personal de salud, bomberos y fuerzas de seguridad. Se suma a los demás descuentos. Es personal e intransferible, se pide con un certificado al pagar la matrícula o desde la cuenta del Campus, y se renueva cada año.',
   '- Pack mensual: se abona el mes completo y la cuota depende de cuántas clases tenga el mes (3, 4 o 5). El beneficio del pack no aplica si se abona el mismo día de la clase.',
   '- Pago por clase: cuesta 15% más en pesos, o USD 5 más por clase desde el exterior.',
   '- Las clases se abonan 24 hs antes. Las ausencias se abonan igual; se comparte el material trabajado y la grabación si la clase fue grabada. Tolerancia de espera: 15 minutos. Hay tareas semanales.',
@@ -3364,7 +3364,7 @@ function respuestaLocal(q){
   if (has('nivel','test','examen'))
     return 'Hacé nuestro test de nivel gratis: son 120 preguntas y tarda unos 15 a 20 minutos. Al terminar te mostramos tu nivel y el curso ideal para vos. [[TEST]]';
   if (has('jubil','salud','medic','enfermer','bombero','policia','seguridad','reconocimiento'))
-    return 'Tenemos un **10% de descuento** en las cuotas para jubilados y pensionados, personal de salud, bomberos y fuerzas de seguridad. Se suma a los demás descuentos. Subís tu certificado desde tu cuenta del Campus, lo verificamos y se aplica solo. Es personal e intransferible y se renueva cada año.';
+    return 'Tenemos un **10% de descuento** en las cuotas para jubilados y pensionados, personal de salud, bomberos y fuerzas de seguridad. Se suma a los demás descuentos. Lo pedís al pagar la matrícula (o desde tu cuenta si ya sos alumno/a), subís tu certificado, lo verificamos y queda cargado en tu cuenta. Es personal e intransferible y se renueva cada año.';
   if (has('matricula'))
     return 'La matrícula 2027 cuesta **$35.000**. Ese valor rige hasta el **21 de diciembre**. Los alumnos actuales que la abonan hasta esa fecha conservan su día y horario; los demás horarios se disponen según cómo se armen los grupos. Reserva tu lugar para todo el año. La abonás desde el botón "Abonar matrícula" de la sección de cursos.';
   if (has('inscrib','anot','empez','sumar','reservar'))
