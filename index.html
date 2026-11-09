@@ -780,7 +780,13 @@ h2{font-size:clamp(2.3rem,4.8vw,3.9rem)}
 .fin-card .recon-pill{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.4);color:#fff}
 .fin-card .recon-pill b{color:#41c1ba}
 .recon{display:flex;align-items:center;gap:22px;margin:0 0 30px;padding:26px 30px;border-radius:26px;background:linear-gradient(120deg,#192c3f,#1d4a5a);color:#fff;box-shadow:0 30px 60px -38px rgba(14,31,77,.8)}
-.recon-ic{flex-shrink:0;width:72px;height:72px;border-radius:22px;background:rgba(65,193,186,.2);display:grid;place-items:center;font-size:2.4rem}
+.recon-ic{flex-shrink:0;width:96px;height:96px;border-radius:26px;background:linear-gradient(160deg,rgba(65,193,186,.35),rgba(65,193,186,.1));border:1px solid rgba(65,193,186,.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.recon-ic span{font-size:1.7rem;line-height:1}
+.recon-ic b{font-size:1.5rem;color:#fff;font-family:var(--display)}
+.recon-tag{display:inline-block;margin-bottom:8px;padding:4px 12px;border-radius:999px;background:#41c1ba;color:#0d2b33;font-size:.8rem;font-weight:800}
+.recon{position:relative;overflow:hidden}
+.recon::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(65,193,186,.28),transparent 70%);pointer-events:none}
+.recon>*{position:relative;z-index:1}
 .recon h3{margin:0 0 6px;font-size:1.25rem;color:#fff}
 .recon p{margin:0;color:rgba(255,255,255,.85);font-size:.98rem;line-height:1.55}
 .recon p b{color:#41c1ba}
@@ -1656,7 +1662,7 @@ main,section,footer{overflow-x:clip}
         <button class="btn btn-accent js-open-test">Hacer el test de nivel gratis</button>
         <a href="#cursos" class="btn btn-line">Ver cursos</a>
       </div>
-      <a class="recon-pill" href="#reconocimiento">🎖️ <span><b>10% extra</b> · 👵 jubilados · 🩺 salud · 🚒 bomberos · 👮 seguridad</span></a>
+      <a class="recon-pill" href="#reconocimiento">🎖️ <span><b>10% extra</b> · 👵 jubilados · 🩺 salud · 🚒 bomberos · 👮 policía</span></a>
       <div class="proof">
         <div class="proof-av" aria-hidden="true"><span>LM</span><span>RG</span><span>SP</span><span>+</span></div>
         <small><b>★★★★★</b><br>Más de 10 años enseñando inglés</small>
@@ -1743,17 +1749,18 @@ main,section,footer{overflow-x:clip}
           <li><b>Pagás como prefieras</b><span>Con cualquiera de estos medios.</span></li>
           <li><b>Te llega la confirmación</b><span>Por mail, con tu comprobante.</span></li>
         </ol>
-        <p class="recon-note">🎖️ 👵 🩺 🚒 👮 ¿Jubilado/a, salud, bomberos o fuerzas de seguridad? Tenés <a href="#reconocimiento">10% de descuento extra</a> en tus cuotas.</p>
+        <p class="recon-note">🎖️ 👵 🩺 🚒 👮 ¿Jubilado/a, salud, bomberos o policía? Tenés <a href="#reconocimiento">10% de descuento extra</a> en tus cuotas.</p>
         <p class="mat-fac"><svg class="i" aria-hidden="true"><use href="#i-file"/></svg><span>Todos los pagos cuentan con su factura correspondiente.</span></p>
       </div>
     </div>
 
     <div class="recon reveal" id="reconocimiento">
-      <div class="recon-ic" aria-hidden="true">🎖️</div>
+      <div class="recon-ic" aria-hidden="true"><span>🎖️</span><b>10%</b></div>
       <div>
+        <span class="recon-tag">Descuento extra</span>
         <h3>10% de descuento para quienes cuidan a los demás</h3>
-        <div class="recon-chips" aria-hidden="true"><span>👵 Jubilados y pensionados</span><span>🩺 Personal de salud</span><span>🚒 Bomberos</span><span>👮 Fuerzas de seguridad</span></div>
-        <p>Si sos <b>jubilado/a o pensionado/a, personal de salud, bombero/a o parte de las fuerzas de seguridad</b>, tenés un 10% de descuento en tus cuotas. Se suma a los demás descuentos. Es personal e intransferible: lo pedís al pagar la matrícula (o desde tu cuenta si ya sos alumno/a), subís tu certificado y lo verificamos.</p>
+        <div class="recon-chips" aria-hidden="true"><span>👵 Jubilados y pensionados</span><span>🩺 Personal de salud</span><span>🚒 Bomberos</span><span>👮 Policía y fuerzas del Estado</span></div>
+        <p>Se suma a los demás descuentos y se aplica a tus cuotas. Es personal e intransferible: lo pedís al pagar la matrícula (o desde tu cuenta si ya sos alumno/a), subís tu certificado y lo verificamos al instante. <b>No incluye seguridad privada.</b></p>
       </div>
       <a href="https://campus.thequeenstea.com.ar/tienda/matricula-2027" class="btn btn-accent">Pedirlo con mi matrícula</a>
     </div>
@@ -2117,7 +2124,7 @@ main,section,footer{overflow-x:clip}
       </div>
       <div class="faq-item" data-cat="cursos">
         <button class="faq-q" aria-expanded="false"><span class="faq-ic"><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg></span><span class="faq-t">¿Tienen descuentos para jubilados, personal de salud o bomberos?</span><span class="plus" aria-hidden="true">+</span></button>
-        <div class="faq-a"><div><p>Sí: 10% de descuento en las cuotas para jubilados y pensionados, personal de salud, bomberos y fuerzas de seguridad. Se suma a los demás descuentos. Lo pedís al pagar la matrícula (o desde tu cuenta del Campus si ya sos alumno/a), subís tu certificado, lo verificamos y el descuento queda cargado en tu cuenta. Es personal, no se transfiere, y se renueva cada año.</p></div></div>
+        <div class="faq-a"><div><p>Sí: 10% de descuento en las cuotas para jubilados y pensionados, personal de salud, bomberos, policías y fuerzas de seguridad del Estado. Se suma a los demás descuentos. Lo pedís al pagar la matrícula (o desde tu cuenta del Campus si ya sos alumno/a), subís tu certificado, lo verificamos y el descuento queda cargado en tu cuenta. Es personal, no se transfiere, y se renueva cada año.</p></div></div>
       </div>
       <div class="faq-item" data-cat="campus">
         <button class="faq-q" aria-expanded="false"><span class="faq-ic"><svg class="i" aria-hidden="true"><use href="#i-laptop"/></svg></span><span class="faq-t">¿Qué es el Campus?</span><span class="plus" aria-hidden="true">+</span></button>
@@ -2163,7 +2170,7 @@ main,section,footer{overflow-x:clip}
           <a href="#cursos" class="btn btn-line">Ver cursos</a>
         </div>
         <ul class="fin-pts"><li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Test gratuito</li><li><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg>15 a 20 minutos</li><li><svg class="i" aria-hidden="true"><use href="#i-chat"/></svg>Te orientamos por WhatsApp</li></ul>
-        <a class="recon-pill" href="#reconocimiento">🎖️ <span><b>10% de descuento extra</b> · 👵 jubilados · 🩺 salud · 🚒 bomberos · 👮 seguridad</span></a>
+        <a class="recon-pill" href="#reconocimiento">🎖️ <span><b>10% de descuento extra</b> · 👵 jubilados · 🩺 salud · 🚒 bomberos · 👮 policía</span></a>
       </div>
       <div class="fin-vis" aria-hidden="true">
         <div class="fin-stairs"><div class="st" style="--h:30%"><b>A1</b></div><div class="st" style="--h:44%"><b>A2</b></div><div class="st" style="--h:58%"><b>B1</b></div><div class="st" style="--h:72%"><b>B2</b></div><div class="st" style="--h:86%"><b>C1</b></div><div class="st" style="--h:100%"><b>C2</b></div></div>
@@ -2233,7 +2240,7 @@ main,section,footer{overflow-x:clip}
       <div class="mini-chart" id="rChart" aria-hidden="true"></div>
       <div class="reco" id="rReco"></div>
       <div class="rec" id="rRec"></div>
-      <p class="recon-note" style="text-align:center">🎖️ 👵 🩺 🚒 👮 ¿Jubilado/a, salud, bomberos o fuerzas de seguridad? Tenés <b>10% de descuento extra</b> en tus cuotas.</p>
+      <p class="recon-note" style="text-align:center">🎖️ 👵 🩺 🚒 👮 ¿Jubilado/a, salud, bomberos o policía? Tenés <b>10% de descuento extra</b> en tus cuotas.</p>
       <label class="field"><span>Tu nombre completo</span><input type="text" id="rName" placeholder="Ej: Ana López" autocomplete="name"></label>
       <a href="#" id="rWa" class="btn btn-wa" style="width:100%;display:none" target="_blank" rel="noopener">Enviar mi resultado por WhatsApp</a>
       <button class="btn btn-ghost" id="rRestart" style="width:100%;margin-top:10px">Volver a empezar</button>
@@ -3342,7 +3349,7 @@ const INFO_GENERAL = [
   '- Clases 100% online en vivo, en grupos reducidos. Metodología comunicativa: inglés para la vida real, académico, profesional y para viajar.',
   '- Material incluido: e-books actualizados, audios y aula virtual las 24 hs. Sin costos extra de libros durante el año.',
   '- Matrícula 2027: $35.000. Es el valor hasta el 21 de diciembre. Mis alumnos actuales que la abonan hasta esa fecha conservan su día y horario; el resto de los horarios se disponen según cómo se armen los grupos. Se abona en https://campus.thequeenstea.com.ar/tienda/matricula-2027',
-  '- Reconocimiento: 10% de descuento en las cuotas para jubilados/pensionados, personal de salud, bomberos y fuerzas de seguridad. Se suma a los demás descuentos. Es personal e intransferible, se pide con un certificado al pagar la matrícula o desde la cuenta del Campus, y se renueva cada año.',
+  '- Reconocimiento: 10% de descuento en las cuotas para jubilados/pensionados, personal de salud, bomberos, policías y fuerzas de seguridad del Estado. Se suma a los demás descuentos. Es personal e intransferible, se pide con un certificado al pagar la matrícula o desde la cuenta del Campus, y se renueva cada año.',
   '- Pack mensual: se abona el mes completo y la cuota depende de cuántas clases tenga el mes (3, 4 o 5). El beneficio del pack no aplica si se abona el mismo día de la clase.',
   '- Pago por clase: cuesta 15% más en pesos, o USD 5 más por clase desde el exterior.',
   '- Las clases se abonan 24 hs antes. Las ausencias se abonan igual; se comparte el material trabajado y la grabación si la clase fue grabada. Tolerancia de espera: 15 minutos. Hay tareas semanales.',
@@ -3377,8 +3384,8 @@ function respuestaLocal(q){
     return `Estos son los grupos con cupos abiertos: ${abiertos.map(c => `**${c.name}** los ${c.sched}`).join('; ')}. Los demás están completos y abren nuevos horarios pronto. [[TEST]]`;
   if (has('nivel','test','examen'))
     return 'Hacé nuestro test de nivel gratis: son 120 preguntas y tarda unos 15 a 20 minutos. Al terminar te mostramos tu nivel y el curso ideal para vos. [[TEST]]';
-  if (has('jubil','salud','medic','enfermer','bombero','policia','seguridad','reconocimiento'))
-    return 'Tenemos un **10% de descuento** en las cuotas para jubilados y pensionados, personal de salud, bomberos y fuerzas de seguridad. Se suma a los demás descuentos. Lo pedís al pagar la matrícula (o desde tu cuenta si ya sos alumno/a), subís tu certificado, lo verificamos y queda cargado en tu cuenta. Es personal e intransferible y se renueva cada año.';
+  if (has('jubil','salud','medic','enfermer','bombero','policia','reconocimiento'))
+    return 'Tenemos un **10% de descuento** en las cuotas para jubilados y pensionados, personal de salud, bomberos, policías y fuerzas de seguridad del Estado. Se suma a los demás descuentos. Lo pedís al pagar la matrícula (o desde tu cuenta si ya sos alumno/a), subís tu certificado, lo verificamos y queda cargado en tu cuenta. Es personal e intransferible y se renueva cada año.';
   if (has('matricula'))
     return 'La matrícula 2027 cuesta **$35.000**. Ese valor rige hasta el **21 de diciembre**. Los alumnos actuales que la abonan hasta esa fecha conservan su día y horario; los demás horarios se disponen según cómo se armen los grupos. Reserva tu lugar para todo el año. La abonás desde el botón "Abonar matrícula" de la sección de cursos.';
   if (has('inscrib','anot','empez','sumar','reservar'))
