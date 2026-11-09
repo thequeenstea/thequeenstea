@@ -770,13 +770,20 @@ h2{font-size:clamp(2.3rem,4.8vw,3.9rem)}
 @media (max-width:980px){.faq-grid>div:first-child{position:static}}
 
 /* ===== Matrícula 2027 ===== */
-.rec{display:flex;align-items:center;gap:22px;margin:0 0 30px;padding:26px 30px;border-radius:26px;background:linear-gradient(120deg,#192c3f,#1d4a5a);color:#fff;box-shadow:0 30px 60px -38px rgba(14,31,77,.8)}
-.rec-ic{flex-shrink:0;width:58px;height:58px;border-radius:18px;background:rgba(65,193,186,.2);display:grid;place-items:center;font-size:1.9rem}
-.rec h3{margin:0 0 6px;font-size:1.25rem;color:#fff}
-.rec p{margin:0;color:rgba(255,255,255,.85);font-size:.98rem;line-height:1.55}
-.rec p b{color:#41c1ba}
-.rec .btn{flex-shrink:0;white-space:nowrap}
-@media(max-width:720px){.rec{flex-direction:column;align-items:flex-start;padding:22px}}
+.recon-pill{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:9px 16px;border-radius:999px;background:rgba(65,193,186,.14);border:1px solid rgba(65,193,186,.5);color:inherit;font-weight:700;font-size:.9rem;text-decoration:none;line-height:1.3}
+.recon-pill b{color:#1f8f89}
+.recon-pill:hover{background:rgba(65,193,186,.24)}
+.recon-note{margin:10px 0 0;font-size:.92rem;font-weight:700}
+.recon-note a{color:#1f8f89;text-decoration:underline}
+.fin-card .recon-pill{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.4);color:#fff}
+.fin-card .recon-pill b{color:#41c1ba}
+.recon{display:flex;align-items:center;gap:22px;margin:0 0 30px;padding:26px 30px;border-radius:26px;background:linear-gradient(120deg,#192c3f,#1d4a5a);color:#fff;box-shadow:0 30px 60px -38px rgba(14,31,77,.8)}
+.recon-ic{flex-shrink:0;width:58px;height:58px;border-radius:18px;background:rgba(65,193,186,.2);display:grid;place-items:center;font-size:1.9rem}
+.recon h3{margin:0 0 6px;font-size:1.25rem;color:#fff}
+.recon p{margin:0;color:rgba(255,255,255,.85);font-size:.98rem;line-height:1.55}
+.recon p b{color:#41c1ba}
+.recon .btn{flex-shrink:0;white-space:nowrap}
+@media(max-width:720px){.recon{flex-direction:column;align-items:flex-start;padding:22px}}
 .mat{display:grid;grid-template-columns:1.25fr 1fr;border-radius:32px;overflow:hidden;margin:34px 0 30px;box-shadow:0 40px 80px -40px rgba(14,31,77,.75)}
 .mat-main{position:relative;background:radial-gradient(600px 300px at 90% -10%,rgba(65,193,186,.45),transparent 60%),linear-gradient(150deg,#0E1F4D,#1E3A8A);color:#fff;padding:46px 46px 42px;overflow:hidden}
 .mat-main::after{content:"2027";position:absolute;right:-6px;bottom:-34px;font-family:var(--display);font-weight:800;font-size:9.5rem;line-height:1;color:rgba(255,255,255,.06);letter-spacing:-.05em;pointer-events:none}
@@ -1647,6 +1654,7 @@ main,section,footer{overflow-x:clip}
         <button class="btn btn-accent js-open-test">Hacer el test de nivel gratis</button>
         <a href="#cursos" class="btn btn-line">Ver cursos</a>
       </div>
+      <a class="recon-pill" href="#reconocimiento">🎖️ <span><b>10% extra</b> para jubilados, salud, bomberos y fuerzas de seguridad</span></a>
       <div class="proof">
         <div class="proof-av" aria-hidden="true"><span>LM</span><span>RG</span><span>SP</span><span>+</span></div>
         <small><b>★★★★★</b><br>Más de 10 años enseñando inglés</small>
@@ -1733,12 +1741,13 @@ main,section,footer{overflow-x:clip}
           <li><b>Pagás como prefieras</b><span>Con cualquiera de estos medios.</span></li>
           <li><b>Te llega la confirmación</b><span>Por mail, con tu comprobante.</span></li>
         </ol>
+        <p class="recon-note">🎖️ ¿Jubilado/a, salud, bomberos o fuerzas de seguridad? Tenés <a href="#reconocimiento">10% de descuento extra</a> en tus cuotas.</p>
         <p class="mat-fac"><svg class="i" aria-hidden="true"><use href="#i-file"/></svg><span>Todos los pagos cuentan con su factura correspondiente.</span></p>
       </div>
     </div>
 
-    <div class="rec reveal" id="reconocimiento">
-      <div class="rec-ic" aria-hidden="true">🎖️</div>
+    <div class="recon reveal" id="reconocimiento">
+      <div class="recon-ic" aria-hidden="true">🎖️</div>
       <div>
         <h3>10% de descuento para quienes cuidan a los demás</h3>
         <p>Si sos <b>jubilado/a o pensionado/a, personal de salud, bombero/a o parte de las fuerzas de seguridad</b>, tenés un 10% de descuento en tus cuotas. Se suma a los demás descuentos. Es personal e intransferible: lo pedís al pagar la matrícula (o desde tu cuenta si ya sos alumno/a), subís tu certificado y lo verificamos.</p>
@@ -2151,6 +2160,7 @@ main,section,footer{overflow-x:clip}
           <a href="#cursos" class="btn btn-line">Ver cursos</a>
         </div>
         <ul class="fin-pts"><li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Test gratuito</li><li><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg>15 a 20 minutos</li><li><svg class="i" aria-hidden="true"><use href="#i-chat"/></svg>Te orientamos por WhatsApp</li></ul>
+        <a class="recon-pill" href="#reconocimiento">🎖️ <span><b>10% de descuento extra</b> si sos jubilado/a, personal de salud, bombero/a o de fuerzas de seguridad</span></a>
       </div>
       <div class="fin-vis" aria-hidden="true">
         <div class="fin-stairs"><div class="st" style="--h:30%"><b>A1</b></div><div class="st" style="--h:44%"><b>A2</b></div><div class="st" style="--h:58%"><b>B1</b></div><div class="st" style="--h:72%"><b>B2</b></div><div class="st" style="--h:86%"><b>C1</b></div><div class="st" style="--h:100%"><b>C2</b></div></div>
@@ -2180,7 +2190,7 @@ main,section,footer{overflow-x:clip}
       </nav>
       <nav aria-label="Campus">
         <h4>Campus y tienda</h4>
-        <a href="https://campus.thequeenstea.com.ar">Entrar al Campus</a><a href="https://campus.thequeenstea.com.ar/tienda">Tienda de cursos</a><a href="https://campus.thequeenstea.com.ar/tienda/matricula-2027">Matrícula 2027</a>
+        <a href="https://campus.thequeenstea.com.ar">Entrar al Campus</a><a href="https://campus.thequeenstea.com.ar/tienda">Tienda de cursos</a><a href="https://campus.thequeenstea.com.ar/tienda/matricula-2027">Matrícula 2027</a><a href="#reconocimiento">10% para quienes cuidan a los demás</a>
       </nav>
       <nav aria-label="Contacto">
         <h4>Contacto</h4>
@@ -2220,6 +2230,7 @@ main,section,footer{overflow-x:clip}
       <div class="mini-chart" id="rChart" aria-hidden="true"></div>
       <div class="reco" id="rReco"></div>
       <div class="rec" id="rRec"></div>
+      <p class="recon-note" style="text-align:center">🎖️ ¿Jubilado/a, salud, bomberos o fuerzas de seguridad? Tenés <b>10% de descuento extra</b> en tus cuotas.</p>
       <label class="field"><span>Tu nombre completo</span><input type="text" id="rName" placeholder="Ej: Ana López" autocomplete="name"></label>
       <a href="#" id="rWa" class="btn btn-wa" style="width:100%;display:none" target="_blank" rel="noopener">Enviar mi resultado por WhatsApp</a>
       <button class="btn btn-ghost" id="rRestart" style="width:100%;margin-top:10px">Volver a empezar</button>
