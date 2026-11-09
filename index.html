@@ -1706,8 +1706,8 @@ main,section,footer{overflow-x:clip}
       <div class="mat-main">
         <span class="mat-tag">Matrícula 2027</span>
         <div class="mat-price"><strong>$35.000</strong><span>para reservar tu lugar</span></div>
-        <div class="mat-same"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Conservás tu día y horario</div>
-        <div class="mat-count" id="matCount"><i></i><span>Valor y horario asegurados hasta el 21 de diciembre</span></div>
+        <div class="mat-same"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Alumnos actuales: conservan su día y horario</div>
+        <div class="mat-count" id="matCount"><i></i><span>Valor válido hasta el 21 de diciembre</span></div>
         <div class="mat-clock" id="matClock" hidden aria-label="Tiempo restante">
           <div><b data-u="d">00</b><small>días</small></div><div><b data-u="h">00</b><small>horas</small></div><div><b data-u="m">00</b><small>min</small></div><div><b data-u="s">00</b><small>seg</small></div>
         </div>
@@ -3307,7 +3307,7 @@ const AI_ENDPOINT = '/api/chat';
 const INFO_GENERAL = [
   '- Clases 100% online en vivo, en grupos reducidos. Metodología comunicativa: inglés para la vida real, académico, profesional y para viajar.',
   '- Material incluido: e-books actualizados, audios y aula virtual las 24 hs. Sin costos extra de libros durante el año.',
-  '- Matrícula 2027: $35.000. Abonándola hasta el 21 de diciembre conservás tu día y horario; después de esa fecha los horarios pueden reorganizarse según cómo se armen los grupos. Se abona en https://campus.thequeenstea.com.ar/tienda/matricula-2027',
+  '- Matrícula 2027: $35.000. Es el valor hasta el 21 de diciembre. Mis alumnos actuales que la abonan hasta esa fecha conservan su día y horario; el resto de los horarios se disponen según cómo se armen los grupos. Se abona en https://campus.thequeenstea.com.ar/tienda/matricula-2027',
   '- Pack mensual: se abona el mes completo y la cuota depende de cuántas clases tenga el mes (3, 4 o 5). El beneficio del pack no aplica si se abona el mismo día de la clase.',
   '- Pago por clase: cuesta 15% más en pesos, o USD 5 más por clase desde el exterior.',
   '- Las clases se abonan 24 hs antes. Las ausencias se abonan igual; se comparte el material trabajado y la grabación si la clase fue grabada. Tolerancia de espera: 15 minutos. Hay tareas semanales.',
@@ -3343,7 +3343,7 @@ function respuestaLocal(q){
   if (has('nivel','test','examen'))
     return 'Hacé nuestro test de nivel gratis: son 120 preguntas y tarda unos 15 a 20 minutos. Al terminar te mostramos tu nivel y el curso ideal para vos. [[TEST]]';
   if (has('matricula'))
-    return 'La matrícula 2027 cuesta **$35.000**. Si la abonás hasta el **21 de diciembre** conservás tu día y horario; después, los horarios pueden reorganizarse según cómo se armen los grupos. Reserva tu lugar para todo el año. La abonás desde el botón "Abonar matrícula" de la sección de cursos.';
+    return 'La matrícula 2027 cuesta **$35.000**. Ese valor rige hasta el **21 de diciembre**. Los alumnos actuales que la abonan hasta esa fecha conservan su día y horario; los demás horarios se disponen según cómo se armen los grupos. Reserva tu lugar para todo el año. La abonás desde el botón "Abonar matrícula" de la sección de cursos.';
   if (has('inscrib','anot','empez','sumar','reservar'))
     return 'Es muy fácil: 1) hacé el test de nivel si no sabés tu nivel, 2) elegí tu curso y tocá "Inscribirme", 3) completá tus datos y enviá la inscripción por WhatsApp, 4) aboná la matrícula. ¡Y listo! [[TEST]]';
   if (has('falt','ausen','grab'))
