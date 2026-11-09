@@ -779,27 +779,39 @@ h2{font-size:clamp(2.3rem,4.8vw,3.9rem)}
 .recon-note a{color:#1f8f89;text-decoration:underline}
 .fin-card .recon-pill{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.4);color:#fff}
 .fin-card .recon-pill b{color:#41c1ba}
-.recon{position:relative;overflow:hidden;margin:0 0 34px;padding:34px;border-radius:30px;background:radial-gradient(520px 260px at 100% 0,rgba(65,193,186,.32),transparent 65%),linear-gradient(135deg,#192c3f,#1d4a5a);color:#fff;box-shadow:0 34px 70px -40px rgba(14,31,77,.85)}
+@property --ang{syntax:"<angle>";initial-value:0deg;inherits:false}
+.recon{position:relative;overflow:hidden;margin:0 0 34px;padding:36px;border-radius:32px;color:#fff;border:2px solid transparent;background:radial-gradient(520px 260px at 100% 0,rgba(65,193,186,.32),transparent 65%),linear-gradient(135deg,#192c3f,#1d4a5a) padding-box,conic-gradient(from var(--ang),#41c1ba,#192c3f 30%,#41c1ba 55%,#192c3f 80%,#41c1ba) border-box;animation:reconSpin 7s linear infinite;box-shadow:0 34px 70px -40px rgba(14,31,77,.85)}
+@keyframes reconSpin{to{--ang:360deg}}
 .recon>*{position:relative;z-index:1}
-.recon-top{display:flex;align-items:center;gap:26px}
-.recon-ic{flex-shrink:0;width:112px;height:112px;border-radius:30px;background:linear-gradient(160deg,rgba(65,193,186,.4),rgba(65,193,186,.08));border:1px solid rgba(65,193,186,.55);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;animation:reconPop .9s cubic-bezier(.2,1.4,.4,1) both}
-.recon-ic span{font-size:1.6rem;margin-bottom:4px}
-.recon-ic b{font-size:2.1rem;font-family:var(--display);color:#fff}
-.recon-ic small{margin-top:3px;font-size:.8rem;font-weight:800;color:#41c1ba}
-@keyframes reconPop{from{transform:scale(.6) rotate(-8deg);opacity:0}to{transform:none;opacity:1}}
+.recon-top{display:flex;align-items:center;gap:28px}
+.recon-ic{flex-shrink:0;width:124px;height:124px;border-radius:34px;background:linear-gradient(160deg,rgba(65,193,186,.45),rgba(65,193,186,.08));border:1px solid rgba(65,193,186,.6);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;box-shadow:0 0 0 0 rgba(65,193,186,.5);animation:reconPulse 2.8s ease-out infinite}
+.recon-ic span{font-size:1.9rem;margin-bottom:4px;display:inline-block;transform-origin:50% 0;animation:reconSwing 3.4s ease-in-out infinite}
+.recon-ic b{font-size:2.3rem;font-family:var(--display);color:#fff}
+.recon-ic b i{font-style:normal}
+.recon-ic small{margin-top:3px;font-size:.82rem;font-weight:800;color:#41c1ba}
+@keyframes reconPulse{0%{box-shadow:0 0 0 0 rgba(65,193,186,.5)}70%,100%{box-shadow:0 0 0 22px rgba(65,193,186,0)}}
+@keyframes reconSwing{0%,100%{transform:rotate(-9deg)}50%{transform:rotate(9deg)}}
 .recon-tag{display:inline-block;margin-bottom:8px;padding:4px 12px;border-radius:999px;background:#41c1ba;color:#0d2b33;font-size:.8rem;font-weight:800}
-.recon h3{margin:0 0 8px;font-size:1.6rem;color:#fff;line-height:1.15}
+.recon h3{margin:0 0 8px;font-size:1.7rem;color:#fff;line-height:1.15}
 .recon p{margin:0;color:rgba(255,255,255,.86);font-size:1rem;line-height:1.6;max-width:62ch}
 .recon p b{color:#41c1ba}
-.recon-grid{list-style:none;margin:26px 0 24px;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.recon-grid li{display:flex;flex-direction:column;align-items:center;text-align:center;padding:18px 10px;border-radius:20px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);transition:transform .25s,background .25s,border-color .25s}
-.recon-grid li:hover{transform:translateY(-5px);background:rgba(65,193,186,.18);border-color:rgba(65,193,186,.6)}
-.recon-grid li span{font-size:2.3rem;line-height:1;margin-bottom:8px}
-.recon-grid li b{font-size:1.05rem;color:#fff}
+.recon-grid{list-style:none;margin:28px 0 26px;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.recon-grid li{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;padding:22px 10px 18px;border-radius:22px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);cursor:default;transition:transform .3s cubic-bezier(.2,1.3,.4,1),background .25s,border-color .25s,box-shadow .25s;opacity:0;transform:translateY(22px)}
+.recon.in .recon-grid li{opacity:1;transform:none;transition:opacity .6s ease,transform .6s cubic-bezier(.2,1.3,.4,1)}
+.recon.in .recon-grid li:nth-child(2){transition-delay:.12s}.recon.in .recon-grid li:nth-child(3){transition-delay:.24s}.recon.in .recon-grid li:nth-child(4){transition-delay:.36s}
+.recon.in .recon-grid li:hover{transform:translateY(-8px) scale(1.03);transition-delay:0s;background:rgba(65,193,186,.2);border-color:#41c1ba;box-shadow:0 18px 34px -18px rgba(65,193,186,.7)}
+.recon-grid li span{font-size:2.6rem;line-height:1;margin-bottom:8px;transition:transform .35s cubic-bezier(.2,1.6,.4,1)}
+.recon-grid li:hover span{transform:scale(1.3) rotate(-8deg)}
+.recon-grid li b{font-size:1.08rem;color:#fff}
 .recon-grid li small{margin-top:3px;font-size:.82rem;color:rgba(255,255,255,.7);line-height:1.3}
+.recon-grid li em{position:absolute;top:-10px;right:-6px;font-style:normal;font-weight:800;font-size:.8rem;padding:3px 9px;border-radius:999px;background:#41c1ba;color:#0d2b33;transform:scale(0) rotate(-12deg);transition:transform .3s cubic-bezier(.2,1.8,.4,1)}
+.recon-grid li:hover em{transform:scale(1) rotate(6deg)}
 .recon-cta{display:flex;width:fit-content;margin:0 auto}
-@media(max-width:720px){.recon{padding:24px 20px}.recon-top{flex-direction:column;align-items:flex-start;gap:18px}.recon-grid{grid-template-columns:repeat(2,1fr)}.recon-cta{width:100%;justify-content:center}}
-@media(prefers-reduced-motion:reduce){.recon-ic{animation:none}.recon-grid li{transition:none}}
+.recon-spark{position:absolute!important;z-index:0!important;width:6px;height:6px;border-radius:50%;background:#41c1ba;opacity:.0;animation:reconUp 6s ease-in infinite}
+.recon-spark.s1{left:12%;bottom:12%;animation-delay:0s}.recon-spark.s2{left:38%;bottom:6%;animation-delay:1.6s;width:4px;height:4px}.recon-spark.s3{left:64%;bottom:10%;animation-delay:3.2s}.recon-spark.s4{left:88%;bottom:4%;animation-delay:4.4s;width:4px;height:4px}
+@keyframes reconUp{0%{transform:translateY(0);opacity:0}15%{opacity:.8}100%{transform:translateY(-260px);opacity:0}}
+@media(max-width:720px){.recon{padding:26px 18px}.recon-top{flex-direction:column;align-items:flex-start;gap:18px}.recon-grid{grid-template-columns:repeat(2,1fr)}.recon-cta{width:100%;justify-content:center}}
+@media(prefers-reduced-motion:reduce){.recon,.recon-ic,.recon-ic span,.recon-spark{animation:none}.recon-grid li{opacity:1;transform:none}}
 .mat{display:grid;grid-template-columns:1.25fr 1fr;border-radius:32px;overflow:hidden;margin:34px 0 30px;box-shadow:0 40px 80px -40px rgba(14,31,77,.75)}
 .mat-main{position:relative;background:radial-gradient(600px 300px at 90% -10%,rgba(65,193,186,.45),transparent 60%),linear-gradient(150deg,#0E1F4D,#1E3A8A);color:#fff;padding:46px 46px 42px;overflow:hidden}
 .mat-main::after{content:"2027";position:absolute;right:-6px;bottom:-34px;font-family:var(--display);font-weight:800;font-size:9.5rem;line-height:1;color:rgba(255,255,255,.06);letter-spacing:-.05em;pointer-events:none}
@@ -1764,18 +1776,19 @@ main,section,footer{overflow-x:clip}
 
     <div class="recon reveal" id="reconocimiento">
       <div class="recon-top">
-        <div class="recon-ic" aria-hidden="true"><span>🎖️</span><b>10%</b><small>extra</small></div>
+        <div class="recon-ic" aria-hidden="true"><span>🎖️</span><b><i id="reconNum" data-to="10">10</i>%</b><small>extra</small></div>
         <div class="recon-copy">
           <span class="recon-tag">Descuento extra</span>
           <h3>Para quienes cuidan a los demás</h3>
           <p>Un <b>10% menos en tus cuotas</b>, que se suma a los demás descuentos. Lo pedís al pagar la matrícula (o desde tu cuenta si ya sos alumno/a), subís tu certificado y lo verificamos al instante. Es personal e intransferible.</p>
         </div>
       </div>
+      <i class="recon-spark s1"></i><i class="recon-spark s2"></i><i class="recon-spark s3"></i><i class="recon-spark s4"></i>
       <ul class="recon-grid">
-        <li><span>👵</span><b>Jubilados</b><small>y pensionados</small></li>
-        <li><span>🩺</span><b>Salud</b><small>médicos, enfermería y más</small></li>
-        <li><span>🚒</span><b>Bomberos</b><small>voluntarios y de carrera</small></li>
-        <li><span>👮</span><b>Policía</b><small>y fuerzas del Estado</small></li>
+        <li><span>👵</span><b>Jubilados</b><em>−10%</em><small>y pensionados</small></li>
+        <li><span>🩺</span><b>Salud</b><em>−10%</em><small>médicos, enfermería y más</small></li>
+        <li><span>🚒</span><b>Bomberos</b><em>−10%</em><small>voluntarios y de carrera</small></li>
+        <li><span>👮</span><b>Policía</b><em>−10%</em><small>y fuerzas del Estado</small></li>
       </ul>
       <a href="https://campus.thequeenstea.com.ar/tienda/matricula-2027" class="btn btn-accent recon-cta">Pedirlo con mi matrícula</a>
     </div>
@@ -3505,6 +3518,12 @@ assistBody.addEventListener('click', e => {
 (document.fonts ? document.fonts.ready : Promise.resolve()).then(refreshSegs);
 refreshSegs();
 });
+</script>
+<script>
+(function(){var r=document.getElementById('reconocimiento');if(!r)return;var n=document.getElementById('reconNum');
+function go(){r.classList.add('in');if(!n||matchMedia('(prefers-reduced-motion:reduce)').matches)return;var t=+n.dataset.to,s=performance.now();(function f(now){var k=Math.min(1,(now-s)/1100);n.textContent=Math.round(t*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(f)})(s)}
+if(!('IntersectionObserver' in window)){r.classList.add('in');return}
+var o=new IntersectionObserver(function(e){if(e[0].isIntersecting){go();o.disconnect()}},{threshold:.25});o.observe(r)})();
 </script>
 </body>
 </html>
