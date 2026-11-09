@@ -780,7 +780,7 @@ h2{font-size:clamp(2.3rem,4.8vw,3.9rem)}
 .fin-card .recon-pill{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.4);color:#fff}
 .fin-card .recon-pill b{color:#41c1ba}
 @property --ang{syntax:"<angle>";initial-value:0deg;inherits:false}
-.recon{position:relative;overflow:hidden;margin:0 0 34px;padding:36px;border-radius:32px;color:#fff;border:2px solid transparent;background:radial-gradient(520px 260px at 100% 0,rgba(65,193,186,.32),transparent 65%),linear-gradient(135deg,#192c3f,#1d4a5a) padding-box,conic-gradient(from var(--ang),#41c1ba,#192c3f 30%,#41c1ba 55%,#192c3f 80%,#41c1ba) border-box;animation:reconSpin 7s linear infinite;box-shadow:0 34px 70px -40px rgba(14,31,77,.85)}
+.recon{position:relative;overflow:hidden;margin:0 0 34px;padding:36px;border-radius:32px;color:#fff;border:2px solid transparent;background:radial-gradient(600px 300px at 90% -10%,rgba(65,193,186,.45),transparent 60%),linear-gradient(150deg,#0E1F4D,#1E3A8A) padding-box,conic-gradient(from var(--ang),#41c1ba,#1E3A8A 30%,#41c1ba 55%,#1E3A8A 80%,#41c1ba) border-box;animation:reconSpin 7s linear infinite;box-shadow:0 34px 70px -40px rgba(14,31,77,.85)}
 @keyframes reconSpin{to{--ang:360deg}}
 .recon>*{position:relative;z-index:1}
 .recon-top{display:flex;align-items:center;gap:28px}
@@ -832,6 +832,12 @@ h2{font-size:clamp(2.3rem,4.8vw,3.9rem)}
 .recon-left{align-items:stretch;justify-content:center;gap:20px}
 .recon-top{align-items:center}
 .recon-cta{width:100%;justify-content:center;text-align:center}
+.recon-lead{font-size:1.08rem!important;color:#fff!important;margin-bottom:12px!important}
+.recon-steps{list-style:none;margin:0 0 10px;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.recon-steps li{display:inline-flex;align-items:center;gap:5px;padding:5px 8px;border-radius:12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);font-size:.76rem;font-weight:700;transition:transform .25s,background .25s}
+.recon-steps li:hover{transform:translateY(-2px);background:rgba(65,193,186,.22)}
+.recon-steps li span{font-size:1rem}
+.recon-fine{display:block;font-size:.8rem;color:rgba(255,255,255,.62)}
 .mat{display:grid;grid-template-columns:1.25fr 1fr;border-radius:32px;overflow:hidden;margin:34px 0 30px;box-shadow:0 40px 80px -40px rgba(14,31,77,.75)}
 .mat-main{position:relative;background:radial-gradient(600px 300px at 90% -10%,rgba(65,193,186,.45),transparent 60%),linear-gradient(150deg,#0E1F4D,#1E3A8A);color:#fff;padding:46px 46px 42px;overflow:hidden}
 .mat-main::after{content:"2027";position:absolute;right:-6px;bottom:-34px;font-family:var(--display);font-weight:800;font-size:9.5rem;line-height:1;color:rgba(255,255,255,.06);letter-spacing:-.05em;pointer-events:none}
@@ -1801,7 +1807,13 @@ main,section,footer{overflow-x:clip}
         <div class="recon-copy">
           <span class="recon-tag">Descuento extra</span>
           <h3>Para quienes cuidan a los demás</h3>
-          <p><b>10% menos en tus cuotas</b>, además de otros descuentos. Lo pedís al pagar la matrícula (o desde tu cuenta), subís tu certificado y lo verificamos al instante. Es personal e intransferible.</p>
+          <p class="recon-lead"><b>10% menos en todas tus cuotas</b>, y se suma a los demás descuentos.</p>
+          <ul class="recon-steps">
+            <li><span>🧾</span>Pedilo al matricularte</li>
+            <li><span>📎</span>Subí tu certificado</li>
+            <li><span>⚡</span>Lo verificamos ya</li>
+          </ul>
+          <small class="recon-fine">Personal e intransferible. ¿Ya sos alumno/a? Pedilo desde tu cuenta.</small>
         </div>
       </div>
       <a href="https://campus.thequeenstea.com.ar/tienda/matricula-2027" class="btn btn-accent recon-cta">Pedirlo con mi matrícula</a>
