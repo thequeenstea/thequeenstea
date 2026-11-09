@@ -770,6 +770,13 @@ h2{font-size:clamp(2.3rem,4.8vw,3.9rem)}
 @media (max-width:980px){.faq-grid>div:first-child{position:static}}
 
 /* ===== Matrícula 2027 ===== */
+.rec{display:flex;align-items:center;gap:22px;margin:0 0 30px;padding:26px 30px;border-radius:26px;background:linear-gradient(120deg,#192c3f,#1d4a5a);color:#fff;box-shadow:0 30px 60px -38px rgba(14,31,77,.8)}
+.rec-ic{flex-shrink:0;width:58px;height:58px;border-radius:18px;background:rgba(65,193,186,.2);display:grid;place-items:center;font-size:1.9rem}
+.rec h3{margin:0 0 6px;font-size:1.25rem;color:#fff}
+.rec p{margin:0;color:rgba(255,255,255,.85);font-size:.98rem;line-height:1.55}
+.rec p b{color:#41c1ba}
+.rec .btn{flex-shrink:0;white-space:nowrap}
+@media(max-width:720px){.rec{flex-direction:column;align-items:flex-start;padding:22px}}
 .mat{display:grid;grid-template-columns:1.25fr 1fr;border-radius:32px;overflow:hidden;margin:34px 0 30px;box-shadow:0 40px 80px -40px rgba(14,31,77,.75)}
 .mat-main{position:relative;background:radial-gradient(600px 300px at 90% -10%,rgba(65,193,186,.45),transparent 60%),linear-gradient(150deg,#0E1F4D,#1E3A8A);color:#fff;padding:46px 46px 42px;overflow:hidden}
 .mat-main::after{content:"2027";position:absolute;right:-6px;bottom:-34px;font-family:var(--display);font-weight:800;font-size:9.5rem;line-height:1;color:rgba(255,255,255,.06);letter-spacing:-.05em;pointer-events:none}
@@ -1730,6 +1737,15 @@ main,section,footer{overflow-x:clip}
       </div>
     </div>
 
+    <div class="rec reveal" id="reconocimiento">
+      <div class="rec-ic" aria-hidden="true">🎖️</div>
+      <div>
+        <h3>10% de descuento para quienes cuidan a los demás</h3>
+        <p>Si sos <b>jubilado/a o pensionado/a, personal de salud, bombero/a o parte de las fuerzas de seguridad</b>, tenés un 10% de descuento en tus cuotas. Se suma a los demás descuentos. Es personal e intransferible: subís tu certificado desde tu cuenta del Campus y lo verificamos.</p>
+      </div>
+      <a href="https://campus.thequeenstea.com.ar/dashboard/cuenta" class="btn btn-accent">Pedir mi descuento</a>
+    </div>
+
     <div class="trail-head reveal">
       <div>
         <h3>Tu camino de A1 a C2</h3>
@@ -2086,6 +2102,10 @@ main,section,footer{overflow-x:clip}
       <div class="faq-item" data-cat="cursos">
         <button class="faq-q" aria-expanded="false"><span class="faq-ic"><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg></span><span class="faq-t">¿Preparan para exámenes internacionales?</span><span class="plus" aria-hidden="true">+</span></button>
         <div class="faq-a"><div><p>Sí. Preparamos para Cambridge First (B2), Advanced (C1) y Proficiency (C2), y para IELTS. Practicás las cuatro habilidades con exámenes estilo Cambridge y correcciones de Writing dentro del campus.</p></div></div>
+      </div>
+      <div class="faq-item" data-cat="cursos">
+        <button class="faq-q" aria-expanded="false"><span class="faq-ic"><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg></span><span class="faq-t">¿Tienen descuentos para jubilados, personal de salud o bomberos?</span><span class="plus" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div><p>Sí: 10% de descuento en las cuotas para jubilados y pensionados, personal de salud, bomberos y fuerzas de seguridad. Se suma a los demás descuentos. Subís tu certificado desde tu cuenta del Campus, lo verificamos y el descuento se aplica solo. Es personal, no se transfiere, y se renueva cada año.</p></div></div>
       </div>
       <div class="faq-item" data-cat="campus">
         <button class="faq-q" aria-expanded="false"><span class="faq-ic"><svg class="i" aria-hidden="true"><use href="#i-laptop"/></svg></span><span class="faq-t">¿Qué es el Campus?</span><span class="plus" aria-hidden="true">+</span></button>
@@ -3308,6 +3328,7 @@ const INFO_GENERAL = [
   '- Clases 100% online en vivo, en grupos reducidos. Metodología comunicativa: inglés para la vida real, académico, profesional y para viajar.',
   '- Material incluido: e-books actualizados, audios y aula virtual las 24 hs. Sin costos extra de libros durante el año.',
   '- Matrícula 2027: $35.000. Es el valor hasta el 21 de diciembre. Mis alumnos actuales que la abonan hasta esa fecha conservan su día y horario; el resto de los horarios se disponen según cómo se armen los grupos. Se abona en https://campus.thequeenstea.com.ar/tienda/matricula-2027',
+  '- Reconocimiento: 10% de descuento en las cuotas para jubilados/pensionados, personal de salud, bomberos y fuerzas de seguridad. Se suma a los demás descuentos. Es personal e intransferible, se pide con un certificado desde la cuenta del Campus y se renueva cada año.',
   '- Pack mensual: se abona el mes completo y la cuota depende de cuántas clases tenga el mes (3, 4 o 5). El beneficio del pack no aplica si se abona el mismo día de la clase.',
   '- Pago por clase: cuesta 15% más en pesos, o USD 5 más por clase desde el exterior.',
   '- Las clases se abonan 24 hs antes. Las ausencias se abonan igual; se comparte el material trabajado y la grabación si la clase fue grabada. Tolerancia de espera: 15 minutos. Hay tareas semanales.',
@@ -3342,6 +3363,8 @@ function respuestaLocal(q){
     return `Estos son los grupos con cupos abiertos: ${abiertos.map(c => `**${c.name}** los ${c.sched}`).join('; ')}. Los demás están completos y abren nuevos horarios pronto. [[TEST]]`;
   if (has('nivel','test','examen'))
     return 'Hacé nuestro test de nivel gratis: son 120 preguntas y tarda unos 15 a 20 minutos. Al terminar te mostramos tu nivel y el curso ideal para vos. [[TEST]]';
+  if (has('jubil','salud','medic','enfermer','bombero','policia','seguridad','reconocimiento'))
+    return 'Tenemos un **10% de descuento** en las cuotas para jubilados y pensionados, personal de salud, bomberos y fuerzas de seguridad. Se suma a los demás descuentos. Subís tu certificado desde tu cuenta del Campus, lo verificamos y se aplica solo. Es personal e intransferible y se renueva cada año.';
   if (has('matricula'))
     return 'La matrícula 2027 cuesta **$35.000**. Ese valor rige hasta el **21 de diciembre**. Los alumnos actuales que la abonan hasta esa fecha conservan su día y horario; los demás horarios se disponen según cómo se armen los grupos. Reserva tu lugar para todo el año. La abonás desde el botón "Abonar matrícula" de la sección de cursos.';
   if (has('inscrib','anot','empez','sumar','reservar'))
