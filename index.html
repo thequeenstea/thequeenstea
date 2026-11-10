@@ -859,6 +859,7 @@ h2{font-size:clamp(2.3rem,4.8vw,3.9rem)}
 .recon-grid li{padding:22px 10px 18px}
 .recon-grid li span{font-size:2.5rem}
 @media(max-width:860px){.recon{padding:26px 18px;gap:24px}.recon-big b{font-size:4.4rem}}
+.dr-help{margin:18px 0 6px;font-size:.9rem;color:var(--muted);line-height:1.5}
 .rec-opt{display:flex;align-items:center;gap:12px;margin:14px 0 4px;padding:12px 14px;border-radius:16px;border:1.5px solid var(--line,#dbe3f0);background:#f6f9ff;cursor:pointer;transition:border-color .25s,background .25s,box-shadow .25s}
 .rec-opt:hover{border-color:#41c1ba}
 .rec-opt.on{border-color:#41c1ba;background:rgba(65,193,186,.14);box-shadow:0 10px 24px -16px rgba(65,193,186,.9)}
@@ -2345,19 +2346,12 @@ main,section,footer{overflow-x:clip}
   <div class="drawer">
     <button class="x-btn" id="regClose" aria-label="Cerrar inscripción">×</button>
     <div class="dr-head">
-      <small style="color:var(--sky);font-weight:700">Confirmación de cupo 2027</small>
+      <small style="color:var(--sky);font-weight:700">Tu cupo 2027</small>
       <h3 id="drName"></h3>
       <span class="sched" id="drSched"></span>
     </div>
 
-    <div class="dr-section"><b>1</b> Tus datos</div>
-    <label class="field"><span>Nombre completo</span><input id="f_name" autocomplete="name"></label>
-    <label class="field"><span>DNI / documento</span><input id="f_dni"></label>
-    <label class="field"><span>Correo electrónico</span><input id="f_mail" type="email" autocomplete="email"></label>
-    <label class="field"><span>Ciudad y país</span><input id="f_loc"></label>
-    <label class="field"><span>WhatsApp</span><input id="f_phone" type="tel" placeholder="+54 9 ..." autocomplete="tel"></label>
-
-    <div class="dr-section"><b>2</b> Cómo vas a pagar</div>
+    <div class="dr-section"><b>1</b> Armá tu mes</div>
     <div class="opts-row"><span>Dónde vivís</span>
       <div class="seg full" data-group="cur"><span class="thumb"></span><button data-val="ars">Argentina</button><button data-val="usd">Exterior</button></div>
     </div>
@@ -2376,18 +2370,9 @@ main,section,footer{overflow-x:clip}
       <div class="calc-total"><span>Total del mes</span><strong id="cTotal"></strong></div>
     </div>
 
-    <div class="dr-section"><b>3</b> Términos y compromiso</div>
-    <div class="terms">
-      <label><input type="checkbox" class="term"> El valor mensual depende de las clases del mes.</label>
-      <label><input type="checkbox" class="term"> El pago se hace 24 hs antes de la clase.</label>
-      <label><input type="checkbox" class="term"> Las ausencias se abonan sin excepción.</label>
-      <label><input type="checkbox" class="term"> La tolerancia de espera es de 15 minutos.</label>
-      <label><input type="checkbox" class="term"> Me comprometo con las tareas semanales.</label>
-    </div>
-    <div class="form-error" id="regError"></div>
+    <p class="dr-help">La matrícula se abona en el Campus: ahí cargás tus datos, elegís cómo pagar y aceptás los términos. Tu curso y tu descuento ya llegan elegidos.</p>
     <div class="dr-actions">
-      <a href="https://campus.thequeenstea.com.ar/tienda/matricula-2027" class="btn btn-violet">Abonar matrícula</a>
-      <button class="btn btn-wa" id="regSend">Enviar inscripción</button>
+      <a href="https://campus.thequeenstea.com.ar/tienda/matricula-2027" class="btn btn-accent" id="regGo" style="width:100%">Seguir con mi matrícula</a>
     </div>
   </div>
 </div>
@@ -2712,10 +2697,8 @@ function openReg(c){
   $('#recChk').checked = false; $('#recOpt').classList.remove('on');
   $('#drName').textContent = c.name;
   $('#drSched').textContent = '🗓️ ' + c.sched;
-  $('#regError').classList.remove('show');
   regOv.classList.add('open'); lockBody(true);
   requestAnimationFrame(() => { syncRegSegs(); updateCalc(); });
-  setTimeout(() => $('#f_name').focus(), 400);
 }
 function closeReg(){ regOv.classList.remove('open'); lockBody(false); }
 $('#regClose').addEventListener('click', closeReg);
@@ -2745,6 +2728,7 @@ function calc(){
 }
 function updateCalc(){
   const r = calc(), isPack = reg.pay === 'pack';
+  $('#regGo').href = 'https://campus.thequeenstea.com.ar/tienda/matricula-2027?nivel=' + encodeURIComponent(NIVEL_API[reg.c.code] || '') + (reg.rec ? '&rec=1' : '');
   $('#cUnit').textContent = money(r.unit, reg.cur);
   $('#cSave').textContent = '− ' + money(r.save, reg.cur);
   $('#cSaveRow').style.display = isPack ? 'flex' : 'none';
@@ -2761,36 +2745,7 @@ function updateCalc(){
 
 $('#recChk').addEventListener('change', e => { reg.rec = e.target.checked; $('#recOpt').classList.toggle('on', reg.rec); updateCalc(); });
 
-$('#regSend').addEventListener('click', () => {
-  const v = id => $('#' + id).value.trim();
-  const err = $('#regError');
-  if (!v('f_name') || !v('f_mail') || !v('f_phone')){
-    err.textContent = 'Completá tu nombre, tu correo y tu WhatsApp para enviar la inscripción.';
-    err.classList.add('show'); return;
-  }
-  if ($$('.term', regOv).some(t => !t.checked)){
-    err.textContent = 'Para continuar, marcá los cinco puntos de términos y compromiso.';
-    err.classList.add('show'); return;
-  }
-  err.classList.remove('show');
-  const r = calc();
-  const msg =
-`¡Hola The Queen's Tea! 👋
-Quiero inscribirme para 2027:
 
-*Curso:* ${reg.c.name}
-*Horario:* ${reg.c.sched}
-*Nombre:* ${v('f_name')}
-*DNI:* ${v('f_dni') || '-'}
-*Email:* ${v('f_mail')}
-*Ciudad y país:* ${v('f_loc') || '-'}
-*WhatsApp:* ${v('f_phone')}
-*Modalidad:* ${reg.pay === 'pack' ? 'Pack mensual' : 'Por clase'} (${reg.classes} clases)
-*Total del mes:* ${money(r.total, reg.cur)}${reg.rec ? '\n*Descuento:* 10% de reconocimiento (te envío mi certificado)' : ''}
-
-Acepto los términos y compromisos.`;
-  window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
-});
 
 
 
