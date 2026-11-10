@@ -795,10 +795,10 @@ h2{font-size:clamp(2.3rem,4.8vw,3.9rem)}
 .recon h3{margin:0 0 8px;font-size:1.7rem;color:#fff;line-height:1.15}
 .recon p{margin:0;color:rgba(255,255,255,.86);font-size:1rem;line-height:1.6;max-width:62ch}
 .recon p b{color:#41c1ba}
-.recon-grid{list-style:none;margin:28px 0 26px;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.recon-grid{list-style:none;margin:28px 0 26px;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
 .recon-grid li{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;padding:22px 10px 18px;border-radius:22px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);cursor:default;transition:transform .3s cubic-bezier(.2,1.3,.4,1),background .25s,border-color .25s,box-shadow .25s;opacity:0;transform:translateY(22px)}
 .recon.in .recon-grid li{opacity:1;transform:none;transition:opacity .6s ease,transform .6s cubic-bezier(.2,1.3,.4,1)}
-.recon.in .recon-grid li:nth-child(2){transition-delay:.12s}.recon.in .recon-grid li:nth-child(3){transition-delay:.24s}.recon.in .recon-grid li:nth-child(4){transition-delay:.36s}
+.recon.in .recon-grid li:nth-child(2){transition-delay:.12s}.recon.in .recon-grid li:nth-child(3){transition-delay:.24s}.recon.in .recon-grid li:nth-child(4){transition-delay:.36s}.recon.in .recon-grid li:nth-child(5){transition-delay:.48s}
 .recon.in .recon-grid li:hover{transform:translateY(-8px) scale(1.03);transition-delay:0s;background:rgba(65,193,186,.2);border-color:#41c1ba;box-shadow:0 18px 34px -18px rgba(65,193,186,.7)}
 .recon-grid li span{font-size:2.6rem;line-height:1;margin-bottom:8px;transition:transform .35s cubic-bezier(.2,1.6,.4,1)}
 .recon-grid li:hover span{transform:scale(1.3) rotate(-8deg)}
@@ -810,7 +810,7 @@ h2{font-size:clamp(2.3rem,4.8vw,3.9rem)}
 .recon-spark{position:absolute!important;z-index:0!important;width:6px;height:6px;border-radius:50%;background:#41c1ba;opacity:.0;animation:reconUp 6s ease-in infinite}
 .recon-spark.s1{left:12%;bottom:12%;animation-delay:0s}.recon-spark.s2{left:38%;bottom:6%;animation-delay:1.6s;width:4px;height:4px}.recon-spark.s3{left:64%;bottom:10%;animation-delay:3.2s}.recon-spark.s4{left:88%;bottom:4%;animation-delay:4.4s;width:4px;height:4px}
 @keyframes reconUp{0%{transform:translateY(0);opacity:0}15%{opacity:.8}100%{transform:translateY(-260px);opacity:0}}
-@media(max-width:720px){.recon{padding:26px 18px}.recon-top{flex-direction:column;align-items:flex-start;gap:18px}.recon-grid{grid-template-columns:repeat(2,1fr)}.recon-cta{width:100%;justify-content:center}}
+@media(max-width:720px){.recon{padding:26px 18px}.recon-top{flex-direction:column;align-items:flex-start;gap:18px}.recon-grid{grid-template-columns:repeat(2,1fr)}.recon-grid li:last-child{grid-column:1/-1}.recon-cta{width:100%;justify-content:center}}
 @media(prefers-reduced-motion:reduce){.recon,.recon-ic,.recon-ic span,.recon-spark{animation:none}.recon-grid li{opacity:1;transform:none}}
 
 .recon{display:grid;grid-template-columns:1.15fr 1fr;align-items:center;gap:30px;padding:28px 30px;margin-bottom:28px}
@@ -828,6 +828,7 @@ h2{font-size:clamp(2.3rem,4.8vw,3.9rem)}
 .recon-grid li span{font-size:2rem;margin-bottom:5px}
 .recon-grid li b{font-size:1rem}
 .recon-grid li small{font-size:.78rem}
+.recon-grid li:last-child{grid-column:1/-1}
 @media(max-width:860px){.recon{grid-template-columns:1fr;gap:22px;padding:24px 18px}.recon-cta{width:100%;justify-content:center}}
 .recon-left{align-items:stretch;justify-content:center;gap:20px}
 .recon-top{align-items:center}
@@ -1741,7 +1742,7 @@ main,section,footer{overflow-x:clip}
         <button class="btn btn-accent js-open-test">Hacer el test de nivel gratis</button>
         <a href="#cursos" class="btn btn-line">Ver cursos</a>
       </div>
-      <a class="recon-pill" href="#reconocimiento">🎖️ <span><b>10% extra</b> · 👵 jubilados · 🩺 salud · 🚒 bomberos · 👮 policía</span></a>
+      <a class="recon-pill" href="#reconocimiento">🎖️ <span><b>10% extra</b> · 👵 jubilados · 🩺 salud · 🚒 bomberos · 👮 policía · 👩‍🏫 docentes</span></a>
       <div class="proof">
         <div class="proof-av" aria-hidden="true"><span>LM</span><span>RG</span><span>SP</span><span>+</span></div>
         <small><b>★★★★★</b><br>Más de 10 años enseñando inglés</small>
@@ -1828,7 +1829,7 @@ main,section,footer{overflow-x:clip}
           <li><b>Pagás como prefieras</b><span>Con cualquiera de estos medios.</span></li>
           <li><b>Te llega la confirmación</b><span>Por mail, con tu comprobante.</span></li>
         </ol>
-        <p class="recon-note">🎖️ 👵 🩺 🚒 👮 ¿Jubilado/a, salud, bomberos o policía? Tenés <a href="#reconocimiento">10% de descuento extra</a> en tus cuotas.</p>
+        <p class="recon-note">🎖️ 👵 🩺 🚒 👮 👩‍🏫 ¿Jubilado/a, salud, bomberos, policía o docente? Tenés <a href="#reconocimiento">10% de descuento extra</a> en tus cuotas.</p>
         <p class="mat-fac"><svg class="i" aria-hidden="true"><use href="#i-file"/></svg><span>Todos los pagos cuentan con su factura correspondiente.</span></p>
       </div>
     </div>
@@ -1855,6 +1856,7 @@ main,section,footer{overflow-x:clip}
         <li><span>🩺</span><b>Salud</b><em>−10%</em><small>médicos, enfermería y más</small></li>
         <li><span>🚒</span><b>Bomberos</b><em>−10%</em><small>voluntarios y de carrera</small></li>
         <li><span>👮</span><b>Policía</b><em>−10%</em><small>y fuerzas del Estado</small></li>
+        <li><span>👩‍🏫</span><b>Docentes</b><em>−10%</em><small>de todos los niveles</small></li>
       </ul>
     </div>
 
@@ -2216,12 +2218,12 @@ main,section,footer{overflow-x:clip}
         <div class="faq-a"><div><p>Sí. Preparamos para Cambridge First (B2), Advanced (C1) y Proficiency (C2), y para IELTS. Practicás las cuatro habilidades con exámenes estilo Cambridge y correcciones de Writing dentro del campus.</p></div></div>
       </div>
       <div class="faq-item" data-cat="cursos">
-        <button class="faq-q" aria-expanded="false"><span class="faq-ic"><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg></span><span class="faq-t">¿Tienen descuentos para jubilados, personal de salud o bomberos?</span><span class="plus" aria-hidden="true">+</span></button>
-        <div class="faq-a"><div><p>Sí: 10% de descuento en las cuotas para jubilados y pensionados, personal de salud, bomberos, policías y fuerzas de seguridad del Estado. Se suma a los demás descuentos. Lo pedís al pagar la matrícula (o desde tu cuenta del Campus si ya sos alumno/a), subís tu certificado, lo verificamos y el descuento queda cargado en tu cuenta. Es personal, no se transfiere, y se renueva cada año.</p></div></div>
+        <button class="faq-q" aria-expanded="false"><span class="faq-ic"><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg></span><span class="faq-t">¿Tienen descuentos para jubilados, personal de salud, bomberos o docentes?</span><span class="plus" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div><p>Sí: 10% de descuento en las cuotas para jubilados y pensionados, personal de salud, bomberos, policías, fuerzas de seguridad del Estado y docentes. Se suma a los demás descuentos. Lo pedís al pagar la matrícula (o desde tu cuenta del Campus si ya sos alumno/a), subís tu certificado, lo verificamos y el descuento queda cargado en tu cuenta. Es personal, no se transfiere, y se renueva cada año.</p></div></div>
       </div>
       <div class="faq-item" data-cat="cursos">
         <button class="faq-q" aria-expanded="false"><span class="faq-ic"><svg class="i" aria-hidden="true"><use href="#i-cap"/></svg></span><span class="faq-t">¿Dan clases individuales?</span><span class="plus" aria-hidden="true">+</span></button>
-        <div class="faq-a"><div><p>Sí, con pocos cupos: $50.000 por clase con horario fijo (mismo día y hora todas las semanas) y $60.000 por clase si querés que el horario cambie semana a semana. Elegís al menos 4 franjas horarias que te sirvan y te confirmamos por WhatsApp. Igual, los cursos grupales son la mejor opción: practicás con compañeros y el valor por clase es mucho menor. Pedilo desde la <a href="https://campus.thequeenstea.com.ar/tienda/matricula-2027#individuales">tienda del Campus</a>.</p></div></div>
+        <div class="faq-a"><div><p>Sí, con pocos cupos: $50.000 por clase con horario fijo (mismo día y hora todas las semanas) y $60.000 por clase si querés poder cambiar tus horarios (nos avisás cuándo y cómo). Son valores por clase abonando el mes completo, sin descuento de reconocimiento; una clase suelta lleva el mismo 15% de recargo que los cursos. Atendemos de lunes a viernes hasta las 21. Elegís al menos 4 franjas horarias que te sirvan y te confirmamos por WhatsApp. Igual, los cursos grupales son la mejor opción: practicás con compañeros y el valor por clase es mucho menor. Pedilo desde la <a href="https://campus.thequeenstea.com.ar/tienda/matricula-2027#individuales">tienda del Campus</a>.</p></div></div>
       </div>
       <div class="faq-item" data-cat="campus">
         <button class="faq-q" aria-expanded="false"><span class="faq-ic"><svg class="i" aria-hidden="true"><use href="#i-laptop"/></svg></span><span class="faq-t">¿Qué es el Campus?</span><span class="plus" aria-hidden="true">+</span></button>
@@ -2267,7 +2269,7 @@ main,section,footer{overflow-x:clip}
           <a href="#cursos" class="btn btn-line">Ver cursos</a>
         </div>
         <ul class="fin-pts"><li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Test gratuito</li><li><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg>15 a 20 minutos</li><li><svg class="i" aria-hidden="true"><use href="#i-chat"/></svg>Te orientamos por WhatsApp</li></ul>
-        <a class="recon-pill" href="#reconocimiento">🎖️ <span><b>10% de descuento extra</b> · 👵 jubilados · 🩺 salud · 🚒 bomberos · 👮 policía</span></a>
+        <a class="recon-pill" href="#reconocimiento">🎖️ <span><b>10% de descuento extra</b> · 👵 jubilados · 🩺 salud · 🚒 bomberos · 👮 policía · 👩‍🏫 docentes</span></a>
       </div>
       <div class="fin-vis" aria-hidden="true">
         <div class="fin-stairs"><div class="st" style="--h:30%"><b>A1</b></div><div class="st" style="--h:44%"><b>A2</b></div><div class="st" style="--h:58%"><b>B1</b></div><div class="st" style="--h:72%"><b>B2</b></div><div class="st" style="--h:86%"><b>C1</b></div><div class="st" style="--h:100%"><b>C2</b></div></div>
@@ -2337,7 +2339,7 @@ main,section,footer{overflow-x:clip}
       <div class="mini-chart" id="rChart" aria-hidden="true"></div>
       <div class="reco" id="rReco"></div>
       <div class="rec" id="rRec"></div>
-      <p class="recon-note" style="text-align:center">🎖️ 👵 🩺 🚒 👮 ¿Jubilado/a, salud, bomberos o policía? Tenés <b>10% de descuento extra</b> en tus cuotas.</p>
+      <p class="recon-note" style="text-align:center">🎖️ 👵 🩺 🚒 👮 👩‍🏫 ¿Jubilado/a, salud, bomberos, policía o docente? Tenés <b>10% de descuento extra</b> en tus cuotas.</p>
       <label class="field"><span>Tu nombre completo</span><input type="text" id="rName" placeholder="Ej: Ana López" autocomplete="name"></label>
       <a href="#" id="rWa" class="btn btn-wa" style="width:100%;display:none" target="_blank" rel="noopener">Enviar mi resultado por WhatsApp</a>
       <button class="btn btn-ghost" id="rRestart" style="width:100%;margin-top:10px">Volver a empezar</button>
@@ -2365,7 +2367,7 @@ main,section,footer{overflow-x:clip}
     <div class="opts-row"><span>Clases este mes</span>
       <div class="seg full" data-group="classes"><span class="thumb"></span><button data-val="3">3</button><button data-val="4">4</button><button data-val="5">5</button></div>
     </div>
-    <label class="rec-opt" id="recOpt"><input type="checkbox" id="recChk"><span class="rec-emo" aria-hidden="true">🎖️</span><span class="rec-txt"><b>Soy jubilado/a, de salud, bombero/a o policía</b><small>Sumá tu 10% de descuento extra 👵 🩺 🚒 👮 (después subís tu certificado)</small></span><span class="rec-sw" aria-hidden="true"></span></label>
+    <label class="rec-opt" id="recOpt"><input type="checkbox" id="recChk"><span class="rec-emo" aria-hidden="true">🎖️</span><span class="rec-txt"><b>Soy jubilado/a, de salud, bombero/a, policía o docente</b><small>Sumá tu 10% de descuento extra 👵 🩺 🚒 👮 👩‍🏫 (después subís tu certificado)</small></span><span class="rec-sw" aria-hidden="true"></span></label>
     <div class="calc">
       <div class="calc-line"><span>Valor por clase</span><strong id="cUnit"></strong></div>
       <div class="calc-line save" id="cRecRow" style="display:none"><span>🎖️ Tu descuento del 10%</span><span id="cRec"></span></div>
@@ -3409,8 +3411,8 @@ const INFO_GENERAL = [
   '- Clases 100% online en vivo, en grupos reducidos. Metodología comunicativa: inglés para la vida real, académico, profesional y para viajar.',
   '- Material incluido: e-books actualizados, audios y aula virtual las 24 hs. Sin costos extra de libros durante el año.',
   '- Matrícula 2027: $35.000. Es el valor hasta el 21 de diciembre. Mis alumnos actuales que la abonan hasta esa fecha conservan su día y horario; el resto de los horarios se disponen según cómo se armen los grupos. Se abona en https://campus.thequeenstea.com.ar/tienda/matricula-2027',
-  '- Clases individuales: $50.000 por clase con horario fijo y $60.000 si el horario cambia semana a semana; se eligen al menos 4 franjas y se confirman por WhatsApp (pocos cupos). Los cursos grupales son la mejor opción. Se piden en https://campus.thequeenstea.com.ar/tienda/matricula-2027#individuales',
-  '- Reconocimiento: 10% de descuento en las cuotas para jubilados/pensionados, personal de salud, bomberos, policías y fuerzas de seguridad del Estado. Se suma a los demás descuentos. Es personal e intransferible, se pide con un certificado al pagar la matrícula o desde la cuenta del Campus, y se renueva cada año.',
+  '- Clases individuales: $50.000 por clase con horario fijo y $60.000 si el alumno puede cambiar sus horarios avisando cuándo y cómo; son valores por clase abonando el mes completo (sin descuento de reconocimiento; clase suelta +15%); de lunes a viernes hasta las 21; se eligen al menos 4 franjas y se confirman por WhatsApp (pocos cupos). Los cursos grupales son la mejor opción. Se piden en https://campus.thequeenstea.com.ar/tienda/matricula-2027#individuales',
+  '- Reconocimiento: 10% de descuento en las cuotas para jubilados/pensionados, personal de salud, bomberos, policías, fuerzas de seguridad del Estado y docentes. Se suma a los demás descuentos. Es personal e intransferible, se pide con un certificado al pagar la matrícula o desde la cuenta del Campus, y se renueva cada año.',
   '- Pack mensual: se abona el mes completo y la cuota depende de cuántas clases tenga el mes (3, 4 o 5). El beneficio del pack no aplica si se abona el mismo día de la clase.',
   '- Pago por clase: cuesta 15% más en pesos, o USD 5 más por clase desde el exterior.',
   '- Las clases se abonan 24 hs antes. Las ausencias se abonan igual; se comparte el material trabajado y la grabación si la clase fue grabada. Tolerancia de espera: 15 minutos. Hay tareas semanales.',
@@ -3440,15 +3442,15 @@ function respuestaLocal(q){
   if (has('exterior','dolar','usd','afuera','otro pais'))
     return `Si vivís fuera de Argentina, abonás en dólares: ${abiertos.map(c => `**${c.name}** ${money(c.usd, 'usd')}`).join(', ')} por clase con el pack mensual. [[TEST]]`;
   if (has('individual','particular','uno a uno','1 a 1','1:1'))
-    return 'Sí, tenemos **clases individuales** con pocos cupos: **$50.000 por clase** con horario fijo (mismo día y hora todas las semanas) y **$60.000** si querés que el horario cambie semana a semana. Elegís al menos 4 franjas que te sirvan y te confirmamos por WhatsApp. Igual, los cursos grupales son la mejor opción: practicás con compañeros y el valor por clase es mucho menor. Pedilo acá: https://campus.thequeenstea.com.ar/tienda/matricula-2027#individuales';
+    return 'Sí, tenemos **clases individuales** con pocos cupos: **$50.000 por clase** con horario fijo (mismo día y hora todas las semanas) y **$60.000** si querés poder cambiar tus horarios (nos avisás cuándo y cómo). Son valores por clase abonando el mes completo y no tienen el descuento de reconocimiento. Atendemos de lunes a viernes hasta las 21. Elegís al menos 4 franjas que te sirvan y te confirmamos por WhatsApp. Igual, los cursos grupales son la mejor opción: practicás con compañeros y el valor por clase es mucho menor. Pedilo acá: https://campus.thequeenstea.com.ar/tienda/matricula-2027#individuales';
   if (has('precio','cuesta','cuanto','valor','cuota','sale','pagar','pago'))
     return `Los valores son por clase con el pack mensual: ${abiertos.map(c => `**${c.name}** ${money(c.price, 'ars')}`).join(', ')}. La cuota depende de cuántas clases tenga el mes (3, 4 o 5). La matrícula 2027 está a **$30.000** hasta el 31 de diciembre. [[TEST]]`;
   if (has('horario','dia','cuando','hora'))
     return `Estos son los grupos con cupos abiertos: ${abiertos.map(c => `**${c.name}** los ${c.sched}`).join('; ')}. Los demás están completos y abren nuevos horarios pronto. [[TEST]]`;
   if (has('nivel','test','examen'))
     return 'Hacé nuestro test de nivel gratis: son 120 preguntas y tarda unos 15 a 20 minutos. Al terminar te mostramos tu nivel y el curso ideal para vos. [[TEST]]';
-  if (has('jubil','salud','medic','enfermer','bombero','policia','reconocimiento'))
-    return 'Tenemos un **10% de descuento** en las cuotas para jubilados y pensionados, personal de salud, bomberos, policías y fuerzas de seguridad del Estado. Se suma a los demás descuentos. Lo pedís al pagar la matrícula (o desde tu cuenta si ya sos alumno/a), subís tu certificado, lo verificamos y queda cargado en tu cuenta. Es personal e intransferible y se renueva cada año.';
+  if (has('jubil','salud','medic','enfermer','bombero','policia','docente','maestr','profesor','reconocimiento'))
+    return 'Tenemos un **10% de descuento** en las cuotas para jubilados y pensionados, personal de salud, bomberos, policías, fuerzas de seguridad del Estado y docentes. Se suma a los demás descuentos. Lo pedís al pagar la matrícula (o desde tu cuenta si ya sos alumno/a), subís tu certificado, lo verificamos y queda cargado en tu cuenta. Es personal e intransferible y se renueva cada año.';
   if (has('matricula'))
     return 'La matrícula 2027 cuesta **$35.000**. Ese valor rige hasta el **21 de diciembre**. Los alumnos actuales que la abonan hasta esa fecha conservan su día y horario; los demás horarios se disponen según cómo se armen los grupos. Reserva tu lugar para todo el año. La abonás desde el botón "Abonar matrícula" de la sección de cursos.';
   if (has('inscrib','anot','empez','sumar','reservar'))
