@@ -859,6 +859,17 @@ h2{font-size:clamp(2.3rem,4.8vw,3.9rem)}
 .recon-grid li{padding:22px 10px 18px}
 .recon-grid li span{font-size:2.5rem}
 @media(max-width:860px){.recon{padding:26px 18px;gap:24px}.recon-big b{font-size:4.4rem}}
+.rec-opt{display:flex;align-items:center;gap:12px;margin:14px 0 4px;padding:12px 14px;border-radius:16px;border:1.5px solid var(--line,#dbe3f0);background:#f6f9ff;cursor:pointer;transition:border-color .25s,background .25s,box-shadow .25s}
+.rec-opt:hover{border-color:#41c1ba}
+.rec-opt.on{border-color:#41c1ba;background:rgba(65,193,186,.14);box-shadow:0 10px 24px -16px rgba(65,193,186,.9)}
+.rec-opt input{position:absolute;opacity:0;pointer-events:none}
+.rec-emo{font-size:1.7rem;line-height:1}
+.rec-txt{flex:1;display:flex;flex-direction:column;gap:2px;font-size:.92rem}
+.rec-txt small{color:var(--muted);font-size:.78rem;line-height:1.3}
+.rec-sw{position:relative;width:44px;height:26px;border-radius:99px;background:#cbd5e1;flex-shrink:0;transition:background .25s}
+.rec-sw::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:transform .25s cubic-bezier(.2,1.5,.4,1)}
+.rec-opt.on .rec-sw{background:#41c1ba}
+.rec-opt.on .rec-sw::after{transform:translateX(18px)}
 .mat{display:grid;grid-template-columns:1.25fr 1fr;border-radius:32px;overflow:hidden;margin:34px 0 30px;box-shadow:0 40px 80px -40px rgba(14,31,77,.75)}
 .mat-main{position:relative;background:radial-gradient(600px 300px at 90% -10%,rgba(65,193,186,.45),transparent 60%),linear-gradient(150deg,#0E1F4D,#1E3A8A);color:#fff;padding:46px 46px 42px;overflow:hidden}
 .mat-main::after{content:"2027";position:absolute;right:-6px;bottom:-34px;font-family:var(--display);font-weight:800;font-size:9.5rem;line-height:1;color:rgba(255,255,255,.06);letter-spacing:-.05em;pointer-events:none}
@@ -2356,8 +2367,10 @@ main,section,footer{overflow-x:clip}
     <div class="opts-row"><span>Clases este mes</span>
       <div class="seg full" data-group="classes"><span class="thumb"></span><button data-val="3">3</button><button data-val="4">4</button><button data-val="5">5</button></div>
     </div>
+    <label class="rec-opt" id="recOpt"><input type="checkbox" id="recChk"><span class="rec-emo" aria-hidden="true">🎖️</span><span class="rec-txt"><b>Soy jubilado/a, de salud, bombero/a o policía</b><small>Sumá tu 10% de descuento extra 👵 🩺 🚒 👮 (después subís tu certificado)</small></span><span class="rec-sw" aria-hidden="true"></span></label>
     <div class="calc">
       <div class="calc-line"><span>Valor por clase</span><strong id="cUnit"></strong></div>
+      <div class="calc-line save" id="cRecRow" style="display:none"><span>🎖️ Tu descuento del 10%</span><span id="cRec"></span></div>
       <div class="calc-line save" id="cSaveRow"><span>Ahorro con pack mensual</span><span id="cSave"></span></div>
       <div class="calc-note" id="cNote"></div>
       <div class="calc-total"><span>Total del mes</span><strong id="cTotal"></strong></div>
@@ -2692,10 +2705,11 @@ if (!matchMedia('(prefers-reduced-motion:reduce)').matches){
    PANEL DE INSCRIPCIÓN
    ============================================================ */
 const regOv = $('#regOv');
-const reg = { c:null, cur:'ars', pay:'pack', classes:4 };
+const reg = { c:null, cur:'ars', pay:'pack', classes:4, rec:false };
 
 function openReg(c){
-  Object.assign(reg, { c, cur: state.cur, pay:'pack', classes:4 });
+  Object.assign(reg, { c, cur: state.cur, pay:'pack', classes:4, rec:false });
+  $('#recChk').checked = false; $('#recOpt').classList.remove('on');
   $('#drName').textContent = c.name;
   $('#drSched').textContent = '🗓️ ' + c.sched;
   $('#regError').classList.remove('show');
@@ -2724,14 +2738,18 @@ function calc(){
   const { c, cur, pay, classes } = reg;
   const packUnit   = cur === 'usd' ? c.usd : c.price;
   const singleUnit = cur === 'usd' ? c.usd + RECARGO_POR_CLASE_USD : c.price * RECARGO_POR_CLASE_ARS;
-  const unit = pay === 'pack' ? packUnit : singleUnit;
-  return { unit, total: unit * classes, save: (singleUnit - packUnit) * classes };
+  const k = reg.rec ? 0.9 : 1;
+  const unit0 = pay === 'pack' ? packUnit : singleUnit;
+  const unit = unit0 * k;
+  return { unit, total: unit * classes, save: (singleUnit - packUnit) * classes * k, rec: unit0 * classes * (1 - k) };
 }
 function updateCalc(){
   const r = calc(), isPack = reg.pay === 'pack';
   $('#cUnit').textContent = money(r.unit, reg.cur);
   $('#cSave').textContent = '− ' + money(r.save, reg.cur);
   $('#cSaveRow').style.display = isPack ? 'flex' : 'none';
+  $('#cRecRow').style.display = reg.rec ? 'flex' : 'none';
+  $('#cRec').textContent = '− ' + money(r.rec, reg.cur);
   $('#cNote').innerHTML = isPack
     ? '<strong>Importante:</strong> el beneficio del pack no aplica si abonás el mismo día de la clase.'
     : '<strong>Tip:</strong> elegí "Pack mensual" para ahorrar ' + money(r.save, reg.cur) + ' este mes.';
@@ -2740,6 +2758,8 @@ function updateCalc(){
   t.classList.remove('bump'); void t.offsetWidth; t.classList.add('bump');
   setTimeout(() => t.classList.remove('bump'), 250);
 }
+
+$('#recChk').addEventListener('change', e => { reg.rec = e.target.checked; $('#recOpt').classList.toggle('on', reg.rec); updateCalc(); });
 
 $('#regSend').addEventListener('click', () => {
   const v = id => $('#' + id).value.trim();
@@ -2766,7 +2786,7 @@ Quiero inscribirme para 2027:
 *Ciudad y país:* ${v('f_loc') || '-'}
 *WhatsApp:* ${v('f_phone')}
 *Modalidad:* ${reg.pay === 'pack' ? 'Pack mensual' : 'Por clase'} (${reg.classes} clases)
-*Total del mes:* ${money(r.total, reg.cur)}
+*Total del mes:* ${money(r.total, reg.cur)}${reg.rec ? '\n*Descuento:* 10% de reconocimiento (te envío mi certificado)' : ''}
 
 Acepto los términos y compromisos.`;
   window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
