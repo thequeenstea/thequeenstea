@@ -1691,6 +1691,17 @@ main,section,footer{overflow-x:clip}
 @media (max-width:980px){.campus-grid,.shop-grid{grid-template-columns:repeat(2,1fr)}.shop-band{grid-template-columns:1fr;padding:30px}}
 @media (max-width:560px){.campus-grid,.shop-grid{grid-template-columns:1fr}}
 </style>
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y44F56JVRP"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-Y44F56JVRP');
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a,button');if(!a)return;
+var h=a.getAttribute('href')||'';
+if(a.id==='regGo')gtag('event','click_matricula',{destino:h});
+else if(h.indexOf('wa.me')>-1)gtag('event','click_whatsapp');
+else if(h.indexOf('campus.thequeenstea.com.ar')>-1)gtag('event','click_campus',{destino:h});});
+</script>
 </head>
 <body>
 
