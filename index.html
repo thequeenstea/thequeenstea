@@ -2361,7 +2361,13 @@ main,section,footer{overflow-x:clip}
     <div class="opts-row"><span>Dónde vivís</span>
       <div class="seg full" data-group="cur"><span class="thumb"></span><button data-val="ars">Argentina</button><button data-val="usd">Exterior</button></div>
     </div>
-    <div class="opts-row"><span>Modalidad</span>
+    <div class="opts-row"><span>Tipo de clases</span>
+      <div class="seg full" data-group="kind"><span class="thumb"></span><button data-val="group">Grupales</button><button data-val="indiv">Clase individual</button></div>
+    </div>
+    <div class="opts-row" id="imodeRow" style="display:none"><span>Horario</span>
+      <div class="seg full" data-group="imode"><span class="thumb"></span><button data-val="fijo">Fijo</button><button data-val="flex">Flexible</button></div>
+    </div>
+    <div class="opts-row" id="payRow"><span>Modalidad</span>
       <div class="seg full" data-group="pay"><span class="thumb"></span><button data-val="pack">Pack mensual</button><button data-val="single">Por clase</button></div>
     </div>
     <div class="opts-row"><span>Clases este mes</span>
@@ -2369,7 +2375,7 @@ main,section,footer{overflow-x:clip}
     </div>
     <label class="rec-opt" id="recOpt"><input type="checkbox" id="recChk"><span class="rec-emo" aria-hidden="true">🎖️</span><span class="rec-txt"><b>Soy jubilado/a, de salud, bombero/a, policía o docente</b><small>Sumá tu 10% de descuento extra 👵 🩺 🚒 👮 👩‍🏫 (después subís tu certificado)</small></span><span class="rec-sw" aria-hidden="true"></span></label>
     <div class="calc">
-      <div class="calc-line"><span>Valor por clase</span><strong id="cUnit"></strong></div>
+      <div class="calc-line"><span id="cUnitLbl">Valor por clase</span><strong id="cUnit"></strong></div>
       <div class="calc-line save" id="cRecRow" style="display:none"><span>🎖️ Tu descuento del 10%</span><span id="cRec"></span></div>
       <div class="calc-line save" id="cSaveRow"><span>Ahorro con pack mensual</span><span id="cSave"></span></div>
       <div class="calc-note" id="cNote"></div>
@@ -2696,10 +2702,18 @@ if (!matchMedia('(prefers-reduced-motion:reduce)').matches){
    PANEL DE INSCRIPCIÓN
    ============================================================ */
 const regOv = $('#regOv');
-const reg = { c:null, cur:'ars', pay:'pack', classes:4, rec:false };
+const reg = { c:null, cur:'ars', pay:'pack', classes:4, rec:false, kind:'group', imode:'fijo' };
+// Clase individual: $50.000 (horario fijo) / $60.000 (horario flexible, se cambia avisando antes de la clase).
+// Sube a la par de los cursos: cuando B1 tenga precio publicado, se ajusta con el mismo porcentaje (base B1 = $27.000).
+const INDIV_BASE = { fijo:50000, flex:60000 };
+function indivPrecio(modo){
+  const b1 = CURSOS.niveles.find(x => x.code === 'b1');
+  const f = b1 && !b1.pronto && b1.price ? b1.price / 27000 : 1;
+  return Math.round(INDIV_BASE[modo] * f / 500) * 500;
+}
 
 function openReg(c){
-  Object.assign(reg, { c, cur: state.cur, pay:'pack', classes:4, rec:false });
+  Object.assign(reg, { c, cur: state.cur, pay:'pack', classes:4, rec:false, kind:'group', imode:'fijo' });
   $('#recChk').checked = false; $('#recOpt').classList.remove('on');
   $('#drName').textContent = c.name;
   $('#drSched').textContent = '🗓️ ' + c.sched;
@@ -2720,11 +2734,13 @@ $$('.seg[data-group]', regOv).forEach(seg => seg.addEventListener('click', e => 
   const b = e.target.closest('button'); if (!b) return;
   const g = seg.dataset.group;
   reg[g] = g === 'classes' ? +b.dataset.val : b.dataset.val;
+  if (g === 'kind' && reg.kind === 'indiv') { reg.rec = false; $('#recChk').checked = false; $('#recOpt').classList.remove('on'); }
   setSeg(seg, b); updateCalc();
 }));
 
 function calc(){
   const { c, cur, pay, classes } = reg;
+  if (reg.kind === 'indiv') { const u = indivPrecio(reg.imode); return { unit:u, total:u * classes, save:0, rec:0 }; }
   const packUnit   = cur === 'usd' ? c.usd : c.price;
   const singleUnit = cur === 'usd' ? c.usd + RECARGO_POR_CLASE_USD : c.price * RECARGO_POR_CLASE_ARS;
   const k = reg.rec ? 0.9 : 1;
@@ -2733,7 +2749,25 @@ function calc(){
   return { unit, total: unit * classes, save: (singleUnit - packUnit) * classes * k, rec: unit0 * classes * (1 - k) };
 }
 function updateCalc(){
-  const r = calc(), isPack = reg.pay === 'pack';
+  const r = calc(), isPack = reg.pay === 'pack', ind = reg.kind === 'indiv';
+  $('#imodeRow').style.display = ind ? '' : 'none';
+  if (ind) { const sg = $('.seg[data-group="imode"]', regOv); setSeg(sg, $('button[data-val="' + reg.imode + '"]', sg)); }
+  $('#payRow').style.display = ind ? 'none' : '';
+  $('#recOpt').style.display = ind ? 'none' : '';
+  $('#cUnitLbl').textContent = ind ? 'Valor por clase individual' : 'Valor por clase';
+  $('#regGo').textContent = ind ? 'Pedir mis horarios' : 'Seguir con mi matrícula';
+  if (ind) {
+    const cur = 'ars';
+    $('#regGo').href = 'https://campus.thequeenstea.com.ar/tienda/matricula-2027?ind=' + reg.imode + '#individuales';
+    $('#cUnit').textContent = money(r.unit, cur);
+    $('#cSaveRow').style.display = 'none'; $('#cRecRow').style.display = 'none';
+    $('#cNote').innerHTML = reg.imode === 'fijo'
+      ? '<strong>Horario fijo:</strong> mismo día y hora todas las semanas. Valor por clase abonando el mes completo, en pesos y sin descuento de reconocimiento. Primero confirmamos tus horarios por WhatsApp.'
+      : '<strong>Horario flexible:</strong> tenés un horario base y podés cambiarlo avisando <u>antes</u> de la clase; después no se cambia ni se recupera. Primero confirmamos tus horarios por WhatsApp.';
+    const t = $('#cTotal'); t.textContent = money(r.total, cur);
+    t.classList.remove('bump'); void t.offsetWidth; t.classList.add('bump'); setTimeout(() => t.classList.remove('bump'), 250);
+    return;
+  }
   $('#regGo').href = 'https://campus.thequeenstea.com.ar/tienda/matricula-2027?nivel=' + encodeURIComponent(NIVEL_API[reg.c.code] || '') + (reg.rec ? '&rec=1' : '');
   $('#cUnit').textContent = money(r.unit, reg.cur);
   $('#cSave').textContent = '− ' + money(r.save, reg.cur);
