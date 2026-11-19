@@ -1,0 +1,14 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Queen's Tea Studio</title><meta name="robots" content="noindex,nofollow"><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#192c3f"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><script>if("serviceWorker" in navigator)navigator.serviceWorker.register("./sw.js").catch(function(){});</script>
+<style>body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#fff;color:#192c3f;display:flex;min-height:100vh;align-items:center;justify-content:center}main{width:min(420px,92vw);text-align:center}img{width:110px}h1{font-size:24px;margin:10px 0 4px}p{color:#5b6f84}a.b,button{display:block;width:100%;box-sizing:border-box;margin:12px 0;padding:18px;border-radius:16px;border:0;font-size:18px;font-weight:700;text-decoration:none;cursor:pointer}a.c{background:#34c7c0;color:#fff}a.p{background:#192c3f;color:#fff}input{width:100%;box-sizing:border-box;padding:16px;font-size:24px;text-align:center;letter-spacing:8px;border:2px solid #dbe5eb;border-radius:14px}button{background:#192c3f;color:#fff}.err{color:#c23d2c}small{color:#7a8b9a}</style></head><body><main>
+<img src="./icon-192.png" alt=""><h1>The Queen's Tea Studio</h1>
+<div id="lock"><p>Escribí tu código para entrar</p><input id="pin" inputmode="numeric" autocomplete="off" maxlength="12"><button id="go">Entrar</button><p id="msg" class="err"></p></div>
+<div id="apps" hidden><a class="b c" href="./carruseles.html">🎨 Carruseles</a><a class="b p" href="./panel.html">📊 Panel de redes</a>
+<p><small>Para tenerla como app: en Android, menú ⋮ → <b>Agregar a pantalla principal</b> (o "Instalar app"). En iPhone, Safari → Compartir → <b>Agregar a inicio</b>.</small></p></div>
+</main><script>
+const H="2e9ed9d0e4d8bad658897396924c0d0d355fe110b8b243caac6e4e65ac1f3350",SALT="qt-studio-2026";
+async function sha(t){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(t));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}
+function open_(){const n=new URLSearchParams(location.search).get("next");if(n&&/^(carruseles|panel)\.html$/.test(n)){location.replace("./"+n);return}document.getElementById("lock").hidden=true;document.getElementById("apps").hidden=false}
+let ok=false;try{ok=localStorage.getItem("qt_pin_ok")===H}catch(e){}if(ok)open_();
+document.getElementById("go").onclick=async()=>{const v=document.getElementById("pin").value.trim();if(await sha(SALT+v)===H){try{localStorage.setItem("qt_pin_ok",H)}catch(e){}open_()}else document.getElementById("msg").textContent="Código incorrecto"};
+document.getElementById("pin").onkeydown=e=>{if(e.key==="Enter")document.getElementById("go").click()};
+</script></body></html>
