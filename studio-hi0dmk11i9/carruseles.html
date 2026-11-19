@@ -86,12 +86,12 @@
   button.dark { background:linear-gradient(135deg,#192c3f,#24435e); }
   header { backdrop-filter:blur(10px); }
   .chips button.on, .tpls button.on { box-shadow:0 0 0 3px rgba(65,193,186,.25); }
-  #progress { position:fixed; top:0; left:0; height:3px; width:0; z-index:60; background:linear-gradient(90deg,#41c1ba,#f2c66d); box-shadow:0 0 12px rgba(65,193,186,.8); }
+  #progress { position:fixed; top:0; left:0; height:3px; width:0; z-index:60; background:linear-gradient(90deg,#41c1ba,#7fdcd6); box-shadow:0 0 12px rgba(65,193,186,.8); }
   .bgfx { position:fixed; inset:0; z-index:-1; pointer-events:none; overflow:hidden; background:linear-gradient(160deg,#eef3f5 0%,#e2f3f1 55%,#edf1f7 100%); }
   .bgfx i { position:absolute; border-radius:50%; filter:blur(50px); opacity:.6; will-change:transform; }
   .bgfx i:nth-child(1) { width:460px; height:460px; background:rgba(65,193,186,.45); left:-140px; top:6%; animation:drift1 19s ease-in-out infinite alternate; }
   .bgfx i:nth-child(2) { width:380px; height:380px; background:rgba(25,44,63,.22); right:-120px; top:38%; animation:drift2 23s ease-in-out infinite alternate; }
-  .bgfx i:nth-child(3) { width:320px; height:320px; background:rgba(242,198,109,.35); left:30%; top:75%; animation:drift1 27s ease-in-out infinite alternate-reverse; }
+  .bgfx i:nth-child(3) { width:320px; height:320px; background:rgba(127,220,214,.35); left:30%; top:75%; animation:drift1 27s ease-in-out infinite alternate-reverse; }
   .bgfx i:nth-child(4) { width:260px; height:260px; background:rgba(65,193,186,.35); right:18%; top:-60px; animation:drift2 17s ease-in-out infinite alternate-reverse; }
   .bgfx b { position:absolute; color:var(--teal); opacity:.55; font-size:26px; will-change:transform; animation:twinkle 4s ease-in-out infinite; }
   @keyframes drift1 { to { translate:90px 60px; scale:1.15; } } @keyframes drift2 { to { translate:-80px -70px; scale:.9; } }
@@ -290,7 +290,7 @@
       </div>
       <label>Fondo</label>
       <div class="chips" id="bgChips">
-        <button data-bg="navy">Azul</button><button data-bg="teal">Turquesa</button><button data-bg="paper">Cuadrícula</button><button data-bg="photo">Foto</button><button data-bg="grad">Degradado</button><button data-bg="aurora">Aurora</button><button data-bg="mesh">Mesh</button><button data-bg="midnight">Neón</button><button data-bg="cream">Crema</button><button data-bg="blush">Rosa</button><button data-bg="mix">Combinado</button>
+        <button data-bg="navy">Azul</button><button data-bg="teal">Turquesa</button><button data-bg="paper">Cuadrícula</button><button data-bg="photo">Foto</button><button data-bg="grad">Degradado</button><button data-bg="aurora">Aurora</button><button data-bg="mesh">Mesh</button><button data-bg="midnight">Noche</button><button data-bg="cream">Blanco</button><button data-bg="blush">Celeste</button><button data-bg="mix">Combinado</button>
       </div>
       <label>Tamaño</label>
       <div class="chips" id="fmtChips"><button data-h="1440">📐 3:4 · 1080×1440 (el más grande en Instagram)</button><button data-h="1350">4:5 · 1080×1350 (clásico)</button><button data-h="1920">📱 9:16 · Stories y TikTok</button></div>
@@ -315,7 +315,7 @@
       <label style="margin-top:0">Diseño de esta slide</label>
       <div class="tpls" id="tpls"></div>
       <label>Fondo de esta slide</label>
-      <select id="slideBg"><option value="auto">Como el carrusel</option><option value="navy">Azul</option><option value="teal">Turquesa</option><option value="paper">Cuadrícula</option><option value="grad">Degradado</option><option value="aurora">Aurora</option><option value="mesh">Mesh</option><option value="midnight">Neón</option><option value="cream">Crema</option><option value="blush">Rosa</option><option value="photo">Foto de fondo</option></select>
+      <select id="slideBg"><option value="auto">Como el carrusel</option><option value="navy">Azul</option><option value="teal">Turquesa</option><option value="paper">Cuadrícula</option><option value="grad">Degradado</option><option value="aurora">Aurora</option><option value="mesh">Mesh</option><option value="midnight">Noche</option><option value="cream">Blanco</option><option value="blush">Celeste</option><option value="photo">Foto de fondo</option></select>
       <div id="fields"></div>
       <div id="imgBox">
         <label>Foto</label>
@@ -335,7 +335,7 @@
       </div>
       <label class="check"><input type="checkbox" id="deco" checked> Destellos y adornos</label>
       <div class="btns">
-        <button class="primary" id="gImprove">🤖 Mejorar esta slide</button><button id="dupBtn">⧉ Duplicar</button><button id="leftBtn">◀</button><button id="rightBtn">▶</button><button id="delBtn">🗑️ Borrar</button>
+        <button class="primary" id="altVer" title="Mismo tema, contenido distinto">🔀 Otra versión</button><button id="altDis" title="Mismo contenido, otro diseño">🎨 Otro diseño</button><button id="gImprove">🤖 Mejorar esta slide</button><button id="dupBtn">⧉ Duplicar</button><button id="leftBtn">◀</button><button id="rightBtn">▶</button><button id="delBtn">🗑️ Borrar</button>
       </div>
     </div>
       <div class="card" id="capsCard">
@@ -559,12 +559,12 @@
     navy: { text: "#fff", hi: TEAL, pillBg: TEAL, pillFg: NAVY, sub: "rgba(255,255,255,.78)", card: "rgba(255,255,255,.07)", cardLine: "rgba(255,255,255,.12)", deco: TEAL, deco2: "#fff", shadow: false },
     teal: { text: NAVY, hi: "#fff", pillBg: NAVY, pillFg: "#fff", sub: "rgba(25,44,63,.8)", card: "rgba(255,255,255,.88)", cardLine: "rgba(25,44,63,.10)", cardHi: TEAL_D, deco: "#fff", deco2: NAVY, shadow: false },
     paper: { text: NAVY, hi: TEAL_D, pillBg: TEAL, pillFg: NAVY, sub: "#4b5e6f", card: "#fff", cardLine: "#dbe6ec", deco: TEAL, deco2: NAVY, shadow: false },
-    aurora: { text: "#fff", hi: "#7fdcd6", pillBg: "#7fdcd6", pillFg: NAVY, sub: "rgba(255,255,255,.8)", card: "rgba(255,255,255,.08)", cardLine: "rgba(255,255,255,.16)", deco: "#7fdcd6", deco2: "#f2c66d", shadow: false },
-    grad: { text: "#fff", hi: "#7fdcd6", pillBg: TEAL, pillFg: NAVY, sub: "rgba(255,255,255,.8)", card: "rgba(255,255,255,.09)", cardLine: "rgba(255,255,255,.14)", deco: "#7fdcd6", deco2: "#f2c66d", shadow: false },
-    midnight: { text: "#fff", hi: "#ff8fb1", pillBg: "#ff8fb1", pillFg: "#1a1030", sub: "rgba(255,255,255,.8)", card: "rgba(255,255,255,.08)", cardLine: "rgba(255,143,177,.25)", deco: "#7fdcd6", deco2: "#ff8fb1", shadow: false },
-    cream: { text: NAVY, hi: "#c8862a", pillBg: NAVY, pillFg: "#fbf3e4", sub: "#5a6470", card: "#fffaf1", cardLine: "#eadcc3", deco: "#c8862a", deco2: TEAL, shadow: false },
-    mesh: { text: "#fff", hi: "#ffd66b", pillBg: "#ffd66b", pillFg: NAVY, sub: "rgba(255,255,255,.85)", card: "rgba(255,255,255,.12)", cardLine: "rgba(255,255,255,.2)", deco: "#ffd66b", deco2: "#9ff3ec", shadow: false },
-    blush: { text: NAVY, hi: "#e0567a", pillBg: NAVY, pillFg: "#fff", sub: "#5b5466", card: "#fff", cardLine: "#f3cfd8", deco: "#e0567a", deco2: TEAL, shadow: false },
+    aurora: { text: "#fff", hi: "#7fdcd6", pillBg: "#7fdcd6", pillFg: NAVY, sub: "rgba(255,255,255,.8)", card: "rgba(255,255,255,.08)", cardLine: "rgba(255,255,255,.16)", deco: "#7fdcd6", deco2: "#7fdcd6", shadow: false },
+    grad: { text: "#fff", hi: "#7fdcd6", pillBg: TEAL, pillFg: NAVY, sub: "rgba(255,255,255,.8)", card: "rgba(255,255,255,.09)", cardLine: "rgba(255,255,255,.14)", deco: "#7fdcd6", deco2: "#7fdcd6", shadow: false },
+    midnight: { text: "#fff", hi: TEAL, pillBg: TEAL, pillFg: NAVY, sub: "rgba(255,255,255,.8)", card: "rgba(255,255,255,.07)", cardLine: "rgba(52,199,192,.28)", deco: TEAL, deco2: "#fff", shadow: false },
+    cream: { text: NAVY, hi: TEAL_D, pillBg: NAVY, pillFg: "#fff", sub: "#4b5e6f", card: "#f3f8fa", cardLine: "#dbe6ec", deco: TEAL, deco2: NAVY, shadow: false },
+    mesh: { text: "#fff", hi: "#7fdcd6", pillBg: TEAL, pillFg: NAVY, sub: "rgba(255,255,255,.85)", card: "rgba(255,255,255,.1)", cardLine: "rgba(255,255,255,.18)", deco: "#7fdcd6", deco2: "#fff", shadow: false },
+    blush: { text: NAVY, hi: TEAL_D, pillBg: NAVY, pillFg: "#fff", sub: "#40596b", card: "#fff", cardLine: "#bfe9e6", deco: TEAL_D, deco2: NAVY, shadow: false },
     photo: { text: "#fff", hi: TEAL, pillBg: TEAL, pillFg: NAVY, sub: "rgba(255,255,255,.85)", card: "rgba(25,44,63,.55)", cardLine: "rgba(255,255,255,.15)", deco: TEAL, deco2: "#fff", shadow: true },
   };
   function bgOf(s, i) {
@@ -695,7 +695,7 @@
     else if (b === "aurora") {
       ctx.fillStyle = "#0e1a2b"; ctx.fillRect(0, 0, W, H);
       ctx.save(); ctx.translate(-i * W, 0);
-      [["rgba(65,193,186,.55)", 0.22, 150], ["rgba(127,220,214,.35)", 0.5, 210], ["rgba(242,198,109,.28)", 0.78, 170]].forEach(([c, yy, amp], k) => {
+      [["rgba(65,193,186,.55)", 0.22, 150], ["rgba(127,220,214,.35)", 0.5, 210], ["rgba(255,255,255,.14)", 0.78, 170]].forEach(([c, yy, amp], k) => {
         ctx.beginPath(); for (let x = i * W - 60; x <= (i + 1) * W + 60; x += 20) { const y = H * yy + Math.sin(x / 430 + k * 2 + (proj.seed % 7)) * amp; x === i * W - 60 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); }
         ctx.lineTo((i + 1) * W + 60, H * yy + 520); ctx.lineTo(i * W - 60, H * yy + 520); ctx.closePath();
         const g = ctx.createLinearGradient(0, H * yy - amp, 0, H * yy + 420); g.addColorStop(0, c); g.addColorStop(1, "rgba(14,26,43,0)"); ctx.fillStyle = g; try { ctx.filter = "blur(28px)"; } catch { } ctx.fill(); try { ctx.filter = "none"; } catch { }
@@ -705,27 +705,27 @@
     else if (b === "grad") {
       const g0 = ctx.createLinearGradient(-i * W * 0.4, 0, W, H); g0.addColorStop(0, "#142437"); g0.addColorStop(0.55, "#1d4a5a"); g0.addColorStop(1, "#2a7d80"); ctx.fillStyle = g0; ctx.fillRect(0, 0, W, H);
       const g1 = ctx.createRadialGradient(W * 0.85, H * 0.15, 0, W * 0.85, H * 0.15, W * 0.7); g1.addColorStop(0, "rgba(127,220,214,.35)"); g1.addColorStop(1, "rgba(127,220,214,0)"); ctx.fillStyle = g1; ctx.fillRect(0, 0, W, H);
-      const g2 = ctx.createRadialGradient(W * 0.1, H * 0.95, 0, W * 0.1, H * 0.95, W * 0.6); g2.addColorStop(0, "rgba(242,198,109,.18)"); g2.addColorStop(1, "rgba(242,198,109,0)"); ctx.fillStyle = g2; ctx.fillRect(0, 0, W, H);
+      const g2 = ctx.createRadialGradient(W * 0.1, H * 0.95, 0, W * 0.1, H * 0.95, W * 0.6); g2.addColorStop(0, "rgba(127,220,214,.16)"); g2.addColorStop(1, "rgba(127,220,214,0)"); ctx.fillStyle = g2; ctx.fillRect(0, 0, W, H);
       noise();
     }
     else if (b === "midnight") {
-      ctx.fillStyle = "#120d24"; ctx.fillRect(0, 0, W, H);
-      [[0.85, 0.12, "rgba(255,143,177,.38)", 0.62], [0.1, 0.9, "rgba(65,193,186,.32)", 0.7], [0.5, 0.5, "rgba(122,92,255,.18)", 0.9]].forEach(([x, y, c, r]) => { const g = ctx.createRadialGradient(W * x - i * 40, H * y, 0, W * x - i * 40, H * y, W * r); g.addColorStop(0, c); g.addColorStop(1, "rgba(0,0,0,0)"); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H); });
+      ctx.fillStyle = "#0f1c2d"; ctx.fillRect(0, 0, W, H);
+      [[0.85, 0.12, "rgba(52,199,192,.30)", 0.62], [0.1, 0.9, "rgba(65,193,186,.26)", 0.7], [0.5, 0.5, "rgba(127,220,214,.10)", 0.9]].forEach(([x, y, c, r]) => { const g = ctx.createRadialGradient(W * x - i * 40, H * y, 0, W * x - i * 40, H * y, W * r); g.addColorStop(0, c); g.addColorStop(1, "rgba(0,0,0,0)"); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H); });
       ctx.strokeStyle = "rgba(255,255,255,.05)"; ctx.lineWidth = 1.5; ctx.beginPath(); for (let y = 0; y <= H; y += 36) { ctx.moveTo(0, y); ctx.lineTo(W, y); } ctx.stroke(); noise();
     }
     else if (b === "cream") {
-      ctx.fillStyle = "#fbf3e4"; ctx.fillRect(0, 0, W, H);
-      const g = ctx.createRadialGradient(W * 0.9, H * 0.05, 0, W * 0.9, H * 0.05, W * 0.8); g.addColorStop(0, "rgba(200,134,42,.16)"); g.addColorStop(1, "rgba(200,134,42,0)"); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, W, H);
+      const g = ctx.createRadialGradient(W * 0.9, H * 0.05, 0, W * 0.9, H * 0.05, W * 0.8); g.addColorStop(0, "rgba(52,199,192,.14)"); g.addColorStop(1, "rgba(52,199,192,0)"); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
       ctx.strokeStyle = "rgba(25,44,63,.08)"; ctx.lineWidth = 2; ctx.strokeRect(36, 36, W - 72, H - 72); noise();
     }
     else if (b === "mesh") {
-      ctx.fillStyle = "#16324a"; ctx.fillRect(0, 0, W, H);
-      [[0.15 + i * 0.03, 0.15, "rgba(65,193,186,.75)", 0.75], [0.95, 0.35, "rgba(122,92,255,.55)", 0.7], [0.3, 0.95, "rgba(255,214,107,.45)", 0.7], [0.8, 0.9, "rgba(255,143,177,.4)", 0.6]].forEach(([x, y, c, r]) => { const g = ctx.createRadialGradient(W * x, H * y, 0, W * x, H * y, W * r); g.addColorStop(0, c); g.addColorStop(1, "rgba(22,50,74,0)"); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H); });
+      ctx.fillStyle = NAVY; ctx.fillRect(0, 0, W, H);
+      [[0.15 + i * 0.03, 0.15, "rgba(65,193,186,.7)", 0.75], [0.95, 0.35, "rgba(127,220,214,.45)", 0.7], [0.3, 0.95, "rgba(52,199,192,.45)", 0.7], [0.8, 0.9, "rgba(255,255,255,.12)", 0.6]].forEach(([x, y, c, r]) => { const g = ctx.createRadialGradient(W * x, H * y, 0, W * x, H * y, W * r); g.addColorStop(0, c); g.addColorStop(1, "rgba(22,50,74,0)"); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H); });
       noise();
     }
     else if (b === "blush") {
-      const g = ctx.createLinearGradient(0, 0, W, H); g.addColorStop(0, "#fdeef0"); g.addColorStop(1, "#fbe1e6"); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
-      ctx.fillStyle = "rgba(224,86,122,.08)"; for (let y = 40; y < H; y += 46) for (let x = ((y / 46) % 2) * 23 + 20 - (i * W) % 46; x < W; x += 46) { ctx.beginPath(); ctx.arc(x, y, 3.2, 0, 7); ctx.fill(); }
+      const g = ctx.createLinearGradient(0, 0, W, H); g.addColorStop(0, "#eefaf9"); g.addColorStop(1, "#d9f3f1"); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = "rgba(25,44,63,.07)"; for (let y = 40; y < H; y += 46) for (let x = ((y / 46) % 2) * 23 + 20 - (i * W) % 46; x < W; x += 46) { ctx.beginPath(); ctx.arc(x, y, 3.2, 0, 7); ctx.fill(); }
     }
     else if (b === "paper") {
       ctx.fillStyle = "#f3f6f7"; ctx.fillRect(0, 0, W, H); ctx.strokeStyle = "rgba(25,44,63,.07)"; ctx.lineWidth = 2;
@@ -975,7 +975,7 @@
         ctx.save(); rr(px, top, pw, bottom - top, 46); ctx.clip();
         ctx.fillStyle = NAVY; ctx.fillRect(px, top, pw, 118);
         const shown = names.slice(0, 2);
-        shown.forEach((n, k) => { const cx = px + 70 + k * 46, cy = top + 59; ctx.beginPath(); ctx.arc(cx, cy, 32, 0, 7); ctx.fillStyle = k ? "#f2c66d" : TEAL; ctx.fill(); ctx.strokeStyle = NAVY; ctx.lineWidth = 4; ctx.stroke(); ctx.fillStyle = NAVY; ctx.font = `800 28px ${BODY}`; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText((n.trim()[0] || "?").toUpperCase(), cx, cy + 1); });
+        shown.forEach((n, k) => { const cx = px + 70 + k * 46, cy = top + 59; ctx.beginPath(); ctx.arc(cx, cy, 32, 0, 7); ctx.fillStyle = k ? "#7fdcd6" : TEAL; ctx.fill(); ctx.strokeStyle = NAVY; ctx.lineWidth = 4; ctx.stroke(); ctx.fillStyle = NAVY; ctx.font = `800 28px ${BODY}`; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText((n.trim()[0] || "?").toUpperCase(), cx, cy + 1); });
         const tx = px + 70 + shown.length * 46 + 6; ctx.textAlign = "left"; ctx.textBaseline = "middle"; ctx.fillStyle = "#fff"; ctx.font = `800 32px ${BODY}`; ctx.fillText(shown.join(" & ").slice(0, 28), tx, top + 46); ctx.fillStyle = "#7fdcd6"; ctx.font = `600 22px ${BODY}`; ctx.fillText("en línea", tx, top + 82); ctx.textBaseline = "alphabetic";
         let y = areaTop;
         items.forEach((it, k) => {
@@ -3462,8 +3462,8 @@ Respondé SOLO JSON: {"titulo":"","artista":"","anio":0,"traduccion":"","tema":"
 
   // ================= ELEMENTOS LIBRES (como en Canva) =================
   const XNAME = { text: "Texto", photo: "Foto", emoji: "Emoji", arrow: "Flecha", circle: "Marca", sparkle: "Destellos", tape: "Cinta", sticky: "Nota" };
-  const XCOLORS = [["auto", "Automático", "linear-gradient(135deg,#fff 50%,#192c3f 50%)"], ["white", "Blanco", "#fff"], ["navy", "Azul", NAVY], ["teal", "Turquesa", TEAL], ["yellow", "Amarillo", "#ffd84d"], ["pink", "Rosa", "#ff8fb1"]];
-  const xColor = (c, P, def) => ({ teal: TEAL, navy: NAVY, white: "#fff", yellow: "#ffd84d", pink: "#ff8fb1" })[c] || def || P.text;
+  const XCOLORS = [["auto", "Automático", "linear-gradient(135deg,#fff 50%,#192c3f 50%)"], ["white", "Blanco", "#fff"], ["navy", "Azul", NAVY], ["teal", "Turquesa", TEAL], ["light", "Celeste", "#7fdcd6"]];
+  const xColor = (c, P, def) => ({ teal: TEAL, navy: NAVY, white: "#fff", light: "#7fdcd6", yellow: "#7fdcd6", pink: TEAL })[c] || def || P.text;
   function newExtra(type, o = {}) {
     const base = { id: "e" + Date.now().toString(36) + Math.floor(Math.random() * 1e4), type, x: W / 2 + (Math.random() - 0.5) * 120, y: H / 2 + (Math.random() - 0.5) * 120, color: "auto" };
     const def = { text: { text: "Escribí *acá*", font: "title", size: 90, bg: "none", w: 800 }, photo: { w: 460, cut: true, outline: true, filter: "none" }, emoji: { emoji: "😍", size: 230 }, arrow: { flip: false }, circle: { w: 420 }, sparkle: {}, tape: { rot: -0.25 }, sticky: { text: "No te olvides de *esto* ✨", color: "yellow" } }[type] || {};
@@ -3860,7 +3860,7 @@ Además devolvé caption (texto para la publicación: primera línea con la pala
     if (innerWidth < 980) document.querySelector(".stageInner").scrollIntoView({ behavior: "smooth", block: "start" });
   }
   $("series").innerHTML = Object.entries(SERIES).map(([k, v]) => `<button data-s="${k}"><i>${v.e}</i><span><b>${v.n}</b><small>${v.d}</small></span><em>∞</em></button>`).join("");
-  $("series").querySelectorAll("button").forEach(b => b.onclick = () => { const v = SERIES[b.dataset.s]; buildSlides(v.gen(), v.n); });
+  $("series").querySelectorAll("button").forEach(b => b.onclick = async () => { const v = SERIES[b.dataset.s]; await buildSlides(v.gen(), v.n); proj.serie = b.dataset.s; });
   $("libRnd").onclick = () => {
     if (Math.random() < 0.75) { const k = pickR(Object.keys(SERIES)); buildSlides(SERIES[k].gen(), SERIES[k].n); }
     else { const pool = LIB.filter(x => x.id !== libSel), it = pool[rndI(pool.length)] || LIB[0]; libSel = it.id; renderLib(); buildLib(it); randomLook(); showSlide(); }
@@ -4336,6 +4336,61 @@ Respondé SOLO JSON: {"nombre":"${name}","quien":"a qué se dedica (2 a 5 palabr
     else { pushHist(); if (where === "portada") { proj.slides[0] = sl; idx = 0; } else { idx = cur + 1; proj.slides.splice(idx, 0, sl); } cur = idx; showSlide(); }
     await setImage(f, { slide: idx }); cur = idx; showSlide();
     setStatus("✅ Foto lista. Tocala en la slide para moverla, agrandarla o cambiar el recorte. Los textos se editan tocándolos.");
+  };
+
+  // ================= OTRA VERSIÓN / OTRO DISEÑO DE UNA SLIDE =================
+  const ALT_TPL = { list: ["decode", "grid4", "steps"], decode: ["list", "grid4", "steps"], grid4: ["list", "steps", "decode"], steps: ["list", "grid4"], text: ["notes", "marker"], notes: ["marker", "text"], marker: ["text", "notes"], quote: ["text"], tweet: ["notes", "text"] };
+  const ALT_BG = ["mesh", "midnight", "cream", "blush", "aurora", "grad", "navy", "teal", "paper"];
+  const asLines = s => String(s.f.items || s.f.body || "").split("\n").map(x => x.trim()).filter(Boolean);
+  function convertSlide(s, to) {
+    const f = s.f, title = f.title || f.kicker || f.quote || "", lines = asLines(s);
+    const pair = l => { const m = l.split(/\s*(?:=>|=|→|:)\s*/); return m.length > 1 ? [m[0], m.slice(1).join(" ")] : [l, ""]; };
+    let nf;
+    if (to === "decode") nf = { title, items: lines.slice(0, 4).map(l => { const p = pair(l); return p[1] ? `${p[0]} => ${p[1]}` : l; }).join("\n") };
+    else if (to === "list") nf = { title, items: lines.slice(0, 6).map(l => { const p = pair(l); return p[1] ? `${p[0]} = ${p[1]}` : l; }).join("\n") };
+    else if (to === "grid4") nf = { title, items: lines.slice(0, 4).map(l => l.replace(/\s*=>\s*/, " = ")).join("\n") };
+    else if (to === "steps") nf = { title, items: lines.slice(0, 5).map(l => l.replace(/\s*=>\s*/, ": ")).join("\n") };
+    else if (to === "text") nf = { kicker: f.kicker || (s.tpl === "quote" ? "Frase" : "Dato"), title: s.tpl === "quote" ? `"${f.quote}"` : (f.title || ""), body: s.tpl === "quote" ? [f.author, f.tr].filter(Boolean).join("\n\n") : (f.body || f.text || ""), emoji: f.emoji || "" };
+    else if (to === "notes" || to === "marker") nf = { title: f.title || f.kicker || "", body: f.body || f.text || "" };
+    if (!nf) return false;
+    if (["decode", "list", "grid4", "steps"].includes(to) && !nf.items) return false;
+    s.tpl = to; s.f = nf; s.adj = {}; return true;
+  }
+  $("altDis").onclick = async () => {
+    const s = slide(); pushHist();
+    s._alt = (s._alt || 0) + 1;
+    const opts = ALT_TPL[s.tpl] || [];
+    const changed = opts.length && s._alt % 3 !== 0 ? convertSlide(s, opts[(s._alt - 1) % opts.length]) : false;
+    if (!changed) { const cb = s.bg && s.bg !== "auto" ? s.bg : ""; s.bg = ALT_BG[(ALT_BG.indexOf(cb) + 1) % ALT_BG.length]; }
+    if (s.f.items && Math.random() < .5) s.f.items = shuf(s.f.items.split("\n")).join("\n");
+    await preloadEmojis(Object.values(s.f)); showSlide();
+    setStatus(changed ? "🎨 Otro diseño, mismo contenido. Tocá de nuevo para ver más. ↶ Deshacer vuelve atrás." : "🎨 Otro fondo para esta slide. Tocá de nuevo para ver más.");
+  };
+  const SWAP_SAFE = ["mitos", "falsos", "slang", "codigo", "datos", "ukus"];
+  $("altVer").onclick = async () => {
+    const s = slide(), b = $("altVer");
+    if (s.tpl === "cta" || s.tpl === "cover") { $("altDis").click(); return; }
+    b.disabled = true;
+    try {
+      if (gKey()) {
+        setStatus("🔀 Buscando otra versión…");
+        const ctxTxt = proj.slides.map((z, k) => `${k + 1}. [${z.tpl}] ` + Object.values(z.f).filter(Boolean).join(" | ")).join("\n").slice(0, 3000);
+        const prompt = `Sos la community manager y profe de inglés de The Queen's Tea (@thequeenstea.ingles). Este es un carrusel de Instagram:\n${ctxTxt}\n\nEscribí OTRA VERSIÓN de la slide ${cur + 1} (diseño "${s.tpl}"): mismo tema y misma función dentro del carrusel, pero con contenido distinto (otros ejemplos, otras palabras, otro enfoque o un dato diferente). No repitas nada de lo que ya dice ni de las otras slides. Campos actuales: ${JSON.stringify(s.f)}\nDevolvé el mismo tpl con todos sus campos.\n\n${STYLE_RULES}`;
+        const x = await gemini(prompt, SLIDE_SCHEMA, "Gemini está escribiendo otra versión"); pushHist();
+        SLIDE_FIELDS.forEach(k => { if (k !== "tpl" && k !== "kw" && x[k] && (k in s.f || TPL[s.tpl].fields.some(f => f[0] === k))) s.f[k] = String(x[k]).replace(/\\n/g, "\n"); });
+        await preloadEmojis(Object.values(s.f)); showSlide(); setStatus("✅ Otra versión lista. Tocá de nuevo para otra, o ↶ Deshacer para volver.");
+        return;
+      }
+      if (proj.serie && SWAP_SAFE.includes(proj.serie) && SERIES[proj.serie]) {
+        const sig = JSON.stringify(s.f);
+        for (let t = 0; t < 8; t++) {
+          const r = SERIES[proj.serie].gen(), cand = (r.slides || []).filter(z => z.tpl === s.tpl && JSON.stringify(z.f) !== sig && !proj.slides.some(y => JSON.stringify(y.f) === JSON.stringify(z.f)));
+          if (cand.length) { pushHist(); const z = pickR(cand); s.f = z.f; s.adj = {}; await preloadEmojis(Object.values(s.f)); showSlide(); setStatus("✅ Otra versión, del mismo tema. Tocá de nuevo para otra."); return; }
+        }
+      }
+      $("altDis").click(); setStatus("🎨 Sin Gemini te propongo otro diseño de la misma slide. Con Gemini conectado, 🔀 te escribe contenido nuevo del mismo tema.");
+    } catch (e) { setStatus("⚠️ " + (e.message || "No pude armar otra versión.")); }
+    finally { b.disabled = false; }
   };
 
   // ================= INICIO =================
