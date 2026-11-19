@@ -130,7 +130,8 @@ body{background:#fff!important}
 .card:hover{transform:none;border-color:#b9cdd8;box-shadow:0 4px 14px rgba(25,44,63,.09)}
 .copybox,input[type=text],input[type=number],input[type=password],select,textarea{background:#f7fafc}
 .ticker{background:#f3f7f9}
-.ticker .track{animation:none;flex-wrap:wrap;width:auto;white-space:normal;gap:6px 28px;padding:9px 20px}
+.ticker .track{animation:none;flex-wrap:nowrap;width:auto;white-space:nowrap;gap:8px;padding:8px 20px;overflow-x:auto;align-items:center;scrollbar-width:none}
+.tk{border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 12px;font-size:13px;color:var(--ink);cursor:pointer;font-family:inherit} .tk b{color:var(--teal2);margin-right:6px;font-weight:700} .tk:hover{border-color:var(--teal)} .tkh{font-size:12.5px;font-weight:700;color:var(--muted);margin-left:6px} .tkm{font-size:13px;color:var(--muted)}
 .brand h1{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:var(--ink);animation:none}
 .bgfx{display:none}
 .rv,.rv.in{opacity:1!important;transform:none!important;transition:none!important}
@@ -403,7 +404,7 @@ Cuando termines, mandame tu resultado y te recomiendo el curso ideal 😊</div><
 
 <!-- BIBLIOTECA -->
 <section class="view" id="v-biblioteca">
-  <div class="sec-head"><div><h2>Ideas que nadie hace</h2><p>Ideas infinitas: bajá y van apareciendo más, cada una distinta. Los carruseles se abren armados en tu web de carruseles con un botón. Todo listo para producir: gancho, por qué se comparte, guion o carrusel completo. Los carruseles se copian con un botón y se pegan en tu web de carruseles ("O escribilo vos" → pegar → Armar carrusel). Tu web de carruseles ya los trae adentro también.</p></div></div>
+  <div class="sec-head"><div><h2>Ideas que nadie hace</h2><p>Ideas infinitas para todas tus redes: bajá y van apareciendo más. Filtrá por tema o por red, y con un toque las abrís armadas o las dejás listas para publicar.</p></div></div>
   <div class="chips" id="libPilares"></div>
   <div class="chips" id="libRedes"></div>
   <div class="grid" id="libGrid"></div>
@@ -2630,12 +2631,17 @@ $("carrOpen").onclick = e => { e.preventDefault(); const u = URL.createObjectURL
 document.querySelector('#tabs [data-tab="carruseles"]').addEventListener("click", () => { if(!carrLoaded) openCarr(""); });
 document.addEventListener("click", e => { const a = e.target.closest("[data-carr]"); if(!a) return; e.preventDefault(); const it = GEN.get(a.dataset.carr) || (typeof BIBLIOTECA !== "undefined" && BIBLIOTECA.find(x => String(x.id) === a.dataset.carr)); if(it && it.slides) openCarr({qtSlides:{slides: it.slides.map(s => ({tpl: s.tpl, f: s.f})), caption: it.caption || "", pin: it.cta || ""}}); else if(a.dataset.serie) openCarr({qtSeries: a.dataset.serie}); else openCarr(null); });
 $("hours").addEventListener("click", e => { const b = e.target.closest("[data-go]"); if(!b) return; const el = document.getElementById("pv-" + b.dataset.go); if(el){ el.scrollIntoView({behavior:"smooth", block:"center"}); el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash"); } });
+$("ticker").addEventListener("click", e => { const b = e.target.closest("[data-tk]"); if(!b) return; showTab("hoy"); if(b.dataset.tk === "fechas") setTimeout(() => $("fechaCard").scrollIntoView({behavior:"smooth", block:"center"}), 60); });
 $("otraHora").onclick = () => { S.shuffle = (S.shuffle || 0) + 1; save(); renderHoy(); };
 function renderTicker(picks){
-  const t = (S.trends && S.trends.items || []).map(x => ["Tendencia", x.tendencia]);
-  const list = t.concat(picks.map(x => [x.n.name, x.it.gancho])).concat(FECHAS.slice(0, 4).map(f => [f.t, f.idea]));
-  const html = list.map(([k, v]) => `<span><b>${esc(k)}</b>${esc(v)}</span>`).join(""); $("ticker").innerHTML = html;
+  const today = new Date(Date.now() - 3 * 3600e3), md = d => String(d.getUTCMonth()+1).padStart(2,"0") + "-" + String(d.getUTCDate()).padStart(2,"0");
+  const prox = []; for(let d = 0; d < 45 && prox.length < 3; d++){ const dt = new Date(today.getTime() + d * 864e5); FECHAS.filter(f => f.f === md(dt)).forEach(f => prox.push({...f, d})); }
+  const t = (S.trends && S.trends.items || []).slice(0, 2);
+  const chip = (lbl, txt, tip, go) => `<button class="tk" data-tk="${go}" title="${esc(tip || "")}"><b>${lbl}</b>${esc(txt)}</button>`;
+  $("ticker").innerHTML = `<span class="tkh">📅 Se viene</span>` + (prox.length ? prox.map(f => chip(f.d === 0 ? "Hoy" : f.d === 1 ? "Mañana" : `En ${f.d} días`, f.t, f.idea, "fechas")).join("") : `<span class="tkm">nada en las próximas semanas</span>`)
+    + (t.length ? `<span class="tkh">🔥 Tendencia</span>` + t.map(x => chip("", x.tendencia, "", "hoy")).join("") : "");
 }
+
 function renderTrends(){
   const c = $("trendCard"), T = S.trends;
   if(!T || !T.items){ c.hidden = true; return; } c.hidden = false;
