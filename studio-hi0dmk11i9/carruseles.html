@@ -166,6 +166,18 @@
       </details>
     </div>
 
+    <div class="card libCard">
+      <h2>🛍️ Carruseles de tu tienda</h2>
+      <div class="small" style="margin-top:-4px">Tocá un curso o recurso de tu tienda y sale un carrusel con gancho que habla solo de ese producto. Cada vez que lo tocás, cambia el gancho de la portada.</div>
+      <div class="series" id="prodList" style="max-height:330px;overflow:auto"></div>
+      <details style="margin-top:12px" open><summary style="cursor:pointer;font-weight:800">📋 Pegá un producto nuevo</summary>
+        <div class="small" style="margin:6px 0">Copiá la página del curso de tu tienda (o un PDF, un mensaje, lo que tengas) y pegala acá. La app arma un resumen y el carrusel.</div>
+        <textarea id="prodTxt" rows="7" placeholder="Ejemplo: Writing Essays - Curso Asincrónico (B2-C1). Este curso te introduce al mundo de la escritura de ensayos... Temario: 1. Essay Writing 2. ... $ 60.000 $ 36.000"></textarea>
+        <div class="btns"><button class="primary" id="prodMake">✨ Armar carrusel</button><button id="prodGem">🤖 Mejor con Gemini</button><button id="prodSaveBtn">💾 Guardar en mi lista</button></div>
+        <div id="prodSum" class="hint hidden" style="line-height:1.55"></div>
+      </details>
+    </div>
+
     <div class="card">
       <h2>📱 Stories</h2>
       <div class="small" style="margin-top:-4px">Stories verticales (1080×1920) listas para subir. En cada una te digo qué sticker agregar en Instagram: encuesta, quiz, preguntas o cuenta regresiva.</div>
@@ -4476,6 +4488,119 @@ Además devolvé caption (texto para la publicación: primera línea con la pala
   }
   $("series").innerHTML = Object.entries(SERIES).map(([k, v]) => `<button data-s="${k}"><i>${v.e}</i><span><b>${v.n}</b><small>${v.d}</small></span><em>∞</em></button>`).join("");
   $("series").querySelectorAll("button").forEach(b => b.onclick = async () => { const v = SERIES[b.dataset.s]; await buildSlides(v.gen(), v.n); proj.serie = b.dataset.s; });
+  // ================= 🛍️ CARRUSELES DE TU TIENDA + PEGAR CUALQUIER PRODUCTO =================
+  const PROD_OF_TIENDA = () => {
+    const out = TIENDA.cursos.map(c => ({ id: "t_" + c.id, n: c.n, tipo: "curso", lvl: c.lvl, precio: c.now, antes: c.old, off: c.off, para: c.para.replace(/\*/g, ""),
+      resumen: `Un curso a tu ritmo, 100% en inglés, con ${c.vid} lecciones en video y ${c.tar} tareas con devolución personalizada.`,
+      aprende: c.tem.split("\n"), incluye: [`🎬 ${c.vid} lecciones en video`, `✍️ ${c.tar} tareas con devolución personalizada`, "🗣️ 100% en inglés", "⚡ Acceso inmediato a tu campus"], temas: c.temas.split("\n"), acceso: true, ingles: true }));
+    const PARA = { patrias: "Para profes que preparan las fechas patrias y quieren trabajarlas en inglés.", pronunciacion: "Para profes que quieren trabajar la pronunciación con material claro y listo.", flashcards: "Para profes que buscan material visual listo para usar en clase.", speaking: "Para profes de nivel inicial que quieren que sus alumnos se animen a hablar.", cultura: "Para profes que quieren llevar la cultura argentina a la clase de inglés." };
+    TIENDA.recursos.forEach((r, k) => { const lv = (r.n.match(/\b([ABC][12](?:\s*[-–]\s*[ABC][12])?\+?)/) || [])[1] || "";
+      out.push({ id: "r_" + k, n: r.n, tipo: "recurso", lvl: lv, precio: r.p, antes: r.old || "", off: r.old ? `−${Math.round(100 - 100 * parseInt(r.p.replace(/\D/g, "")) / parseInt(r.old.replace(/\D/g, "")))}%` : "", para: PARA[r.g] || "Para profes de inglés.", resumen: "Recurso descargable, listo para imprimir o proyectar en tu clase.", aprende: [], incluye: ["📥 Descargable al instante", "🖨️ Para imprimir o proyectar", lv ? `🎯 Nivel ${lv}` : "🧑‍🏫 Pensado para el aula", "⏱️ Te ahorra planificación"], temas: [], e: r.e }); });
+    out.push({ id: "matricula", n: "Matrícula 2027", tipo: "matricula", lvl: "", precio: "$35.000", antes: "", off: "", para: "Para quien quiere asegurar su lugar, su día y su horario para todo 2027.", resumen: "Con la matrícula reservás tu lugar en el curso que elijas. Valor especial hasta el 21 de diciembre.", aprende: [], incluye: ["👥 Grupos reducidos", "📚 Material incluido", "💻 Tu propio campus", "🎖️ 10% extra para jubilados, salud, bomberos, policía y docentes"], temas: [] });
+    return out;
+  };
+  const prodSaved = () => { try { return JSON.parse(localStorage.getItem("qt_prods") || "[]"); } catch { return []; } };
+  const prodSave = a => { try { localStorage.setItem("qt_prods", JSON.stringify(a)); } catch { } };
+
+  // Lee un texto pegado (de la tienda, un PDF, un mensaje…) y saca lo importante. No inventa nada.
+  function prodParse(raw) {
+    const t = String(raw || "").replace(/\r/g, ""), L = t.split("\n").map(x => x.trim()).filter(Boolean);
+    const clean = x => x.replace(/^([0-9]+[.)-]|[0-9]️⃣|[-•·*✅✔️▪️➡️👉🔹🔸]+)\s*/u, "").replace(/\s+/g, " ").trim().replace(/[.;]$/, "");
+    const isPrice = x => /\$\s?\d/.test(x), junk = /agregar al carrito|comprar|ver curso|ver recurso|tu nombre|tu email|tu dni|aplicar|¿cómo querés pagar|transferencia|qr cuenta dni|tarjeta|pago único|oferta|sin comisión/i;
+    const p = { id: "u_" + Date.now(), n: "", tipo: "curso", lvl: "", precio: "", antes: "", off: "", para: "", resumen: "", aprende: [], incluye: [], temas: [] };
+    p.n = (L.find(x => x.length > 3 && x.length < 90 && !isPrice(x) && !junk.test(x) && /[a-záéíóú]/i.test(x)) || "Mi producto").replace(/\s*[-–|]\s*The Queen's Tea\s*$/i, "").replace(/\s*[-–]\s*curso\b.*$/i, "").replace(/\s*\((?:[ABC][12][^)]*)\)\s*$/, "").trim();
+    const lv = t.match(/\b([ABC][12])(?:\s*[-–\/]\s*([ABC][12]))?\b/); if (lv) p.lvl = lv[2] ? `${lv[1]}-${lv[2]}` : lv[1];
+    const money = [...t.matchAll(/\$\s?([\d.]+)(?:,\d+)?/g)].map(m => +m[1].replace(/\./g, "")).filter(v => v > 0);
+    const uniq = [...new Set(money)].sort((a, b) => b - a), fmt = v => "$" + v.toLocaleString("es-AR");
+    if (uniq.length >= 2 && /oferta|descuento|−|-\d+%|antes/i.test(t)) { p.antes = fmt(uniq[0]); p.precio = fmt(uniq[1]); } else if (uniq.length) p.precio = fmt(money[money.length - 1]);
+    const off = t.match(/[−-]\s?(\d{1,2})\s?%/); if (off) p.off = `−${off[1]}%`; else if (p.antes) p.off = `−${Math.round(100 - 100 * uniq[1] / uniq[0])}%`;
+    if (/recurso|descargable|worksheet|flashcard|para profes|docentes|board game/i.test(t) && !/lecci[oó]n|video/i.test(t)) p.tipo = "recurso";
+    if (/matr[ií]cula/i.test(p.n)) p.tipo = "matricula";
+    const CNT = { "lecci": "🎬", "video": "🎬", "clase": "🧑‍🏫", "tarea": "✍️", "actividad": "✍️", "archivo": "📥", "página": "📄", "pagina": "📄", "unidad": "📚", "módulo": "📚", "modulo": "📚", "hora": "⏱️", "ejercicio": "✍️", "audio": "🎧" };
+    const seen = new Set();
+    for (const m of t.matchAll(/(\d+)\s*\n?\s*(lecci(?:o|ó)n(?:es)?(?: en video)?|videos?|clases?|tareas?(?: con feedback| con devoluci[oó]n)?|actividades|archivos?|p[aá]ginas|unidades|m[oó]dulos|horas|ejercicios|audios)/gi)) {
+      const w = m[2].toLowerCase(), k = Object.keys(CNT).find(z => w.startsWith(z)); if (!k || seen.has(k)) continue; seen.add(k);
+      p.incluye.push(`${CNT[k]} ${m[1]} ${m[2].replace(/feedback/i, "devolución personalizada")}`);
+    }
+    const FEAT = [[/100\s?% en ingl[eé]s|idioma: 100/i, "🗣️ 100% en inglés", "ingles"], [/acceso inmediato/i, "⚡ Acceso inmediato", "acceso"], [/feedback|devoluci[oó]n personalizada/i, "✍️ Con devolución personalizada"], [/descargable/i, "📥 Descargable al instante"], [/certificad/i, "🎓 Con certificado"], [/campus/i, "💻 En tu campus"], [/a tu ritmo|asincr[oó]nic/i, "🕐 A tu ritmo, cuando quieras"], [/grupos? reducid/i, "👥 Grupos reducidos"], [/material incluido/i, "📚 Material incluido"]];
+    FEAT.forEach(([re, txt, flag]) => { if (re.test(t) && p.incluye.length < 4 && !p.incluye.some(z => z.slice(0, 2) === txt.slice(0, 2))) p.incluye.push(txt); if (re.test(t) && flag) p[flag] = true; });
+    // listas: temario / qué vas a aprender / contenido
+    const hdr = /temario|vas a aprender|contenido|programa|m[oó]dulos|incluye|qu[eé] vas a encontrar|unidades|actividades/i;
+    let cur = null; const lists = {};
+    L.forEach(x => { if (hdr.test(x) && x.length < 60 && !/\d/.test(x.replace(/[0-9]️⃣/gu, ""))) { cur = /actividad/i.test(x) ? "temas" : "aprende"; lists[cur] = lists[cur] || []; return; }
+      const bullet = /^([0-9]+[.)-]|[0-9]️⃣|[-•·*✅✔️▪️➡️👉🔹🔸]|📚|🎬|✍️)/u.test(x);
+      if ((cur && x.length < 120 && !junk.test(x) && !isPrice(x)) || bullet) { const c = clean(x.replace(/^(📚|🎬|✍️)\s*/u, "").replace(/^Writing:\s*/i, "")); const k = cur || "aprende"; lists[k] = lists[k] || []; if (c.length > 2 && c.length < 110 && !lists[k].includes(c) && !/^\d+$/.test(c)) lists[k].push(c); }
+      if (x.length > 120) cur = null; });
+    p.aprende = (lists.aprende || []).filter(z => z.length <= 60 && !/^(nivel|idioma|\+)/i.test(z) && !/lecciones en video|tareas con/i.test(z)).slice(0, 6);
+    p.temas = shuf(lists.temas || []).slice(0, 4);
+    const sent = L.filter(x => x.length > 50).flatMap(x => x.split(/(?<=[.!?])\s+/)).map(z => z.trim()).filter(z => z.length > 40 && z.length < 260 && !junk.test(z) && !isPrice(z));
+    p.para = (sent.find(z => /\b(para (quien|vos|profes|alumnos|estudiantes|docentes|personas)|ideal para|pensado para|dirigido a)/i.test(z)) || "").replace(/^[^A-ZÁÉÍÓÚ¿]*/, "");
+    p.resumen = sent.find(z => z !== p.para) || "";
+    if (p.resumen.length > 230) p.resumen = p.resumen.slice(0, 227).replace(/\s\S*$/, "") + "…";
+    return p;
+  }
+
+  // Arma el carrusel del producto. Solo habla del producto: nada de vocabulario ni contenido de otra cosa.
+  function prodSlides(p) {
+    const n = p.n, recurso = p.tipo === "recurso", matri = p.tipo === "matricula";
+    const hooks = p.ganchos && p.ganchos.length ? p.ganchos : recurso ? [`Profe: [${n}] listo para usar`, "Ahorrate la planificación de [esta semana]", `Material que tus alumnos [van a disfrutar]`, `¿Buscás material para tu clase? [Mirá esto]`]
+      : matri ? ["Asegurá tu lugar para [2027]", "Matrícula 2027 con valor especial hasta el [21 de diciembre]", "¿Querés tu horario en 2027? [Leé esto]"]
+      : [`¿Querés aprender *${n}* sin horarios? [Mirá esto]`, `${n}: el curso que [te faltaba]`, `Esto vas a saber hacer después de [${n}]`, `Aprendé *${n}* [a tu ritmo]`, `Todo lo que incluye [${n}]`].concat(p.off ? [`*${n}* con [${p.off}] por tiempo limitado`] : []);
+    const kick = recurso ? "Para profes de inglés" : matri ? "Matrícula 2027" : (p.acceso || /asincr/i.test(n) ? "Curso a tu ritmo" : "Nuestros cursos");
+    const out = [COV(kick, hooks, recurso ? (p.e || "🧑‍🏫") : matri ? "🎓" : "✍️")];
+    const dolor = p.dolor || (recurso ? "Planificar desde cero lleva horas. Y encontrar material lindo, claro y pensado para el aula argentina, más todavía." : matri ? "Los grupos son reducidos y los lugares se ocupan rápido." : "Sabés que lo necesitás, pero no tenés tiempo para cursar con horarios fijos.");
+    out.push(S_("text", { kicker: recurso ? "¿Te pasa?" : "¿Te pasa esto?", title: recurso ? "Planificar lleva *tiempo*" : matri ? "Los lugares *vuelan*" : "Querés, pero *no te da el tiempo*", body: dolor, emoji: recurso ? "⏳" : matri ? "🏃‍♀️" : "😮‍💨" }));
+    if (p.resumen) out.push(S_("text", { kicker: "De qué se trata", title: `*${n}*${p.lvl ? ` (${p.lvl})` : ""}`, body: p.resumen, emoji: recurso ? "📥" : "💡" }));
+    if (p.para) out.push(S_("text", { kicker: "Es para vos si...", title: "¿Para *quién* es?", body: p.para, emoji: "🙋" }));
+    if (p.aprende.length >= 2) out.push(S_("steps", { title: recurso ? "Qué *trae*" : "Qué vas a *aprender*", items: p.aprende.slice(0, 6).join("\n") }));
+    if (p.incluye.length >= 2) out.push(S_("grid4", { title: "Qué *incluye*", items: p.incluye.slice(0, 4).join("\n") }));
+    if (p.temas.length >= 2) out.push(S_("list", { title: recurso ? "Algunas *actividades*" : "Algunos *temas* que vas a trabajar", items: p.temas.slice(0, 4).map(z => `✍️ ${z}`).join("\n") }));
+    const faq = [];
+    if (p.acceso) faq.push("Vos: ¿Cuándo puedo empezar?", "The Queen's Tea: Cuando quieras: el acceso es inmediato apenas se acredita el pago.");
+    if (p.ingles) faq.push("Vos: ¿Es todo en inglés?", "The Queen's Tea: Sí, 100% en inglés, así practicás mientras aprendés.");
+    if (recurso) faq.push("Vos: ¿Cómo lo recibo?", "The Queen's Tea: Es descargable: lo bajás al instante y lo usás esa misma semana.");
+    if (faq.length >= 2) out.push(S_("chat", { title: "Lo que nos *preguntan*", lines: dlg(faq.slice(0, 4)) }));
+    if (p.precio) out.push(p.off ? S_("bignum", { num: p.off, text: `*${n}*: ${p.antes ? `de ${p.antes} a ` : ""}${p.precio}.`, src: "" }) : S_("bignum", { num: p.precio, text: `*${n}*`, src: "" }));
+    out.push(S_("steps", { title: "Cómo lo *conseguís*", items: recurso ? "Entrá a la tienda (link en la bio)\nBuscalo en Recursos docentes\nPagás con transferencia, QR o tarjeta\nLo descargás al instante" : matri ? "Entrá a la tienda (link en la bio)\nElegí tu curso y horario\nPagás la matrícula\nSubís el comprobante y listo" : "Entrá a la tienda (link en la bio)\nAgregalo al carrito\nPagás con transferencia, QR o tarjeta\nAcceso inmediato a tu campus" }));
+    out.push(ctaOf(recurso ? "¿Lo *usarías*?" : "¿Lo *empezás*?", recurso ? "Mandáselo a tu colega profe" : "Mandáselo a quien lo necesita", recurso ? "Escribí PROFE y te pasamos el link" : "Escribí QUIERO y te pasamos el link"));
+    return { topic: n, slides: out };
+  }
+
+  (function prodUI() {
+    const box = $("prodList"); if (!box) return;
+    const all = () => PROD_OF_TIENDA().concat(prodSaved());
+    const draw = () => {
+      const saved = prodSaved().map(z => z.id);
+      box.innerHTML = all().map(p => `<button data-p="${p.id}"><span>${p.tipo === "recurso" ? (p.e || "📥") : p.tipo === "matricula" ? "🎓" : "✍️"}</span><span style="flex:1">${escH(p.n)}${p.precio ? ` <small style="opacity:.6">${escH(p.precio)}</small>` : ""}</span>${saved.includes(p.id) ? `<b data-del="${p.id}" title="Borrar" style="padding:0 6px">✕</b>` : ""}</button>`).join("");
+      box.querySelectorAll("button").forEach(b => b.onclick = async e => {
+        const del = e.target.closest("[data-del]"); if (del) { e.stopPropagation(); if (confirm("¿Borrar este producto de tu lista?")) { prodSave(prodSaved().filter(z => z.id !== del.dataset.del)); draw(); } return; }
+        const p = all().find(z => z.id === b.dataset.p); if (p) await buildSlides(prodSlides(p), p.n);
+      });
+    };
+    draw();
+    let last = null;
+    const show = p => { last = p; $("prodSum").classList.remove("hidden");
+      $("prodSum").innerHTML = `<b>${escH(p.n)}</b>${p.lvl ? ` · ${escH(p.lvl)}` : ""}${p.precio ? ` · ${escH(p.precio)}${p.antes ? ` <s>${escH(p.antes)}</s>` : ""}` : ""}<br>${p.resumen ? `📝 ${escH(p.resumen)}<br>` : ""}${p.para ? `🙋 ${escH(p.para)}<br>` : ""}${p.aprende.length ? `📚 ${escH(p.aprende.join(" · "))}<br>` : ""}${p.incluye.length ? `✅ ${escH(p.incluye.join(" · "))}` : ""}`; };
+    $("prodMake").onclick = async () => { const t = $("prodTxt").value.trim(); if (t.length < 20) { setStatus("Pegá primero la descripción del curso o producto."); return; } const p = prodParse(t); show(p); await buildSlides(prodSlides(p), p.n); };
+    $("prodGem").onclick = async () => {
+      const t = $("prodTxt").value.trim(); if (t.length < 20) { setStatus("Pegá primero la descripción del curso o producto."); return; }
+      try {
+        const r = await gemini(`Sos community manager de The Queen's Tea, academia de inglés argentina. Te paso el texto de un producto de su tienda. Resumilo y armá ganchos para un carrusel de Instagram que venda sin parecer publicidad.
+REGLAS: usá SOLO datos que estén en el texto (no inventes precios, cantidades, fechas ni beneficios). Español rioplatense con voseo, frases cortas y cálidas. Hablá solo del producto: nada de vocabulario ni lecciones de inglés.
+En los ganchos, poné entre [corchetes] 1 a 3 palabras para resaltar. Máximo 12 palabras cada gancho. Variá: pregunta, dolor, resultado, curiosidad, oferta.
+TEXTO:
+"""${t.slice(0, 6000)}"""
+Respondé SOLO JSON: {"nombre":"","tipo":"curso|recurso|matricula|otro","nivel":"","precio":"","antes":"","descuento":"","resumen":"2 frases","para":"1 frase: para quién es","dolor":"1 o 2 frases: el problema que resuelve","aprende":["máx 6, cortos"],"incluye":["máx 4, cada uno empieza con un emoji"],"temas":["máx 4"],"ganchos":["5 ganchos"]}`, null, "Gemini está leyendo tu producto");
+        if (!r || !r.nombre) throw new Error("Gemini respondió incompleto. Probá de nuevo.");
+        const base = prodParse(t), A = x => Array.isArray(x) ? x.map(String).filter(Boolean) : [];
+        const p = { ...base, n: r.nombre || base.n, tipo: ["curso", "recurso", "matricula"].includes(r.tipo) ? r.tipo : base.tipo, lvl: r.nivel || base.lvl, precio: r.precio || base.precio, antes: r.antes || base.antes, off: r.descuento ? "−" + String(r.descuento).replace(/^[−-]/, "") : base.off,
+          resumen: r.resumen || base.resumen, para: r.para || base.para, dolor: r.dolor || "", aprende: A(r.aprende).length ? A(r.aprende).slice(0, 6) : base.aprende, incluye: A(r.incluye).length ? A(r.incluye).slice(0, 4) : base.incluye, temas: A(r.temas).length ? A(r.temas).slice(0, 4) : base.temas, ganchos: A(r.ganchos).slice(0, 5) };
+        if (p.off && !/%$/.test(p.off)) p.off += "%";
+        show(p); await buildSlides(prodSlides(p), p.n);
+      } catch (e) { setStatus("⚠️ " + (e.message || e) + " Mientras tanto, probá con ✨ Armar carrusel (sin Gemini)."); }
+    };
+    $("prodSaveBtn").onclick = () => { const t = $("prodTxt").value.trim(); const p = last || (t.length >= 20 ? prodParse(t) : null); if (!p) { setStatus("Pegá primero la descripción del producto."); return; } const a = prodSaved().filter(z => z.id !== p.id); a.push(p); prodSave(a); draw(); setStatus(`💾 "${p.n}" quedó guardado en tu lista. Tocalo cuando quieras para otro carrusel.`); };
+  })();
   $("libRnd").onclick = () => {
     if (Math.random() < 0.75) { const k = pickR(Object.keys(SERIES)); buildSlides(SERIES[k].gen(), SERIES[k].n); }
     else { const pool = LIB.filter(x => x.id !== libSel), it = pool[rndI(pool.length)] || LIB[0]; libSel = it.id; renderLib(); buildLib(it); randomLook(); showSlide(); }
@@ -5046,5 +5171,5 @@ Respondé SOLO JSON: {"nombre":"${name}","quien":"a qué se dedica (2 a 5 palabr
     if (inFrame) show(); setTimeout(function () { if (!window.__appReady) show(); }, 8000);
   })();
 </script>
-<div id="qtVer" style="position:fixed;left:8px;bottom:6px;font:600 11px system-ui,sans-serif;color:#8a9aa8;z-index:99999;pointer-events:none">Versión 20/11 13:29</div><script>(function(){var V="20/11 13:29";function chk(){fetch("./version.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(j){if(j.v&&j.v!==V){var k="qt_rl_"+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,"1")}catch(e){}location.reload()}}).catch(function(){})}if(location.protocol==="https:"){document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()});chk()}})();</script></body>
+<div id="qtVer" style="position:fixed;left:8px;bottom:6px;font:600 11px system-ui,sans-serif;color:#8a9aa8;z-index:99999;pointer-events:none">Versión 20/11 14:47</div><script>(function(){var V="20/11 14:47";function chk(){fetch("./version.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(j){if(j.v&&j.v!==V){var k="qt_rl_"+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,"1")}catch(e){}location.reload()}}).catch(function(){})}if(location.protocol==="https:"){document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()});chk()}})();</script></body>
 </html>
