@@ -934,11 +934,11 @@
       sparkles(s, i, P, [[970, 170, 24]]);
       const tb = el(s, "title", W / 2, 230, () => rich(val(s, "title"), { x: M, y: 130, w: W - 2 * M, h: 200, max: 96, min: 48, font: F, color: P.text, hi: P.hi, pillBg: P.pillBg, pillFg: P.pillFg }));
       const items = val(s, "items").split("\n").map(x => x.trim()).filter(Boolean).slice(0, 8);
-      const y0 = 380, avail = footerY - 50 - y0, rowH = Math.min(150, avail / Math.max(1, items.length));
+      const yb = 380, avail = footerY - 50 - yb, rowH = Math.min(170, avail / Math.max(1, items.length)), y0 = yb + Math.max(0, avail - rowH * items.length) * 0.4;
       el(s, "items", W / 2, y0 + avail / 2, () => {
         items.forEach((it, k) => {
           const y = y0 + k * rowH, m = it.match(/^(.+?)\s*(?:=|→|->|:|–)\s*(.+)$/), size = Math.min(48, rowH * 0.4);
-          rr(M, y + 8, W - 2 * M, rowH - 16, 26); ctx.fillStyle = P.card; ctx.fill();
+          rr(M, y + 8, W - 2 * M, rowH - 16, 26); ctx.fillStyle = P.card; ctx.fill(); ctx.save(); rr(M, y + 8, W - 2 * M, rowH - 16, 26); ctx.clip(); ctx.fillStyle = P.pillBg; ctx.fillRect(M, y + 8, 10, rowH - 16); ctx.restore();
           ctx.beginPath(); ctx.arc(M + 52, y + rowH / 2, Math.min(34, rowH * 0.28), 0, 7); ctx.fillStyle = P.pillBg; ctx.fill();
           ctx.fillStyle = P.pillFg; ctx.font = `800 ${Math.round(size * 0.8)}px ${BODY}`; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(String(k + 1), M + 52, y + rowH / 2 + 2); ctx.textAlign = "left";
           if (m) {
@@ -1100,14 +1100,14 @@
       sparkles(s, i, P, [[970, 160, 24]]);
       el(s, "title", W / 2, 210, () => rich(val(s, "title"), { x: M, y: 120, w: W - 2 * M, h: 180, max: 92, min: 46, font: F, color: P.text, hi: P.hi, pillBg: P.pillBg, pillFg: P.pillFg }));
       const items = val(s, "items").split("\n").map(x => x.trim()).filter(Boolean).slice(0, 4).map(l => { const m = l.split(/\s*(?:=>|⇒)\s*/); return { a: m[0] || "", b: m.slice(1).join(" ") }; });
-      const y0 = 370, avail = footerY - 50 - y0, rowH = Math.min(250, avail / Math.max(1, items.length)), HI = P.cardHi || P.hi;
+      const yb = 370, avail = footerY - 50 - yb, rowH = Math.min(260, avail / Math.max(1, items.length)), HI = P.cardHi || P.hi, y0 = yb + Math.max(0, avail - rowH * items.length) * 0.4;
       el(s, "items", W / 2, y0 + avail / 2, () => {
         ctx.font = `800 24px ${BODY}`; ctx.textBaseline = "middle";
         ctx.fillStyle = P.sub; ctx.fillText((s.f && s.f.la) || "LO QUE DICEN", M + 8, y0 - 24);
         const lab = (s.f && s.f.lb) || "LO QUE QUIEREN DECIR", lw = ctx.measureText(lab).width; ctx.fillStyle = P.hi; ctx.fillText(lab, W - M - 8 - lw, y0 - 24); ctx.textBaseline = "alphabetic";
         items.forEach((it, k) => {
           const y = y0 + k * rowH, h = rowH - 22;
-          rr(M, y, W - 2 * M, h, 30); ctx.fillStyle = P.card; ctx.fill(); ctx.strokeStyle = P.cardLine; ctx.lineWidth = 3; ctx.stroke();
+          rr(M, y, W - 2 * M, h, 30); ctx.fillStyle = P.card; ctx.fill(); ctx.strokeStyle = P.cardLine; ctx.lineWidth = 3; ctx.stroke(); ctx.save(); rr(M, y, W - 2 * M, h, 30); ctx.clip(); ctx.fillStyle = HI; ctx.fillRect(M, y, 12, h); ctx.restore();
           rich(it.a, { x: M + 36, y: y + 14, w: W - 2 * M - 72, h: h * 0.5 - 8, max: 50, min: 26, weight: 800, color: P.text, hi: HI, valign: "middle", lh: 1.1 });
           const ay = y + h * 0.5 + (h * 0.5 - 12) / 2;
           ctx.save(); ctx.strokeStyle = HI; ctx.lineWidth = 5; ctx.lineCap = "round"; ctx.lineJoin = "round"; ctx.beginPath(); ctx.moveTo(M + 40, ay); ctx.lineTo(M + 84, ay); ctx.moveTo(M + 70, ay - 12); ctx.lineTo(M + 84, ay); ctx.lineTo(M + 70, ay + 12); ctx.stroke(); ctx.restore();
@@ -1155,7 +1155,7 @@
       sparkles(s, i, P, [[970, 150, 22]]);
       el(s, "title", W / 2, 200, () => rich(val(s, "title"), { x: M, y: 120, w: W - 2 * M, h: 160, max: 90, min: 46, font: F, color: P.text, hi: P.hi, pillBg: P.pillBg, pillFg: P.pillFg }));
       const rows = val(s, "items").split("\n").map(x => x.split("|").map(y => y.trim())).filter(r => r.length >= 2 && r[0]).slice(0, 4);
-      const y0 = 390, avail = footerY - 50 - y0, rowH = Math.min(230, avail / Math.max(1, rows.length)), half = (W - 2 * M - 30) / 2;
+      const yb = 390, avail = footerY - 50 - yb, rowH = Math.min(230, avail / Math.max(1, rows.length)), half = (W - 2 * M - 30) / 2, y0 = yb + Math.max(0, avail - rowH * rows.length) * 0.4;
       el(s, "items", W / 2, y0 + avail / 2, () => {
         pill(val(s, "left") || "UK", M + half / 2, y0 - 50, P.text === "#fff" ? "#fff" : NAVY, P.text === "#fff" ? NAVY : "#fff", 28);
         pill(val(s, "right") || "US", W - M - half / 2, y0 - 50, P.pillBg, P.pillFg, 28);
@@ -1196,7 +1196,7 @@
       sparkles(s, i, P, [[970, 160, 22], [120, 1150, 16]]);
       el(s, "title", W / 2, 210, () => rich(val(s, "title"), { x: M, y: 120, w: W - 2 * M, h: 190, max: 92, min: 46, font: F, color: P.text, hi: P.hi, pillBg: P.pillBg, pillFg: P.pillFg }));
       const it = val(s, "items").split("\n").map(x => x.replace(/^\s*\d+[.)]\s*/, "").trim()).filter(Boolean).slice(0, 5);
-      const y0 = 350, avail = footerY - 50 - y0, rowH = Math.min(200, avail / Math.max(1, it.length));
+      const yb = 350, avail = footerY - 50 - yb, rowH = Math.min(200, avail / Math.max(1, it.length)), y0 = yb + Math.max(0, avail - rowH * it.length) * 0.4;
       el(s, "items", W / 2, y0 + avail / 2, () => {
         it.forEach((t, k) => {
           const y = y0 + k * rowH, h = rowH - 20, cx = M + 56;
@@ -1228,7 +1228,7 @@
           rr(x, y, bw, bh, 34); ctx.fillStyle = k % 3 === 0 ? P.pillBg : P.card; ctx.fill();
           const m = t.match(EMOJI_RE), e = m && t.indexOf(m[0]) === 0 ? m[0] : "", txt = e ? t.slice(e.length).trim() : t;
           if (e) drawEmoji(e, x + 80, y + 82, 100, -0.1);
-          rich(txt, { x: x + 34, y: y + (e ? 150 : 40), w: bw - 68, h: bh - (e ? 180 : 80), max: 44, min: 22, weight: 700, color: k % 3 === 0 ? P.pillFg : P.text, hi: k % 3 === 0 ? P.pillFg : (P.cardHi || P.hi), lh: 1.2, valign: "middle" });
+          rich(txt, { x: x + 34, y: y + (e ? 150 : 40), w: bw - 68, h: bh - (e ? 180 : 80), max: txt.length < 32 ? 58 : 46, min: 22, weight: 800, color: k % 3 === 0 ? P.pillFg : P.text, hi: k % 3 === 0 ? P.pillFg : (P.cardHi || P.hi), lh: 1.2, valign: "middle" });
           ctx.restore();
         });
         return { x: M, y: y0, w: W - 2 * M, h: 2 * bh + g };
@@ -3424,7 +3424,7 @@ Respondé SOLO JSON: {"titulo":"","artista":"","anio":0,"traduccion":"","tema":"
     return { topic: "web: " + w.id, slides: [
       coverOf(pickR(["The Queen's Tea", "🫖 Te contamos", "✨ Novedad", "📣 Atención"]), pickR(w.covers), w.e),
       ...w.slides(),
-      ...(w.q ? (() => { const ok = Math.random() < .5; return [S_("thisthat", { title: w.q[0], a: ok ? w.q[1] : w.q[2], b: ok ? w.q[2] : w.q[1], note: "Respuesta en la próxima slide 👉" }), S_("text", { kicker: "Respuesta", title: `Es la *${ok ? "A" : "B"}*`, body: `*${w.q[1]}*. ¿Acertaste? Contanos en los comentarios 💬`, emoji: "✅" })]; })() : []),
+      ...(false && w.q ? (() => { const ok = Math.random() < .5; return [S_("thisthat", { title: w.q[0], a: ok ? w.q[1] : w.q[2], b: ok ? w.q[2] : w.q[1], note: "Respuesta en la próxima slide 👉" }), S_("text", { kicker: "Respuesta", title: `Es la *${ok ? "A" : "B"}*`, body: `*${w.q[1]}*. ¿Acertaste? Contanos en los comentarios 💬`, emoji: "✅" })]; })() : []),
       S_("text", { kicker: "Todo está en", title: "*thequeenstea.com.ar*", body: "Entrá, mirá cursos, hacé el test gratis y escribinos por WhatsApp: respondemos en menos de 24 horas.", emoji: "🌐" }),
       ctaOf("¿Te sirve? *Te leemos*", "Mandáselo a quien le venga bien", "Escribí QUIERO y te contamos")] };
   }
@@ -3805,7 +3805,7 @@ Respondé SOLO JSON: {"titulo":"","artista":"","anio":0,"traduccion":"","tema":"
         out.push(COV("UK vs US", covs[cat] || [`UK vs US ${t.replace(/\*/g, "").toLowerCase()}: [mismo idioma], otras palabras`, `*${ps[0][1]}* o *${ps[0][2]}*: [depende] dónde estés`, `Así se dice ${t.replace(/\*/g, "").toLowerCase()} en Londres y en [Nueva York]`], em));
         ps.forEach(x => out.push(duelOf(x, t)));
         if (cat === "ortografia") out.push(S_("list", { title: "Las *reglas* en un vistazo", items: "-our / -or = colour / color\n-re / -er = centre / center\n-ise / -ize = organise / organize\n-ll- / -l- = travelling / traveling" }));
-        else { const more = fresh("ukus_more", UKUS2.filter(x => !ps.includes(x) && !["pronunciacion", "gramatica", "ortografia"].includes(x[0])), 3); out.push(S_("versus", { title: "Tres *más* para guardar", left: "UK", right: "US", items: more.map(x => `${x[1]} | ${x[2]} | ${x[3]}`).join("\n") })); }
+        else { const more = shuf(pool.filter(x => !ps.includes(x))).slice(0, 3); if (more.length >= 2 && !["pronunciacion", "gramatica"].includes(cat)) out.push(S_("versus", { title: `Y ${t.replace(/\*/g, "").toLowerCase()}, *también*`, left: "UK", right: "US", items: more.map(x => `${x[1]} | ${x[2]} | ${x[3]}`).join("\n") })); }
         const q = ps[ps.length - 1], o = pickR(UKUS2.filter(z => z !== q && z[0] === q[0]));
         out.push(...quiz(`¿Cuál es la versión *británica*?`, q[1], q[2], `En el Reino Unido: *${q[1]}*. En EE. UU.: *${q[2]}*.${q[6] ? "\n\n" + q[6] : ""}`));
       }
@@ -3826,7 +3826,7 @@ Respondé SOLO JSON: {"titulo":"","artista":"","anio":0,"traduccion":"","tema":"
           S_("text", { kicker: "Por qué", title: "Se llama *understatement*", body: x.why, emoji: "🧐" }),
           S_("chat", { title: "Así *suena*", lines: dlg([`Them: ${x.f}`, `You: ${x.r}`]) }),
           S_("decode", { title: `Otras ${COD_CTX[x.c][0]}`, items: sim.map(z => `${z.f} => ${z.es}`).join("\n") }),
-          resp([x].concat(sim.slice(0, 2))),
+          S_("decode", { title: "Cómo *responder*", la: "SI TE DICEN", lb: "PODÉS RESPONDER", items: `${x.f} => ${x.r}` }),
           ctaOf("¿Te la *dijeron*?", "Mandáselo a quien trabaja con británicos", "Contanos cuál te sorprendió")] };
       }
       if (mode === "lugar") {
@@ -4037,7 +4037,20 @@ Respondé SOLO JSON: {"titulo":"","artista":"","anio":0,"traduccion":"","tema":"
     (r.slides || []).forEach(s => { ["kicker", "title"].forEach(k => { const v = s.f && s.f[k]; if (typeof v === "string") { const plain = v.replace(/\*/g, ""); if (TITLE_VAR[plain]) s.f[k] = pickR(TITLE_VAR[plain]).replace(/(\S+)$/, k === "title" ? "*$1*" : "$1"); } }); });
     return r;
   }
-  Object.entries(SERIES).forEach(([k, S]) => { const g = S.gen; S.gen = function () { const r = g.apply(this, arguments); try { variedad(r, k); (r.slides || []).forEach(x => Object.keys(x.f || {}).forEach(f => { if (typeof x.f[f] === "string") x.f[f] = amFix(x.f[f]); })); } catch { } return r; }; });
+  const FOCO = { mitos: /^bonus/i, codigo: /mails del trabajo|^otras /i, phrasal: /otros para sumar/i, expresiones: /más para usar hoy/i, nativo: /otras que vas a escuchar/i };
+  const VENTA = /vocabulario|en inglés|frases|primera frase|mini clase|decirlo|así se dice/i, ES_VENTA = ["web", "beneficios", "cursos", "tienda"];
+  function foco(r, k) {
+    const txt = s => String((s.f && (s.f.kicker || "")) + " | " + (s.f && (s.f.title || ""))).replace(/[*\[\]]/g, "");
+    r.slides = (r.slides || []).filter((s, i) => {
+      if (i === 0 || s.tpl === "cta") return true;
+      if (FOCO[k] && FOCO[k].test(String(s.f && s.f.title || "").replace(/[*\[\]]/g, "")) ) return false;
+      if (FOCO[k] && FOCO[k].test(String(s.f && s.f.kicker || ""))) return false;
+      if (ES_VENTA.includes(k) && (s.tpl === "versus" || s.tpl === "duel" || ((s.tpl === "decode" || s.tpl === "list" || s.tpl === "word") && VENTA.test(txt(s))))) return false;
+      return true;
+    });
+    return r;
+  }
+  Object.entries(SERIES).forEach(([k, S]) => { const g = S.gen; S.gen = function () { const r = g.apply(this, arguments); try { foco(r, k); variedad(r, k); (r.slides || []).forEach(x => Object.keys(x.f || {}).forEach(f => { if (typeof x.f[f] === "string") x.f[f] = amFix(x.f[f]); })); } catch { } return r; }; });
 
   const LIB = BIBLIOTECA.filter(x => x.script).map(x => ({ ...x, script: COVERS[x.id] ? x.script.replace(/^Slide 1\n[\s\S]*?\n\nSlide 2/, "Slide 1\n" + COVERS[x.id] + "\n\nSlide 2") : x.script }));
   let libPilar = "todos", libSel = LIB[0] ? LIB[0].id : null;
@@ -5033,5 +5046,5 @@ Respondé SOLO JSON: {"nombre":"${name}","quien":"a qué se dedica (2 a 5 palabr
     if (inFrame) show(); setTimeout(function () { if (!window.__appReady) show(); }, 8000);
   })();
 </script>
-<div id="qtVer" style="position:fixed;left:8px;bottom:6px;font:600 11px system-ui,sans-serif;color:#8a9aa8;z-index:99999;pointer-events:none">Versión 20/11 13:15</div><script>(function(){var V="20/11 13:15";function chk(){fetch("./version.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(j){if(j.v&&j.v!==V){var k="qt_rl_"+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,"1")}catch(e){}location.reload()}}).catch(function(){})}if(location.protocol==="https:"){document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()});chk()}})();</script></body>
+<div id="qtVer" style="position:fixed;left:8px;bottom:6px;font:600 11px system-ui,sans-serif;color:#8a9aa8;z-index:99999;pointer-events:none">Versión 20/11 13:29</div><script>(function(){var V="20/11 13:29";function chk(){fetch("./version.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(j){if(j.v&&j.v!==V){var k="qt_rl_"+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,"1")}catch(e){}location.reload()}}).catch(function(){})}if(location.protocol==="https:"){document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()});chk()}})();</script></body>
 </html>
