@@ -951,8 +951,7 @@
         items.forEach((it, k) => {
           const y = y0 + k * rowH, m = it.match(/^(.+?)\s*(?:=|→|->|:|–)\s*(.+)$/), size = Math.min(48, rowH * 0.4);
           rr(M, y + 8, W - 2 * M, rowH - 16, 26); ctx.fillStyle = P.card; ctx.fill(); ctx.save(); rr(M, y + 8, W - 2 * M, rowH - 16, 26); ctx.clip(); ctx.fillStyle = P.pillBg; ctx.fillRect(M, y + 8, 10, rowH - 16); ctx.restore();
-          ctx.beginPath(); ctx.arc(M + 52, y + rowH / 2, Math.min(34, rowH * 0.28), 0, 7); ctx.fillStyle = P.pillBg; ctx.fill();
-          ctx.fillStyle = P.pillFg; ctx.font = `800 ${Math.round(size * 0.8)}px ${BODY}`; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(String(k + 1), M + 52, y + rowH / 2 + 2); ctx.textAlign = "left";
+          ctx.fillStyle = P.cardHi || P.hi; ctx.font = `800 ${Math.round(size * 0.85)}px ${BODY}`; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(String(k + 1).padStart(2, "0"), M + 58, y + rowH / 2 + 2); ctx.textAlign = "left";
           if (m) {
             ctx.font = `800 ${size}px ${BODY}`; const a = m[1].replace(/\*/g, ""), w = Math.min(mW(a), 440); ctx.fillStyle = P.text; fillT(a, M + 110, y + rowH / 2 + 2);
             rich(m[2], { x: M + 110 + w + 30, y: y + 8, w: W - 2 * M - 140 - w - 30, h: rowH - 16, max: size * 0.9, min: 20, weight: 500, color: P.sub, hi: P.cardHi || P.hi, valign: "middle", lh: 1.15 });
@@ -1211,11 +1210,12 @@
       const yb = 350, avail = footerY - 50 - yb, rowH = Math.min(200, avail / Math.max(1, it.length)), y0 = yb + Math.max(0, avail - rowH * it.length) * 0.4;
       el(s, "items", W / 2, y0 + avail / 2, () => {
         it.forEach((t, k) => {
-          const y = y0 + k * rowH, h = rowH - 20, cx = M + 56;
-          rr(M, y, W - 2 * M, h, 30); ctx.fillStyle = P.card; ctx.fill();
-          ctx.beginPath(); ctx.arc(cx, y + h / 2, Math.min(42, h * 0.36), 0, 7); ctx.fillStyle = P.pillBg; ctx.fill();
-          ctx.fillStyle = P.pillFg; ctx.font = `400 ${Math.min(56, h * 0.42)}px Anton`; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(String(k + 1), cx, y + h / 2 + 3); ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
-          rich(t, { x: M + 124, y: y + 10, w: W - 2 * M - 160, h: h - 20, max: 46, min: 24, weight: 700, color: P.text, hi: P.cardHi || P.hi, valign: "middle", lh: 1.2 });
+          const y = y0 + k * rowH, h = rowH - 22, cx = M + 46, r = Math.min(44, h * 0.38), last = k === it.length - 1 && it.length > 2, x1 = cx + r + 26;
+          if (k < it.length - 1) { ctx.save(); ctx.strokeStyle = P.hi; ctx.globalAlpha = .55; ctx.lineWidth = 5; ctx.lineCap = "round"; ctx.setLineDash([1, 14]); ctx.beginPath(); ctx.moveTo(cx, y + h / 2 + r + 10); ctx.lineTo(cx, y + rowH + h / 2 - r - 10); ctx.stroke(); ctx.restore(); }
+          ctx.beginPath(); ctx.arc(cx, y + h / 2, r, 0, 7); ctx.fillStyle = last ? P.pillBg : P.card; ctx.fill(); ctx.lineWidth = 4; ctx.strokeStyle = P.pillBg; ctx.stroke();
+          ctx.fillStyle = last ? P.pillFg : (P.cardHi || P.hi); ctx.font = `800 ${Math.round(r * 0.78)}px ${BODY}`; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(String(k + 1).padStart(2, "0"), cx, y + h / 2 + 2); ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+          ctx.save(); if (!last) { ctx.shadowColor = "rgba(0,0,0,.10)"; ctx.shadowBlur = 18; ctx.shadowOffsetY = 6; } rr(x1, y, W - M - x1, h, 26); ctx.fillStyle = last ? P.pillBg : P.card; ctx.fill(); ctx.restore();
+          rich(t, { x: x1 + 32, y: y + 10, w: W - M - x1 - 60, h: h - 20, max: 46, min: 24, weight: 700, color: last ? P.pillFg : P.text, hi: last ? P.pillFg : (P.cardHi || P.hi), valign: "middle", lh: 1.2 });
         });
         return { x: M, y: y0, w: W - 2 * M, h: it.length * rowH };
       });
@@ -3026,7 +3026,7 @@ const FECHAS = [
 
   // ---------- BENEFICIOS Y CURSOS (los podés editar en la app) ----------
   const BENEF_KEY = "qt_beneficios_v1", CURSOS_KEY = "qt_cursos_v1";
-  const BENEF_DEF = "10% menos en todas tus cuotas | Para jubilados y pensionados, personal de salud, bomberos, policía y fuerzas del Estado, y docentes de todos los niveles. Se suma a los demás descuentos\nMatrícula 2027 | Reservá tu lugar con $35.000 hasta el 21 de diciembre y mantené tu día y horario\nTest de nivel gratis | 120 preguntas online, de A1 a C2, en 15 a 20 minutos\nPagás como quieras | Mercado Pago, Cuenta DNI, tarjeta o transferencia, siempre con factura";
+  const BENEF_DEF = "10% menos en todas tus cuotas | Para jubilados y pensionados, personal de salud, bomberos, policía y fuerzas del Estado, y docentes de todos los niveles. Se suma a los demás descuentos\nMatrícula 2027 | Reservá tu lugar con valor especial hasta el 21 de diciembre y mantené tu día y horario\nTest de nivel gratis | 120 preguntas online, de A1 a C2, en 15 a 20 minutos\nPagás como quieras | Mercado Pago, Cuenta DNI, tarjeta o transferencia, siempre con factura";
   const CURSOS_DEF = "Grupos reducidos en vivo | Grupos chicos de verdad para que hables en todas las clases, de A1 a C2\nClases individuales | A tu medida, de lunes a viernes hasta las 21 hs\nCursos a tu ritmo | Videos y tareas con seguimiento de progreso y certificado al terminar\nPreparación de exámenes | Cambridge First, Advanced, Proficiency e IELTS, con simulacros y correcciones detalladas\nInglés para tu profesión | Business, Legal, Medical, Aviation y Oil & Gas English\nGrupos para empresas | Capacitación a medida en el horario de tu equipo";
   const readList = (k, def) => { let t = def; try { t = localStorage.getItem(k) || def; } catch { } return t.split("\n").map(x => x.split("|").map(y => y.trim())).filter(x => x[0]).map(x => ({ t: x[0], d: x[1] || "" })); };
   function benefExtra(t) {
@@ -3392,7 +3392,7 @@ Respondé SOLO JSON: {"titulo":"","artista":"","anio":0,"traduccion":"","tema":"
   const WEB = [
     { id: "matricula", q: ["¿Cómo se dice *fecha límite* en inglés?", "deadline", "dateline"], e: "📅", covers: ["Reservá tu lugar [2027] antes que nadie", "Hasta el 21/12: [tu lugar] para 2027", "Si ya sabés que en 2027 [arrancás inglés]..."],
       slides: () => [
-        S_("text", { kicker: "Matrícula 2027", title: "Tu lugar, *reservado*", body: "La matrícula 2027 está abierta en thequeenstea.com.ar: $35.000 para reservar tu lugar, válido hasta el 21 de diciembre.\n\nY si ya sos alumna o alumno, mantenés tu día y tu horario.", emoji: "🎟️" }),
+        S_("text", { kicker: "Matrícula 2027", title: "Tu lugar, *reservado*", body: "La matrícula 2027 está abierta en thequeenstea.com.ar, con valor especial hasta el 21 de diciembre.\n\nY si ya sos alumna o alumno, mantenés tu día y tu horario.", emoji: "🎟️" }),
         S_("decode", { title: "Vocabulario *de inscripción*", la: "EN INGLÉS", lb: "EN ESPAÑOL", items: "enrolment / enrollment => inscripción\nto book a spot => reservar un lugar\ndeadline => fecha límite\nearly bird => (el que se anota) antes" }),
         S_("steps", { title: "Tres pasos y *ya estás adentro*", items: "Hacé el test de nivel gratis\nElegí curso y modalidad\nReservá tu lugar con la matrícula" }),
         S_("text", { kicker: "Dato", title: "Apenas haya *horarios*", body: "Los horarios y valores de los grupos 2027 se avisan apenas abren. Si reservaste, te enterás primero.", emoji: "🔔" })
@@ -3965,9 +3965,8 @@ Respondé SOLO JSON: {"titulo":"","artista":"","anio":0,"traduccion":"","tema":"
           S_("grid4", { title: "Qué *incluye*", items: `🎬 ${c.vid} lecciones en video\n✍️ ${c.tar} tareas con devolución personalizada\n🗣️ 100% en inglés\n⚡ Acceso inmediato a tu campus` }),
           S_("decode", { title: "Una mini clase *gratis*: " + c.mini[0].replace(/\*/g, ""), la: "TIP", lb: "EJEMPLO", items: c.mini[1] }),
           S_("list", { title: "Temas para *escribir*", items: c.temas.split("\n").map(z => `✍️ ${z}`).join("\n") }),
-          S_("bignum", { num: c.off, text: `*${c.n}*: de ${c.old} a ${c.now}. Pago único.`, src: "" }),
-          comprar,
-          ctaOf("¿Lo *empezás*?", "Mandáselo a quien rinde un examen", "Escribí CURSO y te pasamos el link")] };
+          S_("text", { kicker: "¿Lo querés?", title: "Comentá *WRITING*", body: "y te mandamos toda la info por mensaje.\n\nO entrá a *thequeenstea.com.ar* y mirá todo lo que tenemos.", emoji: "💬" }),
+          ctaOf("¿Lo *empezás*?", "Mandáselo a quien rinde un examen", "Comentá WRITING y te escribimos")] };
       }
       if (mode === "profes") {
         const g = pickR(["patrias", "pronunciacion", "flashcards", "todo"]), pool = g === "todo" ? TIENDA.recursos : TIENDA.recursos.filter(r => r.g === g || (g === "flashcards" && r.g === "speaking")), r = shuf(pool).slice(0, 4);
@@ -3977,24 +3976,23 @@ Respondé SOLO JSON: {"titulo":"","artista":"","anio":0,"traduccion":"","tema":"
         return { topic: "recursos para profes de inglés", slides: [
           COV("Para profes de inglés", [`Material listo para ${tit} en [inglés]`, `Profe: ahorrate horas de [planificación]`, `Recursos descargables para ${tit}, [listos para usar]`], "🧑‍🏫"),
           S_("text", { kicker: "Para profes", title: "Material *listo* para tu clase", body: "Recursos descargables pensados para el aula argentina: fechas patrias, pronunciación, juegos y flashcards.\n\nLos comprás, los descargás y los usás esa misma semana.", emoji: "📥" }),
-          S_("grid4", { title: `Para *${tit}*`, items: r.map(z => `${z.e} ${z.n} · ${z.p}`).join("\n") }),
-          ...r.slice(0, 2).map(z => S_("text", { kicker: "Destacado", title: `*${z.n}*`, body: `${z.old ? `Antes ${z.old}, hoy *${z.p}*.` : `*${z.p}*.`}\n\nDescargable: lo imprimís o lo proyectás. Ideal para planificar sin empezar de cero.`, emoji: z.e })),
-          S_("bignum", { num: `−${pct}%`, text: `en *${best.n}*`, src: "" }),
-          S_("steps", { title: "Cómo lo *conseguís*", items: "Entrá a la tienda (link en la bio)\nFiltrá por Recursos docentes\nPagás con transferencia, QR o tarjeta\nLo descargás al instante" }),
+          S_("grid4", { title: `Para *${tit}*`, items: r.map(z => `${z.e} ${z.n}`).join("\n") }),
+          ...r.slice(0, 2).map(z => S_("text", { kicker: "Destacado", title: `*${z.n}*`, body: "Descargable: lo imprimís o lo proyectás. Ideal para planificar sin empezar de cero.", emoji: z.e })),
+          S_("text", { kicker: "¿Lo querés?", title: "Comentá *PROFE*", body: "y te mandamos toda la info por mensaje.\n\nO entrá a *thequeenstea.com.ar* y mirá todos los recursos.", emoji: "💬" }),
           ctaOf("¿Qué *material* te falta?", "Mandáselo a tu colega profe", "Pedí el próximo recurso")] };
       }
       const L = TIENDA.grupos;
       return { topic: "Matrícula 2027", slides: [
         COV("Matrícula 2027", ["Asegurá tu lugar para [2027]", "Matrícula 2027 con valor especial hasta el [21 de diciembre]", "¿Querés tu horario en 2027? [Leé esto]"], "🎓"),
-        S_("text", { kicker: "Matrícula 2027", title: "Reservá con *$35.000*", body: "Valor especial hasta el 21 de diciembre.\n\nSi ya sos alumna o alumno, la abonás y conservás tu día y tu horario. Todo el material del curso está incluido.", emoji: "📌" }),
+        S_("text", { kicker: "Matrícula 2027", title: "Reservá tu *lugar*", body: "Con valor especial hasta el 21 de diciembre.\n\nSi ya sos alumna o alumno, la abonás y conservás tu día y tu horario. Todo el material del curso está incluido.", emoji: "📌" }),
         S_("list", { title: "Los *grupos* 2027", items: L.slice(0, 6).map(z => `${z[0]} = ${z[1]}`).join("\n") }),
         S_("grid4", { title: "Inglés *profesional*", items: "🩺 Medical English\n⚖️ Legal English\n✈️ Aviation English\n🌍 IELTS B2/C1" }),
         S_("text", { kicker: "10% extra", title: "Para quienes *cuidan* a los demás", body: "👵 Jubilados y pensionados\n🩺 Personal de salud\n🚒 Bomberos\n👮 Policía y fuerzas del Estado\n👩‍🏫 Docentes de todos los niveles\n\nSe suma a los otros descuentos.", emoji: "🎖️" }),
-        S_("bignum", { num: "$19.800", text: "ahorrás en un mes de B1 pagando el *mes completo* a tiempo, frente a pagar clase por clase", src: "" }),
-        S_("list", { title: "Cómo *pagar*", items: "Transferencia = sin comisión\nQR Cuenta DNI = 20% de reintegro de lunes a viernes (tope semanal $6.000)\nTarjeta = crédito o débito" }),
-        S_("text", { kicker: "¿Preferís sola o solo?", title: "Clases *individuales*", body: "Desde $50.000 por clase, abonando el mes. Pedí tus horarios y te confirmamos.", emoji: "🧑‍🏫" }),
+        S_("list", { title: "Cómo *pagar*", items: "Transferencia = sin comisión\nQR Cuenta DNI = 20% de reintegro de lunes a viernes\nTarjeta = crédito o débito" }),
+        S_("text", { kicker: "¿Preferís sola o solo?", title: "Clases *individuales*", body: "Si preferís clases solo para vos, pedí tus horarios y te confirmamos.", emoji: "🧑‍🏫" }),
         S_("steps", { title: "Cómo te *anotás*", items: "Entrá a la tienda (link en la bio)\nElegí tu curso y horario\nPagás la matrícula\nSubís el comprobante y listo" }),
-        ctaOf("¿Te *anotás*?", "Mandáselo a quien empieza en 2027", "Escribí 2027 y te ayudamos")] };
+        S_("text", { kicker: "¿Te anotás?", title: "Comentá *2027*", body: "y te mandamos toda la info por mensaje.\n\nO entrá a *thequeenstea.com.ar*.", emoji: "💬" }),
+        ctaOf("¿Te *anotás*?", "Mandáselo a quien empieza en 2027", "Comentá 2027 y te escribimos")] };
     } }
   });
 
@@ -4007,7 +4005,7 @@ Respondé SOLO JSON: {"titulo":"","artista":"","anio":0,"traduccion":"","tema":"
     if (mode === "ahorro") return { topic: "cómo ahorrar en tus clases", slides: [
       COV("Cómo pagar menos", ["3 formas de pagar [menos] tus clases de inglés", "Lo que [nadie] te cuenta sobre ahorrar en tu curso", "Inglés en 2027 sin [gastar de más]"], "💸"),
       S_("bignum", { num: "1", text: "Pagá el *mes completo* hasta 24 hs antes de la primera clase", src: "" }),
-      S_("text", { kicker: "Por qué conviene", title: "Clase suelta = *+15%*", body: "La clase suelta y el mes pagado después tienen un 15% de recargo.\n\nEn un mes de B1 con 4 clases, pagar a tiempo te ahorra $19.800.", emoji: "📅" }),
+      S_("text", { kicker: "Por qué conviene", title: "Clase suelta = *+15%*", body: "La clase suelta y el mes pagado después tienen un 15% de recargo.\n\nPagando el mes completo a tiempo, te ahorrás ese recargo.", emoji: "📅" }),
       S_("bignum", { num: "2", text: "Usá el *QR de Cuenta DNI*: 20% de reintegro de lunes a viernes", src: "" }),
       S_("text", { kicker: "O sin comisión", title: "Por *transferencia*", body: "La transferencia no tiene comisión. La tarjeta suma la comisión de Mercado Pago.", emoji: "🏦" }),
       S_("bignum", { num: "3", text: "Si sos jubilada, de salud, bombera, policía o docente: *10% extra*", src: "" }),
@@ -4033,8 +4031,7 @@ Respondé SOLO JSON: {"titulo":"","artista":"","anio":0,"traduccion":"","tema":"
     if (v) out.push(S_("decode", { title: isEx && !isPro ? "El examen en *4 partes*" : "Una muestra del *vocabulario*", la: isEx && !isPro ? "PARTE" : "EN INGLÉS", lb: isEx && !isPro ? "DURACIÓN" : "EN ESPAÑOL", items: v[1] }));
     else out.push(S_("decode", { title: "Frases que vas a *usar*", la: "EN INGLÉS", lb: "EN ESPAÑOL", items: "Could you say that again? => ¿Lo repetís?\nI'd like to add something. => Quiero agregar algo.\nWhat do you think? => ¿Vos qué pensás?" }));
     out.push(S_("text", { kicker: "Tu campus", title: "Todo en un *lugar*", body: "Clases, tareas, exámenes, notas y calendario en tu propio campus, para que veas tu progreso.", emoji: "💻" }),
-      S_("bignum", { num: g[2], text: `por clase en *${g[0]}* (valor 2027). Con el 10% extra si sos jubilada, de salud, bombera, policía o docente.`, src: "" }),
-      S_("steps", { title: "Cómo te *anotás*", items: "Entrá a la tienda (link en la bio)\nMatrícula 2027: $35.000 hasta el 21/12\nElegí tu curso y horario\nY arrancás 🙌" }),
+      S_("text", { kicker: "¿Te sumás?", title: "Comentá *QUIERO*", body: "y te mandamos horarios y toda la info por mensaje.\n\nO entrá a *thequeenstea.com.ar*.", emoji: "💬" }),
       ctaOf("¿Te *sumás*?", "Mandáselo a quien lo necesita", "Escribí QUIERO y te contamos"));
     return { topic: g[0], slides: out };
   };
@@ -4057,6 +4054,7 @@ Respondé SOLO JSON: {"titulo":"","artista":"","anio":0,"traduccion":"","tema":"
       if (i === 0 || s.tpl === "cta") return true;
       if (FOCO[k] && FOCO[k].test(String(s.f && s.f.title || "").replace(/[*\[\]]/g, "")) ) return false;
       if (FOCO[k] && FOCO[k].test(String(s.f && s.f.kicker || ""))) return false;
+      if (ES_VENTA.includes(k) && s.tpl === "bignum" && /\$/.test(String(s.f && s.f.num || ""))) return false;
       if (ES_VENTA.includes(k) && (s.tpl === "versus" || s.tpl === "duel" || ((s.tpl === "decode" || s.tpl === "list" || s.tpl === "word") && VENTA.test(txt(s))))) return false;
       return true;
     });
@@ -4490,15 +4488,37 @@ Además devolvé caption (texto para la publicación: primera línea con la pala
   $("series").querySelectorAll("button").forEach(b => b.onclick = async () => { const v = SERIES[b.dataset.s]; await buildSlides(v.gen(), v.n); proj.serie = b.dataset.s; });
   // ================= 🛍️ CARRUSELES DE TU TIENDA + PEGAR CUALQUIER PRODUCTO =================
   const PROD_OF_TIENDA = () => {
-    const out = TIENDA.cursos.map(c => ({ id: "t_" + c.id, n: c.n, tipo: "curso", lvl: c.lvl, precio: c.now, antes: c.old, off: c.off, para: c.para.replace(/\*/g, ""),
+    const out = TIENDA.cursos.map(c => ({ id: "t_" + c.id, tema: c.id === "essays" ? "essays" : "narrative", n: c.n, tipo: "curso", lvl: c.lvl, precio: c.now, antes: c.old, off: c.off, para: c.para.replace(/\*/g, ""),
       resumen: `Un curso a tu ritmo, 100% en inglés, con ${c.vid} lecciones en video y ${c.tar} tareas con devolución personalizada.`,
       aprende: c.tem.split("\n"), incluye: [`🎬 ${c.vid} lecciones en video`, `✍️ ${c.tar} tareas con devolución personalizada`, "🗣️ 100% en inglés", "⚡ Acceso inmediato a tu campus"], temas: c.temas.split("\n"), acceso: true, ingles: true }));
     const PARA = { patrias: "Para profes que preparan las fechas patrias y quieren trabajarlas en inglés.", pronunciacion: "Para profes que quieren trabajar la pronunciación con material claro y listo.", flashcards: "Para profes que buscan material visual listo para usar en clase.", speaking: "Para profes de nivel inicial que quieren que sus alumnos se animen a hablar.", cultura: "Para profes que quieren llevar la cultura argentina a la clase de inglés." };
     TIENDA.recursos.forEach((r, k) => { const lv = (r.n.match(/\b([ABC][12](?:\s*[-–]\s*[ABC][12])?\+?)/) || [])[1] || "";
-      out.push({ id: "r_" + k, n: r.n, tipo: "recurso", lvl: lv, precio: r.p, antes: r.old || "", off: r.old ? `−${Math.round(100 - 100 * parseInt(r.p.replace(/\D/g, "")) / parseInt(r.old.replace(/\D/g, "")))}%` : "", para: PARA[r.g] || "Para profes de inglés.", resumen: "Recurso descargable, listo para imprimir o proyectar en tu clase.", aprende: [], incluye: ["📥 Descargable al instante", "🖨️ Para imprimir o proyectar", lv ? `🎯 Nivel ${lv}` : "🧑‍🏫 Pensado para el aula", "⏱️ Te ahorra planificación"], temas: [], e: r.e }); });
-    out.push({ id: "matricula", n: "Matrícula 2027", tipo: "matricula", lvl: "", precio: "$35.000", antes: "", off: "", para: "Para quien quiere asegurar su lugar, su día y su horario para todo 2027.", resumen: "Con la matrícula reservás tu lugar en el curso que elijas. Valor especial hasta el 21 de diciembre.", aprende: [], incluye: ["👥 Grupos reducidos", "📚 Material incluido", "💻 Tu propio campus", "🎖️ 10% extra para jubilados, salud, bomberos, policía y docentes"], temas: [] });
+      out.push({ id: "r_" + k, tema: r.g, n: r.n, tipo: "recurso", lvl: lv, precio: r.p, antes: r.old || "", off: r.old ? `−${Math.round(100 - 100 * parseInt(r.p.replace(/\D/g, "")) / parseInt(r.old.replace(/\D/g, "")))}%` : "", para: PARA[r.g] || "Para profes de inglés.", resumen: "Recurso descargable, listo para imprimir o proyectar en tu clase.", aprende: [], incluye: ["📥 Descargable al instante", "🖨️ Para imprimir o proyectar", lv ? `🎯 Nivel ${lv}` : "🧑‍🏫 Pensado para el aula", "⏱️ Te ahorra planificación"], temas: [], e: r.e }); });
+    out.push({ id: "matricula", tema: "matricula", n: "Matrícula 2027", tipo: "matricula", lvl: "", precio: "$35.000", antes: "", off: "", para: "Para quien quiere asegurar su lugar, su día y su horario para todo 2027.", resumen: "Con la matrícula reservás tu lugar en el curso que elijas. Valor especial hasta el 21 de diciembre.", aprende: [], incluye: ["👥 Grupos reducidos", "📚 Material incluido", "💻 Tu propio campus", "🎖️ 10% extra para jubilados, salud, bomberos, policía y docentes"], temas: [] });
     return out;
   };
+  // Temas: gancho que juega con la necesidad (sin nombrar el producto) + 3 tips de valor + puente
+  const PROD_TEMAS = {
+    essays: { w: "ESSAY", re: /essay|argumentative|opinion essay|for and against|ensayo/i, k: "Writing tips", e: "✍️", hooks: ["¿Tus essays [no convencen]? Mirá esto", "El error que [baja tu nota] en writing", "3 cosas que un corrector [mira primero]", "Escribís bien, pero tu essay [no fluye]", "Cómo escribir un essay que [se lea solo]"],
+      tips: [["Una idea por *párrafo*", "Cada párrafo defiende una sola idea y arranca con una *topic sentence*. Si mezclás dos ideas, el que corrige se pierde."], ["Conectá, no *amontones*", "Los conectores guían al lector: *however* para contrastar, *moreover* para sumar, *therefore* para concluir."], ["Cerrá con tu *postura*", "La conclusión no repite todo: retoma tu opinión con otras palabras y deja una idea final que quede."]] },
+    narrative: { w: "STORY", re: /narrative|story|stories|cuento|relato/i, k: "Writing tips", e: "📖", hooks: ["¿Por qué tus historias en inglés [aburren]?", "El truco para que lean tu story [hasta el final]", "Empezá tu story así y [enganchá] desde la primera línea", "3 trucos de escritores para tu [story en inglés]"],
+      tips: [["Arrancá en plena *acción*", "En vez de *It was a normal day*, empezá con algo que pasa: *The door slammed behind me.*"], ["Mostrá, no *cuentes*", "No digas *I was scared*: mostralo. *My hands were shaking.*"], ["Jugá con el *ritmo*", "Mezclá frases largas y cortas. Las cortas generan tensión: *I ran. I didn't look back.*"]] },
+    pronunciacion: { w: "SCHWA", re: /pronunci|schwa|connected speech|acento/i, k: "Pronunciación", e: "🗣️", hooks: ["¿No entendés a los nativos? [No es tu oído]", "El sonido más común del inglés [no tiene letra]", "Hablan rápido porque [unen] las palabras", "Profe: 3 claves de pronunciación que [cambian todo]"],
+      tips: [["El schwa está en *todos lados*", "Es la vocal relajada /ə/: la a de *about*, la e de *taken*. Es el sonido más común del inglés."], ["Las palabras se *unen*", "*Turn it off* suena casi *tur-ni-toff*. Si esperás palabras separadas, no las reconocés."], ["Las palabras chicas se *achican*", "*to, for, and, can* suenan débiles al hablar rápido: *fish 'n' chips*."]] },
+    patrias: { w: "PATRIA", re: /25 de mayo|bandera|flag day|independencia|güemes|patri|gorriti|remedios/i, k: "Para profes", e: "🇦🇷", hooks: ["Profe: ¿otra vez la fecha patria [a último momento]?", "Cómo dar las fechas patrias en inglés [sin aburrir]", "3 ideas para la próxima [fecha patria] en inglés", "Fechas patrias en inglés: lo que [sí funciona]"],
+      tips: [["Contalo como *historia*", "Presentá a los protagonistas como personajes: quién era, qué quería, qué hizo. Engancha más que una lista de fechas."], ["Hacelos *hablar*", "Una entrevista imaginaria o un juego de roles hace que usen el inglés de verdad."], ["Adaptá el *nivel*", "El mismo tema sirve para A2 o para B2: cambian la cantidad de texto y la tarea, no la fecha."]] },
+    flashcards: { w: "CARDS", re: /flashcard|ordinal|countries|nationalit/i, k: "Para profes", e: "🃏", hooks: ["Profe: el material visual [cambia] la clase", "Cómo usar flashcards [más allá] de mostrar y repetir", "3 juegos con flashcards que tus alumnos [van a pedir]"],
+      tips: [["Juego de *memoria*", "Dalas vuelta boca abajo y que encuentren los pares: palabra e imagen."], ["¿Qué *falta*?", "Mostrá seis, sacá una sin que miren y que adivinen cuál falta."], ["Contra *reloj*", "Que las ordenen lo más rápido posible: números, países, lo que estés dando."]] },
+    speaking: { w: "HABLAR", re: /entrevist|speaking|famosos|conversaci/i, k: "Para profes", e: "🎤", hooks: ["Profe: ¿tus alumnos [no se animan] a hablar?", "El truco para que hablen [hasta los tímidos]", "3 ideas para que tu clase [hable] en inglés"],
+      tips: [["Dales un *rol*", "Hablar como otra persona (un famoso, un periodista) baja la vergüenza."], ["Preguntas *modelo*", "Dejá a la vista cuatro o cinco preguntas: *Where are you from? What do you do?*"], ["Primero en *parejas*", "Practican de a dos y después, si quieren, frente a todos."]] },
+    cultura: { w: "ETERNAUTA", re: /eternauta/i, k: "Para profes", e: "❄️", hooks: ["Profe: ¿y si das inglés con [El Eternauta]?", "Cultura argentina en la clase de inglés: [funciona]", "Lo que pasa cuando la clase habla de [algo que aman]"],
+      tips: [["Partí de lo que *conocen*", "Una historia que ya vieron o leyeron baja la ansiedad y suma ganas."], ["Palabras en *contexto*", "Se aprenden mejor dentro de una historia que en una lista suelta."], ["Cerrá con *debate*", "¿Qué harías vos? Abre conversación real en inglés."]] },
+    matricula: { w: "2027", re: /matr[ií]cula/i, k: "Para tu 2027", e: "🗓️", hooks: ["¿2027 es el año en que [por fin] hablás inglés?", "Por qué abandonás inglés en abril (y [cómo evitarlo])", "Lo que hace que [sí] termines el año de inglés"],
+      tips: [["Un horario *fijo*", "Lo que está en la agenda se cumple. Elegí un día y una hora que puedas sostener todo el año."], ["Un grupo que te *espere*", "En un grupo chico se nota si faltás. Y eso ayuda a seguir."], ["Una meta *concreta*", "No 'mejorar el inglés': rendir un examen, viajar, una entrevista. Con meta, se avanza."]] },
+    general: { w: "INGLÉS", re: /./, k: "Tips de inglés", e: "💡", hooks: ["¿Estudiás inglés hace años y [no arrancás]?", "Lo que nadie te dice de [aprender inglés] de grande", "3 cambios chiquitos que [destraban] tu inglés"],
+      tips: [["Poco, pero *seguido*", "Veinte minutos por día valen más que tres horas un sábado."], ["Con *devolución*", "Sin alguien que te corrija, repetís los mismos errores sin darte cuenta."], ["Para *algo*", "Elegí para qué lo querés: trabajo, viaje o examen. Con un para qué, no abandonás."]] }
+  };
+  const prodTema = (p, raw) => { if (p.tema && PROD_TEMAS[p.tema]) return p.tema; const t = (p.n + " " + (raw || "") + " " + (p.resumen || "")); return ["narrative"].concat(Object.keys(PROD_TEMAS)).find(k => k !== "general" && PROD_TEMAS[k].re.test(t)) || "general"; };
   const prodSaved = () => { try { return JSON.parse(localStorage.getItem("qt_prods") || "[]"); } catch { return []; } };
   const prodSave = a => { try { localStorage.setItem("qt_prods", JSON.stringify(a)); } catch { } };
 
@@ -4537,32 +4557,28 @@ Además devolvé caption (texto para la publicación: primera línea con la pala
     p.para = (sent.find(z => /\b(para (quien|vos|profes|alumnos|estudiantes|docentes|personas)|ideal para|pensado para|dirigido a)/i.test(z)) || "").replace(/^[^A-ZÁÉÍÓÚ¿]*/, "");
     p.resumen = sent.find(z => z !== p.para) || "";
     if (p.resumen.length > 230) p.resumen = p.resumen.slice(0, 227).replace(/\s\S*$/, "") + "…";
+    p.tema = prodTema(p, t);
     return p;
   }
 
   // Arma el carrusel del producto. Solo habla del producto: nada de vocabulario ni contenido de otra cosa.
   function prodSlides(p) {
-    const n = p.n, recurso = p.tipo === "recurso", matri = p.tipo === "matricula";
-    const hooks = p.ganchos && p.ganchos.length ? p.ganchos : recurso ? [`Profe: [${n}] listo para usar`, "Ahorrate la planificación de [esta semana]", `Material que tus alumnos [van a disfrutar]`, `¿Buscás material para tu clase? [Mirá esto]`]
-      : matri ? ["Asegurá tu lugar para [2027]", "Matrícula 2027 con valor especial hasta el [21 de diciembre]", "¿Querés tu horario en 2027? [Leé esto]"]
-      : [`¿Querés aprender *${n}* sin horarios? [Mirá esto]`, `${n}: el curso que [te faltaba]`, `Esto vas a saber hacer después de [${n}]`, `Aprendé *${n}* [a tu ritmo]`, `Todo lo que incluye [${n}]`].concat(p.off ? [`*${n}* con [${p.off}] por tiempo limitado`] : []);
-    const kick = recurso ? "Para profes de inglés" : matri ? "Matrícula 2027" : (p.acceso || /asincr/i.test(n) ? "Curso a tu ritmo" : "Nuestros cursos");
-    const out = [COV(kick, hooks, recurso ? (p.e || "🧑‍🏫") : matri ? "🎓" : "✍️")];
-    const dolor = p.dolor || (recurso ? "Planificar desde cero lleva horas. Y encontrar material lindo, claro y pensado para el aula argentina, más todavía." : matri ? "Los grupos son reducidos y los lugares se ocupan rápido." : "Sabés que lo necesitás, pero no tenés tiempo para cursar con horarios fijos.");
-    out.push(S_("text", { kicker: recurso ? "¿Te pasa?" : "¿Te pasa esto?", title: recurso ? "Planificar lleva *tiempo*" : matri ? "Los lugares *vuelan*" : "Querés, pero *no te da el tiempo*", body: dolor, emoji: recurso ? "⏳" : matri ? "🏃‍♀️" : "😮‍💨" }));
-    if (p.resumen) out.push(S_("text", { kicker: "De qué se trata", title: `*${n}*${p.lvl ? ` (${p.lvl})` : ""}`, body: p.resumen, emoji: recurso ? "📥" : "💡" }));
-    if (p.para) out.push(S_("text", { kicker: "Es para vos si...", title: "¿Para *quién* es?", body: p.para, emoji: "🙋" }));
-    if (p.aprende.length >= 2) out.push(S_("steps", { title: recurso ? "Qué *trae*" : "Qué vas a *aprender*", items: p.aprende.slice(0, 6).join("\n") }));
+    const n = p.n, recurso = p.tipo === "recurso", matri = p.tipo === "matricula", T = PROD_TEMAS[prodTema(p)];
+    const tips = (p.tips && p.tips.length >= 2 ? p.tips : T.tips).slice(0, 3);
+    const hooks = p.ganchos && p.ganchos.length ? p.ganchos : T.hooks;
+    const out = [COV(T.k, hooks, T.e)];
+    // 1) valor primero: tips sin vender nada
+    const EM = ["💡", "✨", "🎯"], kind = shuf(["text", "notes", "text"]);
+    tips.forEach((tp, k) => out.push(kind[k] === "notes" ? S_("notes", { title: tp[0].replace(/\*/g, ""), body: tp[1] }) : S_("text", { kicker: `Tip ${k + 1} de ${tips.length}`, title: tp[0], body: tp[1], emoji: EM[k] })));
+    // 2) el puente: recién acá aparece el producto
+    const puente = p.puente || (recurso ? "Si no tenés tiempo de armarlo desde cero, ya lo dejamos listo para tu clase." : matri ? "Por eso en 2027 te esperamos con grupos chicos, material incluido y tu propio campus." : "Leerlo es fácil. Lo difícil es practicarlo con alguien que te corrija.");
+    out.push(S_("text", { kicker: recurso ? "Para tu próxima clase" : matri ? "Para tu 2027" : "Para practicarlo en serio", title: `Por eso armamos *${n}*`, body: `${puente}\n\n${p.resumen || p.para || ""}`.trim(), emoji: recurso ? "📥" : matri ? "🎓" : "🎁" }));
+    // 3) el producto, corto
+    if (p.aprende.length >= 2 && !recurso) out.push(S_("steps", { title: "Lo que vas a *dominar*", items: p.aprende.slice(0, 5).join("\n") }));
     if (p.incluye.length >= 2) out.push(S_("grid4", { title: "Qué *incluye*", items: p.incluye.slice(0, 4).join("\n") }));
-    if (p.temas.length >= 2) out.push(S_("list", { title: recurso ? "Algunas *actividades*" : "Algunos *temas* que vas a trabajar", items: p.temas.slice(0, 4).map(z => `✍️ ${z}`).join("\n") }));
-    const faq = [];
-    if (p.acceso) faq.push("Vos: ¿Cuándo puedo empezar?", "The Queen's Tea: Cuando quieras: el acceso es inmediato apenas se acredita el pago.");
-    if (p.ingles) faq.push("Vos: ¿Es todo en inglés?", "The Queen's Tea: Sí, 100% en inglés, así practicás mientras aprendés.");
-    if (recurso) faq.push("Vos: ¿Cómo lo recibo?", "The Queen's Tea: Es descargable: lo bajás al instante y lo usás esa misma semana.");
-    if (faq.length >= 2) out.push(S_("chat", { title: "Lo que nos *preguntan*", lines: dlg(faq.slice(0, 4)) }));
-    if (p.precio) out.push(p.off ? S_("bignum", { num: p.off, text: `*${n}*: ${p.antes ? `de ${p.antes} a ` : ""}${p.precio}.`, src: "" }) : S_("bignum", { num: p.precio, text: `*${n}*`, src: "" }));
-    out.push(S_("steps", { title: "Cómo lo *conseguís*", items: recurso ? "Entrá a la tienda (link en la bio)\nBuscalo en Recursos docentes\nPagás con transferencia, QR o tarjeta\nLo descargás al instante" : matri ? "Entrá a la tienda (link en la bio)\nElegí tu curso y horario\nPagás la matrícula\nSubís el comprobante y listo" : "Entrá a la tienda (link en la bio)\nAgregalo al carrito\nPagás con transferencia, QR o tarjeta\nAcceso inmediato a tu campus" }));
-    out.push(ctaOf(recurso ? "¿Lo *usarías*?" : "¿Lo *empezás*?", recurso ? "Mandáselo a tu colega profe" : "Mandáselo a quien lo necesita", recurso ? "Escribí PROFE y te pasamos el link" : "Escribí QUIERO y te pasamos el link"));
+    const W_ = T.w;
+    out.push(S_("text", { kicker: "¿Lo querés?", title: `Comentá *${W_}*`, body: `y te mandamos toda la info por mensaje.\n\nO entrá a *thequeenstea.com.ar* y mirá todo lo que tenemos.`, emoji: "💬" }));
+    out.push(ctaOf("¿Te *sirvió*?", recurso ? "Mandáselo a tu colega profe" : "Mandáselo a quien lo necesita", `Comentá ${W_} y te escribimos`));
     return { topic: n, slides: out };
   }
 
@@ -4585,16 +4601,16 @@ Además devolvé caption (texto para la publicación: primera línea con la pala
     $("prodGem").onclick = async () => {
       const t = $("prodTxt").value.trim(); if (t.length < 20) { setStatus("Pegá primero la descripción del curso o producto."); return; }
       try {
-        const r = await gemini(`Sos community manager de The Queen's Tea, academia de inglés argentina. Te paso el texto de un producto de su tienda. Resumilo y armá ganchos para un carrusel de Instagram que venda sin parecer publicidad.
+        const r = await gemini(`Sos community manager de The Queen's Tea, academia de inglés argentina. Te paso el texto de un producto de su tienda. Resumilo y armá un carrusel de Instagram que venda SIN que se note hasta la slide 5: primero 3 tips útiles sobre el tema del producto, después el producto.
 REGLAS: usá SOLO datos que estén en el texto (no inventes precios, cantidades, fechas ni beneficios). Español rioplatense con voseo, frases cortas y cálidas. Hablá solo del producto: nada de vocabulario ni lecciones de inglés.
-En los ganchos, poné entre [corchetes] 1 a 3 palabras para resaltar. Máximo 12 palabras cada gancho. Variá: pregunta, dolor, resultado, curiosidad, oferta.
+Los ganchos NO nombran el producto ni dicen que vendemos: juegan con la necesidad o el problema de quien lee (pregunta, dolor, error común, resultado, curiosidad). Poné entre [corchetes] 1 a 3 palabras para resaltar. Máximo 12 palabras cada gancho.\nLos tips son consejos reales y concretos sobre el tema (no sobre el producto): título corto + explicación de 1 o 2 frases.
 TEXTO:
 """${t.slice(0, 6000)}"""
-Respondé SOLO JSON: {"nombre":"","tipo":"curso|recurso|matricula|otro","nivel":"","precio":"","antes":"","descuento":"","resumen":"2 frases","para":"1 frase: para quién es","dolor":"1 o 2 frases: el problema que resuelve","aprende":["máx 6, cortos"],"incluye":["máx 4, cada uno empieza con un emoji"],"temas":["máx 4"],"ganchos":["5 ganchos"]}`, null, "Gemini está leyendo tu producto");
+Respondé SOLO JSON: {"nombre":"","tipo":"curso|recurso|matricula|otro","nivel":"","precio":"","antes":"","descuento":"","resumen":"2 frases","para":"1 frase: para quién es","dolor":"1 o 2 frases: el problema que resuelve","aprende":["máx 6, cortos"],"incluye":["máx 4, cada uno empieza con un emoji"],"temas":["máx 4"],"ganchos":["5 ganchos"],"tips":[["título corto","explicación"],["",""],["",""]],"puente":"1 frase que conecta los tips con el producto, sin sonar a publicidad"}`, null, "Gemini está leyendo tu producto");
         if (!r || !r.nombre) throw new Error("Gemini respondió incompleto. Probá de nuevo.");
         const base = prodParse(t), A = x => Array.isArray(x) ? x.map(String).filter(Boolean) : [];
         const p = { ...base, n: r.nombre || base.n, tipo: ["curso", "recurso", "matricula"].includes(r.tipo) ? r.tipo : base.tipo, lvl: r.nivel || base.lvl, precio: r.precio || base.precio, antes: r.antes || base.antes, off: r.descuento ? "−" + String(r.descuento).replace(/^[−-]/, "") : base.off,
-          resumen: r.resumen || base.resumen, para: r.para || base.para, dolor: r.dolor || "", aprende: A(r.aprende).length ? A(r.aprende).slice(0, 6) : base.aprende, incluye: A(r.incluye).length ? A(r.incluye).slice(0, 4) : base.incluye, temas: A(r.temas).length ? A(r.temas).slice(0, 4) : base.temas, ganchos: A(r.ganchos).slice(0, 5) };
+          resumen: r.resumen || base.resumen, para: r.para || base.para, dolor: r.dolor || "", aprende: A(r.aprende).length ? A(r.aprende).slice(0, 6) : base.aprende, incluye: A(r.incluye).length ? A(r.incluye).slice(0, 4) : base.incluye, temas: A(r.temas).length ? A(r.temas).slice(0, 4) : base.temas, ganchos: A(r.ganchos).slice(0, 5), tips: Array.isArray(r.tips) ? r.tips.filter(x => Array.isArray(x) && x[0] && x[1]).map(x => [String(x[0]), String(x[1])]).slice(0, 3) : [], puente: r.puente || "" };
         if (p.off && !/%$/.test(p.off)) p.off += "%";
         show(p); await buildSlides(prodSlides(p), p.n);
       } catch (e) { setStatus("⚠️ " + (e.message || e) + " Mientras tanto, probá con ✨ Armar carrusel (sin Gemini)."); }
@@ -5171,5 +5187,5 @@ Respondé SOLO JSON: {"nombre":"${name}","quien":"a qué se dedica (2 a 5 palabr
     if (inFrame) show(); setTimeout(function () { if (!window.__appReady) show(); }, 8000);
   })();
 </script>
-<div id="qtVer" style="position:fixed;left:8px;bottom:6px;font:600 11px system-ui,sans-serif;color:#8a9aa8;z-index:99999;pointer-events:none">Versión 20/11 14:47</div><script>(function(){var V="20/11 14:47";function chk(){fetch("./version.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(j){if(j.v&&j.v!==V){var k="qt_rl_"+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,"1")}catch(e){}location.reload()}}).catch(function(){})}if(location.protocol==="https:"){document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()});chk()}})();</script></body>
+<div id="qtVer" style="position:fixed;left:8px;bottom:6px;font:600 11px system-ui,sans-serif;color:#8a9aa8;z-index:99999;pointer-events:none">Versión 20/11 14:56</div><script>(function(){var V="20/11 14:56";function chk(){fetch("./version.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(j){if(j.v&&j.v!==V){var k="qt_rl_"+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,"1")}catch(e){}location.reload()}}).catch(function(){})}if(location.protocol==="https:"){document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()});chk()}})();</script></body>
 </html>
