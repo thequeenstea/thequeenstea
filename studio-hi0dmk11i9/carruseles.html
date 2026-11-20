@@ -606,6 +606,7 @@
     myth: { n: "Mito o realidad", i: "🧐", fields: [["kicker", "Etiqueta", "Mito o realidad"], ["myth", "El mito", "El inglés británico es el original"], ["truth", "La realidad", "En algunas cosas el americano es *más antiguo*"], ["why", "Por qué (opcional)", "", 1]], img: false },
     timeline: { n: "Historia de una palabra", i: "⏳", fields: [["title", "Título", "La vida secreta de *nice*"], ["steps", "Un paso por renglón (época: qué pasó)", "1300: significaba tonto o ignorante\n1500: pasó a delicado y exigente\n1700: empezó a ser agradable\nHoy: *nice* = lindo, amable", 1]], img: false },
     versus: { n: "UK vs US", i: "🗺️", fields: [["title", "Título", "Mismo idioma, *otra* palabra"], ["left", "Columna izquierda", "UK"], ["right", "Columna derecha", "US"], ["items", "Un renglón por par (izquierda | derecha | español)", "flat | apartment | departamento\nlift | elevator | ascensor\nbiscuit | cookie | galletita", 1]], img: false },
+    duel: { n: "Duelo UK / US", i: "🆚", fields: [["title", "Título", "En la *mesa*"], ["es", "En español", "galletita"], ["uk", "Reino Unido", "biscuit"], ["ukEx", "Ejemplo Reino Unido", "Fancy a *biscuit*?"], ["us", "Estados Unidos", "cookie"], ["usEx", "Ejemplo Estados Unidos", "Want a *cookie*?"], ["note", "Nota (opcional)", ""], ["left", "Etiqueta de arriba", "REINO UNIDO"], ["right", "Etiqueta de abajo", "ESTADOS UNIDOS"]], img: false },
     steps: { n: "Paso a paso", i: "🪜", fields: [["title", "Título", "Cómo *recordarlas*"], ["items", "Un paso por renglón", "Elegí 3 palabras por día\nUsalas en una frase tuya\nContale a alguien la historia", 1]], img: false },
     quote: { n: "Frase", i: "❝", fields: [["quote", "Frase", "With the greatest respect"], ["author", "Quién la dice", "Lo que dicen los británicos"], ["tr", "Traducción o comentario (a mano)", "Lo que quieren decir: estás muy equivocado"]], img: false },
     grid4: { n: "4 datos", i: "🔢", fields: [["title", "Título", "Datos *rápidos*"], ["items", "4 renglones (emoji + dato)", "📜 nice: antes era un insulto\n🐭 muscle: viene de ratoncito\n🤖 robot: trabajo forzado\n⏰ clock: venía de campana", 1]], img: false },
@@ -1167,6 +1168,27 @@
         });
         return { x: M, y: y0 - 80, w: W - 2 * M, h: rows.length * rowH + 80 };
       });
+    }
+    else if (T === "duel") {
+      sparkles(s, i, P, [[975, 120, 18], [100, 1200, 14]]);
+      const inv = /^#fff/i.test(P.text) ? NAVY : "#fff", note = val(s, "note").trim();
+      el(s, "title", W / 2, 165, () => rich(val(s, "title"), { x: M, y: 95, w: W - 2 * M, h: 130, max: 78, min: 40, font: F, color: P.text, hi: P.hi, pillBg: P.pillBg, pillFg: P.pillFg, align: "center", valign: "middle", maxLines: 2 }));
+      if (val(s, "es").trim()) el(s, "es", W / 2, 268, () => { pill(val(s, "es"), W / 2, 268, P.pillBg, P.pillFg, 32); return { x: M, y: 238, w: W - 2 * M, h: 60 }; });
+      const y0 = 318, gap = 30, bottom = footerY - 46 - (note ? 118 : 0), ch = (bottom - y0 - gap) / 2;
+      const card = (key, y, label, word, ex, dark) => el(s, key, W / 2, y + ch / 2, () => {
+        rr(M, y, W - 2 * M, ch, 42); ctx.fillStyle = dark ? P.pillBg : P.card; ctx.fill();
+        const fg = dark ? P.pillFg : P.text, hi = dark ? P.pillFg : P.hi;
+        pill(label, W / 2, y + 50, dark ? P.pillFg : P.pillBg, dark ? P.pillBg : P.pillFg, 27);
+        const wh = ex ? ch * 0.44 : ch - 110;
+        rich(word, { x: M + 40, y: y + 82, w: W - 2 * M - 80, h: wh, max: 124, min: 44, font: F, color: fg, hi: hi, align: "center", valign: "middle", maxLines: 2, lh: 1 });
+        if (ex) rich(ex, { x: M + 50, y: y + 88 + wh, w: W - 2 * M - 100, h: ch - 110 - wh, max: 40, min: 22, weight: 600, color: fg, hi: fg, align: "center", valign: "middle", lh: 1.25 });
+        return { x: M, y: y, w: W - 2 * M, h: ch };
+      });
+      card("uk", y0, val(s, "left") || "REINO UNIDO", val(s, "uk"), val(s, "ukEx"), false);
+      card("us", y0 + ch + gap, val(s, "right") || "ESTADOS UNIDOS", val(s, "us"), val(s, "usEx"), true);
+      const by = y0 + ch + gap / 2; ctx.beginPath(); ctx.arc(W / 2, by, 46, 0, 7); ctx.fillStyle = P.text; ctx.fill(); ctx.lineWidth = 6; ctx.strokeStyle = inv; ctx.stroke();
+      ctx.fillStyle = inv; ctx.font = `800 30px ${BODY}`; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText("vs", W / 2, by + 2); ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+      if (note) el(s, "note", W / 2, bottom + 62, () => rich("👉 " + note, { x: M, y: bottom + 14, w: W - 2 * M, h: 100, max: 40, min: 22, family: HAND, weight: 700, align: "center", valign: "middle", color: P.hi, hi: P.text, lh: 1.05 }));
     }
     else if (T === "steps") {
       sparkles(s, i, P, [[970, 160, 22], [120, 1150, 16]]);
@@ -3425,6 +3447,584 @@ Respondé SOLO JSON: {"titulo":"","artista":"","anio":0,"traduccion":"","tema":"
     "El truco": ["El truco", "Tip", "La clave", "Secreto de profe"]
   };
   const _lastCov = (() => { try { return JSON.parse(localStorage.getItem("qt_lastcov") || "{}"); } catch { return {}; } })();
+  // ================= SERIES v4: más formatos, más contenido, tienda real =================
+  const vari = a => pickR(a);
+
+  // ---------- UK vs US: un par por slide, con ejemplos ----------
+  // cat, uk, us, es, ukEx, usEx, note
+  const UKUS2 = [
+    ["comida", "biscuit", "cookie", "galletita", "Fancy a *biscuit* with your coffee?", "Want a *cookie* with your coffee?", "En EE. UU. un biscuit es un pancito salado, parecido a un scon."],
+    ["comida", "crisps", "chips", "papas fritas de paquete", "A packet of *crisps*, please.", "A bag of *chips*, please.", "Y en el Reino Unido *chips* son las papas fritas calientes."],
+    ["comida", "chips", "fries", "papas fritas", "Fish and *chips*, please.", "A burger and *fries*, please.", ""],
+    ["comida", "aubergine", "eggplant", "berenjena", "I'm making *aubergine* lasagne.", "I'm making *eggplant* lasagna.", "Fijate: lasagne (UK) y lasagna (US)."],
+    ["comida", "courgette", "zucchini", "zapallito italiano", "Grate the *courgette*.", "Grate the *zucchini*.", ""],
+    ["comida", "sweets", "candy", "golosinas", "The kids ate all the *sweets*.", "The kids ate all the *candy*.", ""],
+    ["comida", "starter", "appetizer", "entrada", "What would you like as a *starter*?", "What would you like as an *appetizer*?", "Ojo: en EE. UU. *entrée* es el plato principal."],
+    ["comida", "the bill", "the check", "la cuenta", "Could we have *the bill*, please?", "Could we get *the check*, please?", ""],
+    ["comida", "takeaway", "takeout", "comida para llevar", "Shall we get a *takeaway* tonight?", "Should we get *takeout* tonight?", ""],
+    ["casa", "flat", "apartment", "departamento", "I live in a small *flat*.", "I live in a small *apartment*.", ""],
+    ["casa", "lift", "elevator", "ascensor", "The *lift* is out of order.", "The *elevator* is out of order.", ""],
+    ["casa", "rubbish", "trash", "basura", "Can you take the *rubbish* out?", "Can you take the *trash* out?", ""],
+    ["casa", "tap", "faucet", "canilla", "The *tap* is dripping.", "The *faucet* is dripping.", ""],
+    ["casa", "ground floor", "first floor", "planta baja", "Reception is on the *ground floor*.", "Reception is on the *first floor*.", "En un hotel de Londres, el *first floor* es el primer piso: ¡un piso más arriba!"],
+    ["casa", "garden", "yard", "patio, jardín", "The kids are playing in the *garden*.", "The kids are playing in the *yard*.", "En EE. UU. *garden* es solo la parte con plantas."],
+    ["casa", "cooker", "stove", "cocina (el artefacto)", "Turn off the *cooker*.", "Turn off the *stove*.", ""],
+    ["casa", "wardrobe", "closet", "placard, ropero", "My *wardrobe* is full.", "My *closet* is full.", ""],
+    ["ropa", "trousers", "pants", "pantalones", "I love your *trousers*!", "I love your *pants*!", "En Londres *pants* es ropa interior 😳"],
+    ["ropa", "jumper", "sweater", "pulóver", "Take a *jumper*, it's cold.", "Take a *sweater*, it's cold.", ""],
+    ["ropa", "trainers", "sneakers", "zapatillas", "New *trainers*!", "New *sneakers*!", ""],
+    ["ropa", "waistcoat", "vest", "chaleco", "He wore a *waistcoat* to the wedding.", "He wore a *vest* to the wedding.", "En el Reino Unido un *vest* es una musculosa."],
+    ["calle", "petrol", "gas", "nafta", "We need *petrol*.", "We need *gas*.", ""],
+    ["calle", "motorway", "highway", "autopista", "Take the *motorway*.", "Take the *highway*.", ""],
+    ["calle", "pavement", "sidewalk", "vereda", "Walk on the *pavement*.", "Walk on the *sidewalk*.", "En EE. UU. *pavement* es el asfalto de la calle."],
+    ["calle", "car park", "parking lot", "estacionamiento", "I'll meet you in the *car park*.", "I'll meet you in the *parking lot*.", ""],
+    ["calle", "the underground", "the subway", "el subte", "Let's take *the underground*.", "Let's take *the subway*.", "En Londres un *subway* es un paso subterráneo para peatones. Al subte le dicen *the Tube*."],
+    ["calle", "zebra crossing", "crosswalk", "senda peatonal", "Cross at the *zebra crossing*.", "Cross at the *crosswalk*.", ""],
+    ["calle", "roundabout", "traffic circle", "rotonda", "Take the second exit at the *roundabout*.", "Take the second exit at the *traffic circle*.", ""],
+    ["calle", "lorry", "truck", "camión", "A *lorry* blocked the road.", "A *truck* blocked the road.", ""],
+    ["viajes", "return ticket", "round-trip ticket", "pasaje de ida y vuelta", "A *return ticket* to Oxford, please.", "A *round-trip ticket* to Boston, please.", "Y solo ida: *single* (UK) y *one-way* (US)."],
+    ["viajes", "queue", "line", "fila", "Please join the *queue*.", "Please get in *line*.", ""],
+    ["viajes", "holiday", "vacation", "vacaciones", "We're going on *holiday*.", "We're going on *vacation*.", ""],
+    ["viajes", "mobile", "cell phone", "celular", "My *mobile* is dead.", "My *cell phone* is dead.", ""],
+    ["viajes", "postcode", "zip code", "código postal", "What's your *postcode*?", "What's your *zip code*?", ""],
+    ["viajes", "luggage", "baggage", "equipaje", "Where can I leave my *luggage*?", "Where can I check my *baggage*?", "Las dos se usan en los dos países, pero cada uno tiene su favorita."],
+    ["colegio", "maths", "math", "matemática", "I've got *maths* first thing.", "I have *math* first thing.", ""],
+    ["colegio", "rubber", "eraser", "goma de borrar", "Can I borrow your *rubber*?", "Can I borrow your *eraser*?", "En EE. UU. no pidas un *rubber* en clase: significa otra cosa 😅"],
+    ["colegio", "revise", "review", "repasar", "I'm *revising* for my exams.", "I'm *reviewing* for my exams.", "En EE. UU. *revise* es corregir un texto."],
+    ["colegio", "state school", "public school", "escuela pública", "She went to a *state school*.", "She went to a *public school*.", "En Inglaterra una *public school* es un colegio privado carísimo."],
+    ["colegio", "headteacher", "principal", "director/a de escuela", "The *headteacher* called my parents.", "The *principal* called my parents.", ""],
+    ["ortografia", "colour", "color", "color", "My favourite *colour* is teal.", "My favorite *color* is teal.", "Regla: *-our* en el Reino Unido, *-or* en EE. UU. (colour, honour, neighbour)."],
+    ["ortografia", "centre", "center", "centro", "Meet me in the city *centre*.", "Meet me downtown, at the *center*.", "Regla: *-re* (UK) y *-er* (US): centre, theatre, metre."],
+    ["ortografia", "travelling", "traveling", "viajando", "I'm *travelling* next week.", "I'm *traveling* next week.", "Regla: el británico duplica la l (cancelled, travelled)."],
+    ["ortografia", "organise", "organize", "organizar", "Let's *organise* a meeting.", "Let's *organize* a meeting.", "En el Reino Unido también vas a ver -ize: las dos se aceptan allá."],
+    ["ortografia", "programme", "program", "programa", "A TV *programme*.", "A TV *program*.", "En el Reino Unido un programa de computadora es *program*."],
+    ["ortografia", "grey", "gray", "gris", "A *grey* sky.", "A *gray* sky.", ""],
+    ["ortografia", "tyre", "tire", "neumático", "I've got a flat *tyre*.", "I have a flat *tire*.", ""],
+    ["ortografia", "defence", "defense", "defensa", "The best *defence*.", "The best *defense*.", "Regla: *-ce* (UK) y *-se* (US): licence, offence."],
+    ["ortografia", "catalogue", "catalog", "catálogo", "Check the *catalogue*.", "Check the *catalog*.", ""],
+    ["pronunciacion", "to-MAH-to", "to-MAY-to", "tomate (tomato)", "/təˈmɑːtəʊ/", "/təˈmeɪtoʊ/", ""],
+    ["pronunciacion", "SHED-yool", "SKED-jool", "horario (schedule)", "/ˈʃedjuːl/", "/ˈskedʒuːl/", "En el Reino Unido también se escucha la versión con k."],
+    ["pronunciacion", "GA-rahzh", "ga-RAHZH", "garaje (garage)", "/ˈɡærɑːʒ/", "/ɡəˈrɑːʒ/", "Cambia la sílaba fuerte."],
+    ["pronunciacion", "WAW-tuh", "WAH-der", "agua (water)", "La t se pronuncia: /ˈwɔːtə/", "La t suena casi como una d suave: /ˈwɑːt̬ɚ/", "En EE. UU. la t entre vocales se ablanda: water, city, better."],
+    ["pronunciacion", "kahnt", "kænt", "no puedo (can't)", "/kɑːnt/", "/kænt/", ""],
+    ["pronunciacion", "VIT-a-min", "VAI-ta-min", "vitamina (vitamin)", "/ˈvɪtəmɪn/", "/ˈvaɪtəmɪn/", ""],
+    ["pronunciacion", "ad-VER-tis-ment", "AD-ver-taiz-ment", "aviso (advertisement)", "/ədˈvɜːtɪsmənt/", "/ˌædvərˈtaɪzmənt/", ""],
+    ["pronunciacion", "LEZH-uh", "LEE-zher", "tiempo libre (leisure)", "/ˈleʒə/", "/ˈliːʒər/", ""],
+    ["pronunciacion", "al-yoo-MIN-ee-um", "a-LOO-mi-num", "aluminio", "Se escribe *aluminium*.", "Se escribe *aluminum*.", "Acá cambian la pronunciación y la ortografía."],
+    ["gramatica", "Have you got a car?", "Do you have a car?", "¿Tenés auto?", "Más común en el Reino Unido.", "Más común en EE. UU.", "Las dos son correctas en los dos países."],
+    ["gramatica", "at the weekend", "on the weekend", "el fin de semana", "What are you doing *at the weekend*?", "What are you doing *on the weekend*?", ""],
+    ["gramatica", "in hospital", "in the hospital", "internado/a", "My gran is *in hospital*.", "My grandma is *in the hospital*.", "Pasa lo mismo con *at university* / *in college*."],
+    ["gramatica", "Have you eaten yet?", "Did you eat yet?", "¿Ya comiste?", "Present perfect con *yet*.", "En EE. UU. es común el pasado simple.", ""],
+    ["gramatica", "The team are winning", "The team is winning", "el equipo va ganando", "Lo ven como un grupo de personas.", "Lo ven como una unidad.", "Pasa con team, family, government, staff."],
+    ["gramatica", "I've just eaten", "I just ate", "recién comí", "Present perfect con *just*.", "Pasado simple con *just*.", ""],
+    ["gramatica", "Shall we go?", "Should we go?", "¿Vamos?", "*Shall* para propuestas.", "*Should* para lo mismo.", "En EE. UU. *shall* suena muy formal."],
+    ["gramatica", "It's got colder", "It's gotten colder", "se puso más frío", "Participio: *got*.", "Participio: *gotten*.", ""],
+    ["gramatica", "20 November", "November 20", "20 de noviembre", "Se escribe 20/11.", "Se escribe 11/20.", "Ojo con las fechas: en EE. UU. va primero el mes."]
+  ];
+  const UK_CAT = { comida: ["En la *mesa*", "🍽️"], casa: ["En *casa*", "🏠"], ropa: ["En el *placard*", "👕"], calle: ["En la *calle*", "🚗"], viajes: ["De *viaje*", "✈️"], colegio: ["En el *colegio*", "📚"], ortografia: ["Cómo se *escribe*", "✍️"], pronunciacion: ["Cómo *suena*", "🗣️"], gramatica: ["La *gramática*", "🧩"] };
+  const duelOf = (x, title) => S_("duel", { title: title || UK_CAT[x[0]][0], es: x[3], uk: x[1], ukEx: x[4], us: x[2], usEx: x[5], note: x[6], left: "REINO UNIDO", right: "ESTADOS UNIDOS" });
+
+  // ---------- EL CÓDIGO BRITÁNICO: muchas más frases y por contexto ----------
+  const CODIGO3 = [
+    { c: "social", f: "You must come round for dinner sometime", cree: "te está invitando a comer", es: "es una frase amable, no una invitación con fecha", why: "Si no hay día ni hora, es cortesía. Una invitación real suena así: *Are you free on Saturday?*", r: "That'd be lovely!" },
+    { c: "social", f: "You alright?", cree: "¿te pasa algo?", es: "hola, ¿qué tal?", why: "En gran parte de Inglaterra es un saludo, igual que *How are you?*. No esperan que les cuentes tus problemas.", r: "Yeah, good, you?" },
+    { c: "social", f: "How do you do?", cree: "¿cómo estás?", es: "mucho gusto", why: "Es un saludo formal al conocer a alguien. La respuesta tradicional es... *How do you do?* otra vez.", r: "How do you do? Nice to meet you." },
+    { c: "social", f: "Mustn't grumble", cree: "no me tengo que quejar", es: "todo bien, dentro de todo", why: "Es la respuesta británica clásica a *How are you?*: no está genial, pero quejarse sería de mala educación.", r: "Glad to hear it!" },
+    { c: "social", f: "Lovely weather, isn't it?", cree: "quiere hablar del clima", es: "hablemos de algo neutral", why: "El clima es el tema seguro para empezar una charla con cualquiera: en el ascensor, en la parada o en la fila.", r: "It is! Hope it lasts." },
+    { c: "social", f: "I'm easy", cree: "soy fácil", es: "me da igual, elegí vos", why: "*I'm easy* significa que no tenés preferencia. Muy útil para elegir restaurante o película.", r: "Great, pizza it is then!" },
+    { c: "social", f: "Oh, you shouldn't have!", cree: "no tendrías que haberlo hecho", es: "¡gracias, me encanta!", why: "Es la reacción educada al recibir un regalo. No es una queja.", r: "It's nothing, I hope you like it!" },
+    { c: "social", f: "I'll let you get on", cree: "te dejo seguir", es: "quiero terminar esta charla", why: "Es la forma amable de cortar: suena a que te hacen un favor, pero en realidad se quieren ir.", r: "Lovely to chat, see you soon!" },
+    { c: "social", f: "Anyway...", cree: "cambia de tema", es: "esta conversación terminó", why: "Un *anyway* largo, con una pausa, anuncia que se viene la despedida.", r: "Anyway, I'd better go too!" },
+    { c: "social", f: "Each to their own", cree: "a cada uno lo suyo", es: "a mí no me gusta nada lo que elegiste", why: "Suena tolerante, pero muchas veces es una forma de no decir lo que piensan de tu elección.", r: "Haha, fair enough!" },
+    { c: "social", f: "It's not really my thing", cree: "no es lo suyo", es: "no me gusta para nada", why: "Rechazar algo de frente suena duro. Esta frase lo suaviza.", r: "No worries, we'll find something else." },
+    { c: "social", f: "Sorry!", cree: "te pide perdón", es: "vos me chocaste, pero lo digo igual", why: "Muchos británicos dicen *sorry* aunque el otro los haya chocado. Es un reflejo social.", r: "Oh, sorry!" },
+    { c: "pub", f: "Fancy a quick one?", cree: "una cosa rapidita", es: "¿vamos a tomar algo? (y no va a ser rápido)", why: "*A quick one* es una bebida en el pub. Casi nunca termina siendo una sola.", r: "Go on then, just one!" },
+    { c: "pub", f: "It's my round", cree: "es mi turno", es: "esta ronda la pago yo", why: "En el pub cada uno paga una ronda para todo el grupo. Si te invitan, se espera que después pagues vos.", r: "Cheers! Next one's on me." },
+    { c: "pub", f: "Cheers!", cree: "¡salud!", es: "gracias, chau o salud, según el momento", why: "*Cheers* es comodín: lo vas a escuchar al recibir el vuelto, al despedirte y al brindar.", r: "Cheers!" },
+    { c: "pub", f: "Go on then", cree: "seguí", es: "bueno, dale, me convenciste", why: "Es la forma de aceptar algo que antes dijiste que no querías.", r: "That's the spirit!" },
+    { c: "reunion", f: "I only have a few minor comments", cree: "unos detallitos", es: "hay que rehacer casi todo", why: "*Minor* achica la crítica. Prepará el café: vienen muchos cambios.", r: "Great, let's go through them." },
+    { c: "reunion", f: "Could we consider some other options?", cree: "quiere ver alternativas", es: "tu idea no me gusta", why: "En vez de decir 'no', proponen 'otras opciones'.", r: "Sure. What would you like to see?" },
+    { c: "reunion", f: "I'm sure you know best", cree: "confía en vos", es: "hacé lo que quieras, pero no estoy de acuerdo", why: "Suena a cumplido, pero muchas veces es una forma de desligarse.", r: "I'd really value your view on it, though." },
+    { c: "reunion", f: "That's one way of doing it", cree: "es una buena forma", es: "lo estás haciendo mal", why: "Al decir 'una forma', dan a entender que hay otra mejor.", r: "How would you approach it?" },
+    { c: "reunion", f: "I'm a little bit concerned", cree: "está apenas preocupado", es: "estoy muy preocupado", why: "*A little bit* es el clásico achicador británico: cuanto más grave, más chiquito lo dicen.", r: "Let's talk it through now." },
+    { c: "reunion", f: "Do you have a moment?", cree: "una pregunta rápida", es: "tenemos que hablar", why: "Si lo dice tu jefe con cara seria, buscá una silla.", r: "Of course, now's fine." },
+    { c: "reunion", f: "Hmm, that's a thought", cree: "es una idea", es: "no", why: "Reconoce que dijiste algo, pero no lo apoya.", r: "Happy to explore it more if you like." },
+    { c: "reunion", f: "It's a bit of a nightmare", cree: "un problemita", es: "es un desastre total", why: "Otra vez *a bit*: la catástrofe se dice en voz baja.", r: "Oh no. How can I help?" },
+    { c: "reunion", f: "Shall we say five-ish?", cree: "a las cinco", es: "a las cinco, más o menos", why: "*-ish* se pega a casi todo: five-ish, tall-ish, done-ish. Significa 'más o menos'.", r: "Five-ish works for me!" },
+    { c: "reunion", f: "Just a quick question", cree: "una pregunta cortita", es: "una pregunta larga", why: "*Quick* prepara el terreno para pedir algo que no es tan rápido.", r: "Sure, go ahead." },
+    { c: "mail", f: "Per my last email", cree: "como en mi último mail", es: "ya te lo dije, leé", why: "Es de los más temidos del mundo laboral: avisa que no leíste algo.", r: "Thanks, I've found it now. Sorry for missing that." },
+    { c: "mail", f: "Just a gentle reminder", cree: "un recordatorio suave", es: "te estoy apurando", why: "*Gentle* suaviza, pero el mensaje es: esto ya tendría que estar hecho.", r: "Thanks for the nudge, it's coming today." },
+    { c: "mail", f: "Going forward", cree: "de ahora en más", es: "que no se repita", why: "Aparece después de un error: marca cómo se tiene que hacer a partir de ahora.", r: "Understood, thanks for flagging it." },
+    { c: "mail", f: "Just to clarify...", cree: "para aclarar", es: "entendiste mal", why: "Es la forma educada de corregirte por escrito.", r: "Thanks for clarifying!" },
+    { c: "mail", f: "As discussed", cree: "como hablamos", es: "ya lo hablamos y ahora queda por escrito", why: "Sirve para dejar constancia de lo que se acordó.", r: "Thanks for the summary." },
+    { c: "mail", f: "Thanks in advance", cree: "gracias de antemano", es: "esto no es opcional", why: "Agradecen antes de que lo hagas: dan por hecho que lo vas a hacer.", r: "Will do!" },
+    { c: "mail", f: "Regards", cree: "saludos", es: "estoy un poco molesto", why: "Si alguien que siempre firma *Best wishes* o *Thanks!* pasa a un *Regards* seco, algo cambió.", r: "(Respondé con calidez y resolvé rápido.)" },
+    { c: "mail", f: "Noted", cree: "anotado", es: "no me gustó, pero bueno", why: "Una sola palabra, sin un *thanks*, suena fría.", r: "Thanks! Let me know if you'd like to discuss it." }
+  ];
+  CODIGO2.forEach(x => { if (!x.c) x.c = "reunion"; });
+  const CODIGO_ALL = CODIGO2.concat(CODIGO3);
+  const COD_CTX = { reunion: ["en una *reunión*", "💼"], mail: ["en los *mails*", "📧"], social: ["en una *charla*", "☕"], pub: ["en el *pub*", "🍻"] };
+
+  // ---------- MITO O REALIDAD: un mito por carrusel, bien refutado ----------
+  const MITOS3 = [
+    { id: "preposicion", m: "Nunca termines una oración con preposición.", v: "MITO", t: "Es una regla *inventada*", why: "En el siglo XVII algunos escritores quisieron que el inglés se pareciera al latín, donde eso no pasa. Pero el inglés funciona distinto y lo hace desde siempre.", o: "Se le atribuye al poeta John Dryden, que en 1672 criticó a Ben Jonson por terminar una frase con preposición.", p: [["What are you looking at?", "¿Qué estás mirando?"], ["Who did you go with?", "¿Con quién fuiste?"], ["This is the house I grew up in.", "Esta es la casa donde crecí."]], tip: "Al hablar, terminá con preposición tranquila. Solo en un texto muy formal podés reacomodar: *the house in which I grew up*." },
+    { id: "andbut", m: "No se puede empezar una oración con And o But.", v: "MITO", t: "Se hace desde hace *siglos*", why: "Es un recurso normal del inglés escrito y hablado. Aparece en novelas, discursos y diarios.", o: "Muchas maestras lo prohibían para que los chicos no escribieran oraciones sueltas, sin terminar. El consejo escolar quedó como 'regla'.", p: [["But that's not the point.", "Pero ese no es el punto."], ["And then it started to rain.", "Y entonces empezó a llover."], ["But wait, there's more!", "¡Pero esperá, hay más!"]], tip: "Usalo con moderación para dar énfasis. En un ensayo formal, alterná con *However* o *Moreover*." },
+    { id: "ok", m: "OK viene de '0 killed', lo que decían en la guerra.", v: "MITO", t: "Nació de un *chiste*", why: "No hay ningún registro que lo relacione con la guerra. Su origen está muy bien documentado.", o: "En 1839 un diario de Boston escribió 'o.k.' como abreviatura en broma de 'oll korrect' (all correct mal escrito). Era una moda de la época. En 1840 se hizo famosa por una campaña presidencial.", p: [["Is that OK with you?", "¿Te parece bien?"], ["I'm OK, thanks.", "Estoy bien, gracias."], ["OK, let's start.", "Bueno, empecemos."]], tip: "Se escribe OK u okay. En un mail formal usá *fine* o *all right*." },
+    { id: "edad", m: "Después de los 12 años ya no podés aprender bien un idioma.", v: "MITO", t: "Los adultos aprenden, y *rápido*", why: "Los adultos tienen estrategias, vocabulario y disciplina. Al principio suelen avanzar más rápido que los chicos.", o: "Viene de la idea del 'período crítico'. Las investigaciones muestran que la edad influye sobre todo en el acento, no en poder comunicarte bien.", p: [["I started learning at 40.", "Empecé a aprender a los 40."], ["It's never too late.", "Nunca es tarde."], ["I can hold a conversation now.", "Ya puedo mantener una conversación."]], tip: "No te compares con un nene. Fijate metas concretas: pedir en un restaurante, hacer una videollamada, leer un mail." },
+    { id: "afuera", m: "Para hablar bien inglés tenés que vivir afuera.", v: "MITO", t: "Se puede *sin mudarte*", why: "Mucha gente vive afuera años y habla poco, y mucha gente habla muy bien sin haber viajado. La diferencia la hace la práctica.", o: "Vivir afuera da más contacto con el idioma. Pero hoy podés tener ese contacto desde tu casa: series, podcasts, clases y conversación.", p: [["I practise every day.", "Practico todos los días."], ["I've never been abroad.", "Nunca viajé al exterior."], ["I learnt it here.", "Lo aprendí acá."]], tip: "Armá tu 'viaje' en casa: una serie con subtítulos en inglés, un podcast en el colectivo y una clase por semana para hablar." },
+    { id: "reina", m: "En Inglaterra todos hablan como la familia real.", v: "MITO", t: "Ese acento es de *pocos*", why: "El acento 'de la tele', la *Received Pronunciation*, lo habla una minoría. En el Reino Unido hay decenas de acentos muy distintos.", o: "Durante años fue el acento de la BBC y de los colegios caros, por eso se volvió el acento 'de las películas'.", p: [["Liverpool: Scouse", "Liverpool tiene su acento propio"], ["Newcastle: Geordie", "Newcastle, otro muy distinto"], ["Londres: Cockney y más", "Londres tiene varios"]], tip: "Escuchá acentos variados: entrevistas a futbolistas, podcasts regionales, series de distintas ciudades." },
+    { id: "gonna", m: "Gonna y wanna son inglés incorrecto.", v: "MITO", t: "Es inglés *hablado* real", why: "Los nativos los usan todo el tiempo al hablar rápido. Son formas reducidas, como nuestro '¿pa' qué?'.", o: "Se ven 'mal' porque casi no aparecen escritos en textos formales. Pero en el habla son lo normal.", p: [["I'm gonna call you.", "= I'm going to call you."], ["Do you wanna come?", "= Do you want to come?"], ["I gotta go.", "= I've got to go."]], tip: "Entendelos y usalos al hablar. En un mail formal escribí la forma completa." },
+    { id: "subtitulos", m: "Ver series con subtítulos en español te enseña inglés.", v: "A MEDIAS", t: "Ayudan más en *inglés*", why: "Con subtítulos en español tu cerebro lee en tu idioma y el oído descansa. Con subtítulos en inglés unís lo que escuchás con cómo se escribe.", o: "Algo se aprende con cualquier serie, por eso el mito tiene parte de verdad. Pero el salto llega cuando pasás a subtítulos en inglés.", p: [["Turn on English subtitles.", "Poné los subtítulos en inglés."], ["Pause and repeat.", "Pausá y repetí."], ["Rewatch your favourite scene.", "Volvé a ver tu escena favorita."]], tip: "Probá así: primera vez con subtítulos en inglés, segunda vez la misma escena sin subtítulos." },
+    { id: "gramatica", m: "Primero tenés que saber toda la gramática y después hablar.", v: "MITO", t: "Se aprende *hablando*", why: "Hablar es una habilidad, como andar en bici: se entrena haciéndolo. Saber una regla no es lo mismo que usarla rápido.", o: "Muchos aprendimos inglés con listas de reglas y ejercicios escritos. Por eso parece que hablar viene después.", p: [["Can I try?", "¿Puedo intentar?"], ["Sorry, let me say that again.", "Perdón, lo digo de nuevo."], ["How do you say...?", "¿Cómo se dice...?"]], tip: "Desde la primera clase, hablá con lo que sabés. Los errores son parte del camino." },
+    { id: "original", m: "El inglés británico es el original y el estadounidense es una copia.", v: "MITO", t: "Los dos *cambiaron*", why: "Los dos siguieron cambiando desde el 1600. En algunas cosas, el estadounidense conserva rasgos más antiguos.", o: "Por ejemplo, la r de 'car' se pronunciaba en la Inglaterra del 1600. Los colonos la conservaron y en el sur de Inglaterra se fue perdiendo después.", p: [["car /kɑːr/", "EE. UU.: la r suena"], ["car /kɑː/", "Sur de Inglaterra: no suena"], ["gotten", "forma antigua que EE. UU. conservó"]], tip: "Ninguno es 'mejor'. Elegí el que más escuchás y entendé los dos." },
+    { id: "shakespeare", m: "Shakespeare inventó 1700 palabras.", v: "A MEDIAS", t: "Muchas ya *existían*", why: "Muchas palabras aparecen escritas por primera vez en sus obras, pero eso no prueba que las haya inventado: seguramente ya circulaban.", o: "Al buscar textos más antiguos, los investigadores encontraron muchas de esas palabras antes que él. Igual, sí creó y popularizó muchísimas expresiones.", p: [["break the ice", "romper el hielo"], ["wild-goose chase", "búsqueda inútil"], ["in a pickle", "en un aprieto"]], tip: "Leelo en ediciones modernas o miralo en película: muchas expresiones de hoy vienen de ahí." },
+    { id: "split", m: "Nunca pongas una palabra entre 'to' y el verbo.", v: "MITO", t: "Es otra regla *copiada del latín*", why: "En latín el infinitivo es una sola palabra y no se puede cortar. En inglés sí, y a veces suena mejor.", o: "Unos gramáticos del siglo XIX quisieron imponerla. La frase más famosa que la rompe es de Star Trek: *to boldly go*.", p: [["to really understand", "entender de verdad"], ["to boldly go", "ir con valentía"], ["to never forget", "no olvidar nunca"]], tip: "Ponelo donde suene natural. Si suena raro, movelo." },
+    { id: "whom", m: "'Whom' ya no se usa.", v: "A MEDIAS", t: "Se usa, pero en lo *formal*", why: "En una charla casi todos dicen *who*. Pero *whom* sigue vivo en textos formales y después de preposición.", o: "El inglés fue perdiendo terminaciones con los siglos. *Whom* es de las pocas que quedan.", p: [["Who did you call?", "Charla: ¿A quién llamaste?"], ["To whom it may concern", "Formal: A quien corresponda"], ["With whom?", "Formal: ¿Con quién?"]], tip: "Al hablar, usá *who*. Después de *to, with, for* en un texto formal, usá *whom*." },
+    { id: "irregardless", m: "'Irregardless' no es una palabra.", v: "A MEDIAS", t: "Está en los *diccionarios*", why: "Aparece en diccionarios como Merriam-Webster, marcada como no estándar. Existe, pero suena poco cuidada.", o: "Se cree que es una mezcla de *irrespective* y *regardless*.", p: [["Regardless of the weather...", "Sin importar el clima..."], ["Irrespective of age...", "Sin importar la edad..."], ["Irregardless...", "Existe, pero evitala"]], tip: "En exámenes y en el trabajo, decí *regardless*." },
+    { id: "literally", m: "'Literally' solo puede significar 'literalmente'.", v: "A MEDIAS", t: "También es un *intensificador*", why: "Los diccionarios registran su uso para dar énfasis desde hace más de 200 años. *I'm literally dying* no significa que alguien se muere.", o: "A mucha gente le molesta este uso, por eso parece 'nuevo'. No lo es.", p: [["I literally can't.", "No puedo, en serio."], ["It was literally freezing.", "Hacía un frío tremendo."], ["Translate it literally.", "Traducilo literal."]], tip: "En la charla está bien. En un texto formal, mejor *really* o *extremely*." },
+    { id: "academia", m: "El inglés no tiene una academia que lo regule.", v: "REALIDAD", t: "No tiene una *RAE*", why: "No existe una institución oficial que diga qué está bien y qué no. Los diccionarios describen cómo se usa el idioma.", o: "En el siglo XVIII se propuso crear una academia, pero nunca se armó. Por eso los diccionarios suman palabras cuando la gente ya las usa.", p: [["selfie", "entró a los diccionarios por el uso"], ["rizz", "Palabra del Año de Oxford 2023"], ["brain rot", "Palabra del Año de Oxford 2024"]], tip: "Por eso el inglés cambia tan rápido: seguilo en series, redes y noticias." },
+    { id: "traducir", m: "Para hablar tenés que traducir mentalmente.", v: "MITO", t: "Traducir todo te *frena*", why: "Al principio es normal. Pero el objetivo es pensar en bloques de frases ya armadas.", o: "Muchos aprendimos con listas de palabras sueltas, y entonces armamos frases traduciendo de a una.", p: [["I'd like to...", "Me gustaría..."], ["Could you...?", "¿Podrías...?"], ["What do you mean?", "¿Qué querés decir?"]], tip: "Aprendé frases enteras, no palabras sueltas. Repetilas en voz alta hasta que salgan solas." },
+    { id: "phrasal", m: "Los phrasal verbs son de inglés informal.", v: "MITO", t: "Están en *todos lados*", why: "Aparecen en mails de trabajo, contratos, noticias y papers.", o: "Como muchos tienen un sinónimo latino (find out = discover), parecen la versión 'informal'. Pero se usan en todos los registros.", p: [["We need to find out why.", "Tenemos que averiguar por qué."], ["The study was carried out in 2023.", "El estudio se realizó en 2023."], ["Let's set up a meeting.", "Armemos una reunión."]], tip: "Aprendelos dentro de frases reales, no en listas sueltas." },
+    { id: "ie", m: "La regla 'i antes de e, salvo después de c' siempre funciona.", v: "MITO", t: "Tiene *muchas* excepciones", why: "Funciona en *believe* o *receive*, pero falla en *science*, *weird*, *their*, *seize* o *ancient*.", o: "Es una rima escolar muy famosa en países de habla inglesa: 'i before e except after c'.", p: [["believe, field", "cumple la regla"], ["receive, ceiling", "cumple la regla"], ["science, weird, their", "no la cumplen"]], tip: "Más que reglas, leé mucho: la ortografía se fija viendo las palabras." },
+    { id: "nativos", m: "Los nativos no cometen errores.", v: "MITO", t: "Se equivocan *un montón*", why: "Confunden *your* y *you're*, escriben *could of* en vez de *could have* y mezclan *less* y *fewer*.", o: "Creemos que hablar 'como nativo' es hablar perfecto. Pero ningún hablante es perfecto en su idioma.", p: [["Your welcome ❌", "You're welcome ✅"], ["I could of gone ❌", "I could have gone ✅"], ["Their late ❌", "They're late ✅"]], tip: "Tu meta no es la perfección: es que se te entienda y te sientas cómoda." },
+    { id: "dormir", m: "Escuchar inglés mientras dormís te enseña palabras nuevas.", v: "MITO", t: "No hay *pruebas*", why: "No hay evidencia de que aprendas vocabulario nuevo durmiendo. Lo que sí está estudiado es que el sueño ayuda a fijar lo que practicaste de día.", o: "Es un sueño (literal) muy vendedor: aprender sin esfuerzo. Por eso circula hace décadas.", p: [["Practise in the day.", "Practicá de día."], ["Review before bed.", "Repasá antes de dormir."], ["Sleep well.", "Dormí bien."]], tip: "Repasá 10 minutos antes de dormir y dejá que el sueño haga su parte." },
+    { id: "britanico", m: "Conviene aprender británico, que es más 'correcto'.", v: "MITO", t: "Ninguno es *mejor*", why: "Los dos son igual de correctos. Los exámenes internacionales aceptan las dos variantes si sos coherente.", o: "Viene de la idea de que el inglés 'de Inglaterra' es el original. Pero el inglés es de todos los que lo hablan.", p: [["colour / color", "las dos están bien"], ["flat / apartment", "las dos están bien"], ["at / on the weekend", "las dos están bien"]], tip: "Elegí una variante para escribir y entendé las dos al escuchar." }
+  ];
+
+  // ---------- DETRÁS DE LA PALABRA: más palabras y explicación por partes ----------
+  PALABRAS.push(
+    { w: "robot", e: "🤖", hoy: "robot", antes: "trabajo forzado", fake: "hombre de metal", o: "del checo robota, 'trabajo forzado'",
+      steps: "1920: aparece en la obra de teatro R.U.R., de Karel Čapek\n1941: Isaac Asimov inventa 'robotics'\nHoy: robot",
+      story: "La palabra nació en una obra de teatro checa de 1920 sobre máquinas que trabajan para los humanos. El autor, Karel Čapek, la tomó de *robota*: trabajo forzado.",
+      ej: [["The robot cleans the floor.", "El robot limpia el piso."], ["Robots are changing many jobs.", "Los robots están cambiando muchos trabajos."]],
+      extra: "Según el propio Karel Čapek, la palabra se la sugirió su hermano, el pintor Josef Čapek." },
+    { w: "emoji", e: "😂", hoy: "emoji", antes: "dibujo + letra (japonés)", fake: "emoción", o: "del japonés e (imagen) + moji (letra, carácter)",
+      steps: "1999: Shigetaka Kurita diseña 176 emojis en Japón\n2010: entran al estándar Unicode\n2015: 😂 es la Palabra del Año de Oxford\nHoy: emoji",
+      story: "Parece que viene de *emotion*, pero es pura casualidad. Es una palabra japonesa: *e* es imagen y *moji* es letra.",
+      ej: [["Send me an emoji!", "¡Mandame un emoji!"], ["She replied with a heart emoji.", "Respondió con un emoji de corazón."]],
+      extra: "Los 176 emojis originales de Kurita están en la colección del MoMA de Nueva York." },
+    { w: "nerd", e: "🤓", hoy: "nerd, estudioso", antes: "un bicho inventado", fake: "estudiante de ciencias", o: "de un libro infantil de Dr. Seuss (1950)",
+      steps: "1950: aparece en 'If I Ran the Zoo', de Dr. Seuss\n1951: se usa como 'persona aburrida'\nHoy: fan de un tema, con orgullo",
+      story: "La primera aparición registrada es en un libro infantil de Dr. Seuss, como nombre de una criatura inventada. Un año después ya se usaba para hablar de alguien aburrido.",
+      ej: [["I'm a total grammar nerd.", "Soy re fan de la gramática."], ["Nerds are cool now.", "Ahora ser nerd está de moda."]],
+      extra: "Hoy se usa con orgullo: *book nerd*, *tech nerd*, *language nerd*." },
+    { w: "shampoo", e: "🧴", hoy: "champú", antes: "masaje", fake: "jabón de coco", o: "del hindi chāmpo, 'presioná, masajeá'",
+      steps: "1762: llega al inglés como 'hacer masajes'\n1860: pasa a ser lavar el pelo\nHoy: champú",
+      story: "Llegó al inglés desde la India, en la época colonial, con el sentido de masajear el cuerpo. Un siglo después pasó a ser lavar la cabeza.",
+      ej: [["I need to buy shampoo.", "Tengo que comprar champú."], ["Shampoo, rinse, repeat.", "Lavá, enjuagá, repetí."]],
+      extra: "En español escribimos *champú*, pero viene de la misma palabra." },
+    { w: "ketchup", e: "🍅", hoy: "kétchup", antes: "salsa de pescado", fake: "salsa de tomate inglesa", o: "probablemente del hokkien kê-tsiap, una salsa de pescado",
+      steps: "1600: salsa de pescado fermentado en el sur de China\n1700: los británicos la llevan a Europa\n1800: en EE. UU. le suman tomate\nHoy: kétchup",
+      story: "El primer *ketchup* no tenía tomate. Era una salsa de pescado del sur de China que los comerciantes británicos copiaron con hongos, nueces y otros ingredientes.",
+      ej: [["Can I have some ketchup?", "¿Me das kétchup?"], ["Fries with ketchup, please.", "Papas con kétchup, por favor."]],
+      extra: "Por eso en inglés se dice *tomato ketchup*: hubo kétchups de otras cosas." },
+    { w: "avocado", e: "🥑", hoy: "palta", antes: "ahuacatl (náhuatl)", fake: "fruta del abogado", o: "del náhuatl ahuacatl, a través del español 'aguacate'",
+      steps: "Náhuatl: ahuacatl\nEspañol: aguacate\nInglés del 1700: avocado\nHoy: avocado",
+      story: "Los españoles tomaron *ahuacatl* del náhuatl y lo convirtieron en *aguacate*. Al pasar al inglés se cruzó con *avocado*, que en el español de la época significaba abogado.",
+      ej: [["Avocado toast, please.", "Tostada con palta, por favor."], ["This avocado isn't ripe.", "Esta palta no está madura."]],
+      extra: "*Guacamole* también viene del náhuatl: *ahuacamolli*, salsa de aguacate." },
+    { w: "alphabet", e: "🔤", hoy: "alfabeto", antes: "alfa + beta", fake: "letras del alba", o: "del griego alpha y beta, las dos primeras letras",
+      steps: "Fenicio: aleph (buey) y beth (casa)\nGriego: alpha y beta\nLatín: alphabetum\nHoy: alphabet",
+      story: "Se nombra con las dos primeras letras griegas, como nosotros decimos 'abecedario' por a, b, c, d. Y los griegos las tomaron del fenicio.",
+      ej: [["The English alphabet has 26 letters.", "El alfabeto inglés tiene 26 letras."], ["Say the alphabet.", "Decí el abecedario."]],
+      extra: "En fenicio *aleph* significaba buey: si das vuelta la A, ¡se ven los cuernos!" },
+    { w: "trivia", e: "🧠", hoy: "datos curiosos", antes: "cruce de tres caminos", fake: "tres preguntas", o: "del latín trivium, 'lugar donde se cruzan tres caminos'",
+      steps: "Latín: trivium, cruce de tres caminos\nLo trivial: lo que se habla en la esquina\nHoy: datos curiosos",
+      story: "Un *trivium* era una esquina donde se unían tres caminos. Lo que se charlaba ahí era común, sin importancia: *trivial*.",
+      ej: [["We went to a trivia night.", "Fuimos a una noche de preguntas."], ["That's just trivia.", "Es solo un dato de color."]],
+      extra: "En español pasa lo mismo: *trivial* viene del mismo cruce de caminos." }
+  );
+  // extra para explicar mejor: pronunciación, partes y parientes
+  const PAL_X = {
+    nice: ["/naɪs/", "ne- = no | scire = saber (latín)", "necio (español) | science, conscious (inglés, misma raíz)"],
+    silly: ["/ˈsɪli/", "sælig = bendecido (inglés antiguo)", "selig = bienaventurado (alemán actual)"],
+    clue: ["/kluː/", "clew = ovillo de hilo", "clueless = despistado (inglés)"],
+    deadline: ["/ˈdedlaɪn/", "dead = muerto | line = línea", "dead end = callejón sin salida | lifeline = salvavidas"],
+    quarantine: ["/ˈkwɒrəntiːn/", "quaranta = cuarenta (italiano) | giorni = días", "cuarentena, cuarenta (español)"],
+    disaster: ["/dɪˈzɑːstə/", "dis- = mal | astro = estrella", "astro, desastre (español) | astronaut, asterisk (inglés)"],
+    muscle: ["/ˈmʌsl/ (la c no suena)", "mus = ratón | -culus = chiquito (latín)", "músculo (español) | mouse (inglés, misma raíz)"],
+    companion: ["/kəmˈpænjən/", "com- = con | panis = pan", "compañero, pan (español) | company, pantry (inglés)"],
+    sinister: ["/ˈsɪnɪstə/", "sinister = izquierdo (latín)", "siniestro (español) | dexterity, de dexter = derecho (inglés)"],
+    awful: ["/ˈɔːfl/", "awe = temor, asombro | -ful = lleno de", "awesome (inglés)"],
+    goodbye: ["/ˌɡʊdˈbaɪ/", "God be with ye = Dios esté con ustedes", "adiós = a Dios (español) | adieu (francés)"],
+    OK: ["/ˌəʊˈkeɪ/", "o = oll (all) | k = korrect (correct)", "LOL, OMG (las abreviaturas en broma de hoy)"],
+    nightmare: ["/ˈnaɪtmeə/", "night = noche | mare = espíritu que oprimía al que dormía", "cauchemar (francés) | Mahr (alemán)"],
+    window: ["/ˈwɪndəʊ/", "vindr = viento | auga = ojo (nórdico antiguo)", "wind, eye (inglés)"],
+    husband: ["/ˈhʌzbənd/", "hus = casa | bondi = el que la habita (nórdico antiguo)", "house, husbandry = agricultura (inglés)"],
+    breakfast: ["/ˈbrekfəst/", "break = romper | fast = ayuno", "desayuno = des + ayuno (español, ¡la misma idea!)"],
+    sandwich: ["/ˈsænwɪdʒ/", "Sandwich = pueblo de Kent: sand (arena) + wic (poblado)", "John Montagu, 4.º conde de Sandwich"],
+    umpire: ["/ˈʌmpaɪə/", "non = no | per = par (francés antiguo)", "par, impar (español)"],
+    apron: ["/ˈeɪprən/", "napron = mantelito (francés antiguo)", "napkin = servilleta (inglés)"],
+    nickname: ["/ˈnɪkneɪm/", "eke = también, además | name = nombre", "an ekename → a nickname"],
+    lady: ["/ˈleɪdi/", "hlaf = pan | dige = la que amasa (inglés antiguo)", "loaf = pan | lord = guardián del pan (inglés)"],
+    gossip: ["/ˈɡɒsɪp/", "god = Dios | sibb = pariente (inglés antiguo)", "sibling = hermano o hermana (inglés)"],
+    bedlam: ["/ˈbedləm/", "Bethlehem = Belén", "Belén (español)"],
+    mortgage: ["/ˈmɔːɡɪdʒ/ (la t no suena)", "mort = muerte | gage = prenda (francés antiguo)", "mortal, mortaja (español) | engage, wage (inglés)"],
+    pedigree: ["/ˈpedɪɡriː/", "pied = pie | de grue = de grulla (francés)", "pie, pedal (español) | pedestrian (inglés)"],
+    glamour: ["/ˈɡlæmə/", "glamour = variante escocesa de grammar", "grammar (inglés) | gramática (español)"],
+    villain: ["/ˈvɪlən/", "villanus = trabajador de una villa, una granja (latín)", "villa, villano, villancico (español)"],
+    daisy: ["/ˈdeɪzi/", "dæges = del día | eage = ojo (inglés antiguo)", "day, eye (inglés)"],
+    noon: ["/nuːn/", "nona hora = la novena hora (latín)", "nono, nona (español)"],
+    hello: ["/həˈləʊ/", "hallo, hullo = gritos para llamar la atención", "hallo, hullo (variantes británicas)"],
+    girl: ["/ɡɜːl/", "gurle = chico o chica (inglés medio)", "girlfriend, girlhood (inglés)"],
+    meat: ["/miːt/", "mete = comida (inglés antiguo)", "sweetmeat = golosina (inglés)"],
+    robot: ["/ˈrəʊbɒt/", "robota = trabajo forzado (checo)", "rabota (en ruso: trabajo)"],
+    emoji: ["/ɪˈməʊdʒi/", "e = imagen | moji = letra (japonés)", "kanji (en japonés: la misma 'ji' de carácter)"],
+    nerd: ["/nɜːd/", "nerd = criatura inventada por Dr. Seuss", "geek, dork (parecidas en inglés)"],
+    shampoo: ["/ʃæmˈpuː/", "chāmpo = presioná, masajeá (hindi)", "champú (español)"],
+    ketchup: ["/ˈketʃʌp/", "kê = pescado | tsiap = salsa (hokkien)", "catsup (otra forma vieja en inglés)"],
+    avocado: ["/ˌævəˈkɑːdəʊ/", "ahuacatl (náhuatl) → aguacate (español)", "aguacate, guacamole (español)"],
+    alphabet: ["/ˈælfəbet/", "alpha = a | beta = b (griego)", "alfabeto, abecedario (español)"],
+    trivia: ["/ˈtrɪviə/", "tri = tres | via = camino (latín)", "trivial, vía (español)"]
+  };
+
+  // ---------- 4 DATOS: banco nuevo y formato '3 verdades y 1 mentira' ----------
+  const DATOS2 = [
+    { id: "run", e: "🏃", n: "645", t: "significados tiene *run*", b: "Es de las palabras con más acepciones del inglés: correr, dirigir una empresa, funcionar, una media corrida... El Oxford English Dictionary le dedica una entrada enorme." },
+    { id: "bookkeeper", e: "📚", n: "3", t: "letras dobles seguidas en *bookkeeper*", b: "b-OO-KK-EE-per: tres pares seguidos. Significa 'tenedor de libros', contador." },
+    { id: "strengths", e: "💪", n: "1", t: "sola vocal en *strengths*", b: "Nueve letras y una sola vocal. Es la palabra más larga del inglés común con una única vocal." },
+    { id: "queue", e: "🧍", n: "4", t: "letras que sobran en *queue*", b: "Se pronuncia /kjuː/, como la letra Q. Si le sacás las últimas cuatro letras, suena igual." },
+    { id: "dreamt", e: "💭", n: "-mt", t: "*dreamt* es la única palabra común que termina así", b: "Es el pasado de *dream* en inglés británico. En EE. UU. dicen más *dreamed*." },
+    { id: "fox", e: "🦊", n: "26", t: "letras en una sola frase", b: "*The quick brown fox jumps over the lazy dog* usa todas las letras del alfabeto. Se usaba para probar máquinas de escribir." },
+    { id: "facetious", e: "🔤", n: "a-e-i-o-u", t: "*facetious* tiene las cinco vocales en orden", b: "Significa 'que hace chistes fuera de lugar'. *Abstemious* (moderado) también las tiene en orden." },
+    { id: "uncopyrightable", e: "🧩", n: "15", t: "letras sin repetir ninguna", b: "*Uncopyrightable* (que no se puede registrar) tiene 15 letras y ninguna se repite." },
+    { id: "typewriter", e: "⌨️", n: "1", t: "fila del teclado alcanza para *typewriter*", b: "Todas sus letras están en la fila de arriba del teclado: q-w-e-r-t-y-u-i-o-p." },
+    { id: "stewardesses", e: "✋", n: "12", t: "letras con la mano izquierda", b: "*Stewardesses* se escribe entero con la mano izquierda, si tipeás bien con los diez dedos." },
+    { id: "sounds", e: "🗣️", n: "44", t: "sonidos con solo 26 letras", b: "El inglés tiene alrededor de 44 sonidos distintos y solo 26 letras para escribirlos. Por eso la ortografía es tan rara." },
+    { id: "ampersand", e: "&", n: "27", t: "letras tenía el alfabeto, con *&*", b: "En las escuelas inglesas del 1800 se recitaba el & al final del abecedario: 'and per se and'. De ahí salió *ampersand*." },
+    { id: "emoji", e: "😂", n: "2015", t: "año en que un emoji fue la Palabra del Año", b: "Oxford eligió 😂 (Face with Tears of Joy) como Palabra del Año 2015." },
+    { id: "nerd", e: "🤓", n: "1950", t: "*nerd* aparece en un libro de Dr. Seuss", b: "Era una criatura inventada en 'If I Ran the Zoo'. Un año después ya era un insulto para alguien aburrido." },
+    { id: "tittle", e: "🔍", n: "1", t: "nombre tiene el puntito de la i", b: "Se llama *tittle*. Y el símbolo # se llama *octothorpe*, aunque casi nadie lo sabe." },
+    { id: "the", e: "🥇", n: "1.º", t: "*the* es la palabra más usada", b: "Es la palabra más frecuente del inglés escrito. Le siguen *be*, *to*, *of* y *and*." },
+    { id: "pneumono", e: "📏", n: "45", t: "letras tiene la palabra más larga del diccionario", b: "*Pneumonoultramicroscopicsilicovolcanoconiosis*: una enfermedad pulmonar por polvo volcánico. Se inventó a propósito para ser larga." },
+    { id: "rhythm", e: "🥁", n: "0", t: "vocales a-e-i-o-u en *rhythm*", b: "Ninguna de las cinco vocales clásicas: acá la y hace de vocal." },
+    { id: "listen", e: "👂", n: "6", t: "letras iguales en *listen* y *silent*", b: "Son anagramas: las mismas letras, en otro orden. Escuchar y silencio, la misma materia." },
+    { id: "ough", e: "🤯", n: "6+", t: "formas de pronunciar *-ough*", b: "though, through, tough, cough, bough, thought. Mismas letras, sonidos distintos." },
+    { id: "colonel", e: "🎖️", n: "0", t: "letras r tiene *colonel*... y en EE. UU. suena con r", b: "Se pronuncia como *kernel*. La escritura viene del italiano (colonnello) y el sonido, de una forma francesa vieja: coronel." },
+    { id: "zed", e: "🔠", n: "2", t: "nombres para la Z", b: "*Zed* en el Reino Unido y *zee* en Estados Unidos." },
+    { id: "selfie", e: "🤳", n: "2013", t: "*selfie* fue la Palabra del Año", b: "Oxford la eligió ese año. En 2023 eligió *rizz* (carisma) y en 2024 *brain rot*." },
+    { id: "brainrot", e: "📱", n: "2024", t: "Palabra del Año de Oxford: *brain rot*", b: "Describe el deterioro mental de consumir contenido sin valor. Lo curioso: el primer registro es de 1854, en un libro de Henry David Thoreau." },
+    { id: "lieutenant", e: "🪖", n: "lef", t: "así suena el comienzo de *lieutenant* en el Reino Unido", b: "Británicos: /lefˈtenənt/. Estadounidenses: /luːˈtenənt/. Misma palabra, dos sonidos." },
+    { id: "w", e: "✌️", n: "W", t: "se llama 'doble u' pero se ve como dos v", b: "En la Edad Media se escribía uu. En francés y en español la llamamos 'doble v'." },
+    { id: "hello", e: "☎️", n: "📞", t: "*hello* se hizo famoso con el teléfono", b: "Thomas Edison lo propuso para atender. Alexander Graham Bell prefería *ahoy*." },
+    { id: "goodbye", e: "👋", n: "4→1", t: "palabras se juntaron para hacer *goodbye*", b: "God be with ye → godbwye → goodbye. El *good* reemplazó a *God* por imitación de *good day*." }
+  ];
+  const DATOS_FAKE = [
+    { f: "*Posh* viene de 'Port Out, Starboard Home', los camarotes caros de los barcos.", r: "Es una leyenda: no hay registros de esos boletos. El origen real de *posh* es desconocido." },
+    { f: "*Golf* viene de 'Gentlemen Only, Ladies Forbidden'.", r: "Falso: viene del escocés medieval *golf*, probablemente del neerlandés *kolf* (palo)." },
+    { f: "*News* viene de North, East, West y South.", r: "Falso: es el plural de *new*, 'cosas nuevas'. En francés es *nouvelles*." },
+    { f: "*Tip* (propina) viene de 'To Insure Promptness'.", r: "Falso: las siglas se inventaron después. *Tip* como propina existe desde el 1700." },
+    { f: "*SOS* significa 'Save Our Souls'.", r: "Falso: se eligió porque en Morse es muy fácil (··· ––– ···). Lo de 'Save Our Souls' se inventó después." },
+    { f: "*Sincere* viene del latín 'sine cera', 'sin cera', por las estatuas sin arreglos.", r: "Falso: es una etimología popular. Viene del latín *sincerus*, 'puro'." },
+    { f: "*Bus* viene de 'Big Urban Shuttle'.", r: "Falso: viene de *omnibus*, en latín 'para todos'." },
+    { f: "*Fun* es una palabra que entró al diccionario recién en el 2000.", r: "Falso: *fun* está registrada desde fines del 1600." },
+    { f: "*Shakespeare* inventó la palabra *hello*.", r: "Falso: *hello* se popularizó en el 1800, más de 200 años después de Shakespeare." },
+    { f: "*Avocado* viene del latín 'advocatus' porque los abogados la comían.", r: "Falso: viene del náhuatl *ahuacatl*, vía el español *aguacate*." }
+  ];
+
+  // ---------- ¿CÓMO SE DICE...? Expresiones argentinas en inglés ----------
+  const ARG = [
+    { a: "Me da fiaca", e: "I can't be bothered", ex: "I can't be bothered to cook tonight.", es: "Me da fiaca cocinar hoy.", n: "Literal sería 'no puedo ser molestado'. Es la forma natural de decir que no tenés ganas." },
+    { a: "Estoy al horno", e: "I'm in hot water", ex: "I forgot the deadline. I'm in hot water!", es: "Me olvidé del plazo. ¡Estoy al horno!", n: "También: *I'm in trouble* o, más informal, *I'm toast*." },
+    { a: "Hacerse el sota", e: "to play dumb", ex: "Don't play dumb, I know you ate it.", es: "No te hagas el sota, sé que te lo comiste.", n: "*Dumb* acá es 'tonto'. También: *to act innocent*." },
+    { a: "¡Qué embole!", e: "What a drag!", ex: "Another meeting? What a drag!", es: "¿Otra reunión? ¡Qué embole!", n: "También: *How boring!* o *That's so boring*." },
+    { a: "Chamuyar", e: "to sweet-talk", ex: "He tried to sweet-talk the teacher.", es: "Le quiso chamuyar a la profe.", n: "Si es mentir para salir del paso: *to bluff* o *to make stuff up*." },
+    { a: "Bancar a alguien", e: "to have someone's back", ex: "Don't worry, I've got your back.", es: "Tranqui, yo te banco.", n: "Si es 'aguantar' algo: *I can't stand it* = no lo banco." },
+    { a: "Ni ahí", e: "No way!", ex: "Me, dancing? No way!", es: "¿Yo, bailar? ¡Ni ahí!", n: "Más fuerte: *Not a chance!*" },
+    { a: "Tirar la toalla", e: "to throw in the towel", ex: "Don't throw in the towel now!", es: "¡No tires la toalla ahora!", n: "¡Esta es igual! También: *to give up*." },
+    { a: "Estar en la luna", e: "to have your head in the clouds", ex: "Sorry, I had my head in the clouds.", es: "Perdón, estaba en la luna.", n: "En inglés estás en las nubes, no en la luna." },
+    { a: "Me cayó la ficha", e: "the penny dropped", ex: "Then the penny dropped!", es: "¡Y ahí me cayó la ficha!", n: "Es británica: la moneda que cae en la máquina. En EE. UU.: *it finally clicked*." },
+    { a: "Ponerse las pilas", e: "to pull your socks up", ex: "You need to pull your socks up.", es: "Tenés que ponerte las pilas.", n: "Británica. En EE. UU. dicen *to step up your game*." },
+    { a: "Hacer la vista gorda", e: "to turn a blind eye", ex: "The manager turned a blind eye.", es: "El gerente hizo la vista gorda.", n: "Se dice que viene de un almirante que se puso el catalejo en el ojo ciego." },
+    { a: "Costar un ojo de la cara", e: "to cost an arm and a leg", ex: "That phone costs an arm and a leg!", es: "¡Ese celular cuesta un ojo de la cara!", n: "En inglés te cuesta un brazo y una pierna." },
+    { a: "Ser pan comido", e: "to be a piece of cake", ex: "The test was a piece of cake.", es: "El examen fue pan comido.", n: "En inglés es una porción de torta." },
+    { a: "Llueve a cántaros", e: "it's pouring", ex: "Take an umbrella, it's pouring!", es: "¡Llevá paraguas, llueve a cántaros!", n: "Existe *it's raining cats and dogs*, pero hoy suena antigua." },
+    { a: "Meter la pata", e: "to put your foot in it", ex: "I really put my foot in it.", es: "Metí la pata de verdad.", n: "En EE. UU. también: *to put your foot in your mouth*." },
+    { a: "Dormirse en los laureles", e: "to rest on your laurels", ex: "Don't rest on your laurels.", es: "No te duermas en los laureles.", n: "¡Casi igual!" },
+    { a: "Estar hasta las manos", e: "to be swamped", ex: "I'm swamped this week.", es: "Estoy hasta las manos esta semana.", n: "*Swamp* es pantano: estás hundida en trabajo." }
+  ];
+
+  // ---------- PRONUNCIACIÓN QUE ENGAÑA ----------
+  const PRON = [
+    ["Wednesday", "/ˈwenzdeɪ/", "WENZ-dei", "La primera d no suena.", "See you on Wednesday!"], ["comfortable", "/ˈkʌmftəbl/", "KAMF-ta-bl", "Tres sílabas, no cuatro.", "This sofa is so comfortable."], ["vegetable", "/ˈvedʒtəbl/", "VECH-ta-bl", "La e del medio desaparece.", "Eat your vegetables!"],
+    ["island", "/ˈaɪlənd/", "AI-land", "La s no suena.", "We stayed on a small island."], ["receipt", "/rɪˈsiːt/", "ri-SIIT", "La p no suena.", "Can I have the receipt?"], ["salmon", "/ˈsæmən/", "SA-man", "La l no suena.", "I'll have the salmon, please."],
+    ["recipe", "/ˈresəpi/", "RE-se-pi", "Tres sílabas: la e final suena.", "Can you send me the recipe?"], ["chaos", "/ˈkeɪɒs/", "KEI-os", "Ch suena como k.", "The airport was total chaos."], ["choir", "/ˈkwaɪə/", "KUAI-a", "Suena como quire.", "She sings in a choir."],
+    ["women", "/ˈwɪmɪn/", "UI-min", "La o suena como i.", "Two women were waiting."], ["said", "/sed/", "sed", "Rima con red, no con paid.", "She said yes!"], ["clothes", "/kləʊðz/", "klouz", "Casi una sola sílaba.", "I need new clothes."],
+    ["suite", "/swiːt/", "SUIT", "Suena igual que sweet.", "We booked a suite."], ["hotel", "/həʊˈtel/", "jou-TEL", "La sílaba fuerte es la segunda.", "Our hotel is near the beach."], ["develop", "/dɪˈveləp/", "di-VE-lop", "La fuerte es VE.", "We need to develop new skills."],
+    ["colonel", "/ˈkɜːnl/", "KER-nl", "Suena como kernel.", "The colonel gave an order."], ["Leicester", "/ˈlestə/", "LES-ter", "Tres letras se esconden.", "He studies in Leicester."], ["queue", "/kjuː/", "KIU", "Como la letra Q.", "There's a long queue."],
+    ["debt", "/det/", "det", "La b no suena.", "I paid off my debt."], ["knee", "/niː/", "nii", "La k no suena.", "I hurt my knee."], ["often", "/ˈɒfn/", "OF-n", "La t casi siempre se calla.", "I often walk to work."],
+    ["walk", "/wɔːk/", "UOK", "La l no suena.", "Let's go for a walk."], ["calm", "/kɑːm/", "KAAM", "La l no suena.", "Stay calm."], ["determine", "/dɪˈtɜːmɪn/", "di-TER-min", "No rima con mine.", "We need to determine the cause."]
+  ];
+
+  // ---------- LA TIENDA REAL (campus.thequeenstea.com.ar/tienda) ----------
+  const TIENDA = {
+    cursos: [
+      { id: "essays", n: "Writing Essays", lvl: "B2-C1", old: "$60.000", now: "$36.000", off: "−40%", vid: 6, tar: 26, tem: "Essay Writing\nParagraph Writing\nFor and Against Essays\nArgumentative Essays\nProblem Solving Essays\nOpinion Essays", para: "Para quien prepara un examen como B2 First, C1 Advanced o IELTS, para la facultad o para quien quiere escribir en inglés con estructura y argumentos.",
+        mini: ["Conectores para tu *opinion essay*", "In my view, => En mi opinión,\nFurthermore, => Además,\nOn the other hand, => Por otro lado,\nTo sum up, => Para resumir,"], temas: "¿Hay que prohibir los testeos en animales?\n¿El amor romántico está sobrevalorado?\n¿Cómo cuidar el trabajo frente a la IA?\nEl tiempo, el recurso más valioso" },
+      { id: "narrative", n: "Narrative Writing", lvl: "B2-C1", old: "$40.000", now: "$30.000", off: "−25%", vid: 5, tar: 13, tem: "What is a narrative essay?\nStructure of a narrative essay\nIntroduction\nBody\nConclusion", para: "Para quien quiere contar historias en inglés: exámenes con *story*, escritura creativa o simplemente escribir mejor.",
+        mini: ["Cómo *enganchar* desde la primera línea", "Empezá en plena acción => The door slammed behind me.\nUsá los sentidos => The air smelled of rain.\nVariá el largo de las frases => I ran. I didn't look back."], temas: "The Visitor\nA Chance Encounter\nThe Secret\nA Twist of Fate" }
+    ],
+    recursos: [
+      { n: "Worksheets 25 de Mayo - B2", p: "$3.000", old: "$4.000", g: "patrias", e: "🇦🇷" }, { n: "Worksheets 25 de Mayo - B1", p: "$3.000", old: "$4.000", g: "patrias", e: "🇦🇷" }, { n: "Worksheets 25 de Mayo - A2", p: "$3.000", g: "patrias", e: "🇦🇷" },
+      { n: "El Eternauta en clases de inglés", p: "$5.400", old: "$6.000", g: "cultura", e: "❄️" }, { n: "Día de la Bandera - Jardín", p: "$2.100", old: "$3.000", g: "patrias", e: "🧒" },
+      { n: "Flag Day - Primaria (+Jura a la Bandera)", p: "$2.700", old: "$3.000", g: "patrias", e: "📝" }, { n: "Board Game: Martín Miguel de Güemes", p: "$2.000", g: "patrias", e: "🎲" },
+      { n: "Entrevistando a famosos (A1-A2)", p: "$4.000", g: "speaking", e: "🎤" }, { n: "Independencia: Juana Manuela Gorriti + ESI", p: "$2.400", old: "$3.000", g: "patrias", e: "📖" },
+      { n: "Independencia: María Remedios del Valle + ESI (B1+)", p: "$2.400", old: "$3.000", g: "patrias", e: "📖" }, { n: "Countries and Nationalities - Flashcards", p: "$560", old: "$800", g: "flashcards", e: "🌍" },
+      { n: "Ordinal Numbers (1st - 31st) - Flashcards", p: "$500", g: "flashcards", e: "🔢" }, { n: "Connected Speech and Pronunciation", p: "$2.500", old: "$5.000", g: "pronunciacion", e: "🗣️" },
+      { n: "Schwa - Worksheets", p: "$4.000", old: "$5.000", g: "pronunciacion", e: "🔤" }
+    ],
+    grupos: [["B1 Intermediate", "miércoles 20 hs", "$33.000"], ["B2 First", "jueves 20 hs", "$34.000"], ["C1 Advanced", "martes 20 hs", "$34.500"], ["C1 to C2", "miércoles 19 hs", "$33.000"], ["C2 Proficiency", "jueves 19 hs", "$38.000"], ["IELTS B2/C1", "jueves 18 hs", "$34.000"], ["Medical English", "a confirmar", "$36.000"], ["Legal English", "a confirmar", "$36.000"], ["Aviation English", "a confirmar", "$38.000"]]
+  };
+  const PRO_VOC = {
+    "Medical English": ["🩺", "symptoms => síntomas\nprescription => receta\nfollow-up => control\nward round => recorrida de sala"],
+    "Legal English": ["⚖️", "contract => contrato\nclause => cláusula\nbreach => incumplimiento\nliability => responsabilidad"],
+    "Aviation English": ["✈️", "runway => pista\ncleared for take-off => autorizado a despegar\nholding point => punto de espera\nsay again => repita"],
+    "IELTS B2/C1": ["🌍", "Listening => 30 minutos\nReading => 60 minutos\nWriting => 60 minutos\nSpeaking => 11 a 14 minutos"],
+    "B2 First": ["🎓", "Reading & Use of English => 1 h 15\nWriting => 1 h 20\nListening => 40 min\nSpeaking => 14 min"],
+    "C1 Advanced": ["🎓", "Reading & Use of English => 1 h 30\nWriting => 1 h 30\nListening => 40 min\nSpeaking => 15 min"],
+    "C2 Proficiency": ["🏆", "Reading & Use of English => 1 h 30\nWriting => 1 h 30\nListening => 40 min\nSpeaking => 16 min"]
+  };
+
+  Object.assign(SERIES, {
+    ukus: { n: "UK vs US", e: "🗺️", d: "Una palabra por slide, con ejemplos: comida, casa, calle, ortografía, pronunciación y gramática", gen() {
+      const mode = vari(["tema", "tema", "trampas", "ortografia", "pronunciacion", "gramatica"]);
+      const out = [];
+      if (mode === "trampas") {
+        const TR = ["biscuit", "chips", "starter", "ground floor", "garden", "trousers", "waistcoat", "pavement", "the underground", "rubber", "revise", "state school"], ps = fresh("ukus_tr", UKUS2.filter(x => TR.includes(x[1]) && x[0] !== "pronunciacion"), 5);
+        out.push(COV("UK vs US", ["Palabras que en Londres y en Nueva York [no significan] lo mismo", "Cuidado: esta palabra en EE. UU. es [otra cosa]", `Si pedís *${ps[0][1]}* en Nueva York, [ojo]`, "5 palabras que te hacen pasar [vergüenza] según el país"], "😳"));
+        ps.forEach(x => out.push(duelOf(x, "Ojo con *esta*")));
+        const q = ps[0], ok = q[2], bad = pickR(UKUS2.filter(z => z !== q && z[0] === q[0]))[2];
+        out.push(...quiz(`En Nueva York, ¿cómo se dice *${q[1]}*?`, ok, bad, `En EE. UU.: *${q[2]}*. ${q[6]}`));
+      } else {
+        const cat = mode === "tema" ? pickR(["comida", "casa", "ropa", "calle", "viajes", "colegio"]) : mode;
+        const pool = UKUS2.filter(x => x[0] === cat), ps = fresh("ukus_" + cat, pool, Math.min(5, pool.length));
+        const [t, em] = UK_CAT[cat];
+        const covs = { ortografia: ["Mismo idioma, [otra] ortografía", "¿*Colour* o *color*? Las [dos] están bien", "Cómo se escribe en Londres y cómo en [Nueva York]"], pronunciacion: ["Misma palabra, [otro] sonido", `¿Cómo se dice *${ps[0][3].replace(/.*\(|\)/g, "")}*? Depende del [país]`, "Así suena en Londres y así en [Nueva York]"], gramatica: ["La gramática [también] cambia según el país", "Británicos y estadounidenses [no] arman igual las frases", `"${ps[0][1]}" o "${ps[0][2]}": ¿[cuál] está bien?`] };
+        out.push(COV("UK vs US", covs[cat] || [`UK vs US ${t.replace(/\*/g, "").toLowerCase()}: [mismo idioma], otras palabras`, `*${ps[0][1]}* o *${ps[0][2]}*: [depende] dónde estés`, `Así se dice ${t.replace(/\*/g, "").toLowerCase()} en Londres y en [Nueva York]`], em));
+        ps.forEach(x => out.push(duelOf(x, t)));
+        if (cat === "ortografia") out.push(S_("list", { title: "Las *reglas* en un vistazo", items: "-our / -or = colour / color\n-re / -er = centre / center\n-ise / -ize = organise / organize\n-ll- / -l- = travelling / traveling" }));
+        else { const more = fresh("ukus_more", UKUS2.filter(x => !ps.includes(x) && !["pronunciacion", "gramatica", "ortografia"].includes(x[0])), 3); out.push(S_("versus", { title: "Tres *más* para guardar", left: "UK", right: "US", items: more.map(x => `${x[1]} | ${x[2]} | ${x[3]}`).join("\n") })); }
+        const q = ps[ps.length - 1], o = pickR(UKUS2.filter(z => z !== q && z[0] === q[0]));
+        out.push(...quiz(`¿Cuál es la versión *británica*?`, q[1], q[2], `En el Reino Unido: *${q[1]}*. En EE. UU.: *${q[2]}*.${q[6] ? "\n\n" + q[6] : ""}`));
+      }
+      out.push(ctaOf("¿Británico o *estadounidense*?", "Mandáselo a quien viaja pronto", "Contanos cuál usás"));
+      return { topic: "inglés británico vs estadounidense", slides: out };
+    } },
+
+    codigo: { n: "El código británico", e: "🕵️", d: "Lo que dicen vs. lo que quieren decir: por frase, por lugar y en modo examen", gen() {
+      const mode = vari(["cuatro", "fondo", "lugar", "examen"]);
+      const one = (x, k, n) => S_("text", { kicker: `Frase ${k + 1} de ${n}`, title: `"*${x.f}*"`, body: `Lo que entendés: ${x.cree}.\nLo que quieren decir: *${x.es}*.\n\n${x.why}`, emoji: ["🎩", "☂️", "🧐", "🤫", "💬"][k % 5] });
+      const resp = a => S_("decode", { title: "Cómo *responder*", la: "SI TE DICEN", lb: "PODÉS RESPONDER", items: a.map(x => `${x.f} => ${x.r}`).join("\n") });
+      if (mode === "fondo") {
+        const x = fresh("cod_fondo", CODIGO_ALL, 1)[0], o = pickR(CODIGO_ALL.filter(z => z !== x)), sim = fresh("cod_sim", CODIGO_ALL.filter(z => z !== x && z.c === x.c), 3), ok = Math.random() < .5;
+        return { topic: "código británico: " + x.f, slides: [
+          COV("El código británico", [`Cuando un británico dice [${x.f.replace(/[.!?…]+$/, "")}]...`, `"${x.f}" no significa [lo que pensás]`, `Una frase británica que te puede [engañar]`], "🕵️"),
+          S_("thisthat", { title: `Te dicen "*${x.f}*". ¿Qué quieren decir?`, a: ok ? x.es : x.cree, b: ok ? x.cree : x.es, note: "Respuesta en la próxima slide 👉" }),
+          S_("text", { kicker: "Respuesta", title: `Es la *${ok ? "A" : "B"}*`, body: `*${x.es}*.\n\nLo que la mayoría entiende: ${x.cree}.`, emoji: "✅" }),
+          S_("text", { kicker: "Por qué", title: "Se llama *understatement*", body: x.why, emoji: "🧐" }),
+          S_("chat", { title: "Así *suena*", lines: dlg([`Them: ${x.f}`, `You: ${x.r}`]) }),
+          S_("decode", { title: `Otras ${COD_CTX[x.c][0]}`, items: sim.map(z => `${z.f} => ${z.es}`).join("\n") }),
+          resp([x].concat(sim.slice(0, 2))),
+          ctaOf("¿Te la *dijeron*?", "Mandáselo a quien trabaja con británicos", "Contanos cuál te sorprendió")] };
+      }
+      if (mode === "lugar") {
+        const ctx = pickR(Object.keys(COD_CTX)), pool = CODIGO_ALL.filter(z => z.c === ctx), c = fresh("cod_" + ctx, pool, Math.min(5, pool.length)), [t, em] = COD_CTX[ctx];
+        return { topic: "código británico " + t.replace(/\*/g, ""), slides: [
+          COV("El código británico", [`Lo que dicen los británicos ${t.replace(/\*/g, "")} y [lo que quieren decir]`, `${c.length} frases británicas ${t.replace(/\*/g, "")} que [no son] lo que parecen`, `El manual secreto para entender a un británico ${t.replace(/\*/g, "")}`], em),
+          ...c.slice(0, 4).map((x, k) => one(x, k, 4)),
+          S_("chat", { title: `Así suena ${t}`, lines: dlg([`Them: ${c[0].f}`, `You: ${c[0].r}`, `Them: ${c[1].f}`, `You: ${c[1].r}`]) }),
+          resp(c.slice(0, 3)),
+          ...quiz(`"${c[c.length - 1].f}". ¿Qué quieren decir?`, c[c.length - 1].es, c[c.length - 1].cree),
+          ctaOf("¿Te *pasó*?", "Mandáselo a quien vive afuera", "Contanos cuál te sorprendió")] };
+      }
+      if (mode === "examen") {
+        const c = fresh("cod_exam", CODIGO_ALL, 3), out = [COV("El código británico", ["¿Aprobás el examen de [británico]?", "3 frases británicas: ¿[entendés] lo que quieren decir?", "Test: ¿sobrevivirías a una reunión en [Londres]?"], "📝")];
+        c.forEach((x, k) => { const ok = Math.random() < .5; out.push(S_("thisthat", { title: `${k + 1}/3: "*${x.f}*"`, a: ok ? x.es : x.cree, b: ok ? x.cree : x.es, note: "Respuesta en la próxima slide 👉" }), S_("text", { kicker: `Respuesta ${k + 1}`, title: `Es la *${ok ? "A" : "B"}*`, body: `*${x.es}*.\n\n${x.why}`, emoji: "✅" })); });
+        out.push(S_("grid4", { title: "¿Cuántas *acertaste*?", items: "0 = recién llegada a Londres 🛬\n1 = turista atenta 📸\n2 = ya entendés las indirectas 😏\n3 = más británica que la lluvia ☔" }));
+        out.push(ctaOf("¿Cuántas *acertaste*?", "Mandáselo a quien se cree británica", "Comentá tu puntaje"));
+        return { topic: "test de código británico", slides: out };
+      }
+      const c = fresh("cod2", CODIGO_ALL, 5), of = fresh("cof", CODIGO_OF, 3);
+      return { topic: "subtexto británico", slides: [
+        COV("El código británico", [`Cuando un británico dice [${c[0].f.replace(/[.!?…]+$/, "")}]...`, `"${c[0].f}" no significa [lo que pensás]`, `4 frases británicas que [no son] lo que parecen`, `Lo que dicen vs. lo que [quieren decir]`], "🕵️"),
+        S_("text", { kicker: "Antes de empezar", title: "Se llama *understatement*", body: "En la cultura británica decir las cosas de frente suena agresivo. Por eso suavizan todo: los elogios se achican, las críticas se disfrazan y los problemas grandes se dicen en voz baja.", emoji: "🤫" }),
+        ...c.slice(0, 4).map((x, k) => one(x, k, 4)),
+        S_("chat", { title: "En una *reunión*", lines: dlg([`Boss: ${c[4].f}`, `You: Oh, great, thanks!`, `Boss (pensando): ${c[4].es}...`, `You (pensando): ¿Qué dije mal? 😅`]) }),
+        resp(c.slice(0, 3)),
+        S_("decode", { title: "Y en los *mails* del trabajo", items: of.map(x => `${x[0]} => ${x[1]}`).join("\n") }),
+        ctaOf("¿Te *pasó*?", "Mandáselo a quien trabaja con británicos", "Contanos cuál te sorprendió")] };
+    } },
+
+    mitos: { n: "Mito o realidad", e: "🧐", d: "Un mito por carrusel: lo que te dijeron, la verdad, de dónde salió y qué hacer", gen() {
+      const x = fresh("mito1", MITOS3, 1)[0], bonus = pickR(MITOS2), ok = Math.random() < .5;
+      const verd = { "MITO": ["❌ MITO", "Mito"], "REALIDAD": ["✅ REALIDAD", "Realidad"], "A MEDIAS": ["🤏 A MEDIAS", "A medias"] }[x.v];
+      const opts = x.v === "REALIDAD" ? ["Realidad", "Mito"] : x.v === "A MEDIAS" ? ["Es verdad a medias", "Es 100% cierto"] : ["Mito", "Realidad"];
+      return { topic: "mito: " + x.m, slides: [
+        COV("Mito o realidad", [`"${x.m.replace(/\.$/, "")}" [¿mito o realidad?]`, `¿Es verdad que ${x.m.charAt(0).toLowerCase() + x.m.slice(1).replace(/\.$/, "")}? [Te contamos]`, `Te lo dijeron mil veces. ¿Es [cierto]?`], "🧐"),
+        S_("thisthat", { title: `"${x.m}"`, a: ok ? opts[0] : opts[1], b: ok ? opts[1] : opts[0], note: "Votá y deslizá para ver la respuesta 👉" }),
+        S_("myth", { kicker: verd[0], myth: x.m, truth: x.t, why: "" }),
+        S_("text", { kicker: "Por qué", title: x.t, body: x.why, emoji: "🔎" }),
+        S_("text", { kicker: "De dónde salió", title: "El *origen* del mito", body: x.o, emoji: "🕰️" }),
+        S_("decode", { title: "La *prueba*", la: "EN INGLÉS", lb: "QUÉ MUESTRA", items: x.p.map(z => `${z[0]} => ${z[1]}`).join("\n") }),
+        S_("text", { kicker: "Entonces", title: "¿Qué *hacés*?", body: x.tip, emoji: "💡" }),
+        S_("myth", { kicker: "Bonus: otro mito rápido", myth: bonus[0], truth: bonus[1], why: bonus[2] }),
+        ctaOf("¿Lo *creías*?", "Mandáselo a quien todavía lo cree", "Contanos qué mito investigamos")] };
+    } },
+
+    palabras: { n: "Detrás de la palabra", e: "📜", d: "Una palabra por carrusel: qué significa, sus partes, su historia, cómo suena y sus parientes", gen() {
+      const x = fresh("palabra1", PALABRAS, 1)[0], X = PAL_X[x.w] || ["", "", ""], okFirst = Math.random() < .5;
+      const parts = X[1] ? X[1].split("|").map(z => z.trim()).filter(Boolean).map(z => z.replace(/\s*=\s*/, " => ")).join("\n") : "";
+      const kin = X[2] ? X[2].split("|").map(z => z.trim()).filter(Boolean) : [];
+      const out = [COV("Detrás de la palabra", [`*${x.w.toUpperCase()}* antes significaba [${x.antes.split(",")[0]}]`, `La historia de [${x.w}] que nadie te contó`, `¿De dónde viene la palabra [${x.w}]?`, `*${x.w}* no siempre significó [${x.hoy.split(",")[0]}]`], x.e),
+        S_("search", { q: `qué significa "${x.w}" en inglés`, title: x.w, kind: "hoy significa", body: `${x.hoy}.\n\n${x.ej[0][0]}\n${x.ej[0][1]}`, also: "" })];
+      const kinRows = kin.map(k => { const m = k.match(/^(.*?)\s*\((.*)\)\s*$/); return m && !m[1].includes("=") ? `${m[1]} = ${m[2]}` : k; });
+      const few = parts && parts.split("\n").length + kinRows.length <= 3;
+      if (few) out.push(S_("decode", { title: `Desarmamos *${x.w}*`, la: "PARTE O PARIENTE", lb: "QUÉ ES", items: parts + "\n" + kinRows.map(r => r.includes("=") ? r.replace(/\s*=\s*/, " => ") : `${r} => de la misma familia`).join("\n") }));
+      else if (parts) out.push(S_("decode", { title: `Desarmamos *${x.w}*`, la: "PARTE", lb: "SIGNIFICA", items: parts }));
+      out.push(S_("text", { kicker: "La historia", title: `De *${x.antes.split(",")[0]}* a *${x.hoy.split(",")[0]}*`, body: x.story + `\n\nViene ${x.o}.`, emoji: x.e }));
+      out.push(S_("timeline", { title: `Cómo fue *cambiando*`, steps: x.steps }));
+      if (X[0]) out.push(S_("word", { label: "Cómo se pronuncia", word: x.w, ipa: X[0], kind: "", tr: x.hoy.split(",").slice(0, 2).join(" /"), ex: x.ej[1][0], exTr: x.ej[1][1] }));
+      if (kin.length && !few) out.push(S_("list", { title: `Sus *parientes*`, items: kinRows.join("\n") }));
+      out.push(S_("text", { kicker: "Dato extra", title: "Y hay *más*", body: x.extra, emoji: "🤓" }));
+      out.push(S_("thisthat", { title: `Al principio, *${x.w}* significaba...`, a: okFirst ? x.antes : x.fake, b: okFirst ? x.fake : x.antes, note: "Respuesta en la próxima slide 👉" }));
+      out.push(S_("text", { kicker: "Respuesta", title: `Es la *${okFirst ? "A" : "B"}*`, body: `*${x.antes}*.\n\n¿Qué palabra investigamos la próxima? Dejala en los comentarios.`, emoji: "✅" }));
+      out.push(ctaOf("¿La *conocías*?", "Mandáselo a quien ama las palabras", "Contanos qué palabra investigamos"));
+      return { topic: "historia de la palabra " + x.w, slides: out };
+    } },
+
+    datos: { n: "4 datos que nadie sabe", e: "🤯", d: "Datos de verdad para compartir, o el juego de 3 verdades y 1 mentira", gen() {
+      if (Math.random() < .45) {
+        const t = fresh("datos2", DATOS2, 3), f = fresh("datosF", DATOS_FAKE, 1)[0], pos = rndI(4), L = ["A", "B", "C", "D"];
+        const items = t.map(z => `${z.e} ${z.n} ${z.t.replace(/\*/g, "")}`); items.splice(pos, 0, `🤔 ${f.f.replace(/\*/g, "")}`);
+        return { topic: "3 verdades y 1 mentira del inglés", slides: [
+          COV("3 verdades y 1 mentira", ["Tres son [verdad]. Una es mentira. ¿Cuál?", "¿Podés descubrir la [mentira]?", "Un dato es [falso]: encontralo"], "🕵️"),
+          S_("grid4", { title: "¿Cuál es la *mentira*?", items: items.map((z, k) => `${L[k]}. ${z}`).join("\n") }),
+          S_("text", { kicker: "¿Ya elegiste?", title: "Pensalo *bien*...", body: "Una de las cuatro es una historia que circula muchísimo, pero no es cierta.\n\nDeslizá para ver la respuesta 👉", emoji: "⏳" }),
+          S_("myth", { kicker: `La mentira era la ${L[pos]}`, myth: f.f, truth: "*Falso*", why: f.r }),
+          ...t.map((z, k) => S_("text", { kicker: `Verdad ${k + 1} de 3`, title: `*${z.n}* ${z.t}`, body: z.b, emoji: z.e })),
+          ctaOf("¿La *descubriste*?", "Mandáselo para ver si la encuentra", "Comentá qué letra elegiste")] };
+      }
+      const d = fresh("datos2", DATOS2, 4), tp = ["text", "search", "bignum", "tweet"];
+      const sl = d.map((z, k) => { const kind = tp[(k + rndI(4)) % 4];
+        if (kind === "bignum" && z.n.length <= 5) return S_("bignum", { num: z.n, text: z.t, src: "" });
+        if (kind === "search") return S_("search", { q: `es verdad que ${z.t.replace(/\*/g, "")}`, title: `${z.n} ${z.t.replace(/\*/g, "")}`.slice(0, 40), kind: `dato ${k + 1} de 4`, body: z.b, also: "" });
+        if (kind === "tweet") return S_("tweet", { text: `${z.e} Dato ${k + 1}: ${z.n} ${z.t.replace(/\*/g, "")}.\n\n${z.b}`, foot: "📌 Guardalo para tu próxima charla" });
+        return S_("text", { kicker: `Dato ${k + 1} de 4`, title: `*${z.n}* ${z.t}`, body: z.b, emoji: z.e }); });
+      const out = [COV("Datos que nadie sabe", ["4 datos del inglés que te van a [volar la cabeza]", `¿Sabías que ${d[0].n} ${d[0].t.replace(/\*/g, "")}? [Y hay más]`, "Datos del inglés para [sorprender] a todos"], "🤯")];
+      d.forEach((z, k) => { out.push(sl[k]); if (sl[k].tpl === "bignum") out.push(S_("text", { kicker: "Por qué", title: `*${z.n}* ${z.t}`, body: z.b, emoji: z.e })); });
+      const f = pickR(DATOS_FAKE); out.push(...quiz("¿Cuál de estos datos es *verdadero*?", `${d[1].n} ${d[1].t.replace(/\*/g, "")}`, f.f.replace(/\*/g, ""), `La otra es un mito: ${f.r}`));
+      out.push(ctaOf("¿Cuál no *sabías*?", "Mandáselo a quien ama los datos raros", "Comentá cuál te sorprendió"));
+      return { topic: "datos curiosos del inglés", slides: out };
+    } },
+
+    comosedice: { n: "¿Cómo se dice en inglés...?", e: "🧉", d: "Expresiones argentinas y cómo se dicen de verdad en inglés", gen() {
+      const a = fresh("arg", ARG, 4), q = a[3], o = pickR(ARG.filter(z => !a.includes(z)));
+      return { topic: "expresiones argentinas en inglés", slides: [
+        COV("¿Cómo se dice en inglés?", [`¿Cómo se dice [${a[0].a.toLowerCase()}] en inglés?`, "Expresiones bien argentinas y cómo se dicen [en inglés]", `"${a[0].a}" en inglés [no es] lo que pensás`], "🧉"),
+        ...a.slice(0, 3).map((x, k) => S_("text", { kicker: `"${x.a}"`, title: `*${x.e}*`, body: `${x.ex}\n${x.es}\n\n${x.n}`, emoji: ["🧉", "🇦🇷", "💬"][k] })),
+        S_("chat", { title: "Así se *usan*", lines: dlg([`Ana: ${a[0].ex}`, `Tom: ${a[1].ex}`, `Ana: ${a[2].ex}`]) }),
+        ...quiz(`¿Cómo dirías *${q.a.toLowerCase()}*?`, q.e, o.e, `${q.ex}\n${q.es}`),
+        S_("decode", { title: "Para *guardar*", la: "EN ARGENTINO", lb: "EN INGLÉS", items: a.map(x => `${x.a} => ${x.e}`).join("\n") }),
+        ctaOf("¿Cuál *seguimos*?", "Mandáselo a tu amiga más argenta", "Dejá una expresión para traducir")] };
+    } },
+
+    pronuncia: { n: "Pronunciación que engaña", e: "🗣️", d: "Palabras que todos dicen mal, con cómo suenan de verdad", gen() {
+      const p = fresh("pron", PRON, 7), q = p[6];
+      return { topic: "pronunciación en inglés", slides: [
+        COV("Pronunciación que engaña", [`¿Cómo se pronuncia [${p[0][0]}]?`, "Palabras que [casi todos] pronuncian mal", `Si decís "${p[0][0]}" como se escribe, [ojo]`], "🗣️"),
+        ...p.slice(0, 4).map((x, k) => S_("word", { label: `Palabra ${k + 1} de 4`, word: x[0], ipa: x[1], kind: "", tr: `suena: ${x[2]}`, ex: x[4], exTr: x[3] })),
+        S_("list", { title: "Y estas *también*", items: p.slice(4, 7).map(x => `${x[0]} = ${x[2]}`).join("\n") }),
+        S_("steps", { title: "Cómo *practicarlas*", items: "Buscala en un diccionario con audio\nRepetila 5 veces en voz alta\nGrabate y comparate\nUsala hoy en una frase" }),
+        ...quiz(`¿Cómo suena *${q[0]}*?`, q[2], `como se escribe: ${q[0]}`, `${q[1]}. ${q[3]}`),
+        ctaOf("¿Cuál decías *mal*?", "Mandáselo a quien necesita escucharlo", "Comentá una palabra que te cuesta")] };
+    } },
+
+    tienda: { n: "Mi tienda", e: "🛍️", d: "Cursos a tu ritmo, recursos para profes y Matrícula 2027 de campus.thequeenstea.com.ar/tienda", gen() {
+      const mode = vari(["curso", "curso", "profes", "matricula"]);
+      const comprar = S_("steps", { title: "Cómo lo *conseguís*", items: "Entrá a la tienda (link en la bio)\nElegí y agregalo al carrito\nPagás con transferencia, QR o tarjeta\nAcceso inmediato apenas se acredita" });
+      if (mode === "curso") {
+        const c = fresh("t_curso", TIENDA.cursos, 1)[0];
+        return { topic: c.n + " (curso a tu ritmo)", slides: [
+          COV("Curso a tu ritmo", [`Aprendé *${c.n}* [cuando quieras]`, `${c.n}: el curso para escribir [mejor] en inglés`, `¿Te cuesta escribir en inglés? [Esto] es para vos`, `${c.n} con ${c.off} [por tiempo limitado]`], "✍️"),
+          S_("text", { kicker: "¿Es para vos?", title: `*${c.n}* (${c.lvl})`, body: c.para + "\n\nTodo 100% en inglés, a tu ritmo y desde tu propio campus.", emoji: "🙋" }),
+          S_("steps", { title: "Qué vas a *aprender*", items: c.tem }),
+          S_("grid4", { title: "Qué *incluye*", items: `🎬 ${c.vid} lecciones en video\n✍️ ${c.tar} tareas con devolución personalizada\n🗣️ 100% en inglés\n⚡ Acceso inmediato a tu campus` }),
+          S_("decode", { title: "Una mini clase *gratis*: " + c.mini[0].replace(/\*/g, ""), la: "TIP", lb: "EJEMPLO", items: c.mini[1] }),
+          S_("list", { title: "Temas para *escribir*", items: c.temas.split("\n").map(z => `✍️ ${z}`).join("\n") }),
+          S_("bignum", { num: c.off, text: `*${c.n}*: de ${c.old} a ${c.now}. Pago único.`, src: "" }),
+          comprar,
+          ctaOf("¿Lo *empezás*?", "Mandáselo a quien rinde un examen", "Escribí CURSO y te pasamos el link")] };
+      }
+      if (mode === "profes") {
+        const g = pickR(["patrias", "pronunciacion", "flashcards", "todo"]), pool = g === "todo" ? TIENDA.recursos : TIENDA.recursos.filter(r => r.g === g || (g === "flashcards" && r.g === "speaking")), r = shuf(pool).slice(0, 4);
+        const tit = { patrias: "fechas patrias", pronunciacion: "pronunciación", flashcards: "tus clases", todo: "tus clases" }[g];
+        const best = TIENDA.recursos.filter(z => z.old).sort((a, b) => (1 - parseInt(b.p.replace(/\D/g, "")) / parseInt(b.old.replace(/\D/g, ""))) - (1 - parseInt(a.p.replace(/\D/g, "")) / parseInt(a.old.replace(/\D/g, ""))))[0];
+        const pct = Math.round(100 - 100 * parseInt(best.p.replace(/\D/g, "")) / parseInt(best.old.replace(/\D/g, "")));
+        return { topic: "recursos para profes de inglés", slides: [
+          COV("Para profes de inglés", [`Material listo para ${tit} en [inglés]`, `Profe: ahorrate horas de [planificación]`, `Recursos descargables para ${tit}, [listos para usar]`], "🧑‍🏫"),
+          S_("text", { kicker: "Para profes", title: "Material *listo* para tu clase", body: "Recursos descargables pensados para el aula argentina: fechas patrias, pronunciación, juegos y flashcards.\n\nLos comprás, los descargás y los usás esa misma semana.", emoji: "📥" }),
+          S_("grid4", { title: `Para *${tit}*`, items: r.map(z => `${z.e} ${z.n} · ${z.p}`).join("\n") }),
+          ...r.slice(0, 2).map(z => S_("text", { kicker: "Destacado", title: `*${z.n}*`, body: `${z.old ? `Antes ${z.old}, hoy *${z.p}*.` : `*${z.p}*.`}\n\nDescargable: lo imprimís o lo proyectás. Ideal para planificar sin empezar de cero.`, emoji: z.e })),
+          S_("bignum", { num: `−${pct}%`, text: `en *${best.n}*`, src: "" }),
+          S_("steps", { title: "Cómo lo *conseguís*", items: "Entrá a la tienda (link en la bio)\nFiltrá por Recursos docentes\nPagás con transferencia, QR o tarjeta\nLo descargás al instante" }),
+          ctaOf("¿Qué *material* te falta?", "Mandáselo a tu colega profe", "Pedí el próximo recurso")] };
+      }
+      const L = TIENDA.grupos;
+      return { topic: "Matrícula 2027", slides: [
+        COV("Matrícula 2027", ["Asegurá tu lugar para [2027]", "Matrícula 2027 con valor especial hasta el [21 de diciembre]", "¿Querés tu horario en 2027? [Leé esto]"], "🎓"),
+        S_("text", { kicker: "Matrícula 2027", title: "Reservá con *$35.000*", body: "Valor especial hasta el 21 de diciembre.\n\nSi ya sos alumna o alumno, la abonás y conservás tu día y tu horario. Todo el material del curso está incluido.", emoji: "📌" }),
+        S_("list", { title: "Los *grupos* 2027", items: L.slice(0, 6).map(z => `${z[0]} = ${z[1]}`).join("\n") }),
+        S_("grid4", { title: "Inglés *profesional*", items: "🩺 Medical English\n⚖️ Legal English\n✈️ Aviation English\n🌍 IELTS B2/C1" }),
+        S_("text", { kicker: "10% extra", title: "Para quienes *cuidan* a los demás", body: "👵 Jubilados y pensionados\n🩺 Personal de salud\n🚒 Bomberos\n👮 Policía y fuerzas del Estado\n👩‍🏫 Docentes de todos los niveles\n\nSe suma a los otros descuentos.", emoji: "🎖️" }),
+        S_("bignum", { num: "$19.800", text: "ahorrás en un mes de B1 pagando el *mes completo* a tiempo, frente a pagar clase por clase", src: "" }),
+        S_("list", { title: "Cómo *pagar*", items: "Transferencia = sin comisión\nQR Cuenta DNI = 20% de reintegro de lunes a viernes (tope semanal $6.000)\nTarjeta = crédito o débito" }),
+        S_("text", { kicker: "¿Preferís sola o solo?", title: "Clases *individuales*", body: "Desde $50.000 por clase, abonando el mes. Pedí tus horarios y te confirmamos.", emoji: "🧑‍🏫" }),
+        S_("steps", { title: "Cómo te *anotás*", items: "Entrá a la tienda (link en la bio)\nElegí tu curso y horario\nPagás la matrícula\nSubís el comprobante y listo" }),
+        ctaOf("¿Te *anotás*?", "Mandáselo a quien empieza en 2027", "Escribí 2027 y te ayudamos")] };
+    } }
+  });
+
+  // promos y cursos: más formatos con los datos reales de la tienda
+  const _benefGen = SERIES.beneficios.gen, _cursosGen = SERIES.cursos.gen;
+  SERIES.beneficios.n = "Promos y beneficios"; SERIES.beneficios.d = "Descuentos, 10% extra, formas de pago y cuánto ahorrás (lo podés editar)";
+  SERIES.beneficios.gen = function () {
+    const mode = vari(["clasico", "ahorro", "faq"]);
+    if (mode === "clasico") return _benefGen();
+    if (mode === "ahorro") return { topic: "cómo ahorrar en tus clases", slides: [
+      COV("Cómo pagar menos", ["3 formas de pagar [menos] tus clases de inglés", "Lo que [nadie] te cuenta sobre ahorrar en tu curso", "Inglés en 2027 sin [gastar de más]"], "💸"),
+      S_("bignum", { num: "1", text: "Pagá el *mes completo* hasta 24 hs antes de la primera clase", src: "" }),
+      S_("text", { kicker: "Por qué conviene", title: "Clase suelta = *+15%*", body: "La clase suelta y el mes pagado después tienen un 15% de recargo.\n\nEn un mes de B1 con 4 clases, pagar a tiempo te ahorra $19.800.", emoji: "📅" }),
+      S_("bignum", { num: "2", text: "Usá el *QR de Cuenta DNI*: 20% de reintegro de lunes a viernes", src: "" }),
+      S_("text", { kicker: "O sin comisión", title: "Por *transferencia*", body: "La transferencia no tiene comisión. La tarjeta suma la comisión de Mercado Pago.", emoji: "🏦" }),
+      S_("bignum", { num: "3", text: "Si sos jubilada, de salud, bombera, policía o docente: *10% extra*", src: "" }),
+      S_("text", { kicker: "Y además", title: "¿Te invitó una *amiga*?", body: "Al inscribirte podés cargar el código de quien te invitó.\n\nY la matrícula 2027 tiene valor especial hasta el 21 de diciembre.", emoji: "💌" }),
+      ctaOf("¿Cuál *usás*?", "Mandáselo a quien quiere empezar", "Escribí AHORRO y te ayudamos")] };
+    return { topic: "preguntas frecuentes", slides: [
+      COV("Preguntas frecuentes", ["Lo que todos nos [preguntan] antes de empezar", "¿Cómo son las clases? [Te contamos todo]", "5 dudas antes de anotarte, [resueltas]"], "❓"),
+      S_("chat", { title: "¿Cómo son las *clases*?", lines: dlg(["Vos: ¿Cuánto dura cada clase?", "The Queen's Tea: Una hora, en grupos chicos.", "Vos: ¿Y si soy tímida?", "The Queen's Tea: Justamente por eso son grupos chicos: tu profe te conoce y te corrige."]) }),
+      S_("chat", { title: "¿Y el *material*?", lines: dlg(["Vos: ¿Tengo que comprar libros?", "The Queen's Tea: No, todo el material viene incluido.", "Vos: ¿Dónde veo las tareas?", "The Queen's Tea: En tu propio campus: clases, tareas, notas y calendario."]) }),
+      S_("chat", { title: "¿Y si *falto*?", lines: dlg(["Vos: ¿Qué pasa si falto a una clase?", "The Queen's Tea: Se abona igual, porque tu lugar queda reservado.", "Vos: ¿Puedo pagar clase por clase?", "The Queen's Tea: Sí, con un 15% más. Conviene el mes completo."]) }),
+      S_("text", { kicker: "¿No sabés tu nivel?", title: "Test de nivel *gratis*", body: "Está en thequeenstea.com.ar: así sabés desde dónde arrancar y qué grupo te conviene.", emoji: "📝" }),
+      S_("grid4", { title: "Por qué *elegirnos*", items: "👥 Grupos reducidos\n📚 Material incluido\n💻 Tu propio campus\n🎓 Exámenes internacionales" }),
+      ctaOf("¿Otra *pregunta*?", "Mandáselo a quien está dudando", "Dejá tu pregunta y te respondemos")] };
+  };
+  SERIES.cursos.d = "Cada curso: para quién es, qué se trabaja, vocabulario de muestra y horarios 2027";
+  SERIES.cursos.gen = function () {
+    if (Math.random() < .35) return _cursosGen();
+    const g = fresh("t_grupo", TIENDA.grupos, 1)[0], v = PRO_VOC[g[0]], isPro = /Medical|Legal|Aviation/.test(g[0]), isEx = /First|Advanced|Proficiency|IELTS/.test(g[0]);
+    const para = /Medical/.test(g[0]) ? "Para médicos, enfermeros y profesionales de la salud que leen papers, van a congresos o quieren trabajar afuera." : /Legal/.test(g[0]) ? "Para abogados, traductores y estudiantes de Derecho. Incluye preparación para el TOLES." : /Aviation/.test(g[0]) ? "Para pilotos, controladores y tripulación que necesitan la fraseología y el inglés operativo." : isEx ? `Para quien quiere rendir el ${g[0]} o llegar a ese nivel con práctica tipo examen.` : `Para quien quiere consolidar el nivel ${g[0].split(" ")[0]} y hablar con más seguridad.`;
+    const out = [COV("Nuestros cursos 2027", [`*${g[0]}*: así es el curso [por dentro]`, `¿Es para vos el [${g[0]}]?`, `${g[0]} en 2027: [todo] lo que tenés que saber`], v ? v[0] : "📚"),
+      S_("text", { kicker: "Para quién es", title: `*${g[0]}*`, body: para, emoji: "🙋" }),
+      S_("grid4", { title: "Cómo *es*", items: `🕐 Clases de una hora\n👥 Grupo reducido\n📚 Material incluido\n📅 ${g[1] === "a confirmar" ? "Horario a confirmar" : g[1].charAt(0).toUpperCase() + g[1].slice(1)}` })];
+    if (v) out.push(S_("decode", { title: isEx && !isPro ? "El examen en *4 partes*" : "Una muestra del *vocabulario*", la: isEx && !isPro ? "PARTE" : "EN INGLÉS", lb: isEx && !isPro ? "DURACIÓN" : "EN ESPAÑOL", items: v[1] }));
+    else out.push(S_("decode", { title: "Frases que vas a *usar*", la: "EN INGLÉS", lb: "EN ESPAÑOL", items: "Could you say that again? => ¿Lo repetís?\nI'd like to add something. => Quiero agregar algo.\nWhat do you think? => ¿Vos qué pensás?" }));
+    out.push(S_("text", { kicker: "Tu campus", title: "Todo en un *lugar*", body: "Clases, tareas, exámenes, notas y calendario en tu propio campus, para que veas tu progreso.", emoji: "💻" }),
+      S_("bignum", { num: g[2], text: `por clase en *${g[0]}* (valor 2027). Con el 10% extra si sos jubilada, de salud, bombera, policía o docente.`, src: "" }),
+      S_("steps", { title: "Cómo te *anotás*", items: "Entrá a la tienda (link en la bio)\nMatrícula 2027: $35.000 hasta el 21/12\nElegí tu curso y horario\nY arrancás 🙌" }),
+      ctaOf("¿Te *sumás*?", "Mandáselo a quien lo necesita", "Escribí QUIERO y te contamos"));
+    return { topic: g[0], slides: out };
+  };
+
   function variedad(r, key) {
     const s0 = r.slides && r.slides[0];
     if (s0 && s0.tpl === "coverText") {
