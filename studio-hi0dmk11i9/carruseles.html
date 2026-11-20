@@ -492,7 +492,9 @@
   // Ajusta el tamaño para que entre en la caja y dibuja. Devuelve la caja ocupada.
   function rich(text, o) {
     const f = o.font ? FONTS[o.font] : null;
-    const oo = { family: f ? f.d : (o.family || BODY), weight: f ? f.dw : (o.weight || 500), ls: f ? f.ls : (o.ls || 0), lh: o.lh || (f ? (f.upper ? 1.02 : 1.08) : 1.38) };
+    const oo = { family: f ? f.d : (o.family || BODY), weight: f ? f.dw : (o.weight || 500), ls: f ? f.ls : (o.ls || 0), lh: o.lh || (f ? (f.upper ? 1.17 : 1.12) : 1.38) };
+    if (f && f.upper) oo.lh = Math.max(oo.lh, 1.14);
+    if (/\[[^\]]+\]/.test(String(text || ""))) oo.lh = Math.max(oo.lh, f ? 1.22 : 1.4);
     const toks = parseRich(text, f && f.upper || o.upper);
     if (!toks.length) return { x: o.x, y: o.y, w: 0, h: 0 };
     let size = o.max || 90, L;
@@ -5031,5 +5033,5 @@ Respondé SOLO JSON: {"nombre":"${name}","quien":"a qué se dedica (2 a 5 palabr
     if (inFrame) show(); setTimeout(function () { if (!window.__appReady) show(); }, 8000);
   })();
 </script>
-</body>
+<div id="qtVer" style="position:fixed;left:8px;bottom:6px;font:600 11px system-ui,sans-serif;color:#8a9aa8;z-index:99999;pointer-events:none">Versión 20/11 13:15</div><script>(function(){var V="20/11 13:15";function chk(){fetch("./version.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(j){if(j.v&&j.v!==V){var k="qt_rl_"+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,"1")}catch(e){}location.reload()}}).catch(function(){})}if(location.protocol==="https:"){document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()});chk()}})();</script></body>
 </html>
