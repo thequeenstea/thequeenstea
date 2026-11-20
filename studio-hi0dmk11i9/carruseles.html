@@ -168,8 +168,10 @@
 
     <div class="card libCard">
       <h2>🛍️ Carruseles de tu tienda</h2>
-      <div class="small" style="margin-top:-4px">Tocá un curso o recurso de tu tienda y sale un carrusel con gancho que habla solo de ese producto. Cada vez que lo tocás, cambia el gancho de la portada.</div>
-      <div class="series" id="prodList" style="max-height:330px;overflow:auto"></div>
+      <div class="small" style="margin-top:-4px">Elegí qué querés promocionar. El carrusel arranca con tips útiles y recién en la slide 5 aparece el curso. Cada vez que tocás "Crear", cambian el gancho y el diseño.</div>
+      <label class="small" for="prodSel" style="font-weight:800;display:block;margin-top:8px">¿Qué querés promocionar?</label>
+      <select id="prodSel" style="width:100%;padding:10px;border-radius:10px;border:2px solid var(--teal);font-size:14px;margin-top:4px"></select>
+      <div class="btns"><button class="primary big" id="prodGo">✨ Crear carrusel</button><button id="prodDel" class="hidden">🗑️ Borrar de mi lista</button></div>
       <details style="margin-top:12px" open><summary style="cursor:pointer;font-weight:800">📋 Pegá un producto nuevo</summary>
         <div class="small" style="margin:6px 0">Copiá la página del curso de tu tienda (o un PDF, un mensaje, lo que tengas) y pegala acá. La app arma un resumen y el carrusel.</div>
         <textarea id="prodTxt" rows="7" placeholder="Ejemplo: Writing Essays - Curso Asincrónico (B2-C1). Este curso te introduce al mundo de la escritura de ensayos... Temario: 1. Essay Writing 2. ... $ 60.000 $ 36.000"></textarea>
@@ -3738,24 +3740,78 @@ Respondé SOLO JSON: {"titulo":"","artista":"","anio":0,"traduccion":"","tema":"
 
   // ---------- ¿CÓMO SE DICE...? Expresiones argentinas en inglés ----------
   const ARG = [
-    { a: "Me da fiaca", e: "I can't be bothered", ex: "I can't be bothered to cook tonight.", es: "Me da fiaca cocinar hoy.", n: "Literal sería 'no puedo ser molestado'. Es la forma natural de decir que no tenés ganas." },
-    { a: "Estoy al horno", e: "I'm in hot water", ex: "I forgot the deadline. I'm in hot water!", es: "Me olvidé del plazo. ¡Estoy al horno!", n: "También: *I'm in trouble* o, más informal, *I'm toast*." },
-    { a: "Hacerse el sota", e: "to play dumb", ex: "Don't play dumb, I know you ate it.", es: "No te hagas el sota, sé que te lo comiste.", n: "*Dumb* acá es 'tonto'. También: *to act innocent*." },
-    { a: "¡Qué embole!", e: "What a drag!", ex: "Another meeting? What a drag!", es: "¿Otra reunión? ¡Qué embole!", n: "También: *How boring!* o *That's so boring*." },
-    { a: "Chamuyar", e: "to sweet-talk", ex: "He tried to sweet-talk the teacher.", es: "Le quiso chamuyar a la profe.", n: "Si es mentir para salir del paso: *to bluff* o *to make stuff up*." },
-    { a: "Bancar a alguien", e: "to have someone's back", ex: "Don't worry, I've got your back.", es: "Tranqui, yo te banco.", n: "Si es 'aguantar' algo: *I can't stand it* = no lo banco." },
-    { a: "Ni ahí", e: "No way!", ex: "Me, dancing? No way!", es: "¿Yo, bailar? ¡Ni ahí!", n: "Más fuerte: *Not a chance!*" },
-    { a: "Tirar la toalla", e: "to throw in the towel", ex: "Don't throw in the towel now!", es: "¡No tires la toalla ahora!", n: "¡Esta es igual! También: *to give up*." },
-    { a: "Estar en la luna", e: "to have your head in the clouds", ex: "Sorry, I had my head in the clouds.", es: "Perdón, estaba en la luna.", n: "En inglés estás en las nubes, no en la luna." },
-    { a: "Me cayó la ficha", e: "the penny dropped", ex: "Then the penny dropped!", es: "¡Y ahí me cayó la ficha!", n: "Es británica: la moneda que cae en la máquina. En EE. UU.: *it finally clicked*." },
-    { a: "Ponerse las pilas", e: "to pull your socks up", ex: "You need to pull your socks up.", es: "Tenés que ponerte las pilas.", n: "Británica. En EE. UU. dicen *to step up your game*." },
-    { a: "Hacer la vista gorda", e: "to turn a blind eye", ex: "The manager turned a blind eye.", es: "El gerente hizo la vista gorda.", n: "Se dice que viene de un almirante que se puso el catalejo en el ojo ciego." },
-    { a: "Costar un ojo de la cara", e: "to cost an arm and a leg", ex: "That phone costs an arm and a leg!", es: "¡Ese celular cuesta un ojo de la cara!", n: "En inglés te cuesta un brazo y una pierna." },
-    { a: "Ser pan comido", e: "to be a piece of cake", ex: "The test was a piece of cake.", es: "El examen fue pan comido.", n: "En inglés es una porción de torta." },
-    { a: "Llueve a cántaros", e: "it's pouring", ex: "Take an umbrella, it's pouring!", es: "¡Llevá paraguas, llueve a cántaros!", n: "Existe *it's raining cats and dogs*, pero hoy suena antigua." },
-    { a: "Meter la pata", e: "to put your foot in it", ex: "I really put my foot in it.", es: "Metí la pata de verdad.", n: "En EE. UU. también: *to put your foot in your mouth*." },
-    { a: "Dormirse en los laureles", e: "to rest on your laurels", ex: "Don't rest on your laurels.", es: "No te duermas en los laureles.", n: "¡Casi igual!" },
-    { a: "Estar hasta las manos", e: "to be swamped", ex: "I'm swamped this week.", es: "Estoy hasta las manos esta semana.", n: "*Swamp* es pantano: estás hundida en trabajo." }
+    { a: "Me da fiaca", e: "I can't be bothered", lit: "It gives me fiaca", ex: "I can't be bothered to cook tonight.", es: "Me da fiaca cocinar hoy.", ex2: "Honestly? I can't be bothered.",
+      v: [["I don't feel like it", "la más neutra, sirve en cualquier lado"], ["I'm feeling lazy", "cuando la fiaca es general"], ["I can't be arsed", "británica y muy informal, ojo dónde la usás"]],
+      oA: "*Fiaca* llegó al lunfardo desde el italiano: *fiacca* es cansancio, flojera. La trajeron los inmigrantes italianos a Buenos Aires.",
+      oE: "*Bother* aparece en el inglés del siglo XVIII y se cree que viene del inglés de Irlanda. *Can't be bothered* es 'no puedo ser molestado': ni ganas de molestarme en hacerlo." },
+    { a: "Estoy al horno", e: "I'm in hot water", lit: "I'm in the oven", ex: "I forgot the deadline. I'm in hot water!", es: "Me olvidé del plazo. ¡Estoy al horno!", ex2: "If my boss finds out, I'm in hot water.",
+      v: [["I'm in trouble", "la más simple"], ["I'm toast", "muy informal: estoy frita"], ["I'm in deep water", "cuando el problema es grande"]],
+      oA: "La imagen es clarísima: estás adentro del horno, cocinándote, y no hay por dónde salir.",
+      oE: "*In hot water* se usa desde el siglo XVI para hablar de problemas: el agua caliente quema y no podés quedarte ahí. *I'm toast* se hizo famosa en los años 80 gracias al cine." },
+    { a: "Hacerse el sota", e: "to play dumb", lit: "To make yourself the jack", ex: "Don't play dumb, I know you ate it.", es: "No te hagas el sota, sé que te lo comiste.", ex2: "He always plays dumb when it's time to pay.",
+      v: [["to act innocent", "hacerse el inocente"], ["to play the fool", "hacerse el tonto, más teatral"], ["Don't give me that look", "cuando la cara de 'yo no fui' lo dice todo"]],
+      oA: "Hay varias teorías. Una de las más repetidas la relaciona con la *sota* de la baraja española: una figura que mira y no se mete en nada.",
+      oE: "*Dumb* en inglés antiguo significaba mudo, que no habla. El sentido de 'tonto' llegó después, por influencia del alemán *dumm*. *Play dumb* es actuar como si no entendieras." },
+    { a: "¡Qué embole!", e: "What a drag!", lit: "What a boring!", ex: "Another meeting? What a drag!", es: "¿Otra reunión? ¡Qué embole!", ex2: "Waiting in line all day was such a drag.",
+      v: [["How boring!", "la más directa"], ["It's so dull", "un poco más formal"], ["Bo-ring!", "estirada, en tono de burla"]],
+      oA: "*Embole* viene de *embolar*, que en el habla rioplatense pasó a significar aburrir.",
+      oE: "*Drag* es arrastrar. Desde el siglo XIX se usa para algo pesado y lento, que hay que 'arrastrar'. En los años 40 el jazz la hizo popular como 'qué aburrido'." },
+    { a: "Chamuyar", e: "to sweet-talk", lit: "To chamuyar", ex: "He tried to sweet-talk the teacher.", es: "Le quiso chamuyar a la profe.", ex2: "Stop sweet-talking me and tell me the truth!",
+      v: [["to chat someone up", "británica: chamuyar a alguien que te gusta"], ["to bluff", "cuando es mentir para salir del paso"], ["to make stuff up", "inventar cosas"]],
+      oA: "*Chamuyar* viene del caló, la lengua de los gitanos españoles: *chamullar* era hablar. En el lunfardo pasó a ser hablar con labia.",
+      oE: "*Sweet-talk* es literalmente 'hablar dulce'. Se registra en Estados Unidos a mediados del siglo XX." },
+    { a: "Bancar a alguien", e: "to have someone's back", lit: "To bank someone", ex: "Don't worry, I've got your back.", es: "Tranqui, yo te banco.", ex2: "She always has my back.",
+      v: [["to stand by someone", "estar al lado de alguien, en las buenas y en las malas"], ["to support someone", "la más formal"], ["I can't stand it", "y si es 'no lo banco', así"]],
+      oA: "En el habla argentina *bancar* es sostener: bancar a alguien es apoyarlo y bancarse algo es aguantarlo.",
+      oE: "*Have someone's back* viene de la idea de cuidarle la espalda a un compañero, para que nadie lo ataque por detrás." },
+    { a: "Ni ahí", e: "No way!", lit: "Not there", ex: "Me, dancing? No way!", es: "¿Yo, bailar? ¡Ni ahí!", ex2: "No way I'm getting up at six.",
+      v: [["Not a chance!", "más fuerte"], ["Not in a million years", "exagerada y graciosa"], ["No chance", "corta y directa"]],
+      oA: "*Ni ahí* es un 'ni siquiera cerca': no estás ni en el lugar de la idea.",
+      oE: "*No way* como exclamación se popularizó en el inglés de Estados Unidos desde los años 60." },
+    { a: "Tirar la toalla", e: "to throw in the towel", lit: "To throw the towel", ex: "Don't throw in the towel now!", es: "¡No tires la toalla ahora!", ex2: "After ten tries, I almost threw in the towel.",
+      v: [["to give up", "la más común"], ["to call it quits", "dejar algo, decir basta"], ["to quit", "corta y directa"]],
+      oA: "Viene del boxeo: cuando el rincón tira la toalla al ring, la pelea termina.",
+      oE: "¡Mismo origen! En el boxeo del siglo XIX primero se tiraba una esponja: *to throw up the sponge*. Después pasó a ser la toalla." },
+    { a: "Estar en la luna", e: "to have your head in the clouds", lit: "To be in the moon", ex: "Sorry, I had my head in the clouds.", es: "Perdón, estaba en la luna.", ex2: "He always has his head in the clouds in class.",
+      v: [["to be miles away", "estar a kilómetros, pensando en otra cosa"], ["to daydream", "soñar despierta"], ["to space out", "colgarse, muy informal"]],
+      oA: "La luna siempre fue el lugar de los distraídos y los soñadores: estás tan lejos que no escuchás nada.",
+      oE: "En inglés no te vas tan lejos: te quedás en las nubes. La imagen es la misma, alguien que flota lejos de lo que pasa." },
+    { a: "Me cayó la ficha", e: "the penny dropped", lit: "The token fell to me", ex: "Then the penny dropped!", es: "¡Y ahí me cayó la ficha!", ex2: "It took a while, but the penny finally dropped.",
+      v: [["It finally clicked", "la de Estados Unidos"], ["Now I get it", "la más simple"], ["It dawned on me", "más elegante: me di cuenta"]],
+      oA: "En los teléfonos públicos con fichas, la llamada se conectaba cuando la ficha caía. Hasta que no caía, nada.",
+      oE: "¡Casi igual! En el Reino Unido, las máquinas funcionaban con una moneda de un penique: cuando caía, la máquina arrancaba." },
+    { a: "Ponerse las pilas", e: "to pull your socks up", lit: "To put on the batteries", ex: "You need to pull your socks up.", es: "Tenés que ponerte las pilas.", ex2: "If you want to pass, pull your socks up!",
+      v: [["to step up your game", "la de Estados Unidos"], ["to get your act together", "organizarte de una vez"], ["to buckle down", "concentrarte en serio"]],
+      oA: "Como un aparato que no anda hasta que le ponés pilas nuevas.",
+      oE: "Es británica. La imagen es la de alguien desprolijo que se sube las medias para arreglarse y empezar a hacer las cosas bien." },
+    { a: "Hacer la vista gorda", e: "to turn a blind eye", lit: "To make the fat view", ex: "The manager turned a blind eye.", es: "El gerente hizo la vista gorda.", ex2: "You can't just turn a blind eye to this.",
+      v: [["to look the other way", "mirar para otro lado"], ["to let it slide", "dejarlo pasar"], ["to overlook something", "más formal"]],
+      oA: "*Vista gorda* es una vista poco fina, que no distingue los detalles: ve, pero no quiere ver.",
+      oE: "Se cuenta que en 1801 el almirante británico Nelson, ciego de un ojo, se puso el catalejo en ese ojo para 'no ver' una orden de retirada." },
+    { a: "Costar un ojo de la cara", e: "to cost an arm and a leg", lit: "To cost an eye of the face", ex: "That phone costs an arm and a leg!", es: "¡Ese celular cuesta un ojo de la cara!", ex2: "Rent here costs an arm and a leg.",
+      v: [["to cost a fortune", "la más neutra"], ["to be a rip-off", "cuando además es un robo"], ["to break the bank", "gastar más de lo que podés"]],
+      oA: "Algo tan caro que pagarías con algo tuyo que no tiene precio: un ojo.",
+      oE: "Aparece en Estados Unidos a mediados del siglo XX. Circula un mito sobre retratos que se cobraban según si se pintaban los brazos, pero no hay pruebas." },
+    { a: "Ser pan comido", e: "to be a piece of cake", lit: "To be eaten bread", ex: "The test was a piece of cake.", es: "El examen fue pan comido.", ex2: "Don't worry, it's a piece of cake.",
+      v: [["easy as pie", "fácil como una tarta"], ["a walk in the park", "un paseo por el parque"], ["a no-brainer", "tan fácil que ni hay que pensarlo"]],
+      oA: "El pan ya comido no da trabajo: está hecho.",
+      oE: "*A piece of cake* se registra en Estados Unidos en los años 30. Se cree que viene de los *cakewalks*, concursos en los que el premio era una torta." },
+    { a: "Llueve a cántaros", e: "it's pouring", lit: "It rains to pitchers", ex: "Take an umbrella, it's pouring!", es: "¡Llevá paraguas, llueve a cántaros!", ex2: "It's been pouring all day.",
+      v: [["It's raining cats and dogs", "la famosa, pero hoy suena antigua"], ["It's bucketing down", "británica: llueve a baldes"], ["It's chucking it down", "británica e informal"]],
+      oA: "Un cántaro es una vasija grande: llueve como si alguien vaciara cántaros desde el cielo.",
+      oE: "*Pour* es verter. Y el origen de *raining cats and dogs* es un misterio: hay muchas teorías y ninguna comprobada." },
+    { a: "Meter la pata", e: "to put your foot in it", lit: "To put the leg", ex: "I really put my foot in it.", es: "Metí la pata de verdad.", ex2: "Sorry, I think I put my foot in it.",
+      v: [["to put your foot in your mouth", "la de Estados Unidos, cuando la metés hablando"], ["to mess up", "equivocarse, muy común"], ["to drop a clanger", "británica: un error que suena fuerte"]],
+      oA: "La imagen es pisar donde no tenías que pisar.",
+      oE: "Muy parecida: meter el pie donde no va. En inglés se usa sobre todo cuando decís algo inoportuno." },
+    { a: "Dormirse en los laureles", e: "to rest on your laurels", lit: "To sleep in the laurels", ex: "Don't rest on your laurels.", es: "No te duermas en los laureles.", ex2: "She won once and then rested on her laurels.",
+      v: [["to coast", "seguir por inercia, sin esfuerzo"], ["to get complacent", "conformarte"], ["to take it easy", "aflojar"]],
+      oA: "¡La misma historia en los dos idiomas!",
+      oE: "En la antigua Grecia, a los ganadores se los coronaba con laureles. Quedarse sentado sobre ellos es vivir de un éxito viejo." },
+    { a: "Estar hasta las manos", e: "to be swamped", lit: "To be up to the hands", ex: "I'm swamped this week.", es: "Estoy hasta las manos esta semana.", ex2: "Can we talk tomorrow? I'm swamped.",
+      v: [["to be snowed under", "británica: tapada de nieve, de trabajo"], ["to have a lot on my plate", "tener mucho en el plato"], ["to be up to my eyes", "hasta los ojos"]],
+      oA: "Tenés tanto que hacer que ya no te dan las manos.",
+      oE: "*Swamp* es pantano. *Swamped* es estar hundida, como en un pantano, pero de trabajo." }
   ];
 
   // ---------- PRONUNCIACIÓN QUE ENGAÑA ----------
@@ -3931,15 +3987,19 @@ Respondé SOLO JSON: {"titulo":"","artista":"","anio":0,"traduccion":"","tema":"
       return { topic: "datos curiosos del inglés", slides: out };
     } },
 
-    comosedice: { n: "¿Cómo se dice en inglés...?", e: "🧉", d: "Expresiones argentinas y cómo se dicen de verdad en inglés", gen() {
-      const a = fresh("arg", ARG, 4), q = a[3], o = pickR(ARG.filter(z => !a.includes(z)));
-      return { topic: "expresiones argentinas en inglés", slides: [
-        COV("¿Cómo se dice en inglés?", [`¿Cómo se dice [${a[0].a.toLowerCase()}] en inglés?`, "Expresiones bien argentinas y cómo se dicen [en inglés]", `"${a[0].a}" en inglés [no es] lo que pensás`], "🧉"),
-        ...a.slice(0, 3).map((x, k) => S_("text", { kicker: `"${x.a}"`, title: `*${x.e}*`, body: `${x.ex}\n${x.es}\n\n${x.n}`, emoji: ["🧉", "🇦🇷", "💬"][k] })),
-        S_("chat", { title: "Así se *usan*", lines: dlg([`Ana: ${a[0].ex}`, `Tom: ${a[1].ex}`, `Ana: ${a[2].ex}`]) }),
-        ...quiz(`¿Cómo dirías *${q.a.toLowerCase()}*?`, q.e, o.e, `${q.ex}\n${q.es}`),
-        S_("decode", { title: "Para *guardar*", la: "EN ARGENTINO", lb: "EN INGLÉS", items: a.map(x => `${x.a} => ${x.e}`).join("\n") }),
-        ctaOf("¿Cuál *seguimos*?", "Mandáselo a tu amiga más argenta", "Dejá una expresión para traducir")] };
+    comosedice: { n: "¿Cómo se dice en inglés...?", e: "🧉", d: "Una expresión argentina por carrusel: cómo se dice, otras formas y de dónde viene", gen() {
+      const x = fresh("arg1", ARG, 1)[0], ok = Math.random() < .5;
+      return { topic: "cómo se dice " + x.a + " en inglés", slides: [
+        COV("¿Cómo se dice en inglés?", [`¿Cómo se dice [${x.a.toLowerCase().replace(/[¡!]/g, "")}] en inglés?`, `"${x.a}" en inglés [no es] "${x.lit}"`, `"${x.a}": así lo dicen [en inglés]`], "🧉"),
+        S_("compare", { title: `"*${x.a}*"`, bad: x.lit, good: x.e, why: "La traducción palabra por palabra no funciona: en inglés la idea se dice con otra imagen." }),
+        S_("text", { kicker: "Así se dice", title: `*${x.e}*`, body: `${x.ex}\n${x.es}`, emoji: "🧉" }),
+        S_("decode", { title: "Otras formas de *decirlo*", la: "EN INGLÉS", lb: "CUÁNDO USARLA", items: x.v.map(z => `${z[0]} => ${z[1]}`).join("\n") }),
+        S_("text", { kicker: "De dónde viene", title: `"*${x.a}*"`, body: x.oA, emoji: "🇦🇷" }),
+        S_("text", { kicker: "Y en inglés", title: `*${x.e}*`, body: x.oE, emoji: "📜" }),
+        S_("chat", { title: "Así *suena*", lines: dlg([`Ana: ${x.ex}`, `Tom: Same here!`, `Ana: ${x.ex2}`]) }),
+        S_("thisthat", { title: `¿Cómo dirías *${x.a.toLowerCase()}*?`, a: ok ? x.e : x.lit, b: ok ? x.lit : x.e, note: "Respuesta en la próxima slide 👉" }),
+        S_("text", { kicker: "Respuesta", title: `Es la *${ok ? "A" : "B"}*`, body: `*${x.e}*. Y si querés variar: *${x.v[0][0]}*.`, emoji: "✅" }),
+        ctaOf("¿Cuál *seguimos*?", "Mandáselo a tu amiga más argenta", "Dejá otra expresión para traducir")] };
     } },
 
     pronuncia: { n: "Pronunciación que engaña", e: "🗣️", d: "Palabras que todos dicen mal, con cómo suenan de verdad", gen() {
@@ -4491,6 +4551,9 @@ Además devolvé caption (texto para la publicación: primera línea con la pala
     const out = TIENDA.cursos.map(c => ({ id: "t_" + c.id, tema: c.id === "essays" ? "essays" : "narrative", n: c.n, tipo: "curso", lvl: c.lvl, precio: c.now, antes: c.old, off: c.off, para: c.para.replace(/\*/g, ""),
       resumen: `Un curso a tu ritmo, 100% en inglés, con ${c.vid} lecciones en video y ${c.tar} tareas con devolución personalizada.`,
       aprende: c.tem.split("\n"), incluye: [`🎬 ${c.vid} lecciones en video`, `✍️ ${c.tar} tareas con devolución personalizada`, "🗣️ 100% en inglés", "⚡ Acceso inmediato a tu campus"], temas: c.temas.split("\n"), acceso: true, ingles: true }));
+    TIENDA.grupos.forEach((g, k) => { const tema = /IELTS/.test(g[0]) ? "ielts" : /Medical/.test(g[0]) ? "medical" : /Legal/.test(g[0]) ? "legal" : /Aviation/.test(g[0]) ? "aviation" : /First|Advanced|Proficiency/.test(g[0]) ? "examen" : "general";
+      const para = { ielts: "Para quien necesita IELTS para estudiar, trabajar o migrar.", medical: "Para médicos, enfermeros y profesionales de la salud.", legal: "Para abogados, traductores y estudiantes de Derecho. Incluye preparación para el TOLES.", aviation: "Para pilotos, controladores y tripulación.", examen: `Para quien quiere rendir el ${g[0]} o llegar a ese nivel.`, general: `Para quien quiere consolidar su inglés y hablar con más seguridad.` }[tema];
+      out.push({ id: "g_" + k, tema, n: g[0], tipo: "grupo", lvl: "", precio: "", antes: "", off: "", para, resumen: `Clases de una hora en grupo reducido${g[1] !== "a confirmar" ? `, los ${g[1]}` : ""}, con material incluido y tu propio campus.`, aprende: [], incluye: ["👥 Grupo reducido", "🕐 Clases de una hora", "📚 Material incluido", "💻 Tu propio campus"], temas: [] }); });
     const PARA = { patrias: "Para profes que preparan las fechas patrias y quieren trabajarlas en inglés.", pronunciacion: "Para profes que quieren trabajar la pronunciación con material claro y listo.", flashcards: "Para profes que buscan material visual listo para usar en clase.", speaking: "Para profes de nivel inicial que quieren que sus alumnos se animen a hablar.", cultura: "Para profes que quieren llevar la cultura argentina a la clase de inglés." };
     TIENDA.recursos.forEach((r, k) => { const lv = (r.n.match(/\b([ABC][12](?:\s*[-–]\s*[ABC][12])?\+?)/) || [])[1] || "";
       out.push({ id: "r_" + k, tema: r.g, n: r.n, tipo: "recurso", lvl: lv, precio: r.p, antes: r.old || "", off: r.old ? `−${Math.round(100 - 100 * parseInt(r.p.replace(/\D/g, "")) / parseInt(r.old.replace(/\D/g, "")))}%` : "", para: PARA[r.g] || "Para profes de inglés.", resumen: "Recurso descargable, listo para imprimir o proyectar en tu clase.", aprende: [], incluye: ["📥 Descargable al instante", "🖨️ Para imprimir o proyectar", lv ? `🎯 Nivel ${lv}` : "🧑‍🏫 Pensado para el aula", "⏱️ Te ahorra planificación"], temas: [], e: r.e }); });
@@ -4515,10 +4578,20 @@ Además devolvé caption (texto para la publicación: primera línea con la pala
       tips: [["Partí de lo que *conocen*", "Una historia que ya vieron o leyeron baja la ansiedad y suma ganas."], ["Palabras en *contexto*", "Se aprenden mejor dentro de una historia que en una lista suelta."], ["Cerrá con *debate*", "¿Qué harías vos? Abre conversación real en inglés."]] },
     matricula: { w: "2027", re: /matr[ií]cula/i, k: "Para tu 2027", e: "🗓️", hooks: ["¿2027 es el año en que [por fin] hablás inglés?", "Por qué abandonás inglés en abril (y [cómo evitarlo])", "Lo que hace que [sí] termines el año de inglés"],
       tips: [["Un horario *fijo*", "Lo que está en la agenda se cumple. Elegí un día y una hora que puedas sostener todo el año."], ["Un grupo que te *espere*", "En un grupo chico se nota si faltás. Y eso ayuda a seguir."], ["Una meta *concreta*", "No 'mejorar el inglés': rendir un examen, viajar, una entrevista. Con meta, se avanza."]] },
+    examen: { w: "EXAMEN", re: /\b(first|advanced|proficiency|cambridge|C2 Proficiency|C1 Advanced|B2 First)\b/i, k: "Exámenes Cambridge", e: "🎓", hooks: ["¿Rendís un Cambridge? [3 claves] que suman puntos", "Lo que nadie te dice del [Speaking] de Cambridge", "Saber inglés no alcanza: hay que [saber el examen]"],
+      tips: [["Practicá con el *reloj*", "En el examen el tiempo vuela. Hacé cada parte cronometrada al menos una vez antes del día."], ["Conocé el *formato*", "Saber qué pide cada parte te ahorra nervios y puntos: no es solo saber inglés, es saber el examen."], ["En el Speaking, *escuchá a tu pareja*", "En Cambridge el Speaking se rinde de a dos: responder a lo que dice tu compañero también suma."]] },
+    ielts: { w: "IELTS", re: /ielts/i, k: "IELTS", e: "🌍", hooks: ["¿Necesitás un buen [band score] en IELTS? Empezá por acá", "El error más común en el [Writing] de IELTS", "3 trucos para el IELTS que [nadie te cuenta]"],
+      tips: [["Leé la *consigna* dos veces", "En el Writing Task 2, si respondés otra pregunta, la nota baja aunque escribas muy bien."], ["En Listening, *anticipá*", "Usá los segundos antes de cada parte para leer las preguntas y predecir qué dato vas a escuchar."], ["En Speaking, *extendé*", "No contestes solo yes o no: sumá un motivo y un ejemplo."]] },
+    medical: { w: "MEDICAL", re: /medical|m[eé]dic|salud/i, k: "Para profesionales de la salud", e: "🩺", hooks: ["¿Te trabás al presentar un [caso en inglés]?", "El inglés que no te enseñaron en [la facultad]", "Congreso en inglés: [3 claves] para no paralizarte"],
+      tips: [["Presentá el caso en *orden*", "Edad y sexo, motivo de consulta, antecedentes, examen y plan. Siempre en el mismo orden, así nadie se pierde."], ["Con el paciente, *simple*", "*Tummy* en vez de *abdomen*, *high blood pressure* en vez de *hypertension*."], ["Un paper por *semana*", "Es la forma más rápida de sumar vocabulario técnico en contexto."]] },
+    legal: { w: "LEGAL", re: /legal|toles|abogad|derecho/i, k: "Para abogados", e: "⚖️", hooks: ["¿Un contrato en inglés te [frena]?", "Por qué el inglés legal [no se traduce] palabra por palabra", "3 errores de abogados [en inglés]"],
+      tips: [["No traduzcas *literal*", "Muchas figuras no existen igual en los dos sistemas: buscá el equivalente que cumple la misma función."], ["Ojo con *shall*", "En los contratos marca obligación. Hoy muchos prefieren *must* para ser más claros."], ["Escribí *claro*", "El *plain English* gana terreno también en derecho: frases cortas, voz activa y nada de jerga de más."]] },
+    aviation: { w: "AVIATION", re: /aviation|aviaci|piloto|controlador/i, k: "Para aviación", e: "✈️", hooks: ["¿La radio en inglés te [pone nervioso]?", "El inglés de la cabina [no es] el de la escuela", "3 claves del inglés [aeronáutico]"],
+      tips: [["Fraseología *estándar*", "En la radio se usan frases fijas: *cleared for take-off*, *say again*. No es lugar para improvisar."], ["*Readback* siempre", "Repetí las autorizaciones importantes para confirmar que entendiste bien."], ["Inglés claro para lo *imprevisto*", "Cuando la fraseología no alcanza, necesitás inglés general claro. Eso también se evalúa."]] },
     general: { w: "INGLÉS", re: /./, k: "Tips de inglés", e: "💡", hooks: ["¿Estudiás inglés hace años y [no arrancás]?", "Lo que nadie te dice de [aprender inglés] de grande", "3 cambios chiquitos que [destraban] tu inglés"],
       tips: [["Poco, pero *seguido*", "Veinte minutos por día valen más que tres horas un sábado."], ["Con *devolución*", "Sin alguien que te corrija, repetís los mismos errores sin darte cuenta."], ["Para *algo*", "Elegí para qué lo querés: trabajo, viaje o examen. Con un para qué, no abandonás."]] }
   };
-  const prodTema = (p, raw) => { if (p.tema && PROD_TEMAS[p.tema]) return p.tema; const t = (p.n + " " + (raw || "") + " " + (p.resumen || "")); return ["narrative"].concat(Object.keys(PROD_TEMAS)).find(k => k !== "general" && PROD_TEMAS[k].re.test(t)) || "general"; };
+  const prodTema = (p, raw) => { if (p.tema && PROD_TEMAS[p.tema]) return p.tema; const t = (p.n + " " + (raw || "") + " " + (p.resumen || "")); return ["narrative", "ielts", "medical", "legal", "aviation"].concat(Object.keys(PROD_TEMAS)).find(k => k !== "general" && PROD_TEMAS[k].re.test(t)) || "general"; };
   const prodSaved = () => { try { return JSON.parse(localStorage.getItem("qt_prods") || "[]"); } catch { return []; } };
   const prodSave = a => { try { localStorage.setItem("qt_prods", JSON.stringify(a)); } catch { } };
 
@@ -4571,8 +4644,8 @@ Además devolvé caption (texto para la publicación: primera línea con la pala
     const EM = ["💡", "✨", "🎯"], kind = shuf(["text", "notes", "text"]);
     tips.forEach((tp, k) => out.push(kind[k] === "notes" ? S_("notes", { title: tp[0].replace(/\*/g, ""), body: tp[1] }) : S_("text", { kicker: `Tip ${k + 1} de ${tips.length}`, title: tp[0], body: tp[1], emoji: EM[k] })));
     // 2) el puente: recién acá aparece el producto
-    const puente = p.puente || (recurso ? "Si no tenés tiempo de armarlo desde cero, ya lo dejamos listo para tu clase." : matri ? "Por eso en 2027 te esperamos con grupos chicos, material incluido y tu propio campus." : "Leerlo es fácil. Lo difícil es practicarlo con alguien que te corrija.");
-    out.push(S_("text", { kicker: recurso ? "Para tu próxima clase" : matri ? "Para tu 2027" : "Para practicarlo en serio", title: `Por eso armamos *${n}*`, body: `${puente}\n\n${p.resumen || p.para || ""}`.trim(), emoji: recurso ? "📥" : matri ? "🎓" : "🎁" }));
+    const puente = p.puente || (p.tipo === "grupo" ? "Todo esto se entrena mejor con alguien que te corrija y un grupo que te acompañe." : recurso ? "Si no tenés tiempo de armarlo desde cero, ya lo dejamos listo para tu clase." : matri ? "Por eso en 2027 te esperamos con grupos chicos, material incluido y tu propio campus." : "Leerlo es fácil. Lo difícil es practicarlo con alguien que te corrija.");
+    out.push(S_("text", { kicker: recurso ? "Para tu próxima clase" : matri ? "Para tu 2027" : "Para practicarlo en serio", title: p.tipo === "grupo" ? `Por eso existe *${n}*` : `Por eso armamos *${n}*`, body: `${puente}\n\n${p.resumen || p.para || ""}`.trim(), emoji: recurso ? "📥" : matri ? "🎓" : "🎁" }));
     // 3) el producto, corto
     if (p.aprende.length >= 2 && !recurso) out.push(S_("steps", { title: "Lo que vas a *dominar*", items: p.aprende.slice(0, 5).join("\n") }));
     if (p.incluye.length >= 2) out.push(S_("grid4", { title: "Qué *incluye*", items: p.incluye.slice(0, 4).join("\n") }));
@@ -4583,17 +4656,20 @@ Además devolvé caption (texto para la publicación: primera línea con la pala
   }
 
   (function prodUI() {
-    const box = $("prodList"); if (!box) return;
+    const box = $("prodSel"); if (!box) return;
     const all = () => PROD_OF_TIENDA().concat(prodSaved());
-    const draw = () => {
-      const saved = prodSaved().map(z => z.id);
-      box.innerHTML = all().map(p => `<button data-p="${p.id}"><span>${p.tipo === "recurso" ? (p.e || "📥") : p.tipo === "matricula" ? "🎓" : "✍️"}</span><span style="flex:1">${escH(p.n)}${p.precio ? ` <small style="opacity:.6">${escH(p.precio)}</small>` : ""}</span>${saved.includes(p.id) ? `<b data-del="${p.id}" title="Borrar" style="padding:0 6px">✕</b>` : ""}</button>`).join("");
-      box.querySelectorAll("button").forEach(b => b.onclick = async e => {
-        const del = e.target.closest("[data-del]"); if (del) { e.stopPropagation(); if (confirm("¿Borrar este producto de tu lista?")) { prodSave(prodSaved().filter(z => z.id !== del.dataset.del)); draw(); } return; }
-        const p = all().find(z => z.id === b.dataset.p); if (p) await buildSlides(prodSlides(p), p.n);
-      });
+    const GR = [["grupo", "👥 Cursos 2027"], ["curso", "✍️ Cursos a tu ritmo"], ["matricula", "🎓 Matrícula"], ["recurso", "🧑‍🏫 Recursos para profes"]];
+    const draw = (sel) => {
+      const saved = prodSaved();
+      box.innerHTML = GR.map(([t, l]) => `<optgroup label="${l}">${all().filter(p => p.tipo === t && !saved.some(z => z.id === p.id)).map(p => `<option value="${p.id}">${escH(p.n)}</option>`).join("")}</optgroup>`).join("")
+        + (saved.length ? `<optgroup label="💾 Mis productos guardados">${saved.map(p => `<option value="${p.id}">${escH(p.n)}</option>`).join("")}</optgroup>` : "");
+      if (sel) box.value = sel;
+      $("prodDel").classList.toggle("hidden", !saved.some(z => z.id === box.value));
     };
     draw();
+    box.onchange = () => $("prodDel").classList.toggle("hidden", !prodSaved().some(z => z.id === box.value));
+    $("prodGo").onclick = async () => { const p = all().find(z => z.id === box.value); if (p) await buildSlides(prodSlides(p), p.n); };
+    $("prodDel").onclick = () => { if (confirm("¿Borrar este producto de tu lista?")) { prodSave(prodSaved().filter(z => z.id !== box.value)); draw(); } };
     let last = null;
     const show = p => { last = p; $("prodSum").classList.remove("hidden");
       $("prodSum").innerHTML = `<b>${escH(p.n)}</b>${p.lvl ? ` · ${escH(p.lvl)}` : ""}${p.precio ? ` · ${escH(p.precio)}${p.antes ? ` <s>${escH(p.antes)}</s>` : ""}` : ""}<br>${p.resumen ? `📝 ${escH(p.resumen)}<br>` : ""}${p.para ? `🙋 ${escH(p.para)}<br>` : ""}${p.aprende.length ? `📚 ${escH(p.aprende.join(" · "))}<br>` : ""}${p.incluye.length ? `✅ ${escH(p.incluye.join(" · "))}` : ""}`; };
@@ -4615,7 +4691,7 @@ Respondé SOLO JSON: {"nombre":"","tipo":"curso|recurso|matricula|otro","nivel":
         show(p); await buildSlides(prodSlides(p), p.n);
       } catch (e) { setStatus("⚠️ " + (e.message || e) + " Mientras tanto, probá con ✨ Armar carrusel (sin Gemini)."); }
     };
-    $("prodSaveBtn").onclick = () => { const t = $("prodTxt").value.trim(); const p = last || (t.length >= 20 ? prodParse(t) : null); if (!p) { setStatus("Pegá primero la descripción del producto."); return; } const a = prodSaved().filter(z => z.id !== p.id); a.push(p); prodSave(a); draw(); setStatus(`💾 "${p.n}" quedó guardado en tu lista. Tocalo cuando quieras para otro carrusel.`); };
+    $("prodSaveBtn").onclick = () => { const t = $("prodTxt").value.trim(); const p = last || (t.length >= 20 ? prodParse(t) : null); if (!p) { setStatus("Pegá primero la descripción del producto."); return; } const a = prodSaved().filter(z => z.id !== p.id); a.push(p); prodSave(a); draw(p.id); setStatus(`💾 "${p.n}" quedó guardado en tu lista: elegilo arriba cuando quieras otro carrusel.`); };
   })();
   $("libRnd").onclick = () => {
     if (Math.random() < 0.75) { const k = pickR(Object.keys(SERIES)); buildSlides(SERIES[k].gen(), SERIES[k].n); }
@@ -5187,5 +5263,5 @@ Respondé SOLO JSON: {"nombre":"${name}","quien":"a qué se dedica (2 a 5 palabr
     if (inFrame) show(); setTimeout(function () { if (!window.__appReady) show(); }, 8000);
   })();
 </script>
-<div id="qtVer" style="position:fixed;left:8px;bottom:6px;font:600 11px system-ui,sans-serif;color:#8a9aa8;z-index:99999;pointer-events:none">Versión 20/11 14:56</div><script>(function(){var V="20/11 14:56";function chk(){fetch("./version.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(j){if(j.v&&j.v!==V){var k="qt_rl_"+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,"1")}catch(e){}location.reload()}}).catch(function(){})}if(location.protocol==="https:"){document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()});chk()}})();</script></body>
+<div id="qtVer" style="position:fixed;left:8px;bottom:6px;font:600 11px system-ui,sans-serif;color:#8a9aa8;z-index:99999;pointer-events:none">Versión 20/11 15:02</div><script>(function(){var V="20/11 15:02";function chk(){fetch("./version.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(j){if(j.v&&j.v!==V){var k="qt_rl_"+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,"1")}catch(e){}location.reload()}}).catch(function(){})}if(location.protocol==="https:"){document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()});chk()}})();</script></body>
 </html>
