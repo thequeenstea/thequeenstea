@@ -364,6 +364,7 @@
     <div class="stageInner">
       <div class="canvasWrap"><canvas id="cv" width="1080" height="1350"></canvas></div>
       <div id="status"></div>
+      <div id="covStyles" class="hidden" style="margin:8px 0"><div class="small" style="font-weight:800;margin-bottom:6px">🎨 Elegí un estilo de portada <button id="covMore" style="padding:4px 10px;font-size:12px;margin-left:6px">🔄 Ver otros</button></div><div id="covGrid" style="display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;-webkit-overflow-scrolling:touch"></div></div>
       <div class="selBar" id="selBar"><span class="small" style="margin:0">Tocá un texto o una foto para moverlo o cambiarle el tamaño.</span></div>
       <div class="addBar" id="addBar"><span>➕ Agregar:</span><button data-x="text">🔤 Texto</button><button data-x="photo">🖼️ Foto</button><button data-x="emoji">😀 Emoji</button><button data-x="arrow">↪️ Flecha</button><button data-x="circle">⭕ Marcar</button><button data-x="sparkle">✨ Destellos</button><button data-x="tape">🩹 Cinta</button><button data-x="sticky">🟨 Nota</button></div>
       <div id="xEdit" class="xEdit hidden"></div>
@@ -1299,6 +1300,8 @@
     if (!sel) { const hid = Object.entries(slide().adj).filter(([k, a]) => a.hide).map(([k]) => k); bar.innerHTML = `<span class="small" style="margin:0">Tocá un texto o una foto para moverlo, agrandarlo o girarlo.</span>` + hid.map(k => `<button data-show="${k}">👁 Mostrar ${KEY_NAME[k] || k}</button>`).join(""); bar.querySelectorAll("[data-show]").forEach(b => b.onclick = () => { pushHist(); delete slide().adj[b.dataset.show].hide; render(); }); return; }
     const isX = sel.startsWith("x:"), xe = isX ? curExtra() : null;
     bar.innerHTML = `<b>${isX ? (xe ? XNAME[xe.type] : "") : (KEY_NAME[sel] || sel)}</b> <button data-a="s-">－</button><button data-a="s+">＋</button><button data-a="r-">⟲</button><button data-a="r+">⟳</button><button data-a="reset">Volver a su lugar</button><button data-a="hide">${isX ? "🗑️ Borrar" : "Ocultar"}</button><button data-a="ok">✓</button>`;
+    { const a0 = slide().adj[sel] || {}; bar.insertAdjacentHTML("beforeend", `<label class="small" style="display:flex;align-items:center;gap:6px;margin:0;flex:1 1 100%">📏 Tamaño <input type="range" id="selSize" min="30" max="300" value="${Math.round((a0.s || 1) * 100)}" style="flex:1"></label>`);
+      const sz = $("selSize"); sz.onpointerdown = () => pushHist(); sz.oninput = () => { const a = (slide().adj[sel] = slide().adj[sel] || {}); a.s = sz.value / 100; HITS = []; ctxSwap(cv.getContext("2d")); ctx.setTransform(1, 0, 0, 1, 0, 0); drawSlide(slide(), cur); }; sz.onchange = () => render(); }
     bar.querySelectorAll("button").forEach(b => b.onclick = () => {
       const a = (slide().adj[sel] = slide().adj[sel] || {}), act = b.dataset.a; pushHist();
       if (act === "s+") a.s = (a.s || 1) * 1.08; if (act === "s-") a.s = (a.s || 1) / 1.08;
@@ -1310,24 +1313,68 @@
   // Arrastrar para mover, rueda para agrandar
   let drag = null;
   const toCanvas = e => { const r = cv.getBoundingClientRect(); return { x: (e.clientX - r.left) * W / r.width, y: (e.clientY - r.top) * H / r.height }; };
+  const PTS = new Map(); let pinch = null;
+  const pdist = () => { const [a, b] = [...PTS.values()]; return Math.hypot(a.x - b.x, a.y - b.y); };
+  const pang = () => { const [a, b] = [...PTS.values()]; return Math.atan2(b.y - a.y, b.x - a.x); };
+  cv.addEventListener("touchmove", e => e.preventDefault(), { passive: false });
+  cv.addEventListener("gesturestart", e => e.preventDefault());
   cv.addEventListener("pointerdown", e => {
+    PTS.set(e.pointerId, toCanvas(e));
+    if (PTS.size === 2 && sel) { const a = slide().adj[sel] = slide().adj[sel] || {}; pinch = { d: pdist(), ang: pang(), s: a.s || 1, r: a.r || 0 }; drag = null; return; }
+    if (PTS.size > 2) return;
     const p = toCanvas(e), hit = HITS.slice().reverse().find(h => p.x >= h.x - 12 && p.x <= h.x + h.w + 12 && p.y >= h.y - 12 && p.y <= h.y + h.h + 12);
     if (!hit) { sel = null; render(); return; }
     sel = hit.key; const a = (slide().adj[sel] = slide().adj[sel] || {}); pushHist();
-    drag = { p, dx: a.dx || 0, dy: a.dy || 0 }; cv.setPointerCapture(e.pointerId); render(); focusField(sel);
+    drag = { p, dx: a.dx || 0, dy: a.dy || 0 }; try { cv.setPointerCapture(e.pointerId); } catch { } render(); if (e.pointerType !== "touch") focusField(sel);
   });
   cv.addEventListener("pointermove", e => {
+    if (PTS.has(e.pointerId)) PTS.set(e.pointerId, toCanvas(e));
+    if (pinch && PTS.size === 2 && sel) { const a = slide().adj[sel]; a.s = clamp(pinch.s * pdist() / pinch.d, 0.3, 4); a.r = pinch.r + (pang() - pinch.ang); if (Math.abs(a.r) < 0.04) a.r = 0; render(); return; }
     const p = toCanvas(e); const over = HITS.slice().reverse().find(h => p.x >= h.x && p.x <= h.x + h.w && p.y >= h.y && p.y <= h.y + h.h); cv.style.cursor = drag ? "grabbing" : over ? "move" : "default";
     if (!drag || !sel) return; const a = slide().adj[sel]; let nx = drag.dx + p.x - drag.p.x, ny = drag.dy + p.y - drag.p.y;
     if (Math.abs(nx) < 14) nx = 0; if (Math.abs(ny) < 14) ny = 0; // imán: vuelve al lugar original
     a.dx = nx; a.dy = ny; render();
   });
-  cv.addEventListener("pointerup", () => { drag = null; scheduleThumbs(); });
+  const ptEnd = e => { PTS.delete(e.pointerId); if (PTS.size < 2) pinch = null; drag = null; scheduleThumbs(); };
+  cv.addEventListener("pointerup", ptEnd); cv.addEventListener("pointercancel", ptEnd);
   cv.addEventListener("wheel", e => { if (!sel) return; e.preventDefault(); const a = slide().adj[sel]; a.s = clamp((a.s || 1) * (e.deltaY < 0 ? 1.05 : 1 / 1.05), 0.3, 4); render(); }, { passive: false });
   function focusField(k) { const el = document.querySelector(`[data-field="${k}"]`); if (el) { el.scrollIntoView({ block: "nearest", behavior: "smooth" }); } }
 
+  // ================= ESTILOS DE PORTADA PARA ELEGIR =================
+  let covSeed = 0, covT = 0;
+  const toTpl = (f, tpl) => { const nf = remapFields(f, tpl); TPL[tpl].fields.forEach(([k]) => { if (nf[k] === undefined) nf[k] = ""; }); return nf; };
+  const COV_BGS = ["auto", "mesh", "midnight", "aurora", "navy", "teal", "cream", "blush", "paper", "grad"];
+  function covVariants(s) {
+    const out = [], bgs = shuf(COV_BGS.slice()), hasPh = !!s.img, R = (a, b) => a + Math.random() * (b - a);
+    if (hasPh) {
+      Object.entries(PH_LAY).forEach(([k, lay], j) => out.push({ tpl: "cover", bg: bgs[j % bgs.length], adj: JSON.parse(JSON.stringify(lay)) }));
+      out.push({ tpl: "cover", bg: "photo", adj: {} });
+      out.push({ tpl: "cover", bg: bgs[5], adj: { photo: { s: .7, dy: -80 }, title: { s: .8, dy: 60 } } });
+      out.push({ tpl: "cover", bg: bgs[6], adj: { photo: { s: 1.25, dy: 40 }, title: { s: .7, dy: 150 }, kicker: { dy: 150 } } });
+    } else {
+      bgs.slice(0, 6).forEach((bg, j) => out.push({ tpl: "coverText", bg, adj: j % 3 === 1 ? { title: { s: .88, dy: -40 } } : j % 3 === 2 ? { title: { s: 1.08 }, emoji: { s: 1.3 } } : {} }));
+      out.push({ tpl: "cover", bg: bgs[6], adj: {} }); out.push({ tpl: "cover", bg: bgs[7], adj: { title: { s: 1.1, dy: -120 } } });
+    }
+    return out;
+  }
+  function renderCovStyles() {
+    const box = $("covStyles"), s = slide();
+    if (!s || !(s.tpl === "cover" || s.tpl === "coverText")) { box.classList.add("hidden"); return; }
+    box.classList.remove("hidden"); const g = $("covGrid"); g.innerHTML = "";
+    const vs = covVariants(s), i = cur, orig = proj.slides[i];
+    vs.forEach(v => {
+      const tmp = JSON.parse(JSON.stringify(orig)); if (tmp.tpl !== v.tpl) tmp.f = toTpl(tmp.f, v.tpl); tmp.tpl = v.tpl; tmp.bg = v.bg; tmp.adj = v.adj;
+      proj.slides[i] = tmp; let c; try { c = renderTo(i, 0.15); } finally { proj.slides[i] = orig; }
+      c.style.cssText = "border-radius:8px;flex:0 0 auto;cursor:pointer;box-shadow:0 2px 8px rgba(25,44,63,.18)"; c.title = "Usar este estilo";
+      c.onclick = () => { pushHist(); const s2 = slide(); if (s2.tpl !== v.tpl) s2.f = toTpl(s2.f, v.tpl); s2.tpl = v.tpl; s2.bg = v.bg; s2.adj = JSON.parse(JSON.stringify(v.adj)); sel = null; showSlide(); setStatus("🎨 Listo. Podés seguir ajustando: tocá el título o la foto y movelos o cambiales el tamaño."); };
+      g.appendChild(c);
+    });
+  }
+  $("covMore").onclick = () => renderCovStyles();
+  const scheduleCov = () => { clearTimeout(covT); covT = setTimeout(renderCovStyles, 250); };
+
   // ================= PANEL DE LA SLIDE =================
-  function showSlide() {
+  function showSlide() { scheduleCov();
     const s = slide(); $("slideNum").textContent = `${cur + 1} de ${proj.slides.length}`;
     const tp = $("tpls"); tp.innerHTML = "";
     Object.entries(TPL).forEach(([k, t]) => { const b = document.createElement("button"); b.className = s.tpl === k ? "on" : ""; b.innerHTML = `<i>${t.i}</i>${t.n}`; b.onclick = () => { pushHist(); s.f = remapFields(s.f, k); s.tpl = k; s.adj = {}; showSlide(); }; tp.appendChild(b); });
@@ -1470,8 +1517,13 @@
       if (target && target.slide !== undefined) s = proj.slides[target.slide];
       if (target && target.extra) ex = (s.extra || []).find(e => e.id === target.extra) || proj.slides.flatMap(z => z.extra || []).find(e => e.id === target.extra);
       const si = proj.slides.indexOf(s);
-      if (!ex && (!target || target.slide !== undefined) && !TPL[s.tpl].img && bgOf(s, si) !== "photo") { // la slide no lleva foto: la pongo de costado
-        ex = newExtra("photo", { x: W - 270, y: H - 440, w: 400, rot: 0.05 }); s.extra = s.extra || []; s.extra.push(ex); sel = "x:" + ex.id;
+      if (!ex && (!target || target.slide !== undefined) && s.tpl === "coverText") { s.f = remapFields(s.f, "cover"); TPL.cover.fields.forEach(([k]) => { if (s.f[k] === undefined) s.f[k] = ""; }); s.tpl = "cover"; s.adj = {}; } // portada de texto + foto = portada con foto
+      if (!ex && (!target || target.slide !== undefined) && !TPL[s.tpl].img && bgOf(s, si) !== "photo") { // la slide no lleva foto: la pongo en el espacio libre
+        const hits = (si === cur && HITS) ? HITS.filter(z => !/^(handle|swipeBtn|x:)/.test(z.key)) : [], fy = H - 82;
+        const bottom = hits.length ? Math.max(...hits.map(z => z.y + z.h)) : H * 0.62, free = fy - 30 - bottom;
+        if (free >= 300) { const w = Math.min(W - 260, free * 1.05); ex = newExtra("photo", { x: W / 2, y: bottom + free / 2 + 10, w, rot: 0.02, cut: false }); }
+        else ex = newExtra("photo", { x: W - 250, y: fy - 230, w: 360, rot: 0.05 });
+        s.extra = s.extra || []; s.extra.push(ex); sel = "x:" + ex.id;
       }
       if (ex) { ex.img = im.id; } else { s.img = im.id; delete s.adj.photo; }
       saveImg(im); showSlide(); setStatus("");
@@ -4544,8 +4596,38 @@ Además devolvé caption (texto para la publicación: primera línea con la pala
     if ($("capsBox").innerHTML) renderCaps();
     if (innerWidth < 980) document.querySelector(".stageInner").scrollIntoView({ behavior: "smooth", block: "start" });
   }
+  // ---- "El inglés de…" también entre las series principales: un famoso por carrusel, con formatos que van cambiando ----
+  SERIES.inglesde = { n: "El inglés de...", e: "🎤", d: "Un famoso por carrusel: de dónde es, cómo pronuncia, sus palabras y de dónde vienen (con foto)", gen() {
+    const f = fresh("inglesde", FAMOSOS, 1)[0], o = inglesDeOffline(f[0]), d = o.d, first = d.nombre.split(" ")[0], mode = pickR(["completo", "completo", "rasgo"].concat(["us", "rp"].includes(f[1]) ? [] : ["palabras"]));
+    let r;
+    if (mode === "rasgo") {
+      const k = rndI(Math.min(4, d.rasgos.length)), x = d.rasgos[k], como = (d.como || [])[k];
+      r = { topic: "el inglés de " + d.nombre, slides: [
+        S_("cover", { kicker: pickR(["El inglés de", "Así habla", "El acento de"]), title: `${first} y *${x[1].toLowerCase()}*`, note: `${d.e} acento de ${d.acento}` }),
+        S_("text", { kicker: "📍 ¿De dónde es?", title: `${d.e} *${d.acento}*`, body: `${d.nombre} (${d.quien}) ${d.origen}.\n\nHoy analizamos un solo rasgo de su forma de hablar, bien a fondo.`, emoji: "🗺️" }),
+        S_("search", { q: `cómo dice "${x[3]}" ${d.nombre}`, title: x[3], kind: x[4], body: `${x[0]} ${x[1]}.\n\n${x[2]}`, also: "" }),
+        ...(como ? [S_("text", { kicker: "👄 Cómo hacerlo", title: "Probalo *vos*", body: `${como}\n\nDecí *${x[3]}* tres veces despacio y después a velocidad normal.`, emoji: "👄" })] : []),
+        ...((d.comp || []).length ? [S_("versus", { title: "Misma palabra, *tres acentos*", left: "Palabra", right: d.acento.split(" (")[0], items: d.comp.slice(0, 3).map(c => `${c[0]} | ${c[1]} | británico estándar: ${c[2]} · EE. UU.: ${c[3]}`).join("\n") })] : []),
+        ...(d.oido ? [S_("text", { kicker: "👂 Para entrenar el oído", title: `Cuando escuches a *${first}*…`, body: `${d.oido}\n\nBuscá una entrevista suya y contá cuántas veces lo notás.`, emoji: "🎧" })] : []),
+        ...(d.desafio ? [S_("text", { kicker: "🎙️ Desafío", title: `Decilo como *${first}*`, body: `"${d.desafio[0]}"\n\n${d.desafio[1]}\n${d.desafio[2]}`, emoji: "🎤" })] : []),
+        ctaOf(`¿A quién *analizamos* después?`, "Mandáselo a un fan", "Comentá el próximo famoso")] };
+    } else if (mode === "palabras") {
+      const fr = (d.frases || []).concat(d.mas || []), ok = Math.random() < .5;
+      r = { topic: "las palabras de " + d.nombre, slides: [
+        S_("cover", { kicker: pickR(["El inglés de", "Habla como", "Las palabras de"]), title: `Cómo habla *${first}*`, note: `${d.e} palabras de ${d.acento}` }),
+        S_("text", { kicker: "📍 ¿De dónde es?", title: `${d.e} *${d.acento}*`, body: `${d.nombre} (${d.quien}) ${d.origen}.\n\nY en su zona se usan palabras que no vas a encontrar en un libro de inglés.`, emoji: "🗺️" }),
+        ...fr.slice(0, 3).map(z => S_("quote", { quote: z[0], author: "Significa: " + z[1], tr: "🌱 De dónde viene: " + z[2] })),
+        ...(fr.length > 3 ? [S_("decode", { title: "Más palabras *de ahí*", la: "PALABRA", lb: "QUÉ SIGNIFICA", items: fr.slice(3, 6).map(z => `${z[0]} => ${z[1]}`).join("\n") })] : []),
+        S_("text", { kicker: "📜 La historia", title: "Por qué *hablan así*", body: d.historia, emoji: "🏛️" }),
+        S_("thisthat", { title: d.quiz[0], a: ok ? d.quiz[1] : d.quiz[2], b: ok ? d.quiz[2] : d.quiz[1], note: "Respuesta en la próxima slide 👉" }),
+        S_("text", { kicker: "Respuesta", title: `Es la *${ok ? "A" : "B"}*`, body: `*${d.quiz[1]}*.\n\nLa próxima vez que escuches a ${first}, prestá atención 👂`, emoji: "✅" }),
+        ctaOf(`¿A quién *analizamos* después?`, "Mandáselo a un fan", "Comentá el próximo famoso")] };
+    } else r = inglesDeSlides(d);
+    r.after = () => inglesDeFotos(d.nombre, o.wiki).catch(() => { });
+    return r;
+  } };
   $("series").innerHTML = Object.entries(SERIES).map(([k, v]) => `<button data-s="${k}"><i>${v.e}</i><span><b>${v.n}</b><small>${v.d}</small></span><em>∞</em></button>`).join("");
-  $("series").querySelectorAll("button").forEach(b => b.onclick = async () => { const v = SERIES[b.dataset.s]; await buildSlides(v.gen(), v.n); proj.serie = b.dataset.s; });
+  $("series").querySelectorAll("button").forEach(b => b.onclick = async () => { const v = SERIES[b.dataset.s], r = v.gen(); await buildSlides(r, v.n); proj.serie = b.dataset.s; if (r.after) r.after(); });
   // ================= 🛍️ CARRUSELES DE TU TIENDA + PEGAR CUALQUIER PRODUCTO =================
   const PROD_OF_TIENDA = () => {
     const out = TIENDA.cursos.map(c => ({ id: "t_" + c.id, tema: c.id === "essays" ? "essays" : "narrative", n: c.n, tipo: "curso", lvl: c.lvl, precio: c.now, antes: c.old, off: c.off, para: c.para.replace(/\*/g, ""),
@@ -5263,5 +5345,5 @@ Respondé SOLO JSON: {"nombre":"${name}","quien":"a qué se dedica (2 a 5 palabr
     if (inFrame) show(); setTimeout(function () { if (!window.__appReady) show(); }, 8000);
   })();
 </script>
-<div id="qtVer" style="position:fixed;left:8px;bottom:6px;font:600 11px system-ui,sans-serif;color:#8a9aa8;z-index:99999;pointer-events:none">Versión 20/11 15:02</div><script>(function(){var V="20/11 15:02";function chk(){fetch("./version.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(j){if(j.v&&j.v!==V){var k="qt_rl_"+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,"1")}catch(e){}location.reload()}}).catch(function(){})}if(location.protocol==="https:"){document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()});chk()}})();</script></body>
+<div id="qtVer" style="position:fixed;left:8px;bottom:6px;font:600 11px system-ui,sans-serif;color:#8a9aa8;z-index:99999;pointer-events:none">Versión 20/11 15:07</div><script>(function(){var V="20/11 15:07";function chk(){fetch("./version.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(j){if(j.v&&j.v!==V){var k="qt_rl_"+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,"1")}catch(e){}location.reload()}}).catch(function(){})}if(location.protocol==="https:"){document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()});chk()}})();</script></body>
 </html>
