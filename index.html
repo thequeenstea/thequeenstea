@@ -933,6 +933,41 @@ h2{font-size:clamp(2.3rem,4.8vw,3.9rem)}
 .enr-link{background:var(--ink);color:#fff;border:0;border-radius:99px;padding:9px 18px;font-weight:700;font-size:.88rem;margin-top:8px;transition:background .25s}
 .enr-link:hover{background:var(--blue)}
 @media (max-width:900px){.enr{padding:34px 22px}.enr-steps{grid-template-columns:1fr;gap:26px}.enr-steps::before,.enr-steps::after{left:35px;right:auto;top:36px;bottom:36px;width:3px;height:auto}.enr-steps::after{display:none}.enr-steps li{flex-direction:column;align-items:flex-start;text-align:left;padding-left:92px;min-height:72px;justify-content:center}.enr-dot{position:absolute;left:0;top:0;margin:0}.enr-steps p{max-width:none}}
+/* ===== Vitrina de la tienda (cursos reales desde el Campus) ===== */
+.vit{position:relative;margin:0 0 40px}
+.vit-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;margin-bottom:22px}
+.vit-flags{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-weight:700;font-size:.92rem;color:#C9D3EE}
+.flag{display:inline-block;width:24px;height:16px;border-radius:3px;overflow:hidden;box-shadow:0 0 0 1px rgba(0,0,0,.12);flex:none;vertical-align:middle}
+.flag svg{display:block;width:100%;height:100%}
+.vit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.vit-card{display:flex;flex-direction:column;background:#fff;color:var(--ink);border-radius:24px;overflow:hidden;text-decoration:none;box-shadow:0 10px 30px -14px rgba(0,0,0,.45);transition:transform .3s, box-shadow .3s}
+.vit-card:hover{transform:translateY(-6px);box-shadow:0 22px 44px -16px rgba(0,0,0,.55)}
+.vit-img{position:relative;aspect-ratio:4/3;background:linear-gradient(145deg,#192c3f,#2b5a78);overflow:hidden}
+.vit-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.vit-card:hover .vit-img img{transform:scale(1.06)}
+.vit-img .vit-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:3.5rem}
+.vit-chip{position:absolute;left:12px;top:12px;background:rgba(255,255,255,.95);color:var(--ink);font-size:.75rem;font-weight:800;padding:5px 11px;border-radius:999px}
+.vit-off{position:absolute;right:12px;top:12px;background:#ff7a59;color:#fff;font-size:.78rem;font-weight:800;padding:5px 11px;border-radius:999px}
+.vit-body{display:flex;flex-direction:column;gap:10px;padding:18px 20px 20px;flex:1}
+.vit-body h3{margin:0;font-size:1.12rem;line-height:1.3;color:var(--ink)}
+.vit-sub{margin:0;color:var(--muted);font-size:.9rem;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.vit-price{margin-top:auto;padding-top:12px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
+.vit-ars{display:flex;align-items:center;gap:9px}
+.vit-ars .flag{width:30px;height:20px}
+.vit-ars b{font-family:var(--display);font-size:1.75rem;font-weight:800;line-height:1}
+.vit-ars s{color:#94a3b8;font-size:.85rem;font-weight:600}
+.vit-ext small{display:block;font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.vit-ext div{display:flex;flex-wrap:wrap;gap:6px}
+.vit-ext span{display:inline-flex;align-items:center;gap:6px;background:rgba(65,193,186,.12);border:1px solid rgba(65,193,186,.35);color:#0d4f4b;font-size:.78rem;font-weight:800;padding:3px 9px 3px 4px;border-radius:999px}
+.vit-ext .flag{width:20px;height:13px}
+.vit-go{display:flex;justify-content:center;background:var(--ink);color:#fff;font-weight:700;font-size:.92rem;padding:11px;border-radius:999px;margin-top:4px;transition:background .25s,color .25s}
+.vit-card:hover .vit-go{background:var(--sky);color:var(--ink)}
+.vit-sk{border-radius:24px;background:rgba(255,255,255,.08);height:420px;animation:vitPulse 1.4s ease-in-out infinite}
+@keyframes vitPulse{50%{opacity:.5}}
+.nav a.nav-shop{background:rgba(95,212,204,.18);border-radius:999px;padding:8px 14px;opacity:1}
+@media (max-width:900px){.vit-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){.vit-grid{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.vit-card,.vit-img img{transition:none}.vit-sk{animation:none}}
 /* ===== Banda final de tienda ===== */
 .cta-band{margin-top:30px;position:relative;overflow:hidden;display:grid;grid-template-columns:1.5fr 1fr;gap:34px;align-items:center;border-radius:32px;padding:52px 52px;background:radial-gradient(500px 300px at 100% 0,rgba(65,193,186,.55),transparent 65%),linear-gradient(135deg,#2A5BD7,#14275F);box-shadow:0 40px 80px -40px rgba(0,0,0,.8);border:1px solid rgba(255,255,255,.18)}
 .cta-band::after{content:"";position:absolute;left:-80px;bottom:-120px;width:300px;height:300px;border-radius:50%;border:2px dashed rgba(255,255,255,.16);animation:orbita 50s linear infinite}
@@ -1752,7 +1787,7 @@ else if(h.indexOf('campus.thequeenstea.com.ar')>-1)gtag('event','click_campus',{
       <a href="#cursos">Cursos</a>
       <a href="#examenes">Exámenes</a>
       <a href="#campus">Campus</a>
-      <a href="https://campus.thequeenstea.com.ar/tienda">Tienda</a>
+      <a href="#tienda" class="nav-shop">Tienda</a>
       <a href="#empresas">Empresas</a>
       <a href="#nosotros">Nosotros</a>
       <a href="https://campus.thequeenstea.com.ar" class="btn btn-ghost nav-campus">Entrar al Campus</a>
@@ -2017,10 +2052,17 @@ else if(h.indexOf('campus.thequeenstea.com.ar')>-1)gtag('event','click_campus',{
         <div class="mock-toast" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-bell"/></svg> Nota nueva en tu campus</div>
       </div>
     </div>
-    <div class="shop-head reveal">
+    <div class="shop-head reveal" id="tienda">
       <span class="kicker" style="color:var(--accent)">Tienda de The Queen's Tea</span>
-      <h2>Worksheets, material docente y cursos asincrónicos.</h2>
-      <p class="lead">Aprendé a tu ritmo. Todo lo que comprás se usa dentro de nuestro campus.</p>
+      <h2>Nuestra tienda de cursos online.</h2>
+      <p class="lead">Cursos asincrónicos, talleres de escritura, worksheets y material docente. Comprás y empezás al instante desde tu campus.</p>
+    </div>
+    <div class="vit reveal">
+      <div class="vit-top">
+        <div class="vit-flags" id="vitFlags">Precios en</div>
+        <a href="https://campus.thequeenstea.com.ar/tienda" class="btn btn-accent">Ver toda la tienda →</a>
+      </div>
+      <div class="vit-grid" id="vitGrid" aria-live="polite"><div class="vit-sk"></div><div class="vit-sk"></div><div class="vit-sk"></div></div>
     </div>
     <div class="sb">
       <article class="sb-c sb-main reveal">
@@ -2701,6 +2743,43 @@ trCard.addEventListener('click', e => {
   handleCourse(findCourse(btn.dataset.code));
 });
 trailBuild(0);
+/* Vitrina de la tienda: muestra los cursos reales del Campus con su precio en pesos y en otras monedas */
+(function(){
+  const grid = document.getElementById('vitGrid'); if (!grid) return;
+  const FLAG = {
+    AR:'<svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#74ACDF"/><rect y="6.67" width="30" height="6.66" fill="#fff"/><circle cx="15" cy="10" r="2" fill="#F6B40E"/></svg>',
+    US:'<svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#fff"/>'+[0,2,4,6,8,10,12].map(i=>'<rect y="'+(i*1.54)+'" width="30" height="1.54" fill="#B22234"/>').join('')+'<rect width="13" height="10.8" fill="#3C3B6E"/></svg>',
+    EU:'<svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#003399"/>'+Array.from({length:12},(_,i)=>'<circle cx="'+(15+6*Math.cos(i*Math.PI/6)).toFixed(2)+'" cy="'+(10+6*Math.sin(i*Math.PI/6)).toFixed(2)+'" r=".9" fill="#FFCC00"/>').join('')+'</svg>',
+    CL:'<svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#fff"/><rect y="10" width="30" height="10" fill="#D52B1E"/><rect width="10" height="10" fill="#0039A6"/><polygon points="5,2.3 5.9,4.8 8.5,4.8 6.4,6.4 7.2,8.9 5,7.4 2.8,8.9 3.6,6.4 1.5,4.8 4.1,4.8" fill="#fff"/></svg>',
+    CO:'<svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#FCD116"/><rect y="10" width="30" height="5" fill="#003893"/><rect y="15" width="30" height="5" fill="#CE1126"/></svg>'
+  };
+  const NOMBRE = {AR:'Argentina',US:'Estados Unidos',EU:'Europa',CL:'Chile',CO:'Colombia'};
+  const PAIS = {ARS:'AR',USD:'US',EUR:'EU',CLP:'CL',COP:'CO'};
+  const flag = c => '<i class="flag" role="img" aria-label="'+NOMBRE[c]+'">'+FLAG[c]+'</i>';
+  const esc = t => String(t ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  const money = (m, n) => { try { return new Intl.NumberFormat('es-AR',{style:'currency',currency:m,maximumFractionDigits:0}).format(n); } catch(e){ return m+' '+n; } };
+  const flags = document.getElementById('vitFlags');
+  if (flags) flags.insertAdjacentHTML('beforeend', ' ' + ['AR','US','EU','CL','CO'].map(flag).join(''));
+  const fallo = () => { grid.hidden = true; };
+  fetch('https://campus.thequeenstea.com.ar/api/public/tienda', { cache:'no-store' })
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(d => {
+      const lista = (Array.isArray(d.productos) ? d.productos : []).slice(0, 6);
+      if (!lista.length) return fallo();
+      grid.innerHTML = lista.map(p => {
+        const off = p.lista && p.lista > p.ars ? Math.round((1 - p.ars / p.lista) * 100) : 0;
+        const img = p.portada ? '<img src="'+esc(p.portada)+'" alt="" loading="lazy">' : '<span class="vit-ph" aria-hidden="true">📘</span>';
+        const ext = (p.ext || []).filter(x => PAIS[x.moneda]).map(x => '<span>'+flag(PAIS[x.moneda])+esc(money(x.moneda, x.monto))+'</span>').join('');
+        return '<a class="vit-card" href="'+esc(p.url)+'">'
+          + '<div class="vit-img">'+img+(p.seccion ? '<span class="vit-chip">'+esc(p.seccion)+'</span>' : '')+(off > 0 ? '<span class="vit-off">−'+off+'%</span>' : '')+'</div>'
+          + '<div class="vit-body"><h3>'+esc(p.titulo)+'</h3>'+(p.subtitulo ? '<p class="vit-sub">'+esc(p.subtitulo)+'</p>' : '')
+          + '<div class="vit-price"><div class="vit-ars">'+flag('AR')+'<b>'+esc(money('ARS', p.ars))+'</b>'+(off > 0 ? '<s>'+esc(money('ARS', p.lista))+'</s>' : '')+'</div>'
+          + (ext ? '<div class="vit-ext"><small>Desde el exterior</small><div>'+ext+'</div></div>' : '')
+          + '</div><span class="vit-go">Ver curso →</span></div></a>';
+      }).join('');
+    })
+    .catch(fallo);
+})();
 /* Precios, cupos y horarios en vivo desde el Campus (panel: Clases y cuotas → Precios).
    Si no responde, queda lo que está escrito arriba en CURSOS. */
 (function(){
