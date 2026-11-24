@@ -985,6 +985,38 @@ h2{font-size:clamp(2.3rem,4.8vw,3.9rem)}
 @media (max-width:900px){.vit-grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:600px){.vit-grid{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.vit-card,.vit-img img{transition:none}.vit-sk{animation:none}}
+/* ===== Tienda: preguntas que enganchan (sin precios) ===== */
+.tq{position:relative;margin:72px 0 40px}
+.tq-head{max-width:820px;margin-bottom:34px}
+.tq-head h2{font-size:clamp(2.1rem,5vw,3.6rem);line-height:1.05;margin:10px 0 16px}
+.tq-rot{display:inline-block;background:linear-gradient(90deg,#5FD4CC,#9EE8E2,#5FD4CC);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:tqShine 4s linear infinite;transition:opacity .35s,transform .35s}
+.tq-rot.out{opacity:0;transform:translateY(10px)}
+.tq-sub{color:#fff}
+@keyframes tqShine{to{background-position:-200% 0}}
+.tq-pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.tq-pills span{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);color:#E3EAF8;font-weight:600;font-size:.9rem;padding:8px 14px;border-radius:999px;backdrop-filter:blur(4px)}
+.tq-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.tq-card{position:relative;isolation:isolate;display:flex;flex-direction:column;gap:10px;min-height:280px;padding:28px 26px 24px;border-radius:28px;text-decoration:none;color:#fff;overflow:hidden;background:linear-gradient(155deg,rgba(255,255,255,.10),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.14);box-shadow:0 20px 40px -24px rgba(0,0,0,.7);transform:translateY(24px);opacity:0;transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity .5s,border-color .3s,background .3s}
+.tq-card.vis{transform:none;opacity:1}
+.tq-card:hover{transform:translateY(-8px) rotate(-.4deg);border-color:rgba(95,212,204,.6);background:linear-gradient(155deg,rgba(95,212,204,.22),rgba(255,255,255,.04))}
+.tq-glow{position:absolute;z-index:-1;width:260px;height:260px;right:-90px;top:-90px;border-radius:50%;background:radial-gradient(circle,rgba(95,212,204,.45),transparent 65%);transition:transform .6s}
+.tq-card:nth-child(3n+2) .tq-glow{background:radial-gradient(circle,rgba(120,160,255,.45),transparent 65%)}
+.tq-card:nth-child(3n) .tq-glow{background:radial-gradient(circle,rgba(255,170,120,.35),transparent 65%)}
+.tq-card:hover .tq-glow{transform:scale(1.35) translate(-20px,20px)}
+.tq-emoji{display:flex;width:66px;height:66px;border-radius:20px;align-items:center;justify-content:center;font-size:2.1rem;background:rgba(255,255,255,.95);box-shadow:0 12px 24px -10px rgba(0,0,0,.5);animation:tqFloat 5s ease-in-out infinite}
+.tq-card:nth-child(2n) .tq-emoji{animation-delay:-2.5s}
+@keyframes tqFloat{50%{transform:translateY(-7px) rotate(-4deg)}}
+.tq-card h3{margin:10px 0 0;font-size:1.4rem;line-height:1.2;color:#fff}
+.tq-card p{margin:0;color:#C9D3EE;font-size:.98rem;line-height:1.5}
+.tq-cta{margin-top:auto;padding-top:14px;display:inline-flex;align-items:center;gap:8px;font-weight:800;color:#5FD4CC}
+.tq-cta i{font-style:normal;transition:transform .3s}
+.tq-card:hover .tq-cta i{transform:translateX(6px)}
+.tq-foot{display:flex;justify-content:center;margin-top:30px}
+.tq-btn{font-size:1.05rem;padding:16px 30px}
+.tq-btn i{font-style:normal;display:inline-block;transition:transform .3s}
+.tq-btn:hover i{transform:translateX(5px)}
+@media (max-width:560px){.tq-card{min-height:0}.tq-card h3{font-size:1.25rem}}
+@media (prefers-reduced-motion:reduce){.tq-rot,.tq-emoji{animation:none}.tq-card{transition:none;transform:none;opacity:1}}
 /* ===== Banda final de tienda ===== */
 .cta-band{margin-top:30px;position:relative;overflow:hidden;display:grid;grid-template-columns:1.5fr 1fr;gap:34px;align-items:center;border-radius:32px;padding:52px 52px;background:radial-gradient(500px 300px at 100% 0,rgba(65,193,186,.55),transparent 65%),linear-gradient(135deg,#2A5BD7,#14275F);box-shadow:0 40px 80px -40px rgba(0,0,0,.8);border:1px solid rgba(255,255,255,.18)}
 .cta-band::after{content:"";position:absolute;left:-80px;bottom:-120px;width:300px;height:300px;border-radius:50%;border:2px dashed rgba(255,255,255,.16);animation:orbita 50s linear infinite}
@@ -2069,17 +2101,17 @@ else if(h.indexOf('campus.thequeenstea.com.ar')>-1)gtag('event','click_campus',{
         <div class="mock-toast" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-bell"/></svg> Nota nueva en tu campus</div>
       </div>
     </div>
-    <div class="shop-head reveal" id="tienda">
-      <span class="kicker" style="color:var(--accent)">Tienda de The Queen's Tea</span>
-      <h2>Nuestra tienda de cursos online.</h2>
-      <p class="lead">Cursos asincrónicos, talleres de escritura, worksheets y material docente. Comprás y empezás al instante desde tu campus.</p>
-    </div>
-    <div class="vit reveal">
-      <div class="vit-top">
-        <div class="vit-flags" id="vitFlags">Pagás desde Argentina o desde el exterior</div>
-        <a href="https://campus.thequeenstea.com.ar/tienda" class="btn btn-accent">Ver toda la tienda →</a>
+    <div class="tq reveal" id="tienda">
+      <div class="tq-head">
+        <span class="kicker">Tienda de The Queen's Tea</span>
+        <h2>¿<span class="tq-rot" id="tqRot">No tenés tiempo</span>?<br><span class="tq-sub">Tenemos un curso para vos.</span></h2>
+        <p class="lead">Cursos online, talleres y material para aprender o enseñar inglés cuando y donde quieras. Entrás desde tu propio campus.</p>
+        <div class="tq-pills" aria-label="Cómo son los cursos">
+          <span>⚡ Empezás hoy mismo</span><span>📱 Desde el celu o la compu</span><span>✅ Tareas con corrección</span><span>🏆 Certificado al terminar</span>
+        </div>
       </div>
-      <div class="tc-grid" id="vitGrid" aria-live="polite"><a class="tc" href="https://campus.thequeenstea.com.ar/tienda?seccion=asincronicos#cursos"><span class="tc-ic">🎬</span><h3>Cursos asincrónicos</h3><p>Videos y tareas para aprender a tu ritmo, con tu avance registrado.</p><span class="tc-foot"><span class="tc-meta">Ver en la tienda</span><span class="tc-go" aria-hidden="true">→</span></span></a><a class="tc" href="https://campus.thequeenstea.com.ar/tienda?seccion=niveles#cursos"><span class="tc-ic">📶</span><h3>Cursos por nivel</h3><p>Repasá y avanzá con el curso de tu nivel.</p><span class="tc-foot"><span class="tc-meta">Ver en la tienda</span><span class="tc-go" aria-hidden="true">→</span></span></a><a class="tc" href="https://campus.thequeenstea.com.ar/tienda?seccion=escritura#cursos"><span class="tc-ic">✍️</span><h3>Talleres de escritura</h3><p>Writing paso a paso, con corrección de cada trabajo.</p><span class="tc-foot"><span class="tc-meta">Ver en la tienda</span><span class="tc-go" aria-hidden="true">→</span></span></a><a class="tc" href="https://campus.thequeenstea.com.ar/tienda?seccion=examenes#cursos"><span class="tc-ic">🏅</span><h3>Preparación de exámenes</h3><p>Llegá con confianza a Cambridge e IELTS.</p><span class="tc-foot"><span class="tc-meta">Ver en la tienda</span><span class="tc-go" aria-hidden="true">→</span></span></a><a class="tc" href="https://campus.thequeenstea.com.ar/tienda?seccion=worksheets#cursos"><span class="tc-ic">📥</span><h3>Worksheets descargables</h3><p>Fichas en PDF listas para imprimir y usar en clase.</p><span class="tc-foot"><span class="tc-meta">Ver en la tienda</span><span class="tc-go" aria-hidden="true">→</span></span></a><a class="tc" href="https://campus.thequeenstea.com.ar/tienda?seccion=docentes#cursos"><span class="tc-ic">🧑‍🏫</span><h3>Recursos docentes</h3><p>Material probado en clase para profes de inglés.</p><span class="tc-foot"><span class="tc-meta">Ver en la tienda</span><span class="tc-go" aria-hidden="true">→</span></span></a><a class="tc" href="https://campus.thequeenstea.com.ar/tienda?seccion=profesorado#cursos"><span class="tc-ic">🎓</span><h3>Cursos de profesorado</h3><p>Preparación para el ingreso y la formación docente.</p><span class="tc-foot"><span class="tc-meta">Ver en la tienda</span><span class="tc-go" aria-hidden="true">→</span></span></a><a class="tc" href="https://campus.thequeenstea.com.ar/tienda?seccion=profesional#cursos"><span class="tc-ic">💼</span><h3>Inglés profesional</h3><p>Oil & Gas, aviación, salud, legal y más.</p><span class="tc-foot"><span class="tc-meta">Ver en la tienda</span><span class="tc-go" aria-hidden="true">→</span></span></a></div>
+      <div class="tq-grid" id="tqGrid"><a class="tq-card" data-sec="asincronicos" href="https://campus.thequeenstea.com.ar/tienda?seccion=asincronicos#cursos"><span class="tq-glow" aria-hidden="true"></span><span class="tq-emoji" aria-hidden="true">🕒</span><h3>¿No tenés tiempo de ir a clase?</h3><p>Videos cortos y tareas que hacés cuando podés: a la mañana, en el colectivo o a la noche.</p><span class="tq-cta">Quiero estudiar así <i aria-hidden="true">→</i></span></a><a class="tq-card" data-sec="asincronicos" href="https://campus.thequeenstea.com.ar/tienda?seccion=asincronicos#cursos"><span class="tq-glow" aria-hidden="true"></span><span class="tq-emoji" aria-hidden="true">🎧</span><h3>¿Preferís estudiar a tu ritmo?</h3><p>Pausás, repetís y avanzás cuando quieras. Tu progreso queda guardado en tu campus.</p><span class="tq-cta">Ver cursos a mi ritmo <i aria-hidden="true">→</i></span></a><a class="tq-card" data-sec="escritura" href="https://campus.thequeenstea.com.ar/tienda?seccion=escritura#cursos"><span class="tq-glow" aria-hidden="true"></span><span class="tq-emoji" aria-hidden="true">✍️</span><h3>¿Querés escribir mejor en inglés?</h3><p>Talleres de writing paso a paso, con corrección de cada trabajo.</p><span class="tq-cta">Quiero escribir mejor <i aria-hidden="true">→</i></span></a><a class="tq-card" data-sec="docentes" href="https://campus.thequeenstea.com.ar/tienda?seccion=docentes#cursos"><span class="tq-glow" aria-hidden="true"></span><span class="tq-emoji" aria-hidden="true">🍎</span><h3>¿Das clases de inglés?</h3><p>Material probado en el aula, listo para usar mañana mismo.</p><span class="tq-cta">Ver recursos docentes <i aria-hidden="true">→</i></span></a><a class="tq-card" data-sec="worksheets" href="https://campus.thequeenstea.com.ar/tienda?seccion=worksheets#cursos"><span class="tq-glow" aria-hidden="true"></span><span class="tq-emoji" aria-hidden="true">🖨️</span><h3>¿Necesitás fichas para imprimir?</h3><p>Worksheets en PDF para trabajar en clase o en casa.</p><span class="tq-cta">Ver worksheets <i aria-hidden="true">→</i></span></a><a class="tq-card" data-sec="examenes" href="https://campus.thequeenstea.com.ar/tienda?seccion=examenes#cursos"><span class="tq-glow" aria-hidden="true"></span><span class="tq-emoji" aria-hidden="true">🏅</span><h3>¿Rendís un examen internacional?</h3><p>Practicá con el formato de Cambridge e IELTS y llegá con confianza.</p><span class="tq-cta">Prepararme <i aria-hidden="true">→</i></span></a><a class="tq-card" data-sec="profesorado" href="https://campus.thequeenstea.com.ar/tienda?seccion=profesorado#cursos"><span class="tq-glow" aria-hidden="true"></span><span class="tq-emoji" aria-hidden="true">🎓</span><h3>¿Vas a entrar al profesorado?</h3><p>Todo lo que necesitás para preparar el ingreso.</p><span class="tq-cta">Ver cursos <i aria-hidden="true">→</i></span></a><a class="tq-card" data-sec="profesional" href="https://campus.thequeenstea.com.ar/tienda?seccion=profesional#cursos"><span class="tq-glow" aria-hidden="true"></span><span class="tq-emoji" aria-hidden="true">💼</span><h3>¿Usás el inglés en tu trabajo?</h3><p>Inglés para tu profesión: Oil & Gas, aviación, salud, legal y más.</p><span class="tq-cta">Ver inglés profesional <i aria-hidden="true">→</i></span></a></div>
+      <div class="tq-foot"><a href="https://campus.thequeenstea.com.ar/tienda" class="btn btn-accent tq-btn">Entrar a la tienda <i aria-hidden="true">→</i></a></div>
     </div>
     <div class="sb">
       <article class="sb-c sb-main reveal">
@@ -2760,35 +2792,30 @@ trCard.addEventListener('click', e => {
   handleCourse(findCourse(btn.dataset.code));
 });
 trailBuild(0);
-/* Tienda: tarjetas con lo que hay (secciones reales del Campus, cuántas opciones y desde qué precio) */
+/* Tienda: frase que va cambiando, tarjetas que aparecen al bajar y solo las secciones que tienen cursos */
 (function(){
-  const grid = document.getElementById('vitGrid'); if (!grid) return;
-  const FLAG = {
-    AR:'<svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#74ACDF"/><rect y="6.67" width="30" height="6.66" fill="#fff"/><circle cx="15" cy="10" r="2" fill="#F6B40E"/></svg>',
-    US:'<svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#fff"/>'+[0,2,4,6,8,10,12].map(i=>'<rect y="'+(i*1.54)+'" width="30" height="1.54" fill="#B22234"/>').join('')+'<rect width="13" height="10.8" fill="#3C3B6E"/></svg>',
-    EU:'<svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#003399"/>'+Array.from({length:12},(_,i)=>'<circle cx="'+(15+6*Math.cos(i*Math.PI/6)).toFixed(2)+'" cy="'+(10+6*Math.sin(i*Math.PI/6)).toFixed(2)+'" r=".9" fill="#FFCC00"/>').join('')+'</svg>',
-    CL:'<svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#fff"/><rect y="10" width="30" height="10" fill="#D52B1E"/><rect width="10" height="10" fill="#0039A6"/><polygon points="5,2.3 5.9,4.8 8.5,4.8 6.4,6.4 7.2,8.9 5,7.4 2.8,8.9 3.6,6.4 1.5,4.8 4.1,4.8" fill="#fff"/></svg>',
-    CO:'<svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#FCD116"/><rect y="10" width="30" height="5" fill="#003893"/><rect y="15" width="30" height="5" fill="#CE1126"/></svg>'
+  const rot = document.getElementById('tqRot');
+  const frases = ['No tenés tiempo','Preferís estudiar a tu ritmo','Querés escribir mejor','Das clases de inglés','Rendís un examen internacional','Trabajás en inglés'];
+  if (rot && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let i = 0;
+    setInterval(() => { rot.classList.add('out'); setTimeout(() => { i = (i + 1) % frases.length; rot.textContent = frases[i]; rot.classList.remove('out'); }, 350); }, 2600);
+  }
+  const grid = document.getElementById('tqGrid'); if (!grid) return;
+  const mostrar = () => {
+    const cards = [...grid.querySelectorAll('.tq-card')];
+    if (!('IntersectionObserver' in window)) return cards.forEach(c => c.classList.add('vis'));
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { const k = cards.indexOf(e.target); setTimeout(() => e.target.classList.add('vis'), (k % 3) * 120); io.unobserve(e.target); } }), { threshold: .15 });
+    cards.forEach(c => io.observe(c));
   };
-  const NOMBRE = {AR:'Argentina',US:'Estados Unidos',EU:'Europa',CL:'Chile',CO:'Colombia'};
-  const PAIS = {ARS:'AR',USD:'US',EUR:'EU',CLP:'CL',COP:'CO'};
-  const flag = c => '<i class="flag" role="img" aria-label="'+NOMBRE[c]+'">'+FLAG[c]+'</i>';
-  const esc = t => String(t ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-  const money = (m, n) => { try { return new Intl.NumberFormat('es-AR',{style:'currency',currency:m,maximumFractionDigits:0}).format(n); } catch(e){ return m+' '+n; } };
-  const flags = document.getElementById('vitFlags');
-  if (flags) flags.insertAdjacentHTML('beforeend', ' ' + ['AR','US','EU','CL','CO'].map(flag).join(''));
+  // Oculta las tarjetas de secciones que todavía no tienen cursos (si el Campus responde)
   fetch('https://campus.thequeenstea.com.ar/api/public/tienda', { cache:'no-store' })
     .then(r => r.ok ? r.json() : Promise.reject())
     .then(d => {
-      const secs = Array.isArray(d.secciones) ? d.secciones : [];
-      if (!secs.length) return;   // sin datos: quedan las tarjetas escritas arriba
-      grid.innerHTML = secs.map(x => {
-        const meta = '<b>'+x.cantidad+'</b> '+(x.cantidad === 1 ? 'opción' : 'opciones')+(x.desde ? ' · desde '+flag('AR')+'<b>'+esc(money('ARS', x.desde))+'</b>' : '');
-        return '<a class="tc" href="'+esc(x.url)+'"><span class="tc-ic">'+esc(x.icono || '✨')+'</span><h3>'+esc(x.nombre)+'</h3>'+(x.desc ? '<p>'+esc(x.desc)+'</p>' : '')
-          + '<span class="tc-foot"><span class="tc-meta">'+meta+'</span><span class="tc-go" aria-hidden="true">→</span></span></a>';
-      }).join('');
+      const hay = new Set((Array.isArray(d.secciones) ? d.secciones : []).map(x => x.id));
+      if (hay.size) grid.querySelectorAll('.tq-card').forEach(c => { if (!hay.has(c.dataset.sec)) c.remove(); });
     })
-    .catch(() => {});
+    .catch(() => {})
+    .finally(mostrar);
 })();
 /* Precios, cupos y horarios en vivo desde el Campus (panel: Clases y cuotas → Precios).
    Si no responde, queda lo que está escrito arriba en CURSOS. */
